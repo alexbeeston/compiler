@@ -14,13 +14,13 @@ vector
 map
 -
 
-/home/abeeston/sp2020/compilers/sandbox/bld/parser.cpp
+/home/abeeston/sp2020/compilers/calc/bld/parser.cpp
 iostream
 -
 map
 -
 symbol_table.hpp
-/home/abeeston/sp2020/compilers/sandbox/bld/symbol_table.hpp
+/home/abeeston/sp2020/compilers/calc/bld/symbol_table.hpp
 stddef.h
 -
 libintl.h
@@ -36,9 +36,9 @@ stdlib.h
 stdio.h
 -
 
-/home/abeeston/sp2020/compilers/sandbox/bld/parser.hpp
+/home/abeeston/sp2020/compilers/calc/bld/parser.hpp
 
-/home/abeeston/sp2020/compilers/sandbox/bld/scanner.cpp
+/home/abeeston/sp2020/compilers/calc/bld/scanner.cpp
 stdio.h
 -
 string.h
@@ -51,22 +51,24 @@ inttypes.h
 -
 cstdlib
 -
+iostream
+-
 parser.hpp
-/home/abeeston/sp2020/compilers/sandbox/bld/parser.hpp
+/home/abeeston/sp2020/compilers/calc/bld/parser.hpp
 unistd.h
 -
 
-/home/abeeston/sp2020/compilers/sandbox/main.cpp
+/home/abeeston/sp2020/compilers/calc/main.cpp
 symbol_table.hpp
-/home/abeeston/sp2020/compilers/sandbox/symbol_table.hpp
+/home/abeeston/sp2020/compilers/calc/symbol_table.hpp
 
-/home/abeeston/sp2020/compilers/sandbox/symbol_table.cpp
+/home/abeeston/sp2020/compilers/calc/symbol_table.cpp
 symbol_table.hpp
-/home/abeeston/sp2020/compilers/sandbox/symbol_table.hpp
+/home/abeeston/sp2020/compilers/calc/symbol_table.hpp
 iostream
 -
 
-/home/abeeston/sp2020/compilers/sandbox/symbol_table.hpp
+/home/abeeston/sp2020/compilers/calc/symbol_table.hpp
 string
 -
 vector

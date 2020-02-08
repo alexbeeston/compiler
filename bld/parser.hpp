@@ -30,8 +30,8 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-#ifndef YY_YY_HOME_ABEESTON_SP2020_COMPILERS_SANDBOX_BLD_PARSER_HPP_INCLUDED
-# define YY_YY_HOME_ABEESTON_SP2020_COMPILERS_SANDBOX_BLD_PARSER_HPP_INCLUDED
+#ifndef YY_YY_HOME_ABEESTON_SP2020_COMPILERS_CALC_BLD_PARSER_HPP_INCLUDED
+# define YY_YY_HOME_ABEESTON_SP2020_COMPILERS_CALC_BLD_PARSER_HPP_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -69,7 +69,7 @@ union YYSTYPE
 float val;
 char* id;
 
-#line 73 "/home/abeeston/sp2020/compilers/sandbox/bld/parser.hpp" /* yacc.c:1909  */
+#line 73 "/home/abeeston/sp2020/compilers/calc/bld/parser.hpp" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -82,4 +82,4 @@ extern YYSTYPE yylval;
 
 int yyparse (void);
 
-#endif /* !YY_YY_HOME_ABEESTON_SP2020_COMPILERS_SANDBOX_BLD_PARSER_HPP_INCLUDED  */
+#endif /* !YY_YY_HOME_ABEESTON_SP2020_COMPILERS_CALC_BLD_PARSER_HPP_INCLUDED  */

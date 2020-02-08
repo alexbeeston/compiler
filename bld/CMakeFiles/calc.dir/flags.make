@@ -6,5 +6,5 @@ CXX_FLAGS =  -g3 -std=c++14
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/abeeston/sp2020/compilers/sandbox 
+CXX_INCLUDES = -I/home/abeeston/sp2020/compilers/calc 
 
