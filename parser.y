@@ -33,6 +33,8 @@ char* id;
 %type <id> ID
 
 %%
+Test : LET{std::cout << "dog";}
+ /*
 
 StatementList : StatementList Statement{}
               | {};
@@ -52,7 +54,7 @@ Factor : OPEN Expression CLOSE {$$ = $2;}
        | NUMBER {$$ = $1;}
        | ID {$$ = symbol_table.lookup($1);delete($1);}
        ;
-
+ */
 %%
 
 void yyerror(const char* msg)
