@@ -6,6 +6,8 @@
 
 #IncludeRegexTransform: 
 
+..//Testing.h
+
 ..//symbol_table.hpp
 string
 -
@@ -14,11 +16,15 @@ vector
 map
 -
 
+/home/abeeston/sp2020/compilers/calc/Testing.h
+
 /home/abeeston/sp2020/compilers/calc/bld/parser.cpp
 iostream
 -
 map
 -
+Testing.h
+/home/abeeston/sp2020/compilers/calc/bld/Testing.h
 symbol_table.hpp
 /home/abeeston/sp2020/compilers/calc/bld/symbol_table.hpp
 stddef.h
@@ -61,6 +67,10 @@ unistd.h
 /home/abeeston/sp2020/compilers/calc/main.cpp
 symbol_table.hpp
 /home/abeeston/sp2020/compilers/calc/symbol_table.hpp
+Testing.h
+/home/abeeston/sp2020/compilers/calc/Testing.h
+iostream
+-
 
 /home/abeeston/sp2020/compilers/calc/symbol_table.cpp
 symbol_table.hpp

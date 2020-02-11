@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="calc"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/abeeston/sp2020/compilers/calc/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/abeeston/sp2020/compilers/calc/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/abeeston/sp2020/compilers/calc/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/abeeston/sp2020/compilers/calc/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/abeeston/sp2020/compilers/calc/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/abeeston/sp2020/compilers/calc/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/abeeston/sp2020/compilers/calc/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/abeeston/sp2020/compilers/calc/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/abeeston/sp2020/compilers/calc/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/abeeston/sp2020/compilers/calc/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="calc">
+				<Option output="/home/abeeston/sp2020/compilers/calc/cmake-build-debug/calc" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/abeeston/sp2020/compilers/calc/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/abeeston/sp2020/compilers/calc"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/abeeston/sp2020/compilers/calc/cmake-build-debug/Makefile&quot;  VERBOSE=1 calc"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/abeeston/sp2020/compilers/calc/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/abeeston/sp2020/compilers/calc/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/abeeston/sp2020/compilers/calc/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="calc/fast">
+				<Option output="/home/abeeston/sp2020/compilers/calc/cmake-build-debug/calc" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/abeeston/sp2020/compilers/calc/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/abeeston/sp2020/compilers/calc"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/abeeston/sp2020/compilers/calc/cmake-build-debug/Makefile&quot;  VERBOSE=1 calc/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/abeeston/sp2020/compilers/calc/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/abeeston/sp2020/compilers/calc/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/abeeston/sp2020/compilers/calc/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/abeeston/sp2020/compilers/calc/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/abeeston/sp2020/compilers/calc/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/abeeston/sp2020/compilers/calc/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/abeeston/sp2020/compilers/calc/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/abeeston/sp2020/compilers/calc/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/abeeston/sp2020/compilers/calc/cmake-build-debug/parser.cpp">
+			<Option target="calc"/>
+		</Unit>
+		<Unit filename="/home/abeeston/sp2020/compilers/calc/cmake-build-debug/parser.cpp.rule">
+			<Option target="calc"/>
+		</Unit>
+		<Unit filename="/home/abeeston/sp2020/compilers/calc/cmake-build-debug/parser.hpp">
+			<Option target="calc"/>
+		</Unit>
+		<Unit filename="/home/abeeston/sp2020/compilers/calc/cmake-build-debug/scanner.cpp">
+			<Option target="calc"/>
+		</Unit>
+		<Unit filename="/home/abeeston/sp2020/compilers/calc/cmake-build-debug/scanner.cpp.rule">
+			<Option target="calc"/>
+		</Unit>
+		<Unit filename="/home/abeeston/sp2020/compilers/calc/main.cpp">
+			<Option target="calc"/>
+		</Unit>
+		<Unit filename="/home/abeeston/sp2020/compilers/calc/symbol_table.cpp">
+			<Option target="calc"/>
+		</Unit>
+		<Unit filename="/home/abeeston/sp2020/compilers/calc/symbol_table.hpp">
+			<Option target="calc"/>
+		</Unit>
+		<Unit filename="/home/abeeston/sp2020/compilers/calc/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

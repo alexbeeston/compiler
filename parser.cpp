@@ -66,14 +66,13 @@
 
 #include <iostream>
 #include <map>
-#include "Testing.h"
+
 #include "symbol_table.hpp"
 
 extern int yylex();
 void yyerror(const char*);
-extern int count = 0;
 
-#line 77 "/home/abeeston/sp2020/compilers/calc/bld/parser.cpp" /* yacc.c:339  */
+#line 76 "/home/abeeston/sp2020/compilers/calc/bld/parser.cpp" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -127,12 +126,12 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 13 "parser.y" /* yacc.c:355  */
+#line 12 "parser.y" /* yacc.c:355  */
 
 float val;
 char* id;
 
-#line 136 "/home/abeeston/sp2020/compilers/calc/bld/parser.cpp" /* yacc.c:355  */
+#line 135 "/home/abeeston/sp2020/compilers/calc/bld/parser.cpp" /* yacc.c:355  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -149,7 +148,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 153 "/home/abeeston/sp2020/compilers/calc/bld/parser.cpp" /* yacc.c:358  */
+#line 152 "/home/abeeston/sp2020/compilers/calc/bld/parser.cpp" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -389,18 +388,18 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  2
+#define YYFINAL  3
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   13
+#define YYLAST   1
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  14
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  3
+#define YYNNTS  2
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  4
+#define YYNRULES  2
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  6
+#define YYNSTATES  4
 
 /* YYTRANSLATE[YYX] -- Symbol number corresponding to YYX as returned
    by yylex, with out-of-bounds checking.  */
@@ -447,7 +446,7 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    37,    37,    38,    40
+       0,    36,    36
 };
 #endif
 
@@ -457,8 +456,7 @@ static const yytype_uint8 yyrline[] =
 static const char *const yytname[] =
 {
   "$end", "error", "$undefined", "ADD", "SUB", "MULT", "DIV", "OPEN",
-  "CLOSE", "DONE", "NUMBER", "ID", "EQUAL", "LET", "$accept",
-  "StatementList", "Statement", YY_NULLPTR
+  "CLOSE", "DONE", "NUMBER", "ID", "EQUAL", "LET", "$accept", "Test", YY_NULLPTR
 };
 #endif
 
@@ -472,10 +470,10 @@ static const yytype_uint16 yytoknum[] =
 };
 # endif
 
-#define YYPACT_NINF -9
+#define YYPACT_NINF -14
 
 #define yypact_value_is_default(Yystate) \
-  (!!((Yystate) == (-9)))
+  (!!((Yystate) == (-14)))
 
 #define YYTABLE_NINF -1
 
@@ -486,7 +484,7 @@ static const yytype_uint16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      -9,     0,    -9,    -8,    -9,    -9
+     -13,   -14,     1,   -14
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -494,19 +492,19 @@ static const yytype_int8 yypact[] =
      means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       3,     0,     1,     0,     2,     4
+       0,     2,     0,     1
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-      -9,    -9,    -9
+     -14,   -14
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,     1,     4
+      -1,     2
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -514,33 +512,31 @@ static const yytype_int8 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_uint8 yytable[] =
 {
-       2,     5,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     3
+       1,     3
 };
 
-static const yytype_int8 yycheck[] =
+static const yytype_uint8 yycheck[] =
 {
-       0,     9,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,    13
+      13,     0
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
      symbol of state STATE-NUM.  */
 static const yytype_uint8 yystos[] =
 {
-       0,    15,     0,    13,    16,     9
+       0,    13,    15,     0
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_uint8 yyr1[] =
 {
-       0,    14,    15,    15,    16
+       0,    14,    15
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
 static const yytype_uint8 yyr2[] =
 {
-       0,     2,     2,     0,     2
+       0,     2,     1
 };
 
 
@@ -1217,25 +1213,13 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 37 "parser.y" /* yacc.c:1646  */
-    {}
+#line 36 "parser.y" /* yacc.c:1646  */
+    {std::cout << "dog";}
+#line 1219 "/home/abeeston/sp2020/compilers/calc/bld/parser.cpp" /* yacc.c:1646  */
+    break;
+
+
 #line 1223 "/home/abeeston/sp2020/compilers/calc/bld/parser.cpp" /* yacc.c:1646  */
-    break;
-
-  case 3:
-#line 38 "parser.y" /* yacc.c:1646  */
-    {}
-#line 1229 "/home/abeeston/sp2020/compilers/calc/bld/parser.cpp" /* yacc.c:1646  */
-    break;
-
-  case 4:
-#line 40 "parser.y" /* yacc.c:1646  */
-    {std::cout << "got it" << std::endl;}
-#line 1235 "/home/abeeston/sp2020/compilers/calc/bld/parser.cpp" /* yacc.c:1646  */
-    break;
-
-
-#line 1239 "/home/abeeston/sp2020/compilers/calc/bld/parser.cpp" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1463,7 +1447,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 60 "parser.y" /* yacc.c:1906  */
+#line 58 "parser.y" /* yacc.c:1906  */
 
 
 void yyerror(const char* msg)

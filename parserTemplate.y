@@ -1,12 +1,11 @@
 %{
 #include <iostream>
 #include <map>
-#include "Testing.h"
+
 #include "symbol_table.hpp"
 
 extern int yylex();
 void yyerror(const char*);
-extern int count = 0;
 %}
 
 %union
@@ -34,12 +33,9 @@ char* id;
 %type <id> ID
 
 %%
+
 StatementList : StatementList Statement{}
               | {};
-
-Statement : LET DONE {std::cout << "got it" << std::endl;} ;
-
-/*
 Statement : Expression DONE {std::cout << $1 << std::endl;}
           | LET ID EQUAL Expression DONE{symbol_table.store($2,$4);delete($2);}
           | DONE{};
@@ -56,7 +52,7 @@ Factor : OPEN Expression CLOSE {$$ = $2;}
        | NUMBER {$$ = $1;}
        | ID {$$ = symbol_table.lookup($1);delete($1);}
        ;
- */
+
 %%
 
 void yyerror(const char* msg)
