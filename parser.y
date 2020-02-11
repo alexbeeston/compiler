@@ -30,6 +30,7 @@ char* id;
 %token CONST
 %token VAR
 
+%type <val> NUM
 %type <val> Factor
 %type <val> Term
 %type <id> ID
