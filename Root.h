@@ -27,6 +27,7 @@ struct Block
 struct Program
 {
     std::vector<Constant> constants;
+    std::vector<Var> vars;
 //    TypeDecl typeDecl;
 //    VarDecl varDel;
 //    ProcedureDecl procedureDecl;

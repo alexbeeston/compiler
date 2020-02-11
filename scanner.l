@@ -5,6 +5,8 @@
 %}
 %option noyywrap
 %%
+"const" {return CONST;}
+"var | VAR" {return VAR;}
 ";" {return DONE;}
 "=" {return EQUAL;}
 [0-9]+ {yylval.val = atof(yytext); return NUM;}

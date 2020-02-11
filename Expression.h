@@ -16,6 +16,14 @@ struct Constant : Expression
   Constant(int value):value(value){}
 };
 
+
+struct Var: Expression
+{
+    bool isCV() {return true;}
+    int CV(){return value;}
+    int value;
+    Var(int value):value(value){}
+};
 //struct Add : Expression
 //{
 //  bool isCV() {return false;};

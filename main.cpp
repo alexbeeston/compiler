@@ -11,9 +11,17 @@ int main()
     std::cout << "####### BEGIN PROGRAM #########" << std::endl;
 	symbol_table.enter_scope();
 	yyparse();
+	std::cout << "Constants: " << std::endl;
+
 	for (Constant dog : program.constants)
     {
 	    std::cout << dog.value << std::endl;
+    }
+
+    std::cout << "vars: " << std::endl;
+    for (Var dog : program.vars)
+    {
+        std::cout << dog.value << std::endl;
     }
 }
 

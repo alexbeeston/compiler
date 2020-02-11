@@ -28,23 +28,24 @@ char* id;
 %token EQUAL
 %token LET
 %token CONST
+%token VAR
 
 %type <val> Factor
 %type <val> Term
 %type <id> ID
 
 %%
-ConstantDecl : CONST ConstantList;
-    |;
-
 ConstantList : ConstantList Constant;
     |;
 Constant : NUM DONE { program.constants.push_back(Constant($1) ; } ;
 
-
-
 /*
+VarDecl: VAR VarList;
+    |;
 
+VarList: VarList Var;
+    |;
+Var: NUM DONE { program.constants.push_back(Constant($1) ; } ;
 
 StatementList : StatementList Statement {}
               | ;
