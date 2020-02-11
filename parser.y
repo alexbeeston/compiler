@@ -2,7 +2,6 @@
 #include <iostream>
 #include <map>
 #include "Root.h"
-#include "Routines.cpp"
 #include "symbol_table.hpp"
 
 extern int yylex();

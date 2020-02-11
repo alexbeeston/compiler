@@ -1,3 +1,6 @@
+// don't put using in ANY header files!
+#include "Routines.cpp";
+
 
 struct ConstantDecl
 {
@@ -28,8 +31,8 @@ struct Program
     ConstantDecl constDecl;
     TypeDecl typeDecl;
     VarDecl varDel;
-//    ProcedureDecl procedureDecl;
-//    FunctionDecl functionDecl;
+    ProcedureDecl procedureDecl;
+    FunctionDecl functionDecl;
     Block block;
 
     int testing1 = 1000;
