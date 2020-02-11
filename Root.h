@@ -3,10 +3,7 @@
 #include <vector>
 #include "Expression.h"
 
-struct ConstantDecl
-{
-    std::vector<Constant> constants;
-};
+
 
 struct TypeDecl
 {
@@ -29,7 +26,7 @@ struct Block
 
 struct Program
 {
-    ConstantDecl constDecl;
+    std::vector<Constant> constants;
 //    TypeDecl typeDecl;
 //    VarDecl varDel;
 //    ProcedureDecl procedureDecl;

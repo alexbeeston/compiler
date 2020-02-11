@@ -11,10 +11,10 @@ int main()
     std::cout << "####### BEGIN PROGRAM #########" << std::endl;
 	symbol_table.enter_scope();
 	yyparse();
-//	for (Constant dog : program.constDVjjecl.constants)
-//    {
-//	    std::cout << dog.value << std::endl;
-//    }
+	for (Constant dog : program.constants)
+    {
+	    std::cout << dog.value << std::endl;
+    }
 }
 
 

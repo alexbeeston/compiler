@@ -29,7 +29,6 @@ char* id;
 %token LET
 %token CONST
 
-%type <val> NUM
 %type <val> Factor
 %type <val> Term
 %type <id> ID
@@ -37,7 +36,7 @@ char* id;
 %%
 ConstantList : ConstantList Constant{}
     | ;
-Constant : NUM DONE {std::cout << $1 << std::endl;};
+Constant : NUM DONE { program.constants.push_back(Constant($1) ; } ;
 
 
 
