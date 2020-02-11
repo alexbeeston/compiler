@@ -36,9 +36,10 @@ char* id;
 %type <id> ID
 
 %%
+ConstDec : CONST ConstantList;
 ConstantList : ConstantList Constant;
     |;
-Constant : NUM DONE { program.constants.push_back(Constant($1) ; } ;
+Constant : NUM DONE { program.constants.push_back(Constant($1)); } ;
 
 /*
 VarDecl: VAR VarList;
