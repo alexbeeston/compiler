@@ -355,8 +355,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 7
-#define YY_END_OF_BUFFER 8
+#define YY_NUM_RULES 8
+#define YY_END_OF_BUFFER 9
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -364,10 +364,11 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[20] =
+static const flex_int16_t yy_accept[24] =
     {   0,
-        0,    0,    8,    7,    5,    3,    4,    6,    6,    6,
-        5,    6,    6,    6,    6,    2,    6,    1,    0
+        0,    0,    9,    8,    6,    4,    5,    7,    7,    7,
+        7,    6,    7,    7,    7,    7,    7,    7,    2,    7,
+        3,    1,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -383,9 +384,9 @@ static const YY_CHAR yy_ec[256] =
         5,    5,    5,    5,    5,    5,    5,    5,    5,    5,
         1,    1,    1,    1,    6,    1,    7,    5,    8,    5,
 
-        5,    5,    5,    5,    5,    5,    5,    5,    5,    9,
-       10,    5,    5,   11,   12,   13,    5,   14,    5,    5,
-        5,    5,    1,    1,    1,    1,    1,    1,    1,    1,
+        9,    5,    5,    5,    5,    5,    5,    5,    5,   10,
+       11,   12,    5,   13,   14,   15,    5,   16,    5,    5,
+       17,    5,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -402,38 +403,42 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static const YY_CHAR yy_meta[15] =
+static const YY_CHAR yy_meta[18] =
     {   0,
         1,    2,    1,    1,    2,    2,    2,    2,    2,    2,
-        2,    2,    2,    2
+        2,    2,    2,    2,    2,    2,    2
     } ;
 
-static const flex_int16_t yy_base[21] =
+static const flex_int16_t yy_base[25] =
     {   0,
-        0,    0,   24,   25,   21,   25,   25,    0,   12,   14,
-       18,    0,   10,    7,    5,    0,    3,    0,   25,   13
+        0,    0,   30,   31,   27,   31,   31,    0,   17,   10,
+       19,   23,    0,   14,   11,    9,    7,   11,    0,    4,
+        0,    0,   31,   16
     } ;
 
-static const flex_int16_t yy_def[21] =
+static const flex_int16_t yy_def[25] =
     {   0,
-       19,    1,   19,   19,   19,   19,   19,   20,   20,   20,
-       19,   20,   20,   20,   20,   20,   20,   20,    0,   19
+       23,    1,   23,   23,   23,   23,   23,   24,   24,   24,
+       24,   23,   24,   24,   24,   24,   24,   24,   24,   24,
+       24,   24,    0,   23
     } ;
 
-static const flex_int16_t yy_nxt[40] =
+static const flex_int16_t yy_nxt[49] =
     {   0,
         4,    5,    6,    7,    8,    4,    8,    9,    8,    8,
-        8,    8,    8,   10,   12,   18,   17,   16,   15,   11,
-       14,   13,   11,   19,    3,   19,   19,   19,   19,   19,
-       19,   19,   19,   19,   19,   19,   19,   19,   19
+        8,    8,    8,    8,   10,   11,    8,   13,   22,   21,
+       20,   19,   18,   17,   12,   16,   15,   14,   12,   23,
+        3,   23,   23,   23,   23,   23,   23,   23,   23,   23,
+       23,   23,   23,   23,   23,   23,   23,   23
     } ;
 
-static const flex_int16_t yy_chk[40] =
+static const flex_int16_t yy_chk[49] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,   20,   17,   15,   14,   13,   11,
-       10,    9,    5,    3,   19,   19,   19,   19,   19,   19,
-       19,   19,   19,   19,   19,   19,   19,   19,   19
+        1,    1,    1,    1,    1,    1,    1,   24,   20,   18,
+       17,   16,   15,   14,   12,   11,   10,    9,    5,    3,
+       23,   23,   23,   23,   23,   23,   23,   23,   23,   23,
+       23,   23,   23,   23,   23,   23,   23,   23
     } ;
 
 static yy_state_type yy_last_accepting_state;
@@ -455,8 +460,8 @@ char *yytext;
 #include <cstdlib>
 #include <iostream>
 #include "parser.hpp"
-#line 459 "/home/abeeston/sp2020/compilers/calc/bld/scanner.cpp"
-#line 460 "/home/abeeston/sp2020/compilers/calc/bld/scanner.cpp"
+#line 464 "/home/abeeston/sp2020/compilers/calc/bld/scanner.cpp"
+#line 465 "/home/abeeston/sp2020/compilers/calc/bld/scanner.cpp"
 
 #define INITIAL 0
 
@@ -675,7 +680,7 @@ YY_DECL
 	{
 #line 7 "scanner.l"
 
-#line 679 "/home/abeeston/sp2020/compilers/calc/bld/scanner.cpp"
+#line 684 "/home/abeeston/sp2020/compilers/calc/bld/scanner.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -702,13 +707,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 20 )
+				if ( yy_current_state >= 24 )
 					yy_c = yy_meta[yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 25 );
+		while ( yy_base[yy_current_state] != 31 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -745,21 +750,26 @@ YY_RULE_SETUP
 case 3:
 YY_RULE_SETUP
 #line 10 "scanner.l"
-{return DONE;}
+{return TYPE;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 11 "scanner.l"
-{return EQUAL;}
+#line 12 "scanner.l"
+{return DONE;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 12 "scanner.l"
-{yylval.val = atof(yytext); return NUM;}
+#line 13 "scanner.l"
+{return EQUAL;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 13 "scanner.l"
+#line 14 "scanner.l"
+{yylval.val = atof(yytext); return NUM;}
+	YY_BREAK
+case 7:
+YY_RULE_SETUP
+#line 15 "scanner.l"
 {yylval.id = strdup(yytext); return IDENT;}
 	YY_BREAK
 /*
@@ -780,12 +790,12 @@ _[a-zA-Z]+ {yylval.id = strdup(yytext+1);return ID;}
 [0-9]*\.[0-9]* {yylval.val = atof(yytext);return NUMBER;}
 [0-9]+ {yylval.val = atof(yytext);return NUMBER;}
  */
-case 7:
+case 8:
 YY_RULE_SETUP
-#line 37 "scanner.l"
+#line 39 "scanner.l"
 ECHO;
 	YY_BREAK
-#line 789 "/home/abeeston/sp2020/compilers/calc/bld/scanner.cpp"
+#line 799 "/home/abeeston/sp2020/compilers/calc/bld/scanner.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1082,7 +1092,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 20 )
+			if ( yy_current_state >= 24 )
 				yy_c = yy_meta[yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1110,11 +1120,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 20 )
+		if ( yy_current_state >= 24 )
 			yy_c = yy_meta[yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 19);
+	yy_is_jam = (yy_current_state == 23);
 
 		return yy_is_jam ? 0 : yy_current_state;
 }
@@ -1790,6 +1800,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 37 "scanner.l"
+#line 39 "scanner.l"
 
 

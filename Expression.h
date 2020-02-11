@@ -24,6 +24,15 @@ struct Var: Expression
     int value;
     Var(int value):value(value){}
 };
+
+
+struct Typer: Expression
+{
+    bool isCV() {return true;}
+    int CV(){return value;}
+    int value;
+    Typer(int value):value(value){}
+};
 //struct Add : Expression
 //{
 //  bool isCV() {return false;};

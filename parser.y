@@ -29,26 +29,45 @@ char* id;
 %token LET
 %token CONST
 %token VAR
+%token TYPE
 
 %type <val> NUM
+%type <val> Expression
 %type <val> Factor
 %type <val> Term
 %type <id> ID
 
 %%
-Program : ConstDec VarDecl;
+Program : ConstDec TypeDecl VarDecl;
 ConstDec : CONST ConstantList
     |;
 ConstantList : ConstantList Constant;
     |;
-Constant : NUM DONE { program.constants.push_back(Constant($1)); } ;
+Constant : IDENT EQUAL Expression DONE { program.constants.push_back(Constant($3)); } ;
+
+
+TypeDecl: TYPE TypeList
+    |;
+TypeList: TypeList Type;
+    |;
+Type: IDENT EQUAL Expression DONE { program.constants.push_back(Typer($3)); } ;
 
 
 VarDecl: VAR VarList
     |;
 VarList: VarList Var;
     |;
-Var: NUM DONE { program.vars.push_back(Var($1)); } ;
+Var: IDENT EQUAL Expression DONE { program.vars.push_back(Var($3)); } ;
+
+
+
+
+
+
+
+
+
+Expression : NUM;
 
 /*
 VarDecl: VAR VarList;

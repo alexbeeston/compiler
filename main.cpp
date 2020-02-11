@@ -18,6 +18,13 @@ int main()
 	    std::cout << dog.value << std::endl;
     }
 
+    std::cout << "types: " << std::endl;
+    for (Typer dog : program.types)
+    {
+        std::cout << dog.value << std::endl;
+    }
+
+
     std::cout << "vars: " << std::endl;
     for (Var dog : program.vars)
     {

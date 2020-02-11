@@ -7,6 +7,8 @@
 %%
 "const" {return CONST;}
 "var" {return VAR;}
+"type" {return TYPE;}
+
 ";" {return DONE;}
 "=" {return EQUAL;}
 [0-9]+ {yylval.val = atof(yytext); return NUM;}

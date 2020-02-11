@@ -1,3 +1,11 @@
+const
+hen = 40;
+smith = 10;
+
+type
+dog = 3;
+cat  2;
+
 var
-30;
-40;
+hello = 10;
+sdafb = 5;

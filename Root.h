@@ -28,6 +28,7 @@ struct Program
 {
     std::vector<Constant> constants;
     std::vector<Var> vars;
+    std::vector<Type> types;
 //    TypeDecl typeDecl;
 //    VarDecl varDel;
 //    ProcedureDecl procedureDecl;
