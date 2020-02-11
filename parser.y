@@ -1,12 +1,14 @@
 %{
 #include <iostream>
 #include <map>
-#include "Testing.h"
+#include "Root.h"
+#include "Routines.cpp"
 #include "symbol_table.hpp"
 
 extern int yylex();
 void yyerror(const char*);
-extern int count = 0;
+
+Program program;
 %}
 
 %union
@@ -34,10 +36,10 @@ char* id;
 %type <id> ID
 
 %%
-StatementList : StatementList Statement{}
-              | {};
+StatementList : StatementList Statement {program.testing1 = 1;}
+              | {program.testing2 = 2;};
 
-Statement : LET DONE {std::cout << "got it" << std::endl;} ;
+Statement : LET DONE {} ;
 
 /*
 Statement : Expression DONE {std::cout << $1 << std::endl;}

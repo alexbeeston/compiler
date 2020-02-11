@@ -1,13 +1,38 @@
-#include <vector>
 
-struct Testing
+struct ConstantDecl
 {
-	int num1;
-	int num2;
+
 };
 
-struct Root
+struct TypeDecl
 {
-    std::vector<int> stuff;
+
 };
 
+struct VarDecl
+{
+
+};
+
+
+
+struct Block
+{
+
+
+};
+
+
+struct Program
+{
+    ConstantDecl constDecl;
+    TypeDecl typeDecl;
+    VarDecl varDel;
+//    ProcedureDecl procedureDecl;
+//    FunctionDecl functionDecl;
+    Block block;
+
+    int testing1 = 1000;
+    int testing2 = 2000;
+    int testing3;
+};

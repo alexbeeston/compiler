@@ -1,3 +1,0 @@
-/home/abeeston/sp2020/compilers/calc/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/abeeston/sp2020/compilers/calc/cmake-build-debug/CMakeFiles/calc.dir
-/home/abeeston/sp2020/compilers/calc/cmake-build-debug/CMakeFiles/edit_cache.dir
