@@ -34,8 +34,11 @@ char* id;
 %type <id> ID
 
 %%
-ConstantList : ConstantList Constant{}
-    | ;
+ConstantDecl : CONST ConstantList;
+    |;
+
+ConstantList : ConstantList Constant;
+    |;
 Constant : NUM DONE { program.constants.push_back(Constant($1) ; } ;
 
 
