@@ -1,0 +1,9 @@
+struct ProcedureDecl
+{
+
+};
+
+struct FunctionDecl
+{
+
+};
