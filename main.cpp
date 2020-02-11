@@ -8,10 +8,13 @@ extern Program program;
 
 int main()
 {
+    std::cout << "####### BEGIN PROGRAM #########" << std::endl;
 	symbol_table.enter_scope();
 	yyparse();
-	std::cout << "program.testing1 = " << program.testing1 << std::endl;
-	std::cout << "program.testing2 = " << program.testing2 << std::endl;
+//	for (Constant dog : program.constDVjjecl.constants)
+//    {
+//	    std::cout << dog.value << std::endl;
+//    }
 }
 
 

@@ -23,24 +23,31 @@ char* id;
 %token OPEN
 %token CLOSE
 %token DONE
-%token NUMBER
-%token ID
+%token NUM
+%token IDENT
 %token EQUAL
 %token LET
+%token CONST
 
-%type <val> NUMBER
-%type <val> Expression
+%type <val> NUM
 %type <val> Factor
 %type <val> Term
 %type <id> ID
 
 %%
-StatementList : StatementList Statement {program.testing1 = 1;}
-              | {program.testing2 = 2;};
+ConstantList : ConstantList Constant{}
+    | ;
+Constant : NUM DONE {std::cout << $1 << std::endl;};
 
-Statement : LET DONE {} ;
+
 
 /*
+
+
+StatementList : StatementList Statement {}
+              | ;
+Statement : NUM DONE {std::cout << $1 << std::endl;} ;
+
 Statement : Expression DONE {std::cout << $1 << std::endl;}
           | LET ID EQUAL Expression DONE{symbol_table.store($2,$4);delete($2);}
           | DONE{};
