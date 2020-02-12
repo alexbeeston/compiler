@@ -19,7 +19,7 @@ int main()
     }
 
     std::cout << "types: " << std::endl;
-    for (Typer dog : program.types)
+    for (Type dog : program.types)
     {
         std::cout << dog.value << std::endl;
     }

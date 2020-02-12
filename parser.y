@@ -50,7 +50,7 @@ TypeDecl: TYPE TypeList
     |;
 TypeList: TypeList Type;
     |;
-Type: IDENT EQUAL Expression DONE { program.constants.push_back(Typer($3)); } ;
+Type: IDENT EQUAL Expression DONE { program.types.push_back(Type($3)); } ;
 
 
 VarDecl: VAR VarList

@@ -4,7 +4,7 @@ smith = 10;
 
 type
 dog = 3;
-cat  2;
+cat =  2;
 
 var
 hello = 10;

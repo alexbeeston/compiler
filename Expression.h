@@ -26,12 +26,12 @@ struct Var: Expression
 };
 
 
-struct Typer: Expression
+struct Type: Expression
 {
     bool isCV() {return true;}
     int CV(){return value;}
     int value;
-    Typer(int value):value(value){}
+    Type(int value):value(value){}
 };
 //struct Add : Expression
 //{
