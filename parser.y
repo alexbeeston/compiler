@@ -30,6 +30,7 @@ char* id;
 %token CONST
 %token VAR
 %token TYPE
+%token RECORD
 
 %type <val> NUM
 %type <val> Expression
@@ -38,12 +39,27 @@ char* id;
 %type <id> ID
 
 %%
-Program : ConstDec TypeDecl VarDecl;
-ConstDec : CONST ConstantList
-    |;
-ConstantList : ConstantList Constant;
-    |;
+Program : ConstContainer TypeContainer VarDecl;
+
+ConstContainer : ConstDec | ;
+ConstDec : CONST ConstantList | ;
+ConstantList : ConstantList Constant | ;
 Constant : IDENT EQUAL Expression DONE { program.constants.push_back(Constant($3)); } ;
+Expression : NUM;
+
+TypeContainer : TypeDecl | ;
+TypeDecl : TYPE TypeList;
+TypeList : TypeList TypeListItem | ;
+TypeListItem : IDENT EQUAL TYPE DONE {std::cout << "TypeListItem" << std::endl;};
+
+
+
+
+
+
+
+
+
 
 
 TypeDecl: TYPE TypeList
@@ -67,7 +83,6 @@ Var: IDENT EQUAL Expression DONE { program.vars.push_back(Var($3)); } ;
 
 
 
-Expression : NUM;
 
 /*
 VarDecl: VAR VarList;

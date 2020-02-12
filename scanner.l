@@ -8,9 +8,12 @@
 "const" {return CONST;}
 "var" {return VAR;}
 "type" {return TYPE;}
-
+"r = a,b,c:i"
 ";" {return DONE;}
 "=" {return EQUAL;}
+"stuff" {yylval.id = strdup(yytext); return RECORD;}
+
+
 [0-9]+ {yylval.val = atof(yytext); return NUM;}
 [a-zA-Z][a-zA-Z0-9_]* {yylval.id = strdup(yytext); return IDENT;}
 

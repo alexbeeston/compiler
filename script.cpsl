@@ -1,11 +1,9 @@
 const
 hen = 40;
 smith = 10;
+hello = 60;
 
 type
-dog = 3;
-cat =  2;
+dog = type;
+cat =  type;
 
-var
-hello = 10;
-sdafb = 5;
