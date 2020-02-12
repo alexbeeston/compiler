@@ -1,17 +1,10 @@
 const
-hen = 40;
-smith = 10;
-hello = 60;
+ BASE = 5;
+ SIZE = 10;
 
-type
-testingVar = heyJude;
-testingVar = record a,b,c,testing,hello:testingVar; b,FLLS,ASDFJ_LE:testingVar; end;
-testingVar = array [10:10] of array [5:5] of testing;
+type i = integer;
+r = record a,b,c:i; end;
+a = array[4:4]of r;
 
 var
-A : a;
-B,C,D: testing;
-
-
-
-
+ A : a;

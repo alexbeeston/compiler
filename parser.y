@@ -47,16 +47,14 @@ char* id;
 %type <id> ID
 
 %%
-Program : ConstContainer TypeContainer VarContainer;
+Program : ConstDecl TypeDecl VarDecl;
 
-ConstContainer : ConstDec | ;
-ConstDec : CONST ConstantList | ;
+ConstDec : CONST Constant ConstantList | ;
 ConstantList : ConstantList Constant | ;
 Constant : IDENT EQUAL Expression DONE { program.constants.push_back(Constant($3)); } ;
 Expression : NUM;
 
-TypeContainer : TypeDecl | ;
-TypeDecl : TYPE TypeList;
+TypeDecl : TYPE TypeList | ;
 TypeList : TypeList TypeListItem | ;
 TypeListItem : IDENT EQUAL Type DONE {std::cout << "TypeListItem" << std::endl;};
 Type : SimpleType | RecordType | ArrayType;
@@ -70,8 +68,7 @@ Type : SimpleType | RecordType | ArrayType;
 
     ArrayType : ARRAY LBRACKET Expression COLON Expression RBRACKET OF Type {std::cout << "array" << std::endl; };
 
-VarContainer : VarDecl | ;
-VarDecl : VAR Record RecordSet {std::cout << "Variable" << std::endl; } ;
+VarDecl : VAR Record RecordSet | {std::cout << "Variable" << std::endl; } ;
 
 
 
