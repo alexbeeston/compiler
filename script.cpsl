@@ -4,5 +4,8 @@ smith = 10;
 hello = 60;
 
 type
-dog = heyJude;
-ident = record end;
+testingVar = heyJude;
+testingVar = record a,b,c,testing,hello:testingVar; b,FLLS,ASDFJ_LE:testingVar; end;
+
+
+

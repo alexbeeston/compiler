@@ -10,15 +10,19 @@
 "type" {return TYPE;}
 "end" {return END;}
 "record" {return RECORD;}
+"dog" {return DOG;}
 
-"r = a,b,c:i"
+":" {return COLON;}
 ";" {return DONE;}
 "=" {return EQUAL;}
+"," {return COMMA;}
+
 "stuff" {yylval.id = strdup(yytext); return RECORD;}
 
 
 [0-9]+ {yylval.val = atof(yytext); return NUM;}
 [a-zA-Z][a-zA-Z0-9_]* {yylval.id = strdup(yytext); return IDENT;}
+
 
 
 
