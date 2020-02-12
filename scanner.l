@@ -11,6 +11,10 @@
 "end" {return END;}
 "record" {return RECORD;}
 "dog" {return DOG;}
+"array" {return ARRAY;}
+"of" {return OF;}
+"[" {return LBRACKET;}
+"]" {return RBRACKET;};
 
 ":" {return COLON;}
 ";" {return DONE;}

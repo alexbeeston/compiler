@@ -35,6 +35,10 @@ char* id;
 %token DOG
 %token COLON
 %token COMMA
+%token ARRAY
+%token LBRACKET
+%token RBRACKET
+%token OF
 
 %type <val> NUM
 %type <val> Expression
@@ -43,7 +47,7 @@ char* id;
 %type <id> ID
 
 %%
-Program : ConstContainer TypeContainer;
+Program : ConstContainer TypeContainer VarContainer;
 
 ConstContainer : ConstDec | ;
 ConstDec : CONST ConstantList | ;
@@ -55,7 +59,7 @@ TypeContainer : TypeDecl | ;
 TypeDecl : TYPE TypeList;
 TypeList : TypeList TypeListItem | ;
 TypeListItem : IDENT EQUAL Type DONE {std::cout << "TypeListItem" << std::endl;};
-Type : SimpleType | RecordType;
+Type : SimpleType | RecordType | ArrayType;
     SimpleType : IDENT {std::cout << "SimpleType" << std::endl; };
     RecordType : RECORD RecordSet END;
         RecordSet : RecordSet Record | ;
@@ -64,6 +68,10 @@ Type : SimpleType | RecordType;
                     IdentListExtraSet : IdentListExtraSet IdentExtra | ;
                         IdentExtra : COMMA IDENT;
 
+    ArrayType : ARRAY LBRACKET Expression COLON Expression RBRACKET OF Type {std::cout << "array" << std::endl; };
+
+VarContainer : VarDecl | ;
+VarDecl : VAR Record RecordSet {std::cout << "Variable" << std::endl; } ;
 
 
 

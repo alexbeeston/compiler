@@ -6,6 +6,12 @@ hello = 60;
 type
 testingVar = heyJude;
 testingVar = record a,b,c,testing,hello:testingVar; b,FLLS,ASDFJ_LE:testingVar; end;
+testingVar = array [10:10] of array [5:5] of testing;
+
+var
+A : a;
+B,C,D: testing;
+
 
 
 
