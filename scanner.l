@@ -8,6 +8,9 @@
 "const" {return CONST;}
 "var" {return VAR;}
 "type" {return TYPE;}
+"end" {return END;}
+"record" {return RECORD;}
+
 "r = a,b,c:i"
 ";" {return DONE;}
 "=" {return EQUAL;}

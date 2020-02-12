@@ -31,6 +31,7 @@ char* id;
 %token VAR
 %token TYPE
 %token RECORD
+%token END
 
 %type <val> NUM
 %type <val> Expression
@@ -50,7 +51,10 @@ Expression : NUM;
 TypeContainer : TypeDecl | ;
 TypeDecl : TYPE TypeList;
 TypeList : TypeList TypeListItem | ;
-TypeListItem : IDENT EQUAL TYPE DONE {std::cout << "TypeListItem" << std::endl;};
+TypeListItem : IDENT EQUAL Type DONE {std::cout << "TypeListItem" << std::endl;};
+Type : SimpleType | RecordType;
+    SimpleType : IDENT;
+    RecordType : RECORD END;
 
 
 

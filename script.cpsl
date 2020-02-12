@@ -4,6 +4,5 @@ smith = 10;
 hello = 60;
 
 type
-dog = type;
-cat =  type;
-
+dog = heyJude;
+ident = record end;
