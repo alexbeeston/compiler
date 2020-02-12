@@ -66,7 +66,8 @@ Type : SimpleType | RecordType | ArrayType;
                     IdentListExtraSet : IdentListExtraSet IdentExtra | ;
                         IdentExtra : COMMA IDENT;
     ArrayType : ARRAY LBRACKET Expression COLON Expression RBRACKET OF Type {std::cout << "array" << std::endl; };
-    VarDecl : VAR Record RecordSet | {std::cout << "Variable" << std::endl; } ;
+
+VarDecl : VAR Record RecordSet | {std::cout << "Variable" << std::endl; } ;
 
 
 
