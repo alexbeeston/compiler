@@ -32,19 +32,19 @@ char* id;
 %token TYPE
 %token RECORD
 %token END
-%token DOG
 %token COLON
 %token COMMA
 %token ARRAY
 %token LBRACKET
 %token RBRACKET
 %token OF
+%token BEGIN_TOKEN
 
 %type <val> NUM
 %type <val> Expression
 
 %%
-Program : ConstDecl TypeDecl VarDecl;
+Program : ConstDecl TypeDecl VarDecl Block;
 
 ConstDecl : CONST Constant ConstantList | ;
 ConstantList : ConstantList Constant | ;
@@ -53,19 +53,25 @@ Expression : NUM;
 
 TypeDecl : TYPE TypeList | ;
 TypeList : TypeList TypeListItem | ;
-TypeListItem : IDENT EQUAL Type DONE {std::cout << "TypeListItem" << std::endl;};
+TypeListItem : IDENT EQUAL Type DONE ;
 Type : SimpleType | RecordType | ArrayType;
-    SimpleType : IDENT {std::cout << "SimpleType" << std::endl; };
+    SimpleType : IDENT ;
     RecordType : RECORD RecordSet END;
         RecordSet : RecordSet Record | ;
-            Record : IdentList COLON Type DONE {std::cout << "Record" << std::endl; };
+            Record : IdentList COLON Type DONE;
                 IdentList : IDENT IdentListExtraSet;
                     IdentListExtraSet : IdentListExtraSet IdentExtra | ;
                         IdentExtra : COMMA IDENT;
-    ArrayType : ARRAY LBRACKET Expression COLON Expression RBRACKET OF Type {std::cout << "array" << std::endl; };
+    ArrayType : ARRAY LBRACKET Expression COLON Expression RBRACKET OF Type ;
 
-VarDecl : VAR Record RecordSet | {std::cout << "Variable" << std::endl; } ;
+VarDecl : VAR Record RecordSet | ;
 
+Block: BEGIN_TOKEN StatementSequence END | ;
+StatementSequence : Statement ExtraStatementList;
+Statement : Assignment;
+Assignment : IDENT;
+ExtraStatementList : ExtraStatementList ExtraStatement | ;
+ExtraStatement : DONE Statement;
 
 
 /*
