@@ -15,6 +15,8 @@
 "[" {return LBRACKET;}
 "]" {return RBRACKET;};
 "begin" {return BEGIN_TOKEN;}
+"while" {return WHILE;}
+"do" {return DO;}
 
 ":" {return COLON;}
 ";" {return DONE;}

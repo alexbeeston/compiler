@@ -39,6 +39,8 @@ char* id;
 %token RBRACKET
 %token OF
 %token BEGIN_TOKEN
+%token WHILE
+%token DO
 
 %type <val> NUM
 %type <val> Expression
@@ -68,10 +70,16 @@ VarDecl : VAR Record RecordSet | ;
 
 Block: BEGIN_TOKEN StatementSequence END | ;
 StatementSequence : Statement ExtraStatementList;
-Statement : Assignment;
+Statement : Assignment
+    | WhileStatement;
+    | ;
 Assignment : IDENT;
 ExtraStatementList : ExtraStatementList ExtraStatement | ;
 ExtraStatement : DONE Statement;
+
+WhileStatement : WHILE Expression DO StatementSequence END;
+
+
 
 
 /*

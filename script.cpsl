@@ -9,9 +9,13 @@ a = array[4:4]of r;
 var
  A : a;
 
+
 begin
-testing;
-testing;
-testing;
-testing
+    while 10 do
+        testing;
+        testing;
+        testing;
+        testing;
+    end;
+    testing;
 end
