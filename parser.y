@@ -42,14 +42,11 @@ char* id;
 
 %type <val> NUM
 %type <val> Expression
-%type <val> Factor
-%type <val> Term
-%type <id> ID
 
 %%
 Program : ConstDecl TypeDecl VarDecl;
 
-ConstDec : CONST Constant ConstantList | ;
+ConstDecl : CONST Constant ConstantList | ;
 ConstantList : ConstantList Constant | ;
 Constant : IDENT EQUAL Expression DONE { program.constants.push_back(Constant($3)); } ;
 Expression : NUM;
@@ -68,35 +65,6 @@ Type : SimpleType | RecordType | ArrayType;
     ArrayType : ARRAY LBRACKET Expression COLON Expression RBRACKET OF Type {std::cout << "array" << std::endl; };
 
 VarDecl : VAR Record RecordSet | {std::cout << "Variable" << std::endl; } ;
-
-
-
-
-
-
-
-
-
-
-TypeDecl: TYPE TypeList
-    |;
-TypeList: TypeList Type;
-    |;
-Type: IDENT EQUAL Expression DONE { program.types.push_back(Type($3)); } ;
-
-
-VarDecl: VAR VarList
-    |;
-VarList: VarList Var;
-    |;
-Var: IDENT EQUAL Expression DONE { program.vars.push_back(Var($3)); } ;
-
-
-
-
-
-
-
 
 
 
