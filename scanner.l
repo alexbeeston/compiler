@@ -22,6 +22,8 @@
 ";" {return DONE;}
 "=" {return EQUAL;}
 "," {return COMMA;}
+":=" {return ASSIGN;}
+"." {return DOT;}
 
 "stuff" {yylval.id = strdup(yytext); return RECORD;}
 

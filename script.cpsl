@@ -11,11 +11,18 @@ var
 
 
 begin
+    testing.testing.hello[4] := 10;
+    testing := 20;
+
     while 10 do
-        testing;
-        testing;
-        testing;
-        testing;
+        testing := 4;
+        testing := 5;
     end;
-    testing;
+
+
+
+
+
+
+
 end

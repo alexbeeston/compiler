@@ -41,6 +41,8 @@ char* id;
 %token BEGIN_TOKEN
 %token WHILE
 %token DO
+%token ASSIGN
+%token DOT
 
 %type <val> NUM
 %type <val> Expression
@@ -73,7 +75,11 @@ StatementSequence : Statement ExtraStatementList;
 Statement : Assignment
     | WhileStatement;
     | ;
-Assignment : IDENT;
+Assignment : LValue ASSIGN Expression;
+    LValue : IDENT LValueList;
+    LValueList : LValueList LValueItem | ;
+    LValueItem : DOT IDENT
+        | LBRACKET Expression RBRACKET;
 ExtraStatementList : ExtraStatementList ExtraStatement | ;
 ExtraStatement : DONE Statement;
 
