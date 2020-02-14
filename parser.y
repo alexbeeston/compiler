@@ -170,16 +170,6 @@ ExtraStatement : DONE Statement;
 
 /*
 
-
-        ElseIfList : ElseIfList ElseIfListItem | ;
-        ElseIfListItem : ELSEIF Expression THEN StatementSequence;
-VarDecl: VAR VarList;
-    |;
-
-VarList: VarList Var;
-    |;
-Var: NUM DONE { program.constants.push_back(Constant($1) ; } ;
-
 StatementList : StatementList Statement {}
               | ;
 Statement : NUM DONE {std::cout << $1 << std::endl;} ;

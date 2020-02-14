@@ -12,7 +12,7 @@ var
 
 
 begin
-
+    i := "\t";
 repeat
 
    x := ((i < j ) & ((i > j) | (i <> j)) & ~(i=j)) | (i <= j) & (j >= -i) | ord('x') > 42;
@@ -36,8 +36,8 @@ stop;
 return;
 return 54;
 for x := 2 to 3 do stop end;
-read(i,c);
-write(1);
+read(i,10);
+write(1, "hello");
 
 end
 

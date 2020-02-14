@@ -61,7 +61,7 @@
 
 [0-9]+ {yylval.val = atof(yytext); return IDENT;}
 [a-zA-Z][a-zA-Z0-9_]* {yylval.id = strdup(yytext); return IDENT;}
-
+"[^\"]*" {yylval.id = strdup(yytext); return IDENT;}
 
 
 
