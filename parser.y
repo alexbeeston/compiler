@@ -72,28 +72,28 @@ Program : ConstDecl TypeDecl VarDecl Block;
 ConstDecl : CONST Constant ConstantList | ;
 ConstantList : ConstantList Constant | ;
 Constant : IDENT EQUAL Expression DONE { program.constants.push_back(Constant($3)); } ;
-Expression : Expression OR Expression
-    | Expression AND Expression
-    | Expression EQUAL Expression
-    | Expression NOTEQUAL Expression
-    | Expression GREATER_THAN_OR_EQUAL Expression
-    | Expression LESS_THAN_OR_EQUAL Expression
-    | Expression GREATER_THAN Expression
-    | Expression LESS_THAN Expression
-    | Expression ADD Expression
-    | Expression SUB Expression
+Expression : LValue
+    | LPAREN Expression RPAREN
+    | SUB Expression
     | Expression MULT Expression
     | Expression DIV Expression
     | Expression MOD Expression
+    | Expression ADD Expression
+    | Expression SUB Expression
+    | Expression EQUAL Expression
+    | Expression NOTEQUAL Expression
+    | Expression LESS_THAN Expression
+    | Expression LESS_THAN_OR_EQUAL Expression
+    | Expression GREATER_THAN Expression
+    | Expression GREATER_THAN_OR_EQUAL Expression
+    | Expression AND Expression
     | NEGATION Expression
-    | SUB Expression
-    | LPAREN Expression RPAREN
+    | Expression OR Expression
     | IDENT LPAREN MysterySet RPAREN
     | CHR LPAREN Expression RPAREN
     | ORD LPAREN Expression RPAREN
     | PRED LPAREN Expression RPAREN
-    | SUCC LPAREN Expression RPAREN
-    | LValue;
+    | SUCC LPAREN Expression RPAREN;
 
     MysterySet : Expression MysterySetList | ;
         MysterySetList : MysterySetList MysterySetListItem | ;

@@ -34,6 +34,7 @@ begin
 
 
    x := ((i < j ) & ((i > j) | (i <> j)) & ~(i=j)) | (i <= j) & (j >= -i) | ord('x') > 42;
+   x := pred(chr(succ(ord('A'))));
 
   if 5
       then k :=3;
