@@ -54,7 +54,8 @@ char* id;
 %token ELSE
 %token REPEAT
 %token UNTIL
-
+%token READ
+%token WRITE
 
 
 %token TILDA
@@ -134,6 +135,8 @@ Statement : Assignment
     | ForStatement;
     | StopStatement;
     | ReturnStatement;
+    | ReadStatement;
+    | WriteStatement;
     | ;
     Assignment : LValue ASSIGN Expression;
         LValue : IDENT LValueList;
@@ -150,6 +153,12 @@ Statement : Assignment
         Location : TO | DOWNTO;
     StopStatement : STOP;
     ReturnStatement : RETURN_TOKEN | RETURN_TOKEN Expression;
+    ReadStatement : READ LPAREN LValue ReadList RPAREN;
+        ReadList : ReadList ReadListItem | ;
+            ReadListItem : COMMA Expression;
+    WriteStatement : WRITE LPAREN Expression WriteList RPAREN;
+        WriteList : WriteList WriteListItem | ;
+            WriteListItem : COMMA Expression;
 
 
 ExtraStatementList : ExtraStatementList ExtraStatement | ;

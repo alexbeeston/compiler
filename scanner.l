@@ -30,6 +30,8 @@
 "downto" {return DOWNTO;}
 "stop" {return STOP;}
 "return" {return RETURN_TOKEN;}
+"read" {return READ;}
+"write" {return WRITE;}
 
 
 "<>" {return NOTEQUAL;}
