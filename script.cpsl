@@ -1,46 +1,16 @@
-const
- BASE = 5 + 1 * 21 - 2 + 3;
- SIZE = 10;
-
-type i = integer;
-r = record a,b,c:i; end;
-a = array[4:4]of r;
-
 var
- A : a;
+x : integer;
 
-procedure testing (testing); forward;
+function postinc(ref x:integer) : integer;
+var
+temp : integer;
+begin
+ temp := x;
+ x := succ(x);
+ return temp;
+end;
 
 begin
-    i := "\t";
-repeat
-
-   x := ((i < j ) & ((i > j) | (i <> j)) & ~(i=j)) | (i <= j) & (j >= -i) | ord('x') > 42;
-   x := pred(chr(succ(ord('A'))));
-
-  if 5
-      then k :=3;
-      if 1
-        then a := 2;
-      end;
-    elseif 5
-      then dog := 2;
-    elseif 10
-        then hello := 3;
-    else
-        dog := 10;
-    end;
-
-    until (hello);
-stop;
-return;
-return 54;
-for x := 2 to 3 do stop end;
-read(i,10);
-write(1, "hello");
-
-  sayHi();
-  sayHi();
-
-end
-.
+x := 1;
+write(x,postinc(x),x);
+end.

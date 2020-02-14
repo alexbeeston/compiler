@@ -40,6 +40,8 @@ char* id;
 %token RETURN_TOKEN
 %token PROCEDURE
 %token FORWARD
+%token REF
+%token FUNCTION
 
 %token WHILE
 %token DO
@@ -82,14 +84,21 @@ char* id;
 %type <val> Expression
 
 %%
-Program : ConstDecl TypeDecl VarDecl RoutineDeclList Block DOT;
+Program : Prelude RoutineDeclList Block DOT;
+Prelude : ConstDecl TypeDecl VarDecl;
 
 RoutineDeclList : RoutineDeclList RoutineDeclListItem | ;
     RoutineDeclListItem : ProcedureDecl | FunctionDecl;
 ProcedureDecl : PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE FORWARD DONE
-    | PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE Block DONE;
-    FormalParameters : IDENT;
-FunctionDecl : IDENT;
+    | PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE Body DONE;
+    FormalParameters : ParameterSet ParameterSetList | ;
+            ParameterSet : VarOrRef IdentList COLON Type;
+                VarOrRef : VAR | REF | ;
+            ParameterSetList : ParameterSetList ParameterSetListItem | ;
+                ParameterSetListItem : DONE ParameterSet;
+    Body : Prelude Block;
+FunctionDecl : FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE FORWARD DONE
+    | FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE Body DONE;
 
 
 ConstDecl : CONST Constant ConstantList | ;

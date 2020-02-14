@@ -34,6 +34,8 @@
 "write" {return WRITE;}
 "procedure" {return PROCEDURE;}
 "forward" {return FORWARD;}
+"ref" {return REF;}
+"function" {return FUNCTION;}
 
 
 "<>" {return NOTEQUAL;}
