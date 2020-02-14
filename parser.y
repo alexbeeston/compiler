@@ -84,7 +84,9 @@ Statement : Assignment
         LValueList : LValueList LValueItem | ;
         LValueItem : DOT IDENT
             | LBRACKET Expression RBRACKET;
-    IfStatement : IF Expression THEN StatementSequence END;
+    IfStatement : IF Expression THEN StatementSequence ElseIfList END;
+        ElseIfList : ElseIfList ElseIfListItem | ;
+            ElseIfListItem : ELSEIF Expression THEN StatementSequence;
     WhileStatement : WHILE Expression DO StatementSequence END;
 
 
