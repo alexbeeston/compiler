@@ -23,6 +23,12 @@
 "chr" {return CHR;}
 "pred" {return PRED;}
 "succ" {return SUCC;}
+"repeat" {return REPEAT;}
+"until" {return UNTIL;}
+"for" {return FOR;}
+"to" {return TO;}
+"downto" {return DOWNTO;}
+"stop" {return STOP;}
 
 
 "<>" {return NOTEQUAL;}

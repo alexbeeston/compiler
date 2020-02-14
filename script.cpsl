@@ -13,25 +13,7 @@ var
 
 begin
 
-
-
-  i := 1 % 1;
-  j := 1 & 1;
-    k := 1 <> 1;
-    k := 1 >= 1;
-    k := 1 <= 1;
-    j := 1 > 1;
-    k := 2 < 2;
-    k := 1 / 2;
-    k := (1 + 1);
-    k := testing ( (1+1),(2+2),(1));
-    k := chr (1);
-    k := ord (1);
-    k := pred (1);
-    j := succ (2 -1);
-    j := 1 = 1;
-    j := j;
-
+repeat
 
    x := ((i < j ) & ((i > j) | (i <> j)) & ~(i=j)) | (i <= j) & (j >= -i) | ord('x') > 42;
    x := pred(chr(succ(ord('A'))));
@@ -48,5 +30,10 @@ begin
     else
         dog := 10;
     end;
+
+    until (hello);
+stop;
+for x := 2 to 3 do stop end;
+
 end
 

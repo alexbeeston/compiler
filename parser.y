@@ -37,14 +37,25 @@ char* id;
 %token RBRACKET
 %token OF
 %token BEGIN_TOKEN
+
 %token WHILE
 %token DO
+%token FOR
+%token TO
+%token DOWNTO
+%token STOP
+
 %token ASSIGN
 %token DOT
 %token IF
 %token THEN
 %token ELSEIF
 %token ELSE
+%token REPEAT
+%token UNTIL
+
+
+
 %token TILDA
 %token GREATER_THAN_OR_EQUAL
 %token LESS_THAN_OR_EQUAL
@@ -94,7 +105,6 @@ Expression : LValue
     | ORD LPAREN Expression RPAREN
     | PRED LPAREN Expression RPAREN
     | SUCC LPAREN Expression RPAREN;
-
     MysterySet : Expression MysterySetList | ;
         MysterySetList : MysterySetList MysterySetListItem | ;
             MysterySetListItem : COMMA Expression;
@@ -119,6 +129,9 @@ StatementSequence : Statement ExtraStatementList;
 Statement : Assignment
     | IfStatement
     | WhileStatement
+    | RepeatStatement;
+    | ForStatement;
+    | StopStatement;
     | ;
     Assignment : LValue ASSIGN Expression;
         LValue : IDENT LValueList;
@@ -130,6 +143,11 @@ Statement : Assignment
             ElseIfListItem : ELSEIF Expression THEN StatementSequence;
         Else : ELSE StatementSequence | ;
     WhileStatement : WHILE Expression DO StatementSequence END;
+    RepeatStatement : REPEAT StatementSequence UNTIL Expression;
+    ForStatement : FOR IDENT ASSIGN Expression Location Expression DO StatementSequence END;
+    StopStatement : STOP;
+
+        Location : TO | DOWNTO;
 
 
 ExtraStatementList : ExtraStatementList ExtraStatement | ;
