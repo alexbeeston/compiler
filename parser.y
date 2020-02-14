@@ -80,7 +80,7 @@ char* id;
 %type <val> Expression
 
 %%
-Program : ConstDecl TypeDecl VarDecl Block;
+Program : ConstDecl TypeDecl VarDecl Block DOT;
 
 ConstDecl : CONST Constant ConstantList | ;
 ConstantList : ConstantList Constant | ;
