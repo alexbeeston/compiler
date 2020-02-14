@@ -137,6 +137,7 @@ Statement : Assignment
     | ReturnStatement;
     | ReadStatement;
     | WriteStatement;
+    | ProcedureCall;
     | ;
     Assignment : LValue ASSIGN Expression;
         LValue : IDENT LValueList;
@@ -153,12 +154,12 @@ Statement : Assignment
         Location : TO | DOWNTO;
     StopStatement : STOP;
     ReturnStatement : RETURN_TOKEN | RETURN_TOKEN Expression;
-    ReadStatement : READ LPAREN LValue ReadList RPAREN;
-        ReadList : ReadList ReadListItem | ;
-            ReadListItem : COMMA Expression;
-    WriteStatement : WRITE LPAREN Expression WriteList RPAREN;
-        WriteList : WriteList WriteListItem | ;
-            WriteListItem : COMMA Expression;
+    ReadStatement : READ LPAREN LValue CommaExpressionList RPAREN;
+        CommaExpressionList: CommaExpressionList CommaExpressionListItem | ;
+            CommaExpressionListItem: COMMA Expression;
+    WriteStatement : WRITE LPAREN Expression CommaExpressionList RPAREN;
+    ProcedureCall : IDENT LPAREN ProcedureParams RPAREN;
+        ProcedureParams : Expression CommaExpressionList | ;
 
 
 ExtraStatementList : ExtraStatementList ExtraStatement | ;

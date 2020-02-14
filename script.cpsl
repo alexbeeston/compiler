@@ -39,5 +39,8 @@ for x := 2 to 3 do stop end;
 read(i,10);
 write(1, "hello");
 
+  sayHi();
+  sayHi();
+
 end
 
