@@ -55,6 +55,13 @@ char* id;
 %token OR
 %token AND
 %token NEGATION
+%token CHR
+%token ORD
+%token PRED
+%token SUCC
+%token LPAREN
+%token RPAREN
+
 
 %type <val> LValue
 %type <val> Expression
@@ -78,7 +85,19 @@ Expression : Expression OR Expression
     | Expression MULT Expression
     | Expression DIV Expression
     | Expression MOD Expression
+    | NEGATION Expression
+    | SUB Expression
+    | LPAREN Expression RPAREN
+    | IDENT LPAREN MysterySet RPAREN
+    | CHR LPAREN Expression RPAREN
+    | ORD LPAREN Expression RPAREN
+    | PRED LPAREN Expression RPAREN
+    | SUCC LPAREN Expression RPAREN
     | LValue;
+
+    MysterySet : Expression MysterySetList | ;
+        MysterySetList : MysterySetList MysterySetListItem | ;
+            MysterySetListItem : COMMA Expression;
 
 TypeDecl : TYPE TypeList | ;
 TypeList : TypeList TypeListItem | ;

@@ -19,6 +19,10 @@
 "elseif" {return ELSEIF;}
 "then" {return THEN;}
 "else" {return ELSE;}
+"ord" {return ORD;}
+"chr" {return CHR;}
+"pred" {return PRED;}
+"succ" {return SUCC;}
 
 
 "<>" {return NOTEQUAL;}
@@ -36,6 +40,8 @@
 "]" {return RBRACKET;}
 "&" {return AND;}
 "|" {return OR;}
+"(" {return LPAREN;}
+")" {return RPAREN;}
 
 ":" {return COLON;}
 ";" {return DONE;}
