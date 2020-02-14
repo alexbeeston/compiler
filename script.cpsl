@@ -10,19 +10,15 @@ var
  A : a;
 
 
+
 begin
-    testing.testing.hello[4] := 10;
-    testing := 20;
 
-    while 10 do
-        testing := 4;
-        testing := 5;
-    end;
+  i := 5;
+  j := 1;
 
-
-
-
-
-
-
+  if  4 then
+     i := 45;
+     j := 3;
+   end;
 end
+

@@ -17,6 +17,9 @@
 "begin" {return BEGIN_TOKEN;}
 "while" {return WHILE;}
 "do" {return DO;}
+"if" {return IF;}
+"elseif" {return ELSEIF;}
+"then" {return THEN;}
 
 ":" {return COLON;}
 ";" {return DONE;}

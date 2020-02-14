@@ -43,6 +43,9 @@ char* id;
 %token DO
 %token ASSIGN
 %token DOT
+%token IF
+%token THEN
+%token ELSEIF
 
 %type <val> NUM
 %type <val> Expression
@@ -73,22 +76,30 @@ VarDecl : VAR Record RecordSet | ;
 Block: BEGIN_TOKEN StatementSequence END | ;
 StatementSequence : Statement ExtraStatementList;
 Statement : Assignment
-    | WhileStatement;
+    | IfStatement
+    | WhileStatement
     | ;
-Assignment : LValue ASSIGN Expression;
-    LValue : IDENT LValueList;
-    LValueList : LValueList LValueItem | ;
-    LValueItem : DOT IDENT
-        | LBRACKET Expression RBRACKET;
+    Assignment : LValue ASSIGN Expression;
+        LValue : IDENT LValueList;
+        LValueList : LValueList LValueItem | ;
+        LValueItem : DOT IDENT
+            | LBRACKET Expression RBRACKET;
+    IfStatement : IF Expression THEN StatementSequence END;
+    WhileStatement : WHILE Expression DO StatementSequence END;
+
+
 ExtraStatementList : ExtraStatementList ExtraStatement | ;
 ExtraStatement : DONE Statement;
 
-WhileStatement : WHILE Expression DO StatementSequence END;
 
 
 
 
 /*
+
+
+        ElseIfList : ElseIfList ElseIfListItem | ;
+        ElseIfListItem : ELSEIF Expression THEN StatementSequence;
 VarDecl: VAR VarList;
     |;
 
