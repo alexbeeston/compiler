@@ -355,8 +355,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 25
-#define YY_END_OF_BUFFER 26
+#define YY_NUM_RULES 26
+#define YY_END_OF_BUFFER 27
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -366,13 +366,13 @@ struct yy_trans_info
 	};
 static const flex_int16_t yy_accept[73] =
     {   0,
-        0,    0,   26,   25,   19,   21,   23,   16,   17,   18,
-       24,    8,    9,   24,   24,   24,   24,   24,   24,   24,
-       24,   24,   24,   24,   24,   23,   20,   24,   24,   24,
-       24,   12,   24,   24,   13,    7,   24,   24,   24,   24,
-       24,   24,   24,   24,   24,   24,    4,   24,   24,   24,
-       24,    2,   24,   24,   24,   24,   24,   24,   24,   15,
-        3,   24,    6,   10,    1,   24,   24,   22,   11,   14,
+        0,    0,   27,   26,   20,   22,   24,   17,   18,   19,
+       25,    8,    9,   25,   25,   25,   25,   25,   25,   25,
+       25,   25,   25,   25,   25,   24,   21,   25,   25,   25,
+       25,   12,   25,   25,   13,    7,   25,   25,   25,   25,
+       25,   25,   25,   25,   25,   25,    4,   25,   25,   25,
+       25,    2,   25,   25,   25,   25,   16,   25,   25,   15,
+        3,   25,    6,   10,    1,   25,   25,   23,   11,   14,
         5,    0
     } ;
 
@@ -847,47 +847,52 @@ YY_RULE_SETUP
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 24 "scanner.l"
-{return COLON;}
+#line 23 "scanner.l"
+{return ELSE;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
 #line 25 "scanner.l"
-{return DONE;}
+{return COLON;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
 #line 26 "scanner.l"
-{return EQUAL;}
+{return DONE;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
 #line 27 "scanner.l"
-{return COMMA;}
+{return EQUAL;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
 #line 28 "scanner.l"
-{return ASSIGN;}
+{return COMMA;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
 #line 29 "scanner.l"
-{return DOT;}
+{return ASSIGN;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 31 "scanner.l"
-{yylval.id = strdup(yytext); return RECORD;}
+#line 30 "scanner.l"
+{return DOT;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 34 "scanner.l"
-{yylval.val = atof(yytext); return NUM;}
+#line 32 "scanner.l"
+{yylval.id = strdup(yytext); return RECORD;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
 #line 35 "scanner.l"
+{yylval.val = atof(yytext); return NUM;}
+	YY_BREAK
+case 25:
+YY_RULE_SETUP
+#line 36 "scanner.l"
 {yylval.id = strdup(yytext); return IDENT;}
 	YY_BREAK
 /*
@@ -908,12 +913,12 @@ _[a-zA-Z]+ {yylval.id = strdup(yytext+1);return ID;}
 [0-9]*\.[0-9]* {yylval.val = atof(yytext);return NUMBER;}
 [0-9]+ {yylval.val = atof(yytext);return NUMBER;}
  */
-case 25:
+case 26:
 YY_RULE_SETUP
-#line 60 "scanner.l"
+#line 61 "scanner.l"
 ECHO;
 	YY_BREAK
-#line 917 "/home/abeeston/sp2020/compilers/calc/bld/scanner.cpp"
+#line 922 "/home/abeeston/sp2020/compilers/calc/bld/scanner.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1918,6 +1923,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 60 "scanner.l"
+#line 61 "scanner.l"
 
 

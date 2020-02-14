@@ -20,6 +20,7 @@
 "if" {return IF;}
 "elseif" {return ELSEIF;}
 "then" {return THEN;}
+"else" {return ELSE;}
 
 ":" {return COLON;}
 ";" {return DONE;}

@@ -23,6 +23,10 @@ begin
       end;
     elseif 5
       then dog := 2;
+    elseif 10
+        then hello := 3;
+    else
+        dog := 10;
     end;
 end
 

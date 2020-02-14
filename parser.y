@@ -46,6 +46,7 @@ char* id;
 %token IF
 %token THEN
 %token ELSEIF
+%token ELSE
 
 %type <val> NUM
 %type <val> Expression
@@ -84,9 +85,10 @@ Statement : Assignment
         LValueList : LValueList LValueItem | ;
         LValueItem : DOT IDENT
             | LBRACKET Expression RBRACKET;
-    IfStatement : IF Expression THEN StatementSequence ElseIfList END;
+    IfStatement : IF Expression THEN StatementSequence ElseIfList Else END;
         ElseIfList : ElseIfList ElseIfListItem | ;
             ElseIfListItem : ELSEIF Expression THEN StatementSequence;
+        Else : ELSE StatementSequence | ;
     WhileStatement : WHILE Expression DO StatementSequence END;
 
 
