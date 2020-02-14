@@ -20,8 +20,6 @@ char* id;
 %token SUB
 %token MULT
 %token DIV
-%token OPEN
-%token CLOSE
 %token DONE
 %token NUM
 %token IDENT
@@ -47,8 +45,18 @@ char* id;
 %token THEN
 %token ELSEIF
 %token ELSE
+%token TILDA
+%token GREATER_THAN_OR_EQUAL
+%token LESS_THAN_OR_EQUAL
+%token LESS_THAN
+%token GREATER_THAN
+%token MOD
+%token NOTEQUAL
+%token OR
+%token AND
+%token NEGATION
 
-%type <val> NUM
+%type <val> LValue
 %type <val> Expression
 
 %%
@@ -57,7 +65,20 @@ Program : ConstDecl TypeDecl VarDecl Block;
 ConstDecl : CONST Constant ConstantList | ;
 ConstantList : ConstantList Constant | ;
 Constant : IDENT EQUAL Expression DONE { program.constants.push_back(Constant($3)); } ;
-Expression : NUM;
+Expression : Expression OR Expression
+    | Expression AND Expression
+    | Expression EQUAL Expression
+    | Expression NOTEQUAL Expression
+    | Expression GREATER_THAN_OR_EQUAL Expression
+    | Expression LESS_THAN_OR_EQUAL Expression
+    | Expression GREATER_THAN Expression
+    | Expression LESS_THAN Expression
+    | Expression ADD Expression
+    | Expression SUB Expression
+    | Expression MULT Expression
+    | Expression DIV Expression
+    | Expression MOD Expression
+    | LValue;
 
 TypeDecl : TYPE TypeList | ;
 TypeList : TypeList TypeListItem | ;

@@ -12,8 +12,6 @@
 "record" {return RECORD;}
 "array" {return ARRAY;}
 "of" {return OF;}
-"[" {return LBRACKET;}
-"]" {return RBRACKET;};
 "begin" {return BEGIN_TOKEN;}
 "while" {return WHILE;}
 "do" {return DO;}
@@ -22,6 +20,23 @@
 "then" {return THEN;}
 "else" {return ELSE;}
 
+
+"<>" {return NOTEQUAL;}
+">=" {return GREATER_THAN_OR_EQUAL;}
+"<=" {return LESS_THAN_OR_EQUAL;}
+"<" {return LESS_THAN;}
+">" {return GREATER_THAN;}
+"%" {return MOD;}
+"+" {return ADD;}
+"-" {return SUB;}
+"*" {return MULT;}
+"/" {return DIV;}
+"~" {return NEGATION;}
+"[" {return LBRACKET;}
+"]" {return RBRACKET;}
+"&" {return AND;}
+"|" {return OR;}
+
 ":" {return COLON;}
 ";" {return DONE;}
 "=" {return EQUAL;}
@@ -29,10 +44,7 @@
 ":=" {return ASSIGN;}
 "." {return DOT;}
 
-"stuff" {yylval.id = strdup(yytext); return RECORD;}
-
-
-[0-9]+ {yylval.val = atof(yytext); return NUM;}
+[0-9]+ {yylval.val = atof(yytext); return IDENT;}
 [a-zA-Z][a-zA-Z0-9_]* {yylval.id = strdup(yytext); return IDENT;}
 
 
@@ -40,10 +52,6 @@
 
 
  /*
-"+" {return ADD;}
-"-" {return SUB;}
-"*" {return MULT;}
-"/" {return DIV;}
 "(" {return OPEN;}
 ")" {return CLOSE;}
 "\n" {return DONE;}

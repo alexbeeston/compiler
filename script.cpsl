@@ -1,5 +1,5 @@
 const
- BASE = 5;
+ BASE = 5 + 1 * 21 - 2 + 3;
  SIZE = 10;
 
 type i = integer;
@@ -12,6 +12,8 @@ var
 
 
 begin
+
+
 
   i := 5;
   j := 1;
