@@ -9,7 +9,7 @@ a = array[4:4]of r;
 var
  A : a;
 
-
+procedure testing (testing); forward;
 
 begin
     i := "\t";

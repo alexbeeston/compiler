@@ -32,6 +32,8 @@
 "return" {return RETURN_TOKEN;}
 "read" {return READ;}
 "write" {return WRITE;}
+"procedure" {return PROCEDURE;}
+"forward" {return FORWARD;}
 
 
 "<>" {return NOTEQUAL;}
