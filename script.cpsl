@@ -33,6 +33,8 @@ repeat
 
     until (hello);
 stop;
+return;
+return 54;
 for x := 2 to 3 do stop end;
 
 end

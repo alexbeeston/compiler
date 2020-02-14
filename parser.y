@@ -37,6 +37,7 @@ char* id;
 %token RBRACKET
 %token OF
 %token BEGIN_TOKEN
+%token RETURN_TOKEN
 
 %token WHILE
 %token DO
@@ -132,6 +133,7 @@ Statement : Assignment
     | RepeatStatement;
     | ForStatement;
     | StopStatement;
+    | ReturnStatement;
     | ;
     Assignment : LValue ASSIGN Expression;
         LValue : IDENT LValueList;
@@ -145,9 +147,9 @@ Statement : Assignment
     WhileStatement : WHILE Expression DO StatementSequence END;
     RepeatStatement : REPEAT StatementSequence UNTIL Expression;
     ForStatement : FOR IDENT ASSIGN Expression Location Expression DO StatementSequence END;
-    StopStatement : STOP;
-
         Location : TO | DOWNTO;
+    StopStatement : STOP;
+    ReturnStatement : RETURN_TOKEN | RETURN_TOKEN Expression;
 
 
 ExtraStatementList : ExtraStatementList ExtraStatement | ;

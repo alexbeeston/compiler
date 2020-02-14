@@ -29,6 +29,7 @@
 "to" {return TO;}
 "downto" {return DOWNTO;}
 "stop" {return STOP;}
+"return" {return RETURN_TOKEN;}
 
 
 "<>" {return NOTEQUAL;}
