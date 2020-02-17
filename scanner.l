@@ -5,6 +5,9 @@
 %}
 %option noyywrap
 %%
+
+"comment" {;}
+
 "const" {return CONST;}
 "var" {return VAR;}
 "type" {return TYPE;}
@@ -37,6 +40,18 @@
 "ref" {return REF;}
 "function" {return FUNCTION;}
 
+'\\n' {yylval.character = '\n'; return CHARCONST;}
+'\\r' {yylval.character = '\r'; return CHARCONST;}
+'\\b' {yylval.character = '\b'; return CHARCONST;}
+'\\t' {yylval.character = '\t'; return CHARCONST;}
+'\\f' {yylval.character = '\f'; return CHARCONST;}
+'\\.' {yylval.character = yytext[2]; return CHARCONST;}
+'.' {yylval.character = yytext[1]; return CHARCONST;}
+0[0-7]* {return OCTCONST;}
+0x[0-9a-fA-F]* {return HEXCONST;}
+[1-9][0-9]* {yylval.string = strdup(yytext); return DECCONST;}
+
+[a-zA-Z][a-zA-Z0-9_]* {yylval.string = strdup(yytext); return IDENT;}
 
 "<>" {return NOTEQUAL;}
 ">=" {return GREATER_THAN_OR_EQUAL;}
@@ -55,7 +70,6 @@
 "|" {return OR;}
 "(" {return LPAREN;}
 ")" {return RPAREN;}
-
 ":" {return COLON;}
 ";" {return DONE;}
 "=" {return EQUAL;}
@@ -63,21 +77,7 @@
 ":=" {return ASSIGN;}
 "." {return DOT;}
 
-[0-9]+ {yylval.val = atof(yytext); return IDENT;}
-[a-zA-Z][a-zA-Z0-9_]* {yylval.id = strdup(yytext); return IDENT;}
-"[^\"]*" {yylval.id = strdup(yytext); return IDENT;}
-
-
-
-
  /*
-"(" {return OPEN;}
-")" {return CLOSE;}
-"\n" {return DONE;}
-";" {return DONE;}
-"=" {return EQUAL;}
-"==" {return EQUAL;}
-":=" {return EQUAL;}
 [a-z] {yylval.id = strdup(yytext);return ID;}
 _[a-zA-Z]+ {yylval.id = strdup(yytext+1);return ID;}
 [ \t] {}

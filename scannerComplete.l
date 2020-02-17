@@ -4,7 +4,7 @@
 %}
 %option noyywrap
 %%
-\$.*\n {return COMMENT;}
+\$.*\n {}
 
 "[^"]*" {return string;}
 '\\n' {yylval = '\n'; return CHAR;}

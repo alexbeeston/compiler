@@ -13,7 +13,9 @@ Program program;
 %union
 {
 float val;
-char* id;
+char* string;
+char character;
+int integer;
 }
 
 %token ADD
@@ -79,9 +81,19 @@ char* id;
 %token LPAREN
 %token RPAREN
 
+%token CHARCONST
+%token STRCONST
+%token HEXCONST
+%token OCTCONST
+%token DECCONST
+
+
 
 %type <val> LValue
 %type <val> Expression
+%type <character> CHARCONST
+%type <string> STRCONST
+%type <integer> DECCONST
 
 %%
 Program : Prelude RoutineDeclList Block DOT;
@@ -100,10 +112,12 @@ ProcedureDecl : PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE FORWARD DONE
 FunctionDecl : FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE FORWARD DONE
     | FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE Body DONE;
 
-
-ConstDecl : CONST Constant ConstantList | ;
+ConstDecl : CONST Constant ConstantList | {std:: cout << "constdecl" << std::endl;};
 ConstantList : ConstantList Constant | ;
-Constant : IDENT EQUAL Expression DONE { program.constants.push_back(Constant($3)); } ;
+Constant : IDENT EQUAL Expression DONE { std::cout << "got an expression constant: " << $3 << std::endl; }
+    | IDENT EQUAL CHARCONST DONE {std::cout<< "got a char: " << $3 << std::endl; }
+    | IDENT EQUAL STRCONST DONE { std::cout << "got a string:" << $3 << std::endl;}
+    | IDENT EQUAL DECCONST DONE { std::cout << "dec const" << $3 << std::endl;} ;
 Expression : LValue
     | LPAREN Expression RPAREN
     | SUB Expression

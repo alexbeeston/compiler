@@ -1,4 +1,5 @@
 #!/bin/bash
 cmake ..
 make
-cat ../script.cpsl | ./calc
+cat ../script.cpsl  | ./calc
+
