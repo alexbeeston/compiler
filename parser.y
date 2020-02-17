@@ -174,7 +174,7 @@ Statement : Assignment
     | ProcedureCall
     | ;
     Assignment : LValue ASSIGN Expression;
-        LValue : IDENT LValueList;
+        LValue : IDENT LValueList | DECCONST;
         LValueList : LValueList LValueItem | ;
         LValueItem : DOT IDENT
             | LBRACKET Expression RBRACKET;
