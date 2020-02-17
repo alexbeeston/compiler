@@ -112,7 +112,7 @@ ProcedureDecl : PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE FORWARD DONE
 FunctionDecl : FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE FORWARD DONE
     | FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE Body DONE;
 
-ConstDecl : CONST Constant ConstantList | {std:: cout << "constdecl" << std::endl;};
+ConstDecl : CONST Constant ConstantList | ;
 ConstantList : ConstantList Constant | ;
 Constant : IDENT EQUAL Expression DONE { std::cout << "got an expression constant: " << $3 << std::endl; }
     | IDENT EQUAL CHARCONST DONE {std::cout<< "got a char: " << $3 << std::endl; }
@@ -165,13 +165,13 @@ StatementSequence : Statement ExtraStatementList;
 Statement : Assignment
     | IfStatement
     | WhileStatement
-    | RepeatStatement;
-    | ForStatement;
-    | StopStatement;
-    | ReturnStatement;
-    | ReadStatement;
-    | WriteStatement;
-    | ProcedureCall;
+    | RepeatStatement
+    | ForStatement
+    | StopStatement
+    | ReturnStatement
+    | ReadStatement
+    | WriteStatement
+    | ProcedureCall
     | ;
     Assignment : LValue ASSIGN Expression;
         LValue : IDENT LValueList;
@@ -184,7 +184,7 @@ Statement : Assignment
         Else : ELSE StatementSequence | ;
     WhileStatement : WHILE Expression DO StatementSequence END;
     RepeatStatement : REPEAT StatementSequence UNTIL Expression;
-    ForStatement : FOR IDENT ASSIGN Expression Location Expression DO StatementSequence END;
+    ForStatement : FOR IDENT ASSIGN Expression TO Expression DO StatementSequence END;
         Location : TO | DOWNTO;
     StopStatement : STOP;
     ReturnStatement : RETURN_TOKEN | RETURN_TOKEN Expression;
