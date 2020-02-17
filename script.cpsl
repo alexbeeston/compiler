@@ -1,6 +1,9 @@
 const
 dog = 100;
 cat = 100;
-
+hello = 300;
+hey = hey;
+testing = "strconst";
+dog = 450;
 
 .

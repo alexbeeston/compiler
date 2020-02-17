@@ -51,6 +51,8 @@
 0x[0-9a-fA-F]* {return HEXCONST;}
 [1-9][0-9]* {yylval.string = strdup(yytext); return DECCONST;}
 
+\"(\\.|[^"\\])*\"  {yylval.string == strdup(yytext); return STRCONST;}
+
 [a-zA-Z][a-zA-Z0-9_]* {yylval.string = strdup(yytext); return IDENT;}
 
 "<>" {return NOTEQUAL;}

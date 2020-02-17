@@ -88,7 +88,7 @@ int integer;
 %token DECCONST
 
 
-
+%type <string> IDENT
 %type <val> LValue
 %type <val> Expression
 %type <character> CHARCONST
@@ -116,8 +116,9 @@ ConstDecl : CONST Constant ConstantList | {std:: cout << "constdecl" << std::end
 ConstantList : ConstantList Constant | ;
 Constant : IDENT EQUAL Expression DONE { std::cout << "got an expression constant: " << $3 << std::endl; }
     | IDENT EQUAL CHARCONST DONE {std::cout<< "got a char: " << $3 << std::endl; }
-    | IDENT EQUAL STRCONST DONE { std::cout << "got a string:" << $3 << std::endl;}
-    | IDENT EQUAL DECCONST DONE { std::cout << "dec const" << $3 << std::endl;} ;
+    | IDENT EQUAL STRCONST DONE { std::cout << "got a string:" << $3 << std::endl; }
+    | IDENT EQUAL DECCONST DONE { std::cout << "dec const" << $3 << std::endl;}
+    | IDENT EQUAL IDENT DONE {std::cout << "const identifier: " << $3 << std::endl;} ;
 Expression : LValue
     | LPAREN Expression RPAREN
     | SUB Expression
