@@ -21,7 +21,7 @@ int main()
 
 	for (Type* st : program.types)
     {
-        std::cout << static_cast<SimpleType*>(st)->ident << std::endl;
+	    st->print();
     }
 /*
 	std::cout << "Constants: " << std::endl;

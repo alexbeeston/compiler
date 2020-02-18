@@ -6,12 +6,16 @@
 
 struct Type
 {
+    virtual void print() {std::cout << "Type toString() function" << std::endl;}
 };
+
 
 struct SimpleType : Type
 {
     char* ident;
-    public: SimpleType(char* p_indent) { ident = p_indent; };
+    SimpleType(char* p_indent) { ident = p_indent; };
+    void print() {std::cout << "SimpleType toString() function" << std::endl;}
 };
+
 
 #endif
