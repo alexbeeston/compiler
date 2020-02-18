@@ -8,12 +8,12 @@ struct Expression
 //  virtual void print() = 0;
 };
 
-struct Constant : Expression
+struct NumericLiteral: Expression
 {
   bool isCV() {return true;}
   int CV(){return value;}
   int value;
-  Constant(int value):value(value){}
+  NumericLiteral(int value):value(value){}
 };
 
 
