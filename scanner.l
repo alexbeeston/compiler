@@ -40,18 +40,18 @@
 "ref" {return REF;}
 "function" {return FUNCTION;}
 
-'\\n' {yylval.character = '\n'; return CHARCONST;}
-'\\r' {yylval.character = '\r'; return CHARCONST;}
-'\\b' {yylval.character = '\b'; return CHARCONST;}
-'\\t' {yylval.character = '\t'; return CHARCONST;}
-'\\f' {yylval.character = '\f'; return CHARCONST;}
-'\\.' {yylval.character = yytext[2]; return CHARCONST;}
-'.' {yylval.character = yytext[1]; return CHARCONST;}
-0[0-7]* {return OCTCONST;}
-0x[0-9a-fA-F]* {return HEXCONST;}
-[1-9][0-9]* {yylval.string = strdup(yytext); return DECCONST;}
+'\\n' {yylval.character = '\n'; return CHARLIT;}
+'\\r' {yylval.character = '\r'; return CHARLIT;}
+'\\b' {yylval.character = '\b'; return CHARLIT;}
+'\\t' {yylval.character = '\t'; return CHARLIT;}
+'\\f' {yylval.character = '\f'; return CHARLIT;}
+'\\.' {yylval.character = yytext[2]; return CHARLIT;}
+'.' {yylval.character = yytext[1]; return CHARLIT;}
+0[0-7]* {return OCTINT;}
+0x[0-9a-fA-F]* {return HEXINT;}
+[1-9][0-9]* {yylval.string = strdup(yytext); return DECINT;}
 
-\"(\\.|[^"\\])*\"  {yylval.string == strdup(yytext); return STRCONST;}
+\"(\\.|[^"\\])*\"  {yylval.string == strdup(yytext); return STRLIT;}
 
 [a-zA-Z][a-zA-Z0-9_]* {yylval.string = strdup(yytext); return IDENT;}
 

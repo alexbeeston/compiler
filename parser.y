@@ -81,19 +81,19 @@ int integer;
 %token LPAREN
 %token RPAREN
 
-%token CHARCONST
-%token STRCONST
-%token HEXCONST
-%token OCTCONST
-%token DECCONST
+%token CHARLIT
+%token STRLIT
+%token HEXINT
+%token OCTINT
+%token DECINT
 
 
 %type <string> IDENT
 %type <val> LValue
 %type <val> Expression
-%type <character> CHARCONST
-%type <string> STRCONST
-%type <integer> DECCONST
+%type <character> CHARLIT
+%type <string> STRLIT
+%type <integer> DECINT
 
 %%
 Program : Prelude RoutineDeclList Block DOT;
@@ -115,11 +115,12 @@ FunctionDecl : FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE FOR
 ConstDecl : CONST Constant ConstantList | ;
 ConstantList : ConstantList Constant | ;
 Constant : IDENT EQUAL Expression DONE { std::cout << "got an expression constant: " << $3 << std::endl; }
-    | IDENT EQUAL CHARCONST DONE {std::cout<< "got a char: " << $3 << std::endl; }
-    | IDENT EQUAL STRCONST DONE { std::cout << "got a string:" << $3 << std::endl; }
-    | IDENT EQUAL DECCONST DONE { std::cout << "dec const" << $3 << std::endl;}
+    | IDENT EQUAL CHARLIT DONE {std::cout<< "got a char: " << $3 << std::endl; }
+    | IDENT EQUAL STRLIT DONE { std::cout << "got a string:" << $3 << std::endl; }
+    | IDENT EQUAL DECINT DONE { std::cout << "dec const" << $3 << std::endl;}
     | IDENT EQUAL IDENT DONE {std::cout << "const identifier: " << $3 << std::endl;} ;
 Expression : LValue
+    | DECINT
     | LPAREN Expression RPAREN
     | SUB Expression
     | Expression MULT Expression
@@ -174,7 +175,7 @@ Statement : Assignment
     | ProcedureCall
     | ;
     Assignment : LValue ASSIGN Expression;
-        LValue : IDENT LValueList | DECCONST;
+        LValue : IDENT LValueList;
         LValueList : LValueList LValueItem | ;
         LValueItem : DOT IDENT
             | LBRACKET Expression RBRACKET;
@@ -184,7 +185,7 @@ Statement : Assignment
         Else : ELSE StatementSequence | ;
     WhileStatement : WHILE Expression DO StatementSequence END;
     RepeatStatement : REPEAT StatementSequence UNTIL Expression;
-    ForStatement : FOR IDENT ASSIGN Expression TO Expression DO StatementSequence END;
+    ForStatement : FOR IDENT ASSIGN Expression Location Expression DO StatementSequence END;
         Location : TO | DOWNTO;
     StopStatement : STOP;
     ReturnStatement : RETURN_TOKEN | RETURN_TOKEN Expression;

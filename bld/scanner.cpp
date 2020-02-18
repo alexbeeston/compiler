@@ -999,58 +999,58 @@ YY_RULE_SETUP
 case 33:
 YY_RULE_SETUP
 #line 43 "scanner.l"
-{yylval.character = '\n'; return CHARCONST;}
+{yylval.character = '\n'; return CHARLIT;}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
 #line 44 "scanner.l"
-{yylval.character = '\r'; return CHARCONST;}
+{yylval.character = '\r'; return CHARLIT;}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
 #line 45 "scanner.l"
-{yylval.character = '\b'; return CHARCONST;}
+{yylval.character = '\b'; return CHARLIT;}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
 #line 46 "scanner.l"
-{yylval.character = '\t'; return CHARCONST;}
+{yylval.character = '\t'; return CHARLIT;}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
 #line 47 "scanner.l"
-{yylval.character = '\f'; return CHARCONST;}
+{yylval.character = '\f'; return CHARLIT;}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
 #line 48 "scanner.l"
-{yylval.character = yytext[2]; return CHARCONST;}
+{yylval.character = yytext[2]; return CHARLIT;}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
 #line 49 "scanner.l"
-{yylval.character = yytext[1]; return CHARCONST;}
+{yylval.character = yytext[1]; return CHARLIT;}
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
 #line 50 "scanner.l"
-{return OCTCONST;}
+{return OCTINT;}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
 #line 51 "scanner.l"
-{return HEXCONST;}
+{return HEXINT;}
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
 #line 52 "scanner.l"
-{yylval.string = strdup(yytext); return DECCONST;}
+{yylval.string = strdup(yytext); return DECINT;}
 	YY_BREAK
 case 43:
 /* rule 43 can match eol */
 YY_RULE_SETUP
 #line 54 "scanner.l"
-{yylval.string == strdup(yytext); return STRCONST;}
+{yylval.string == strdup(yytext); return STRLIT;}
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
