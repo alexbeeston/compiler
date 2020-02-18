@@ -98,7 +98,7 @@ struct Type* Type_type;
 %type <string> STRLIT
 %type <integer> DECINT
 %type <SimpleType_type> SimpleType
-%type <SimpleType_type> Type
+%type <Type_type> Type
 
 %%
 Program : Prelude RoutineDeclList Block DOT;

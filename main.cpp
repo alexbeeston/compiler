@@ -19,9 +19,9 @@ int main()
 	symbol_table.enter_scope();
 	yyparse();
 
-	for (SimpleType* st : program.types)
+	for (Type* st : program.types)
     {
-        std::cout << st->ident << std::endl;
+        std::cout << static_cast<SimpleType*>(st)->ident << std::endl;
     }
 /*
 	std::cout << "Constants: " << std::endl;

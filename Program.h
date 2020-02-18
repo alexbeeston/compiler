@@ -4,5 +4,5 @@
 
 struct Program
 {
-    std::vector<SimpleType*> types;
+    std::vector<Type*> types;
 };
