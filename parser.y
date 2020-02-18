@@ -1,7 +1,8 @@
 %{
 #include <iostream>
 #include <map>
-#include "Root.h"
+#include "Types.h"
+#include "Program.h"
 #include "symbol_table.hpp"
 
 extern int yylex();
@@ -16,6 +17,8 @@ float val;
 char* string;
 char character;
 int integer;
+struct SimpleType* SimpleType_type;
+struct Type* Type_type;
 }
 
 %token ADD
@@ -94,6 +97,8 @@ int integer;
 %type <character> CHARLIT
 %type <string> STRLIT
 %type <integer> DECINT
+%type <SimpleType_type> SimpleType
+%type <SimpleType_type> Type
 
 %%
 Program : Prelude RoutineDeclList Block DOT;
@@ -148,9 +153,9 @@ Expression : LValue
 
 TypeDecl : TYPE TypeList | ;
 TypeList : TypeList TypeListItem | ;
-TypeListItem : IDENT EQUAL Type DONE ;
-Type : SimpleType | RecordType | ArrayType;
-    SimpleType : IDENT ;
+TypeListItem : IDENT EQUAL Type DONE { program.types.push_back($3); };
+Type : SimpleType { $$ = $1;} | RecordType | ArrayType;
+    SimpleType : IDENT { $$ = new SimpleType($1); };
     RecordType : RECORD RecordSet END;
         RecordSet : RecordSet Record | ;
             Record : IdentList COLON Type DONE;

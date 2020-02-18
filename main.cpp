@@ -1,5 +1,6 @@
 #include "symbol_table.hpp"
-#include "Root.h"
+#include "Program.h"
+#include "Types.h"
 #include <iostream>
 #include <vector>
 
@@ -8,9 +9,20 @@ extern Program program;
 
 int main()
 {
+//    Program testing;
+//    testing.types.push_back(new SimpleType("Hey"));
+//    std::cout << testing.types[0]->ident << std::endl;
+//
+
+
     std::cout << "####### BEGIN PROGRAM #########" << std::endl;
 	symbol_table.enter_scope();
 	yyparse();
+
+	for (SimpleType* st : program.types)
+    {
+        std::cout << st->ident << std::endl;
+    }
 /*
 	std::cout << "Constants: " << std::endl;
 

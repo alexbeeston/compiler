@@ -1,3 +1,7 @@
+type
+a = d;
+b = c;
+e = f;
+
 begin
-write("Hello World!");
 end.
