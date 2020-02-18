@@ -4,6 +4,7 @@
 #include "Types.h"
 #include "Program.h"
 #include "symbol_table.hpp"
+#include <vector>
 
 extern int yylex();
 void yyerror(const char*);
@@ -19,6 +20,7 @@ char character;
 int integer;
 struct SimpleType* SimpleType_type;
 struct Type* Type_type;
+std::vector<char*>* charPointerVectorPointer;
 }
 
 %token ADD
@@ -66,7 +68,6 @@ struct Type* Type_type;
 %token READ
 %token WRITE
 
-
 %token TILDA
 %token GREATER_THAN_OR_EQUAL
 %token LESS_THAN_OR_EQUAL
@@ -99,6 +100,8 @@ struct Type* Type_type;
 %type <integer> DECINT
 %type <SimpleType_type> SimpleType
 %type <Type_type> Type
+%type <charPointer> IdentExtra
+%type <charPointerVectorPointer> IdentListExtraSet
 
 %%
 Program : Prelude RoutineDeclList Block DOT;
@@ -163,8 +166,8 @@ Type : SimpleType { $$ = $1;}
             TypedList: IdentList COLON Type DONE;
                 IdentList : IDENT IdentListExtraSet {std::cout << "IdentList " << std::endl; } ;
                     IdentListExtraSet : IdentListExtraSet IdentExtra { std::cout << "IdentListExtraSet recursive " << std::endl; }
-                        | { std::cout << "IdentListExtraSet Blank" << std::endl; } ;
-                        IdentExtra : COMMA IDENT {std::cout << "IdentExtra: " << $2 << std::endl; };
+                        | { $$ = new std::vector<char*>; };
+                        IdentExtra : COMMA IDENT { $$ = $2; };
     ArrayType : ARRAY LBRACKET Expression COLON Expression RBRACKET OF Type ;
 
 VarDecl : VAR TypedList TypedLists| ;

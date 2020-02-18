@@ -16,7 +16,7 @@ int main()
 //
 
     std::string dog;
-
+    std::vector<char*>* hello;
 
     std::cout << "####### BEGIN PROGRAM #########" << std::endl;
 	symbol_table.enter_scope();
