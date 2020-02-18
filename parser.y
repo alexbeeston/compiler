@@ -156,15 +156,15 @@ TypeList : TypeList TypeListItem | ;
 TypeListItem : IDENT EQUAL Type DONE { program.types.push_back($3); };
 Type : SimpleType { $$ = $1;} | RecordType | ArrayType;
     SimpleType : IDENT { $$ = new SimpleType($1); };
-    RecordType : RECORD RecordSet END;
-        RecordSet : RecordSet Record | ;
-            Record : IdentList COLON Type DONE;
+    RecordType : RECORD TypedLists END;
+        TypedLists : TypedLists TypedList | ;
+            TypedList: IdentList COLON Type DONE;
                 IdentList : IDENT IdentListExtraSet;
                     IdentListExtraSet : IdentListExtraSet IdentExtra | ;
                         IdentExtra : COMMA IDENT;
     ArrayType : ARRAY LBRACKET Expression COLON Expression RBRACKET OF Type ;
 
-VarDecl : VAR Record RecordSet | ;
+VarDecl : VAR TypedList TypedLists| ;
 
 Block: BEGIN_TOKEN StatementSequence END | ;
 StatementSequence : Statement ExtraStatementList;
