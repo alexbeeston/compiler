@@ -154,7 +154,9 @@ Expression : LValue
 TypeDecl : TYPE TypeList | ;
 TypeList : TypeList TypeListItem | ;
 TypeListItem : IDENT EQUAL Type DONE { program.types.push_back($3); };
-Type : SimpleType { $$ = $1;} | RecordType | ArrayType;
+Type : SimpleType { $$ = $1;}
+    | RecordType
+    | ArrayType;
     SimpleType : IDENT { $$ = new SimpleType($1); };
     RecordType : RECORD TypedLists END;
         TypedLists : TypedLists TypedList | ;

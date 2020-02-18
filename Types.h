@@ -14,7 +14,7 @@ struct SimpleType : Type
 {
     char* ident;
     SimpleType(char* p_indent) { ident = p_indent; };
-    void print() {std::cout << "SimpleType toString() function" << std::endl;}
+    void print() {std::cout << ident << std::endl;}
 };
 
 
