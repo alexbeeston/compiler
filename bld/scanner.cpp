@@ -1044,18 +1044,18 @@ YY_RULE_SETUP
 case 42:
 YY_RULE_SETUP
 #line 52 "scanner.l"
-{yylval.string = strdup(yytext); return DECINT;}
+{yylval.charPointer = strdup(yytext); return DECINT;}
 	YY_BREAK
 case 43:
 /* rule 43 can match eol */
 YY_RULE_SETUP
 #line 54 "scanner.l"
-{yylval.string == strdup(yytext); return STRLIT;}
+{yylval.charPointer == strdup(yytext); return STRLIT;}
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
 #line 56 "scanner.l"
-{yylval.string = strdup(yytext); return IDENT;}
+{yylval.charPointer = strdup(yytext); return IDENT;}
 	YY_BREAK
 case 45:
 YY_RULE_SETUP

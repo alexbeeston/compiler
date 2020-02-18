@@ -2,6 +2,6 @@ type
 a = d;
 b = c;
 e = f;
-
+r = record a,b,c:i; end;
 begin
 end.

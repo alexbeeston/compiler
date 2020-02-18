@@ -3,6 +3,7 @@
 #include "Types.h"
 #include <iostream>
 #include <vector>
+#include <string>
 
 extern int yyparse();
 extern Program program;
@@ -14,15 +15,17 @@ int main()
 //    std::cout << testing.types[0]->ident << std::endl;
 //
 
+    std::string dog;
+
 
     std::cout << "####### BEGIN PROGRAM #########" << std::endl;
 	symbol_table.enter_scope();
 	yyparse();
 
-	for (Type* st : program.types)
-    {
-	    st->print();
-    }
+//	for (Type* st : program.types)
+//    {
+//	    st->print();
+//    }
 /*
 	std::cout << "Constants: " << std::endl;
 

@@ -14,7 +14,7 @@ Program program;
 %union
 {
 float val;
-char* string;
+char* charPointer;
 char character;
 int integer;
 struct SimpleType* SimpleType_type;
@@ -91,11 +91,11 @@ struct Type* Type_type;
 %token DECINT
 
 
-%type <string> IDENT
+%type <charPointer> IDENT
 %type <val> LValue
 %type <val> Expression
 %type <character> CHARLIT
-%type <string> STRLIT
+%type <charPointer> STRLIT
 %type <integer> DECINT
 %type <SimpleType_type> SimpleType
 %type <Type_type> Type
@@ -161,9 +161,10 @@ Type : SimpleType { $$ = $1;}
     RecordType : RECORD TypedLists END;
         TypedLists : TypedLists TypedList | ;
             TypedList: IdentList COLON Type DONE;
-                IdentList : IDENT IdentListExtraSet;
-                    IdentListExtraSet : IdentListExtraSet IdentExtra | ;
-                        IdentExtra : COMMA IDENT;
+                IdentList : IDENT IdentListExtraSet {std::cout << "IdentList " << std::endl; } ;
+                    IdentListExtraSet : IdentListExtraSet IdentExtra { std::cout << "IdentListExtraSet recursive " << std::endl; }
+                        | { std::cout << "IdentListExtraSet Blank" << std::endl; } ;
+                        IdentExtra : COMMA IDENT {std::cout << "IdentExtra: " << $2 << std::endl; };
     ArrayType : ARRAY LBRACKET Expression COLON Expression RBRACKET OF Type ;
 
 VarDecl : VAR TypedList TypedLists| ;
