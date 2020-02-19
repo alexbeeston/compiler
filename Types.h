@@ -21,24 +21,24 @@ struct SimpleType : Type
 struct IdentList
 {
     char* firstIdent;
-    std::vector<char*> idents;
-    IdentList (char* p_firstIdent, std::vector<char*> p_extraIdents)
+    std::vector<char*>* idents;
+    IdentList (char* p_firstIdent, std::vector<char*>* p_extraIdents)
     {
-        idents.push_back(p_firstIdent);
+        idents->push_back(p_firstIdent);
         // check for a null list here, in which case there is only one identifier, the first one
-        for (char* extraIdent : p_extraIdents)
+        for (char* extraIdent : *p_extraIdents)
         {
-            idents.push_back(extraIdent);
+            idents->push_back(extraIdent);
         }
     }
 };
 
 struct TypedList
 {
-    std::vector<char*> idents;
+    std::vector<char*>* idents;
     char* type;
 
-    TypedList (std::vector<char*> p_idents, char* p_type)
+    TypedList (std::vector<char*>* p_idents, char* p_type)
     {
         idents = p_idents;
         type = p_type;
@@ -47,8 +47,8 @@ struct TypedList
 
 struct RecordType : Type
 {
-    std::vector<TypedList*> typedLists;
-    RecordType (std::vector<TypedList*> p_typedLists) { typedLists = p_typedLists; } ;
+    std::vector<TypedList*>* typedLists;
+    RecordType (std::vector<TypedList*>* p_typedLists) { typedLists = p_typedLists; } ;
 };
 
 

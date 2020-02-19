@@ -1,10 +1,10 @@
 %{
 #include <iostream>
+#include <vector>
 #include <map>
 #include "Types.h"
 #include "Program.h"
 #include "symbol_table.hpp"
-#include <vector>
 
 extern int yylex();
 void yyerror(const char*);
@@ -20,7 +20,7 @@ char character;
 int integer;
 struct SimpleType* SimpleType_type;
 struct Type* Type_type;
-std::vector<char*>* charPointerVectorPointer;
+std::vector<char*>* vectorPointer;
 }
 
 %token ADD
@@ -101,7 +101,7 @@ std::vector<char*>* charPointerVectorPointer;
 %type <SimpleType_type> SimpleType
 %type <Type_type> Type
 %type <charPointer> IdentExtra
-%type <charPointerVectorPointer> IdentListExtraSet
+%type <vectorPointer> IdentListExtraSet
 
 %%
 Program : Prelude RoutineDeclList Block DOT;
