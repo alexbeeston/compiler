@@ -5,6 +5,7 @@
 #include "Types.h"
 #include "Program.h"
 #include "symbol_table.hpp"
+#include "global.h"
 
 extern int yylex();
 void yyerror(const char*);
@@ -212,6 +213,6 @@ ExtraStatement : DONE Statement;
 
 void yyerror(const char* msg)
 {
-  std::cerr << msg << std::endl;
+  std::cerr << "Syntax Error. Could be near line " << lineNumber  << std::endl;
 }
 

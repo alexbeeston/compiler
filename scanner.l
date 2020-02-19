@@ -3,10 +3,13 @@
 #include <iostream>
 #include <vector>
 #include "parser.hpp"
+#include "global.h"
+
+int lineNumber = 0;
 %}
 %option noyywrap
 %%
-
+"\n" { ++lineNumber; }
 "comment" {;}
 
 "const" {return CONST;}
