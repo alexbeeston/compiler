@@ -4,45 +4,45 @@
 #include <vector>
 #include "parser.hpp"
 #include "global.h"
-
 int lineNumber = 0;
 %}
+
 %option noyywrap
+
 %%
 "\n" { ++lineNumber; }
-"comment" {;}
 
-"const" {return CONST;}
-"var" {return VAR;}
-"type" {return TYPE;}
-"end" {return END;}
-"record" {return RECORD;}
-"array" {return ARRAY;}
-"of" {return OF;}
-"begin" {return BEGIN_TOKEN;}
-"while" {return WHILE;}
-"do" {return DO;}
-"if" {return IF;}
-"elseif" {return ELSEIF;}
-"then" {return THEN;}
-"else" {return ELSE;}
-"ord" {return ORD;}
-"chr" {return CHR;}
-"pred" {return PRED;}
-"succ" {return SUCC;}
-"repeat" {return REPEAT;}
-"until" {return UNTIL;}
-"for" {return FOR;}
-"to" {return TO;}
-"downto" {return DOWNTO;}
-"stop" {return STOP;}
-"return" {return RETURN_TOKEN;}
-"read" {return READ;}
-"write" {return WRITE;}
-"procedure" {return PROCEDURE;}
-"forward" {return FORWARD;}
-"ref" {return REF;}
-"function" {return FUNCTION;}
+const|CONST {return CONST;}
+var|VAR {return VAR;}
+type|TYPE {return TYPE;}
+end|END {return END;}
+record|RECORD {return RECORD;}
+array|ARRAY {return ARRAY;}
+of|OF {return OF;}
+begin|BEGIN {return BEGIN_TOKEN;}
+while|WHILE {return WHILE;}
+do|DO {return DO;}
+if|IF {return IF;}
+elseif|ELSEIF {return ELSEIF;}
+then|THEN {return THEN;}
+else|ELSE {return ELSE;}
+ord|ORD {return ORD;}
+chr|CHR {return CHR;}
+pred|PRED {return PRED;}
+succ|SUCC {return SUCC;}
+repeat|REPEAT {return REPEAT;}
+until|UNTIL {return UNTIL;}
+for|FOR {return FOR;}
+to|TO {return TO;}
+downto|DOWNTO {return DOWNTO;}
+stop|STOP {return STOP;}
+return|RETURN {return RETURN_TOKEN;}
+read|READ {return READ;}
+write|WRITE {return WRITE;}
+procedure|PROCEDURE {return PROCEDURE;}
+forward|FORWARD {return FORWARD;}
+ref|REF {return REF;}
+function|FUNCTION {return FUNCTION;}
 
 '\\n' {yylval.character = '\n'; return CHARLIT;}
 '\\r' {yylval.character = '\r'; return CHARLIT;}
@@ -54,9 +54,7 @@ int lineNumber = 0;
 0[0-7]* {return OCTINT;}
 0x[0-9a-fA-F]* {return HEXINT;}
 [1-9][0-9]* {yylval.charPointer = strdup(yytext); return DECINT;}
-
 \"(\\.|[^"\\])*\"  {yylval.charPointer == strdup(yytext); return STRLIT;}
-
 [a-zA-Z][a-zA-Z0-9_]* {yylval.charPointer = strdup(yytext); return IDENT;}
 
 "<>" {return NOTEQUAL;}

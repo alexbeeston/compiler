@@ -1,0 +1,6 @@
+CONST
+dog = 10;
+cat = 40;
+
+begin
+end.
