@@ -23,6 +23,17 @@ struct Type* Type_type;
 std::vector<char*>* vectorPointer;
 }
 
+%type <charPointer> IDENT
+%type <val> LValue
+%type <val> Expression
+%type <character> CHARLIT
+%type <charPointer> STRLIT
+%type <integer> DECINT
+%type <SimpleType_type> SimpleType
+%type <Type_type> Type
+%type <charPointer> IdentExtra
+%type <vectorPointer> IdentListExtraSet
+
 %token ADD
 %token SUB
 %token MULT
@@ -91,19 +102,8 @@ std::vector<char*>* vectorPointer;
 %token OCTINT
 %token DECINT
 
-
-%type <charPointer> IDENT
-%type <val> LValue
-%type <val> Expression
-%type <character> CHARLIT
-%type <charPointer> STRLIT
-%type <integer> DECINT
-%type <SimpleType_type> SimpleType
-%type <Type_type> Type
-%type <charPointer> IdentExtra
-%type <vectorPointer> IdentListExtraSet
-
 %%
+
 Program : Prelude RoutineDeclList Block DOT;
 Prelude : ConstDecl TypeDecl VarDecl;
 
@@ -122,11 +122,11 @@ FunctionDecl : FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE FOR
 
 ConstDecl : CONST Constant ConstantList | ;
 ConstantList : ConstantList Constant | ;
-Constant : IDENT EQUAL Expression DONE { std::cout << "got an expression constant: " << $3 << std::endl; }
-    | IDENT EQUAL CHARLIT DONE {std::cout<< "got a char: " << $3 << std::endl; }
-    | IDENT EQUAL STRLIT DONE { std::cout << "got a string:" << $3 << std::endl; }
-    | IDENT EQUAL DECINT DONE { std::cout << "dec const" << $3 << std::endl;}
-    | IDENT EQUAL IDENT DONE {std::cout << "const identifier: " << $3 << std::endl;} ;
+Constant : IDENT EQUAL Expression DONE
+    | IDENT EQUAL CHARLIT DONE
+    | IDENT EQUAL STRLIT DONE
+    | IDENT EQUAL DECINT DONE
+    | IDENT EQUAL IDENT DONE ;
 Expression : LValue
     | DECINT
     | LPAREN Expression RPAREN
@@ -156,18 +156,18 @@ Expression : LValue
 
 TypeDecl : TYPE TypeList | ;
 TypeList : TypeList TypeListItem | ;
-TypeListItem : IDENT EQUAL Type DONE { program.types.push_back($3); };
-Type : SimpleType { $$ = $1;}
+TypeListItem : IDENT EQUAL Type DONE ;
+Type : SimpleType
     | RecordType
     | ArrayType;
-    SimpleType : IDENT { $$ = new SimpleType($1); };
+    SimpleType : IDENT ;
     RecordType : RECORD TypedLists END;
         TypedLists : TypedLists TypedList | ;
             TypedList: IdentList COLON Type DONE;
-                IdentList : IDENT IdentListExtraSet {std::cout << "IdentList " << std::endl; } ;
-                    IdentListExtraSet : IdentListExtraSet IdentExtra { std::cout << "IdentListExtraSet recursive " << std::endl; }
-                        | { $$ = new std::vector<char*>; };
-                        IdentExtra : COMMA IDENT { $$ = $2; };
+                IdentList : IDENT IdentListExtraSet;
+                    IdentListExtraSet : IdentListExtraSet IdentExtra
+                        | ;
+                        IdentExtra : COMMA IDENT;
     ArrayType : ARRAY LBRACKET Expression COLON Expression RBRACKET OF Type ;
 
 VarDecl : VAR TypedList TypedLists| ;
@@ -206,38 +206,8 @@ Statement : Assignment
     WriteStatement : WRITE LPAREN Expression CommaExpressionList RPAREN;
     ProcedureCall : IDENT LPAREN ProcedureParams RPAREN;
         ProcedureParams : Expression CommaExpressionList | ;
-
-
 ExtraStatementList : ExtraStatementList ExtraStatement | ;
 ExtraStatement : DONE Statement;
-
-
-
-
-
-/*
-
-StatementList : StatementList Statement {}
-              | ;
-Statement : NUM DONE {std::cout << $1 << std::endl;} ;
-
-Statement : Expression DONE {std::cout << $1 << std::endl;}
-          | LET ID EQUAL Expression DONE{symbol_table.store($2,$4);delete($2);}
-          | DONE{};
-Expression : Expression ADD Term {$$ = $1 + $3;}
-           | Expression SUB Term {$$ = $1 - $3;}
-           | Term {$$ = $1;};
-
-Term : Term MULT Factor { $$ = $1 * $3;}
-     | Term Factor { $$ = $1 * $2;}
-     | Term DIV Factor { $$ = $1 / $3;}
-     | Factor {$$ = $1;}
-     ;
-Factor : OPEN Expression CLOSE {$$ = $2;}
-       | NUMBER {$$ = $1;}
-       | ID {$$ = symbol_table.lookup($1);delete($1);}
-       ;
- */
 %%
 
 void yyerror(const char* msg)

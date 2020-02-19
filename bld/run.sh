@@ -1,5 +1,9 @@
 #!/bin/bash
 cmake ..
 make
-cat ../script.cpsl  | ./calc
+
+for file in ../scripts/*; do
+	echo "Testing file $file"
+	cat $file | ./calc
+done
 

@@ -1,6 +1,7 @@
 %{
 #include <cstdlib>
 #include <iostream>
+#include <vector>
 #include "parser.hpp"
 %}
 %option noyywrap
