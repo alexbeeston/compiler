@@ -2,8 +2,12 @@
 cmake ..
 make
 
-for file in ../scripts/*; do
-	echo "Testing file $file"
-	cat $file | ./calc
-done
-
+if [ "$1" == "" ]; then
+	for file in ../scripts/*; do
+		echo "##########"
+		echo "$file"
+		cat $file | ./calc
+	done
+else
+	cat $1 | ./calc
+fi
