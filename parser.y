@@ -105,7 +105,6 @@ std::vector<char*>* vectorPointer;
 %token HEXINT
 %token OCTINT
 %token DECINT
-
 %%
 
 Program : Prelude RoutineDeclList Block DOT;
@@ -128,8 +127,7 @@ ConstDecl : CONST Constant ConstantList
     | ;
 ConstantList : ConstantList Constant | ;
 Constant : IDENT EQUAL Expression DONE { std::cout << "Constant: " << $1 << " = " << $3 << ";" << std::endl; } ;
-Expression : IDENT
-    | NumericLiteral
+Expression : NumericLiteral
     | CHARLIT
     | STRLIT
     | LPAREN Expression RPAREN
