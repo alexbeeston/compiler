@@ -123,13 +123,11 @@ FunctionDecl : FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE FOR
 
 ConstDecl : CONST Constant ConstantList | ;
 ConstantList : ConstantList Constant | ;
-Constant : IDENT EQUAL Expression DONE
-    | IDENT EQUAL CHARLIT DONE
-    | IDENT EQUAL STRLIT DONE
-    | IDENT EQUAL DECINT DONE
-    | IDENT EQUAL IDENT DONE ;
+Constant : IDENT EQUAL Expression DONE { std::cout << "got a constant" << std::endl;} ;
 Expression : LValue
-    | DECINT
+    | NumericLiteral { std::cout << "NumericLiteral" << std::endl; }
+    | CHARLIT { std:: cout << "CHARLIT: " << $1 << std::endl; }
+    | STRLIT {std::cout << "STRLIT:" << $1 << std::endl; }
     | LPAREN Expression RPAREN
     | SUB Expression
     | Expression MULT Expression
@@ -154,7 +152,8 @@ Expression : LValue
     MysterySet : Expression MysterySetList | ;
         MysterySetList : MysterySetList MysterySetListItem | ;
             MysterySetListItem : COMMA Expression;
-
+    NumericLiteral : DECINT { std::cout << "DECINT: " << $1 << std:: endl; }
+    | HEXINT | OCTINT;
 TypeDecl : TYPE TypeList | ;
 TypeList : TypeList TypeListItem | ;
 TypeListItem : IDENT EQUAL Type DONE ;

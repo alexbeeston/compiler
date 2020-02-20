@@ -1,0 +1,614 @@
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/abeeston/sp2020/compilers/calc/bld
+[100%] Built target calc
+##########
+../scripts/array_sum.cpsl
+	  DECINT: -25968784
+NumericLiteral
+got a constant
+	  DECINT: -25968720
+NumericLiteral
+   	  	      	 	  NumericLiteral
+	   DECINT: -25968208
+NumericLiteral
+   		    		 	   DECINT: -25967952
+NumericLiteral
+   		  DECINT: -25967824
+NumericLiteral
+  		STRLIT:x
+  CHARLIT: 
+
+	STRLIT:
+
+##########
+../scripts/assignment.cpsl
+         DECINT: 1358540720
+NumericLiteral
+  STRLIT:42
+STRLIT:number
+
+##########
+../scripts/badidea.cpsl
+   DECINT: -1217343632
+NumericLiteral
+DECINT: -1217343600
+NumericLiteral
+got a constant
+   DECINT: -1217343536
+NumericLiteral
+DECINT: -1217343504
+NumericLiteral
+got a constant
+               DECINT: -1217343056
+NumericLiteral
+DECINT: -1217343024
+NumericLiteral
+CHARLIT: 
+
+ DECINT: -1217342960
+NumericLiteral
+DECINT: -1217342928
+NumericLiteral
+CHARLIT: 
+
+ CHARLIT: A
+  CHARLIT:  
+CHARLIT: 
+
+ STRLIT:
+ STRLIT:
+ STRLIT:
+ STRLIT:
+
+##########
+../scripts/const_declarations.cpsl
+   DECINT: 302641008
+NumericLiteral
+got a constant
+   CHARLIT: a
+got a constant
+   got a constant
+   STRLIT:str
+got a constant
+
+##########
+../scripts/control.cpsl
+                            DECINT: 203165744
+NumericLiteral
+  DECINT: 203165776
+NumericLiteral
+      DECINT: 203165840
+NumericLiteral
+  DECINT: 203165872
+NumericLiteral
+   
+##########
+../scripts/expressions.cpsl
+   DECINT: -1350733968
+NumericLiteral
+got a constant
+   DECINT: -1350733904
+NumericLiteral
+got a constant
+                       DECINT: -1350732944
+NumericLiteral
+    DECINT: -1350732592
+NumericLiteral
+    DECINT: -1350732240
+NumericLiteral
+    DECINT: -1350731888
+NumericLiteral
+    DECINT: -1350731536
+NumericLiteral
+                         CHARLIT: x
+  DECINT: -1350731056
+NumericLiteral
+CHARLIT: A
+
+##########
+../scripts/factorial.cpsl
+      DECINT: 1316896720
+NumericLiteral
+     DECINT: 1316896784
+NumericLiteral
+  DECINT: 1316896816
+NumericLiteral
+         CHARLIT: 	
+CHARLIT: 
+
+  STRLIT:
+STRLIT:
+STRLIT:
+STRLIT:
+STRLIT:
+STRLIT:
+STRLIT:
+STRLIT:
+STRLIT:
+
+##########
+../scripts/for_down.cpsl
+           DECINT: -28287056
+NumericLiteral
+  DECINT: -28287024
+NumericLiteral
+      STRLIT:i
+        DECINT: -28286896
+NumericLiteral
+  NumericLiteral
+     CHARLIT:  
+  STRLIT:j
+STRLIT:j
+
+##########
+../scripts/for_to.cpsl
+           NumericLiteral
+  DECINT: -1503531088
+NumericLiteral
+      STRLIT:i
+    STRLIT:i
+
+##########
+../scripts/function_decl.cpsl
+                  DECINT: 1763975440
+NumericLiteral
+
+##########
+../scripts/function_with_args.cpsl
+                   DECINT: -924778320
+NumericLiteral
+    DECINT: -924778256
+NumericLiteral
+  STRLIT:2
+  CHARLIT: 
+
+  STRLIT:
+  CHARLIT: 
+
+  STRLIT:
+   CHARLIT: 
+
+  STRLIT:
+  DECINT: -924777904
+NumericLiteral
+ DECINT: -924777872
+NumericLiteral
+CHARLIT: 
+
+  STRLIT:
+  CHARLIT: 
+
+  STRLIT:
+  CHARLIT: 
+
+
+##########
+../scripts/hanoi.cpsl
+        	DECINT: -888508272
+NumericLiteral
+ 		STRLIT:1
+STRLIT:disk
+STRLIT:source
+CHARLIT: 
+
+			DECINT: -888507984
+NumericLiteral
+		STRLIT:dest
+STRLIT:disk
+STRLIT:source
+CHARLIT: 
+
+		DECINT: -888507600
+NumericLiteral
+		STRLIT:source
+		STRLIT:disks
+STRLIT:disks
+	CHARLIT: A
+CHARLIT: B
+CHARLIT: C
+	STRLIT:isks from tower A to tower B with tower C helping\n"
+
+##########
+../scripts/hello.cpsl
+STRLIT:##########
+../scripts/ifelseif_nested.cpsl
+          DECINT: 485945296
+NumericLiteral
+    DECINT: 485945360
+NumericLiteral
+     DECINT: 485945424
+NumericLiteral
+     STRLIT:5
+       DECINT: 485945520
+NumericLiteral
+       STRLIT:1
+         DECINT: 485945616
+NumericLiteral
+     STRLIT:5
+      STRLIT:5
+  
+##########
+../scripts/io.cpsl
+  STRLIT:char
+STRLIT:c
+CHARLIT: 
+
+STRLIT:
+CHARLIT: 
+
+STRLIT:
+CHARLIT: 
+
+STRLIT:
+CHARLIT: 
+
+
+##########
+../scripts/long_expression.cpsl
+     DECINT: 757977616
+NumericLiteral
+ DECINT: 757977680
+NumericLiteral
+ DECINT: 757977744
+NumericLiteral
+ DECINT: 757977808
+NumericLiteral
+ DECINT: 757977872
+NumericLiteral
+ DECINT: 757977936
+NumericLiteral
+ DECINT: 757978000
+NumericLiteral
+ DECINT: 757978064
+NumericLiteral
+ DECINT: 757978128
+NumericLiteral
+ DECINT: 757978192
+NumericLiteral
+ DECINT: 757978256
+NumericLiteral
+ DECINT: 757978320
+NumericLiteral
+ DECINT: 757978384
+NumericLiteral
+ DECINT: 757978448
+NumericLiteral
+ DECINT: 757978512
+NumericLiteral
+ DECINT: 757978576
+NumericLiteral
+                                  STRLIT:b
+STRLIT:x
+CHARLIT: 
+
+STRLIT:
+STRLIT:y
+STRLIT:y
+STRLIT:z
+
+##########
+../scripts/multi_array.cpsl
+   DECINT: -618799248
+NumericLiteral
+got a constant
+   NumericLiteral
+got a constant
+                  NumericLiteral
+NumericLiteral
+  NumericLiteral
+NumericLiteral
+DECINT: -618798576
+NumericLiteral
+  NumericLiteral
+NumericLiteral
+DECINT: -618798512
+NumericLiteral
+  NumericLiteral
+NumericLiteral
+DECINT: -618798448
+NumericLiteral
+  NumericLiteral
+DECINT: -618798384
+NumericLiteral
+NumericLiteral
+  NumericLiteral
+DECINT: -618798320
+NumericLiteral
+DECINT: -618798288
+NumericLiteral
+  DECINT: -618798256
+NumericLiteral
+DECINT: -618798192
+NumericLiteral
+DECINT: -618798160
+NumericLiteral
+  DECINT: -618798128
+NumericLiteral
+DECINT: -618798064
+NumericLiteral
+DECINT: -618798032
+NumericLiteral
+  DECINT: -618798000
+NumericLiteral
+DECINT: -618797936
+NumericLiteral
+NumericLiteral
+  NumericLiteral
+DECINT: -618797872
+NumericLiteral
+DECINT: -618797840
+NumericLiteral
+  DECINT: -618797808
+NumericLiteral
+DECINT: -618797744
+NumericLiteral
+DECINT: -618797712
+NumericLiteral
+  DECINT: -618797680
+NumericLiteral
+DECINT: -618797616
+NumericLiteral
+DECINT: -618797584
+NumericLiteral
+  DECINT: -618797552
+NumericLiteral
+DECINT: -618797488
+NumericLiteral
+NumericLiteral
+  NumericLiteral
+DECINT: -618797424
+NumericLiteral
+DECINT: -618797392
+NumericLiteral
+  DECINT: -618797360
+NumericLiteral
+DECINT: -618797296
+NumericLiteral
+DECINT: -618797264
+NumericLiteral
+  DECINT: -618797232
+NumericLiteral
+DECINT: -618797168
+NumericLiteral
+DECINT: -618797136
+NumericLiteral
+  DECINT: -618797104
+NumericLiteral
+DECINT: -618797040
+NumericLiteral
+STRLIT:i
+CHARLIT: 
+
+STRLIT:
+DECINT: -618796720
+NumericLiteral
+CHARLIT: 
+
+
+##########
+../scripts/proc_decl.cpsl
+             DECINT: 491130960
+NumericLiteral
+
+##########
+../scripts/procedure_no_args.cpsl
+   STRLIT:sayHi
+    
+##########
+../scripts/record_array.cpsl
+   DECINT: -532594832
+NumericLiteral
+DECINT: -532594800
+NumericLiteral
+                         DECINT: -532594512
+NumericLiteral
+DECINT: -532594480
+NumericLiteral
+DECINT: -532594448
+NumericLiteral
+DECINT: -532594416
+NumericLiteral
+  CHARLIT: A
+CHARLIT: Z
+            DECINT: -532594224
+NumericLiteral
+DECINT: -532594192
+NumericLiteral
+               DECINT: -532594032
+NumericLiteral
+DECINT: -532593936
+NumericLiteral
+CHARLIT: C
+DECINT: -532593872
+NumericLiteral
+  DECINT: -532593840
+NumericLiteral
+ DECINT: -532593776
+NumericLiteral
+DECINT: -532593680
+NumericLiteral
+CHARLIT: D
+  DECINT: -532593616
+NumericLiteral
+DECINT: -532593520
+NumericLiteral
+CHARLIT: C
+ STRLIT:
+DECINT: -532593424
+NumericLiteral
+DECINT: -532593328
+NumericLiteral
+CHARLIT: D
+DECINT: -532593264
+NumericLiteral
+CHARLIT: 
+
+ STRLIT:
+DECINT: -532593200
+NumericLiteral
+CHARLIT: 
+
+
+##########
+../scripts/repeat.cpsl
+       NumericLiteral
+STRLIT:i
+   STRLIT:i
+  STRLIT:i
+    DECINT: 136437872
+NumericLiteral
+   DECINT: 136437936
+NumericLiteral
+  STRLIT:5
+  STRLIT:i
+    DECINT: 136438144
+NumericLiteral
+   DECINT: 136438208
+NumericLiteral
+   DECINT: 136438272
+NumericLiteral
+   STRLIT:5
+CHARLIT: 
+
+
+##########
+../scripts/simple_array.cpsl
+    DECINT: 336596848
+NumericLiteral
+DECINT: 336596880
+NumericLiteral
+        DECINT: 336597040
+NumericLiteral
+  DECINT: 336597072
+NumericLiteral
+    DECINT: 336597136
+NumericLiteral
+      DECINT: 336597296
+NumericLiteral
+  DECINT: 336597360
+NumericLiteral
+  DECINT: 336597424
+NumericLiteral
+  STRLIT:2
+DECINT: 336597520
+NumericLiteral
+CHARLIT: 
+
+  STRLIT:
+DECINT: 336597584
+NumericLiteral
+CHARLIT: 
+
+
+##########
+../scripts/simple_record.cpsl
+            DECINT: 1422401680
+NumericLiteral
+  DECINT: 1422401744
+NumericLiteral
+  DECINT: 1422401808
+NumericLiteral
+               STRLIT:x
+ CHARLIT:  
+CHARLIT:  
+CHARLIT: 
+
+STRLIT:
+
+##########
+../scripts/simple_while.cpsl
+    NumericLiteral
+   DECINT: 2129006544
+NumericLiteral
+ 		    DECINT: 2129006672
+NumericLiteral
+STRLIT:1
+
+##########
+../scripts/sort.cpsl
+   DECINT: -731447440
+NumericLiteral
+got a constant
+    NumericLiteral
+                   DECINT: -731447024
+NumericLiteral
+    DECINT: -731446960
+NumericLiteral
+     DECINT: -731446864
+NumericLiteral
+     DECINT: -731446768
+NumericLiteral
+       NumericLiteral
+    DECINT: -731446544
+NumericLiteral
+   CHARLIT:  
+       NumericLiteral
+         DECINT: -731446128
+NumericLiteral
+              NumericLiteral
+        DECINT: -731445392
+NumericLiteral
+                    STRLIT:l
+CHARLIT: 
+
+NumericLiteral
+STRLIT:LIST_MAX
+CHARLIT: 
+
+
+##########
+../scripts/statements.cpsl
+    
+##########
+../scripts/stop.cpsl
+         DECINT: 177778608
+NumericLiteral
+  STRLIT:42
+      
+##########
+../scripts/swap.cpsl
+       DECINT: 1650258256
+NumericLiteral
+NumericLiteral
+CHARLIT: 
+
+CHARLIT: 
+
+
+##########
+../scripts/type_decl.cpsl
+   DECINT: 1065275248
+NumericLiteral
+got a constant
+   DECINT: 1065275312
+NumericLiteral
+got a constant
+             
+##########
+../scripts/while_and_if.cpsl
+    NumericLiteral
+   DECINT: -979116080
+NumericLiteral
+      DECINT: -979116016
+NumericLiteral
+  NumericLiteral
+  	    	    DECINT: -979115888
+NumericLiteral
+STRLIT:1
+
+##########
+../scripts/while_nested.cpsl
+       NumericLiteral
+ NumericLiteral
+  DECINT: -546803696
+NumericLiteral
+           STRLIT:i
+CHARLIT:  
+      DECINT: -546803440
+NumericLiteral
+    CHARLIT: 
+
+        NumericLiteral
+STRLIT:j
+
