@@ -1107,7 +1107,7 @@ case 43:
 /* rule 43 can match eol */
 YY_RULE_SETUP
 #line 57 "scanner.l"
-{yylval.charPointer == strdup(yytext); return STRLIT;}
+{yylval.charPointer = strdup(yytext); return STRLIT;}
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
