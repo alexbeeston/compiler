@@ -1,9 +1,0 @@
-CONST
-dog = 10;
-cat = 40;
-hello = 'b';
-sucks = "hello";
-testingAgain = dog;
-
-begin
-end.

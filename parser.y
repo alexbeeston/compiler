@@ -26,10 +26,13 @@ std::vector<char*>* vectorPointer;
 
 %type <charPointer> IDENT
 %type <val> LValue
-%type <val> Expression
-%type <character> CHARLIT
+%type <charPointer> Expression
+%type <charPointer> NumericLiteral
+%type <charPointer> CHARLIT
 %type <charPointer> STRLIT
-%type <integer> DECINT
+%type <charPointer> DECINT
+%type <charPointer> HEXINT
+%type <charPointer> OCTINT
 %type <SimpleType_type> SimpleType
 %type <Type_type> Type
 %type <charPointer> IdentExtra
@@ -121,13 +124,14 @@ ProcedureDecl : PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE FORWARD DONE
 FunctionDecl : FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE FORWARD DONE
     | FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE Body DONE;
 
-ConstDecl : CONST Constant ConstantList | ;
+ConstDecl : CONST Constant ConstantList { std::cout << "const" << std::endl; }
+    | ;
 ConstantList : ConstantList Constant | ;
-Constant : IDENT EQUAL Expression DONE { std::cout << "got a constant" << std::endl;} ;
-Expression : LValue
-    | NumericLiteral { std::cout << "NumericLiteral" << std::endl; }
-    | CHARLIT { std:: cout << "CHARLIT: " << $1 << std::endl; }
-    | STRLIT {std::cout << "STRLIT:" << $1 << std::endl; }
+Constant : IDENT EQUAL Expression DONE { std::cout << $1 << " = " << $3 << ";" << std::endl; } ;
+Expression : IDENT
+    | NumericLiteral;
+    | CHARLIT;
+    | STRLIT;
     | LPAREN Expression RPAREN
     | SUB Expression
     | Expression MULT Expression
@@ -148,12 +152,14 @@ Expression : LValue
     | CHR LPAREN Expression RPAREN
     | ORD LPAREN Expression RPAREN
     | PRED LPAREN Expression RPAREN
-    | SUCC LPAREN Expression RPAREN;
+    | SUCC LPAREN Expression RPAREN
+    | LValue;
     MysterySet : Expression MysterySetList | ;
         MysterySetList : MysterySetList MysterySetListItem | ;
             MysterySetListItem : COMMA Expression;
-    NumericLiteral : DECINT { std::cout << "DECINT: " << $1 << std:: endl; }
-    | HEXINT | OCTINT;
+    NumericLiteral : DECINT
+    | HEXINT
+    | OCTINT;
 TypeDecl : TYPE TypeList | ;
 TypeList : TypeList TypeListItem | ;
 TypeListItem : IDENT EQUAL Type DONE ;
@@ -172,7 +178,8 @@ Type : SimpleType
 
 VarDecl : VAR TypedList TypedLists| ;
 
-Block: BEGIN_TOKEN StatementSequence END | ;
+Block: BEGIN_TOKEN StatementSequence END { std::cout << "begin \n statements .. \n end"; }
+    | ;
 StatementSequence : Statement ExtraStatementList;
 Statement : Assignment
     | IfStatement
