@@ -33,10 +33,10 @@ std::vector<char*>* vectorPointer;
 %type <charPointer> DECINT
 %type <charPointer> HEXINT
 %type <charPointer> OCTINT
-%type <SimpleType_type> SimpleType
-%type <Type_type> Type
 %type <charPointer> IdentExtra
 %type <vectorPointer> IdentListExtraSet
+%type <charPointer> Type
+%type <charPointer> SimpleType
 
 %token ADD
 %token SUB
@@ -160,10 +160,10 @@ Expression : NumericLiteral
     | OCTINT;
 TypeDecl : TYPE TypeList | ;
 TypeList : TypeList TypeListItem | ;
-TypeListItem : IDENT EQUAL Type DONE ;
+TypeListItem : IDENT EQUAL Type DONE { std::cout << "Type: " << $1 << " = " << $3 << std::endl; };
 Type : SimpleType
-    | RecordType
-    | ArrayType;
+    | RecordType {$$ = "Record Type"; }
+    | ArrayType {$$ = "Array Type"; };
     SimpleType : IDENT ;
     RecordType : RECORD TypedLists END;
         TypedLists : TypedLists TypedList | ;
@@ -176,11 +176,11 @@ Type : SimpleType
 
 VarDecl : VAR TypedList TypedLists| ;
 
-Block: BEGIN_TOKEN StatementSequence END { std::cout << "begin \n statements .. \n end"; }
+Block: BEGIN_TOKEN StatementSequence END
     | ;
 StatementSequence : Statement ExtraStatementList;
-Statement : Assignment
-    | IfStatement
+Statement : Assignment { $$ = "Assignment"; }
+    | IfStatement {$$ = "If Statement" ; }
     | WhileStatement
     | RepeatStatement
     | ForStatement
