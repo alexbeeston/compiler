@@ -1,8 +1,8 @@
 CONST
 dog = 10;
 cat = 40;
-hello = 'c';
-testingAgain = "dog";
+hello = 'k';
+testingAgain = "dogs are great!";
 
 begin
 end.
