@@ -1,9 +1,0 @@
-struct ProcedureDecl
-{
-
-};
-
-struct FunctionDecl
-{
-
-};

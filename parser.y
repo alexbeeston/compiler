@@ -2,15 +2,12 @@
 #include <iostream>
 #include <vector>
 #include <map>
-#include "Types.h"
-#include "Program.h"
 #include "symbol_table.hpp"
 #include "global.h"
 
 extern int yylex();
 void yyerror(const char*);
 
-Program program;
 %}
 
 %union
@@ -179,8 +176,8 @@ VarDecl : VAR TypedList TypedLists| ;
 Block: BEGIN_TOKEN StatementSequence END
     | ;
 StatementSequence : Statement ExtraStatementList;
-Statement : Assignment { $$ = "Assignment"; }
-    | IfStatement {$$ = "If Statement" ; }
+Statement : Assignment
+    | IfStatement
     | WhileStatement
     | RepeatStatement
     | ForStatement
