@@ -8,10 +8,11 @@
 #include "constructs/expression/Expression.h"
 #include "constructs/expression/StringLit.h"
 #include "constructs/Constant.h"
+#include "constructs/Program.h"
 
 extern int yylex();
-std::vector<Constant*>* test;
 void yyerror(const char*);
+Program program;
 
 %}
 
@@ -131,7 +132,7 @@ ProcedureDecl : PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE FORWARD DONE
 FunctionDecl : FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE FORWARD DONE
     | FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE Body DONE;
 
-ConstDecl : CONST ConstantList { test = $2; }
+ConstDecl : CONST ConstantList { program.constants = $2; }
     | ;
 ConstantList : Constant { $$ = new std::vector<Constant*>{$1}; }
     | ConstantList Constant { $1->push_back($2); }
