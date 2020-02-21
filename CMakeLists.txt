@@ -21,11 +21,11 @@ set(calc_srcs
   ${FLEX_Scanner_OUTPUTS}
 		constructs/
 		constructs/Program.cpp
-		constructs/expression/StringLit.cpp
-		constructs/expression/Expression.cpp
+		constructs/expressions/StringLit.cpp
+		constructs/expressions/Expression.cpp
 		constructs/Constant.cpp
 		constructs/Prelude.cpp
-		constructs/expression/CharLit.cpp
+		constructs/expressions/CharLit.cpp
 	)
 source_group("Calc" FILES ${calc_srcs})
 

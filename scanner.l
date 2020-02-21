@@ -4,9 +4,10 @@
 #include <vector>
 #include "parser.hpp"
 #include "global.h"
-#include "constructs/expression/Expression.h"
+
+#include "constructs/expressions/Expression.h"
+#include "constructs/expressions/CharLit.h"
 #include "constructs/Constant.h"
-#include "constructs/expression/CharLit.h"
 
 
 int lineNumber = 0;

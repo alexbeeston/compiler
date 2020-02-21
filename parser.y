@@ -5,12 +5,12 @@
 #include "symbol_table.hpp"
 #include "global.h"
 
-#include "constructs/expression/Expression.h"
-#include "constructs/expression/StringLit.h"
+#include "constructs/expressions/Expression.h"
+#include "constructs/expressions/StringLit.h"
 #include "constructs/Constant.h"
 #include "constructs/Program.h"
 #include "constructs/Prelude.h"
-#include "constructs/expression/CharLit.h"
+#include "constructs/expressions/CharLit.h"
 
 extern int yylex();
 void yyerror(const char*);
