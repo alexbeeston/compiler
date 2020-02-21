@@ -16,5 +16,6 @@ int main()
 	std::cout << std::endl; // band-aid line; the terminal prints an extra tab without before the next PS1 line without it
 	for (Constant* item : *test)
     {
-	    std::cout << "Identifier: " << item->identifier << "  Value: " << item->value->value << std::endl; }
+	    std::cout << "Identifier: " << item->identifier << "  Value: " << item->value->value << std::endl;
+    }
 }

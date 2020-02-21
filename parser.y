@@ -10,7 +10,7 @@
 #include "constructs/Constant.h"
 
 extern int yylex();
-std::vector<Constant*>* test = new std::vector<Constant*>;
+std::vector<Constant*>* test;
 void yyerror(const char*);
 
 %}
@@ -27,6 +27,7 @@ std::vector<char*>* vectorPointer;
 struct Constant* constantPointer;
 struct Expression* expressionPointer;
 struct StringLit* stringLitPointer;
+std::vector<Constant*>* constantPointerVectorPointer;
 }
 
 %type <charPointer> IDENT
@@ -43,6 +44,7 @@ struct StringLit* stringLitPointer;
 %type <charPointer> Type
 %type <charPointer> SimpleType
 %type <constantPointer> Constant
+%type <constantPointerVectorPointer> ConstantList
 
 %token ADD
 %token SUB
@@ -129,11 +131,13 @@ ProcedureDecl : PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE FORWARD DONE
 FunctionDecl : FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE FORWARD DONE
     | FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE Body DONE;
 
-ConstDecl : CONST Constant ConstantList
+ConstDecl : CONST ConstantList { test = $2; }
     | ;
-ConstantList : ConstantList Constant
-    |;
-Constant : IDENT EQUAL Expression DONE { test->push_back(new Constant($1, $3)); };
+ConstantList : Constant { $$ = new std::vector<Constant*>{$1}; }
+    | ConstantList Constant { $1->push_back($2); }
+    | ;
+
+Constant : IDENT EQUAL Expression DONE { $$ = new Constant($1, $3); };
 Expression : NumericLiteral
     | CHARLIT
     | STRLIT {$$ = new StringLit($1); }
