@@ -19,7 +19,9 @@ set(calc_srcs
   symbol_table.cpp
   ${BISON_Parser_OUTPUTS}
   ${FLEX_Scanner_OUTPUTS}
-        Routine.cpp Expression.h Type.h Statement.h Program.h Program.cpp)
+	test/
+	test/Program.cpp
+	)
 source_group("Calc" FILES ${calc_srcs})
 
 add_executable(calc ${calc_srcs})

@@ -16,4 +16,3 @@ public:
     Program();
 };
 
-void sayHi();

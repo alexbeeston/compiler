@@ -1,5 +1,5 @@
 #include "symbol_table.hpp"
-#include "Program.h"
+#include "test/Program.h"
 #include "global.h"
 #include <iostream>
 
