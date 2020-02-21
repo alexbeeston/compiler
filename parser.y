@@ -9,6 +9,7 @@
 #include "constructs/expression/StringLit.h"
 #include "constructs/Constant.h"
 #include "constructs/Program.h"
+#include "constructs/Prelude.h"
 
 extern int yylex();
 void yyerror(const char*);
@@ -29,6 +30,7 @@ struct Constant* constantPointer;
 struct Expression* expressionPointer;
 struct StringLit* stringLitPointer;
 std::vector<Constant*>* constantPointerVectorPointer;
+struct Prelude* preludePointer;
 }
 
 %type <charPointer> IDENT
@@ -46,6 +48,8 @@ std::vector<Constant*>* constantPointerVectorPointer;
 %type <charPointer> SimpleType
 %type <constantPointer> Constant
 %type <constantPointerVectorPointer> ConstantList
+%type <constantPointerVectorPointer> ConstDecl
+%type <preludePointer> Prelude
 
 %token ADD
 %token SUB
@@ -116,8 +120,8 @@ std::vector<Constant*>* constantPointerVectorPointer;
 %token DECINT
 %%
 
-Program : Prelude RoutineDeclList Block DOT;
-Prelude : ConstDecl TypeDecl VarDecl;
+Program : Prelude RoutineDeclList Block DOT { program.prelude = $1; };
+Prelude : ConstDecl TypeDecl VarDecl { $$ = new Prelude($1); };
 
 RoutineDeclList : RoutineDeclList RoutineDeclListItem | ;
     RoutineDeclListItem : ProcedureDecl | FunctionDecl;
@@ -132,7 +136,7 @@ ProcedureDecl : PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE FORWARD DONE
 FunctionDecl : FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE FORWARD DONE
     | FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE Body DONE;
 
-ConstDecl : CONST ConstantList { program.constants = $2; }
+ConstDecl : CONST ConstantList { $$ = $2;}
     | ;
 ConstantList : Constant { $$ = new std::vector<Constant*>{$1}; }
     | ConstantList Constant { $1->push_back($2); }

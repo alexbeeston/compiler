@@ -24,6 +24,7 @@ set(calc_srcs
 		constructs/expression/StringLit.cpp
 		constructs/expression/Expression.cpp
 		constructs/Constant.cpp
+		constructs/Prelude.cpp
 	)
 source_group("Calc" FILES ${calc_srcs})
 
