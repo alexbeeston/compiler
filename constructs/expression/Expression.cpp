@@ -2,5 +2,6 @@
 
 Expression::Expression(char* p_value)
 {
-    value = p_value;
+    prettyPrintValue = p_value;
 }
+

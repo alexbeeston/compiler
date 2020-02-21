@@ -6,7 +6,7 @@
 #define COMPILERS_EXPRESSION_H
 struct Expression
 {
-    char* value;
-    Expression(char* p_value);
+    char* prettyPrintValue;
+    Expression(char*);
 };
 #endif //COMPILERS_EXPRESSION_H

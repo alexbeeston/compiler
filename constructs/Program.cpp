@@ -12,7 +12,7 @@ void Program::prettyPrint()
     std::cout << "const" << std::endl;
     for (Constant* item : *(prelude->constants))
     {
-        std::cout << item->identifier << " = " << item->value->value << ";" << std::endl;
+        std::cout << item->identifier << " = " << item->value->prettyPrintValue << ";" << std::endl;
     }
 }
 

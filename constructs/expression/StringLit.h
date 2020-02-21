@@ -9,6 +9,7 @@
 
 struct StringLit : Expression
 {
+    char* stringLitValue;
     StringLit(char* p_value);
 };
 #endif //COMPILERS_STRINGLIT_H
