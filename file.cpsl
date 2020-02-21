@@ -1,5 +1,7 @@
 CONST
-testingAgain = "dogs are great";
+stringOne = "string 1";
+stringTwo = "string 2";
+stringThree = "string 3";
 
 begin
 end.
