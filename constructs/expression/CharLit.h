@@ -7,9 +7,9 @@
 
 #include "Expression.h"
 
-struct CharLit
+struct CharLit : Expression
 {
     char charLitValue;
-    CharLit(char);
+    CharLit(char p_charLitValue);
 };
 #endif //COMPILERS_CHARLIT_H

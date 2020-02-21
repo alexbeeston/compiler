@@ -1,6 +1,7 @@
 CONST
 stringOne = "string 1";
 stringTwo = "string 2";
+thing = 'x';
 stringThree = "string 3";
 
 begin

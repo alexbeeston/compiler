@@ -10,6 +10,7 @@
 #include "constructs/Constant.h"
 #include "constructs/Program.h"
 #include "constructs/Prelude.h"
+#include "constructs/expression/CharLit.h"
 
 extern int yylex();
 void yyerror(const char*);
@@ -29,6 +30,7 @@ std::vector<char*>* vectorPointer;
 struct Constant* constantPointer;
 struct Expression* expressionPointer;
 struct StringLit* stringLitPointer;
+struct CharLit* charLitPointer;
 std::vector<Constant*>* constantPointerVectorPointer;
 struct Prelude* preludePointer;
 }
@@ -37,7 +39,7 @@ struct Prelude* preludePointer;
 %type <val> LValue
 %type <expressionPointer> Expression
 %type <charPointer> NumericLiteral
-%type <charPointer> CHARLIT
+%type <character> CHARLIT
 %type <charPointer> STRLIT
 %type <charPointer> DECINT
 %type <charPointer> HEXINT
@@ -144,8 +146,8 @@ ConstantList : Constant { $$ = new std::vector<Constant*>{$1}; }
 
 Constant : IDENT EQUAL Expression DONE { $$ = new Constant($1, $3); };
 Expression : NumericLiteral
-    | CHARLIT
-    | STRLIT {$$ = new StringLit($1); }
+    | CHARLIT { $$ = new CharLit($1); }
+    | STRLIT { $$ = new StringLit($1); }
     | LPAREN Expression RPAREN
     | SUB Expression
     | Expression MULT Expression

@@ -6,6 +6,7 @@
 #include "global.h"
 #include "constructs/expression/Expression.h"
 #include "constructs/Constant.h"
+#include "constructs/expression/CharLit.h"
 
 
 int lineNumber = 0;
