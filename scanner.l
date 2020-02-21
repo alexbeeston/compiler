@@ -4,6 +4,10 @@
 #include <vector>
 #include "parser.hpp"
 #include "global.h"
+#include "constructs/expression/Expression.h"
+#include "constructs/Constant.h"
+
+
 int lineNumber = 0;
 %}
 

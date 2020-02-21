@@ -1,13 +1,5 @@
 CONST
-dog = 10;
-cat = 40;
-hello = 'k';
-testingAgain = "dogs are great!";
-
-TYPE
-hello = dog;
-testing = record a,b,d:int; e,f,g:float; end;
-arrayTesting = array [1:4] of dog;
+testingAgain = "dogs are great";
 
 begin
 end.

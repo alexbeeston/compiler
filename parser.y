@@ -5,6 +5,10 @@
 #include "symbol_table.hpp"
 #include "global.h"
 
+#include "constructs/expression/Expression.h"
+#include "constructs/expression/StringLit.h"
+#include "constructs/Constant.h"
+
 extern int yylex();
 void yyerror(const char*);
 
@@ -19,11 +23,14 @@ int integer;
 struct SimpleType* SimpleType_type;
 struct Type* Type_type;
 std::vector<char*>* vectorPointer;
+struct Constant* constantPointer;
+struct Expression* expressionPointer;
+struct StringLit* stringLitPointer;
 }
 
 %type <charPointer> IDENT
 %type <val> LValue
-%type <charPointer> Expression
+%type <expressionPointer> Expression
 %type <charPointer> NumericLiteral
 %type <charPointer> CHARLIT
 %type <charPointer> STRLIT
@@ -34,6 +41,7 @@ std::vector<char*>* vectorPointer;
 %type <vectorPointer> IdentListExtraSet
 %type <charPointer> Type
 %type <charPointer> SimpleType
+%type <constantPointer> Constant
 
 %token ADD
 %token SUB
@@ -123,10 +131,10 @@ FunctionDecl : FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE FOR
 ConstDecl : CONST Constant ConstantList
     | ;
 ConstantList : ConstantList Constant | ;
-Constant : IDENT EQUAL Expression DONE { std::cout << "Constant: " << $1 << " = " << $3 << ";" << std::endl; } ;
+Constant : IDENT EQUAL Expression DONE { $$ = new Constant($1, $3); } ;
 Expression : NumericLiteral
     | CHARLIT
-    | STRLIT
+    | STRLIT {$$ = new StringLit($1); }
     | LPAREN Expression RPAREN
     | SUB Expression
     | Expression MULT Expression

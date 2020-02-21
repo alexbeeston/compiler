@@ -19,8 +19,11 @@ set(calc_srcs
   symbol_table.cpp
   ${BISON_Parser_OUTPUTS}
   ${FLEX_Scanner_OUTPUTS}
-	test/
-	test/Program.cpp
+		constructs/
+		constructs/Program.cpp
+		constructs/expression/StringLit.cpp
+		constructs/expression/Expression.cpp
+		constructs/Constant.cpp
 	)
 source_group("Calc" FILES ${calc_srcs})
 

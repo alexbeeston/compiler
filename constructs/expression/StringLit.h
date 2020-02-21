@@ -1,0 +1,14 @@
+//
+// Created by abeeston on 2/20/20.
+//
+
+#ifndef COMPILERS_STRINGLIT_H
+#define COMPILERS_STRINGLIT_H
+
+#include "Expression.h"
+
+struct StringLit : Expression
+{
+    StringLit(char* p_value);
+};
+#endif //COMPILERS_STRINGLIT_H
