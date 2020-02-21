@@ -9,7 +9,6 @@
 #include "constructs/expressions/CharLit.h"
 #include "constructs/Constant.h"
 
-
 int lineNumber = 0;
 %}
 

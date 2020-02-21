@@ -11,6 +11,7 @@
 #include "constructs/Program.h"
 #include "constructs/Prelude.h"
 #include "constructs/expressions/CharLit.h"
+#include "constructs/expressions/NumericLit.h"
 
 extern int yylex();
 void yyerror(const char*);
@@ -33,12 +34,12 @@ struct StringLit* stringLitPointer;
 struct CharLit* charLitPointer;
 std::vector<Constant*>* constantPointerVectorPointer;
 struct Prelude* preludePointer;
+struct NumericLit* numericLitPointer;
 }
 
 %type <charPointer> IDENT
 %type <val> LValue
 %type <expressionPointer> Expression
-%type <charPointer> NumericLiteral
 %type <character> CHARLIT
 %type <charPointer> STRLIT
 %type <charPointer> DECINT
@@ -52,6 +53,7 @@ struct Prelude* preludePointer;
 %type <constantPointerVectorPointer> ConstantList
 %type <constantPointerVectorPointer> ConstDecl
 %type <preludePointer> Prelude
+%type <numericLitPointer> NumericLiteral
 
 %token ADD
 %token SUB
@@ -173,7 +175,7 @@ Expression : NumericLiteral
     MysterySet : Expression MysterySetList | ;
         MysterySetList : MysterySetList MysterySetListItem | ;
             MysterySetListItem : COMMA Expression;
-    NumericLiteral : DECINT
+    NumericLiteral : DECINT { $$ = new NumericLit($1); }
     | HEXINT
     | OCTINT;
 TypeDecl : TYPE TypeList | ;
