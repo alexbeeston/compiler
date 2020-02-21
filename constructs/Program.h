@@ -7,6 +7,7 @@
 
 struct Program
 {
+    Constant* testing;
     std::vector<Constant*>* constants;
     std::vector<Type*>* types;
     std::vector<Var*>* vars;
@@ -14,5 +15,6 @@ struct Program
     std::vector<Statement*>* block;
 public:
     Program();
+    void prettyPrint();
 };
 

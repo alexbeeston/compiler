@@ -6,3 +6,8 @@ Program::Program()
     std::cout << "constructor" << std::endl;
 }
 
+void Program::prettyPrint()
+{
+
+}
+

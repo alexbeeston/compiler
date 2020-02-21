@@ -10,6 +10,7 @@
 #include "constructs/Constant.h"
 
 extern int yylex();
+Constant* test;
 void yyerror(const char*);
 
 %}
@@ -131,7 +132,7 @@ FunctionDecl : FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE FOR
 ConstDecl : CONST Constant ConstantList
     | ;
 ConstantList : ConstantList Constant | ;
-Constant : IDENT EQUAL Expression DONE { $$ = new Constant($1, $3); } ;
+Constant : IDENT EQUAL Expression DONE { test = new Constant($1, $3); } ;
 Expression : NumericLiteral
     | CHARLIT
     | STRLIT {$$ = new StringLit($1); }
