@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 #include "symbol_table.hpp"
 #include "global.h"

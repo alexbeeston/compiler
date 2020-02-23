@@ -6,7 +6,8 @@
 #define COMPILERS_EXPRESSION_H
 struct Expression
 {
-    char* prettyPrintValue;
+    char* prettyPrintValue; // band-aid: it's a ch
     Expression(char*);
+    Expression(int);
 };
 #endif //COMPILERS_EXPRESSION_H

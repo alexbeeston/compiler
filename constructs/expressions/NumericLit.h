@@ -9,7 +9,7 @@
 
 struct NumericLit : Expression
 {
-    char* numericLitValue;
-    NumericLit(char*);
+    int numericLitValue;
+    NumericLit(int);
 };
 #endif //COMPILERS_NUMERICLIT_H

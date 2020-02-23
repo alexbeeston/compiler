@@ -22,9 +22,9 @@ Program program;
 %union
 {
 float val;
+int integer;
 char* charPointer;
 char character;
-int integer;
 struct SimpleType* SimpleType_type;
 struct Type* Type_type;
 std::vector<char*>* vectorPointer;
@@ -42,7 +42,7 @@ struct NumericLit* numericLitPointer;
 %type <expressionPointer> Expression
 %type <character> CHARLIT
 %type <charPointer> STRLIT
-%type <charPointer> DECINT
+%type <integer> DECINT
 %type <charPointer> HEXINT
 %type <charPointer> OCTINT
 %type <charPointer> IdentExtra

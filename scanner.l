@@ -58,7 +58,7 @@ function|FUNCTION {return FUNCTION;}
 '.' {yylval.character = yytext[1]; return CHARLIT;}
 0[0-7]* {return OCTINT;}
 0x[0-9a-fA-F]* {return HEXINT;}
-[1-9][0-9]* {yylval.charPointer = strdup(yytext); return DECINT;}
+[1-9][0-9]* {yylval.integer = std::stoi(strdup(yytext)); return DECINT;}
 \"[^\"]*\"  {yylval.charPointer = strdup(yytext); return STRLIT;}
 [a-zA-Z][a-zA-Z0-9_]* {yylval.charPointer = strdup(yytext); return IDENT;}
 

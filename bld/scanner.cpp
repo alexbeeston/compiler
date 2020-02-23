@@ -1106,7 +1106,7 @@ YY_RULE_SETUP
 case 42:
 YY_RULE_SETUP
 #line 61 "scanner.l"
-{yylval.charPointer = strdup(yytext); return DECINT;}
+{yylval.integer = std::stoi(strdup(yytext)); return DECINT;}
 	YY_BREAK
 case 43:
 /* rule 43 can match eol */
