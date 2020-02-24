@@ -14,5 +14,10 @@ void Program::prettyPrint()
     {
         std::cout << item->identifier << " = " << item->value->prettyPrintValue << ";" << std::endl;
     }
+    std::cout << "type" << std::endl;
+    for (BaseType* item : *(prelude->types)
+    {
+        std::cout << item->ident << " = " << std::endl;
+    }
 }
 

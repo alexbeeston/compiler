@@ -5,5 +5,8 @@ thing = 'x';
 stringThree = "string 3";
 number = 10;
 
+TYPE
+dog = hen;
+
 begin
 end.

@@ -12,6 +12,8 @@
 #include "constructs/prelude/Prelude.h"
 #include "constructs/expressions/CharLit.h"
 #include "constructs/expressions/NumericLit.h"
+#include "constructs/prelude/types/BaseType.h"
+#include "constructs/prelude/types/SimpleType.h"
 
 extern int yylex();
 void yyerror(const char*);
@@ -25,8 +27,6 @@ float val;
 int integer;
 char* charPointer;
 char character;
-struct SimpleType* SimpleType_type;
-struct Type* Type_type;
 std::vector<char*>* vectorPointer;
 struct Constant* constantPointer;
 struct Expression* expressionPointer;
@@ -35,11 +35,16 @@ struct CharLit* charLitPointer;
 std::vector<Constant*>* constantPointerVectorPointer;
 struct Prelude* preludePointer;
 struct NumericLit* numericLitPointer;
+
+struct BaseType* baseTypePointer;
+struct SimpleType* simpleTypePointer;
+std::vector<BaseType*>* baseTypePointerVectorPointer;
+
 }
+%type <preludePointer> Prelude
 
 %type <charPointer> IDENT
 %type <val> LValue
-%type <expressionPointer> Expression
 %type <character> CHARLIT
 %type <charPointer> STRLIT
 %type <integer> DECINT
@@ -47,13 +52,18 @@ struct NumericLit* numericLitPointer;
 %type <charPointer> OCTINT
 %type <charPointer> IdentExtra
 %type <vectorPointer> IdentListExtraSet
-%type <charPointer> Type
-%type <charPointer> SimpleType
+
+%type <expressionPointer> Expression
 %type <constantPointer> Constant
 %type <constantPointerVectorPointer> ConstantList
 %type <constantPointerVectorPointer> ConstDecl
-%type <preludePointer> Prelude
 %type <numericLitPointer> NumericLiteral
+
+%type <baseTypePointerVectorPointer> TypeDecl
+%type <baseTypePointerVectorPointer> TypeList
+%type <baseTypePointer> Type
+%type <baseTypePointer> TypeListItem
+%type <simpleTypePointer> SimpleType
 
 %token ADD
 %token SUB
@@ -125,7 +135,7 @@ struct NumericLit* numericLitPointer;
 %%
 
 Program : Prelude RoutineDeclList Block DOT { program.prelude = $1; };
-Prelude : ConstDecl TypeDecl VarDecl { $$ = new Prelude($1); };
+Prelude : ConstDecl TypeDecl VarDecl { $$ = new Prelude($1, $2); };
 
 RoutineDeclList : RoutineDeclList RoutineDeclListItem | ;
     RoutineDeclListItem : ProcedureDecl | FunctionDecl;
@@ -178,13 +188,15 @@ Expression : NumericLiteral
     NumericLiteral : DECINT { $$ = new NumericLit($1); }
     | HEXINT
     | OCTINT;
-TypeDecl : TYPE TypeList | ;
-TypeList : TypeList TypeListItem | ;
-TypeListItem : IDENT EQUAL Type DONE { std::cout << "Type: " << $1 << " = " << $3 << std::endl; };
+TypeDecl : TYPE TypeList { $$ = $2;}
+    | ;
+TypeList : TypeList TypeListItem { $1->push_back($2); }
+    | { $$ = new std::vector<BaseType*>; };
+TypeListItem : IDENT EQUAL Type DONE { $$ = $3; };
 Type : SimpleType
-    | RecordType {$$ = "Record Type"; }
-    | ArrayType {$$ = "Array Type"; };
-    SimpleType : IDENT ;
+    | RecordType
+    | ArrayType;
+    SimpleType : IDENT { $$ = new SimpleType($1); };
     RecordType : RECORD TypedLists END;
         TypedLists : TypedLists TypedList | ;
             TypedList: IdentList COLON Type DONE;
