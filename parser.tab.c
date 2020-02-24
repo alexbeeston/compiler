@@ -35,7 +35,7 @@
 
 /* All symbols defined below should begin with yy or YY, to avoid
    infringing on user name space.  This should be done even for local
-   variables, as they might otherwise be expanded by user macros.
+   vars, as they might otherwise be expanded by user macros.
    There are some unavoidable exceptions within include files to
    define necessary library symbols; they are noted "INFRINGES ON
    USER NAME SPACE" below.  */
@@ -61,7 +61,7 @@
 
 
 
-/* Copy the first part of user declarations.  */
+/* Copy the first part of user prelude.  */
 #line 1 "parser.y" /* yacc.c:339  */
 
 #include <iostream>
@@ -205,7 +205,7 @@ int yyparse (void);
 
 
 
-/* Copy the second part of user declarations.  */
+/* Copy the second part of user prelude.  */
 
 #line 211 "parser.tab.c" /* yacc.c:358  */
 
@@ -409,7 +409,7 @@ union yyalloc
 # define YYCOPY_NEEDED 1
 
 /* Relocate STACK from its old location to the new one.  The
-   local variables YYSIZE and YYSTACKSIZE give the old and new number of
+   local vars YYSIZE and YYSTACKSIZE give the old and new number of
    elements in the stack, and YYPTR gives the new location of the
    stack.  Advance YYPTR to a properly aligned location for the next
    stack.  */
@@ -1315,7 +1315,7 @@ yyparse (void)
   int yyresult;
   /* Lookahead token as an internal (translated) token number.  */
   int yytoken = 0;
-  /* The variables used to return semantic value and location from the
+  /* The vars used to return semantic value and location from the
      action routines.  */
   YYSTYPE yyval;
 

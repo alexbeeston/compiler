@@ -7,9 +7,9 @@
 
 #include "constructs/expressions/Expression.h"
 #include "constructs/expressions/StringLit.h"
-#include "constructs/Constant.h"
+#include "constructs/prelude/constants/Constant.h"
 #include "constructs/Program.h"
-#include "constructs/Prelude.h"
+#include "constructs/prelude/Prelude.h"
 #include "constructs/expressions/CharLit.h"
 #include "constructs/expressions/NumericLit.h"
 

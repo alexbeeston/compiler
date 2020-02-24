@@ -5,7 +5,7 @@
 #ifndef COMPILERS_CONSTANT_H
 #define COMPILERS_CONSTANT_H
 
-#include "expressions/Expression.h"
+#include "../../expressions/Expression.h"
 
 struct Constant
 {

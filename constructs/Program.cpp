@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Program.h"
-#include "Constant.h"
+#include "prelude/constants/Constant.h"
 
 Program::Program()
 {

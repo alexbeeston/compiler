@@ -885,7 +885,7 @@ case YY_STATE_EOF(INITIAL):
 			"fatal flex scanner internal error--no action found" );
 	} /* end of action switch */
 		} /* end of scanning one token */
-	} /* end of user's declarations */
+	} /* end of user's prelude */
 } /* end of yylex */
 
 /* yy_get_next_buffer - try to read in a new buffer

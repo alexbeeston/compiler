@@ -23,10 +23,11 @@ set(calc_srcs
 		constructs/Program.cpp
 		constructs/expressions/StringLit.cpp
 		constructs/expressions/Expression.cpp
-		constructs/Constant.cpp
-		constructs/Prelude.cpp
 		constructs/expressions/CharLit.cpp
 		constructs/expressions/NumericLit.cpp
+
+		constructs/prelude/constants/Constant.cpp
+		constructs/prelude/Prelude.cpp
 	)
 source_group("Calc" FILES ${calc_srcs})
 

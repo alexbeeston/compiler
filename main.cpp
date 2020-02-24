@@ -4,7 +4,6 @@
 #include "symbol_table.hpp"
 #include "global.h"
 #include "constructs/Program.h"
-#include "constructs/Constant.h"
 
 extern int yyparse();
 extern Program program;

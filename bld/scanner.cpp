@@ -617,7 +617,7 @@ char *yytext;
 
 #include "constructs/expressions/Expression.h"
 #include "constructs/expressions/CharLit.h"
-#include "constructs/Constant.h"
+#include "constructs/prelude/constants/Constant.h"
 
 int lineNumber = 0;
 #line 624 "/home/abeeston/sp2020/compilers/calc/bld/scanner.cpp"
