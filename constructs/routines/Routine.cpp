@@ -2,9 +2,9 @@
 
 #include "Routine.h"
 
-Routine::Routine()
+Routine::Routine(char* p_ident)
 {
-    int dog = 10;
+    ident = p_ident;
 }
 
 void Routine::print()

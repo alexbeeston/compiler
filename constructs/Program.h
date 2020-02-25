@@ -6,8 +6,7 @@ struct Program
 {
     Prelude* prelude;
     std::vector<Routine*>* routines;
-public:
-    Program();
+    Program(Prelude*, std::vector<Routine*>*);
     void prettyPrint();
 };
 

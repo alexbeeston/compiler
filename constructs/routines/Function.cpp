@@ -2,12 +2,11 @@
 
 #include "Function.h"
 
-Function::Function()
+Function::Function(char* p_ident):Routine(p_ident)
 {
-    std::cout << "Function constructor" << std::endl;
 }
 
 void Function::print()
 {
-    std::cout << "Function print" << std::endl;
+    std::cout << "FUNCTION " << ident << "();" << std::endl;
 }

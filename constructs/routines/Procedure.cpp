@@ -2,12 +2,11 @@
 
 #include "Procedure.h"
 
-Procedure::Procedure()
+Procedure::Procedure(char* p_ident):Routine(p_ident)
 {
-    std::cout << "procedure constructor" << std::endl;
 }
 
 void Procedure::print()
 {
-    std::cout << "Procedure print function" << std::endl;
+    std::cout << "PROCEDURE " << ident << "();" << std::endl;
 }

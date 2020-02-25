@@ -9,7 +9,7 @@
 
 struct Procedure:Routine
 {
-    Procedure();
+    Procedure(char*);
     void print();
 };
 #endif //COMPILERS_PROCEDURE_H

@@ -9,6 +9,6 @@ struct Routine
 {
     char* ident;
     virtual void print();
-    Routine();
+    Routine(char*);
 };
 #endif //COMPILERS_ROUTINE_H

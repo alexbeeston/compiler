@@ -9,7 +9,7 @@
 
 struct Function:Routine
 {
-    Function();
+    Function(char*);
     void print();
 };
 #endif //COMPILERS_FUNCTION_H

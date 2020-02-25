@@ -21,7 +21,7 @@
 
 extern int yylex();
 void yyerror(const char*);
-Program program;
+Program* program;
 
 %}
 
@@ -48,6 +48,7 @@ struct TypedList* typedListPointer;
 std::vector<TypedList*>* typedListPointerVectorPointer;
 
 struct Routine* routinePointer;
+std::vector<Routine*>* routinePointerVectorPointer;
 struct Procedure* procedurePointer;
 struct Function* functionPointer;
 
@@ -82,6 +83,7 @@ struct Function* functionPointer;
 %type <typedListPointerVectorPointer> VarDecl
 
 %type <routinePointer> RoutineDeclListItem
+%type <routinePointerVectorPointer> RoutineDeclList
 %type <procedurePointer> ProcedureDecl
 %type <functionPointer> FunctionDecl
 
@@ -154,23 +156,22 @@ struct Function* functionPointer;
 %token DECINT
 %%
 
-Program : Prelude RoutineDeclList Block DOT { program.prelude = $1; };
+Program : Prelude RoutineDeclList Block DOT { program = new Program($1, $2); };
 Prelude : ConstDecl TypeDecl VarDecl { $$ = new Prelude($1, $2, $3); };
 
-RoutineDeclList : RoutineDeclList RoutineDeclListItem { $2->print(); }
-    | ;
-    RoutineDeclListItem : ProcedureDecl
-        | FunctionDecl ;
-ProcedureDecl : PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE FORWARD DONE { $$ = new Procedure(); }
-    | PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE Body DONE { $$ = new Procedure(); };
+RoutineDeclList : RoutineDeclList RoutineDeclListItem { $1->push_back($2); }
+    | { $$ = new std::vector<Routine*>; };
+    RoutineDeclListItem : ProcedureDecl | FunctionDecl ;
+ProcedureDecl : PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE FORWARD DONE { $$ = new Procedure($2); }
+    | PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE Body DONE { $$ = new Procedure($2); };
     FormalParameters : ParameterSet ParameterSetList | ;
             ParameterSet : VarOrRef IdentList COLON Type;
                 VarOrRef : VAR | REF | ;
             ParameterSetList : ParameterSetList ParameterSetListItem | ;
                 ParameterSetListItem : DONE ParameterSet;
     Body : Prelude Block;
-FunctionDecl : FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE FORWARD DONE { $$ = new Function(); }
-    | FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE Body DONE { $$ = new Function(); }
+FunctionDecl : FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE FORWARD DONE { $$ = new Function($2); }
+    | FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE Body DONE { $$ = new Function($2); }
 
 ConstDecl : CONST ConstantList { $$ = $2;}
     | ;
