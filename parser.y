@@ -27,7 +27,7 @@ float val;
 int integer;
 char* charPointer;
 char character;
-std::vector<char*>* vectorPointer;
+std::vector<char*>* charPointerVectorPointer;
 struct Constant* constantPointer;
 struct Expression* expressionPointer;
 struct StringLit* stringLitPointer;
@@ -53,7 +53,8 @@ std::vector<TypedList*>* typedListPointerVectorPointer;
 %type <charPointer> HEXINT
 %type <charPointer> OCTINT
 %type <charPointer> IdentExtra
-%type <vectorPointer> IdentListExtraSet
+%type <charPointerVectorPointer> IdentListExtraSet
+%type <charPointerVectorPointer> IdentList
 
 %type <expressionPointer> Expression
 %type <constantPointer> Constant
@@ -208,10 +209,10 @@ Type : SimpleType { $$ = new BaseType(); }
         TypedLists : TypedLists TypedList { $1->push_back($2); }
             | { $$ = new std::vector<TypedList*>; };
             TypedList: IdentList COLON Type DONE { $$ = new TypedList($3); };
-                IdentList : IDENT IdentListExtraSet;
-                    IdentListExtraSet : IdentListExtraSet IdentExtra
-                        | ;
-                        IdentExtra : COMMA IDENT;
+                IdentList : IDENT IdentListExtraSet { $2->push_back($1); $$ = $2;} ;
+                    IdentListExtraSet : IdentListExtraSet IdentExtra { $1->push_back($2); }
+                        | { $$ = new std::vector<char*>; };
+                        IdentExtra : COMMA IDENT { $$ = $2; };
     ArrayType : ARRAY LBRACKET Expression COLON Expression RBRACKET OF Type ;
 
 VarDecl : VAR TypedList TypedLists { $3->push_back($2); $$ = $3; }

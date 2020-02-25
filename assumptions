@@ -1,1 +1,2 @@
 all type declarions are a simple type
+the first item on an IdentList is pushed onto the back. Same with a TypedList on a VarDecl; oh well. There has to be at last one, and this is the hacky way of doing it. It doesn't preserver order, but I think that it's okay.
