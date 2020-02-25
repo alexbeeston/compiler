@@ -2,8 +2,9 @@
 
 #include "Function.h"
 
-Function::Function(char* p_ident, std::vector<ParameterSet*>* p_parameters):Routine(p_ident, p_parameters)
+Function::Function(char* p_ident, std::vector<ParameterSet*>* p_parameters, Body* p_body, BaseType* p_type):Routine(p_ident, p_parameters, p_body)
 {
+    type = p_type;
 }
 
 void Function::print()
@@ -11,6 +12,8 @@ void Function::print()
     std::cout << "FUNCTION " << ident << "(";
     printParameters();
     std::cout << ")";
-    std::cout << "print the return type here and optional body.";
+    type->print();
+    std::cout << "\n";
+    if (body != NULL) { body->print(); }
     std::cout << std::endl;
 }

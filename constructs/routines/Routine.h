@@ -8,13 +8,15 @@
 #include <vector>
 
 #include "ParameterSet.h"
+#include "Body.h"
 
 struct Routine
 {
     char* ident;
     std::vector<ParameterSet*>* formalParameters;
+    Body* body;
     virtual void print();
     void printParameters();
-    Routine(char*, std::vector<ParameterSet*>*);
+    Routine(char*, std::vector<ParameterSet*>*, Body*);
 };
 #endif //COMPILERS_ROUTINE_H

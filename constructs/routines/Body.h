@@ -10,5 +10,7 @@
 struct Body
 {
     Prelude* prelude;
+    Body();
+    void print();
 };
 #endif //COMPILERS_BODY_H

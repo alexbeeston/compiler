@@ -1,4 +1,13 @@
-//
-// Created by abeeston on 2/25/20.
-//
+#include <iostream>
 
+#include "Body.h"
+
+Body::Body()
+{
+
+}
+
+void Body::print()
+{
+    std::cout << "Body\n";
+}

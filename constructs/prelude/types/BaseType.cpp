@@ -10,5 +10,5 @@ BaseType::BaseType()
 
 void BaseType::print()
 {
-    std::cout << "This is a base type. It should be over-written.";
+    std::cout << "[base type]";
 }

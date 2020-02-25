@@ -3,7 +3,7 @@
 
 #include "Procedure.h"
 
-Procedure::Procedure(char* p_ident, std::vector<ParameterSet*>* p_parameters):Routine(p_ident, p_parameters)
+Procedure::Procedure(char* p_ident, std::vector<ParameterSet*>* p_parameters, Body* p_body):Routine(p_ident, p_parameters, p_body)
 {
 }
 
@@ -11,7 +11,7 @@ void Procedure::print()
 {
     std::cout << "PROCEDURE " << ident << "(";
     printParameters();
-    std::cout << ")";
-    std::cout << "print the optional body.";
+    std::cout << ")\n";
+    if (body != NULL) { body->print(); };
     std::cout << std::endl;
 }

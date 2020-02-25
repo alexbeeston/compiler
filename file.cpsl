@@ -13,12 +13,9 @@ var
  A, b, c : a;
  A, B, C: d;
 
-PROCEDURE sayHi();
-begin
-  write("Hi\n");
-end;
+PROCEDURE sayHi(); forward;
 
-FUNCTION add (a,b: integer) : integer;
+FUNCTION add (a,b: integer; ref c,d,e: dog) : integer;
 BEGIN
   return a + b;
 END;

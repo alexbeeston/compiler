@@ -3,11 +3,13 @@
 
 #include "Routine.h"
 #include "ParameterSet.h"
+#include "Body.h"
 
-Routine::Routine(char* p_ident, std::vector<ParameterSet*>* p_formalParameters)
+Routine::Routine(char* p_ident, std::vector<ParameterSet*>* p_formalParameters, Body* p_body)
 {
     ident = p_ident;
     formalParameters = p_formalParameters;
+    body = p_body;
 }
 
 void Routine::print()
@@ -25,6 +27,7 @@ void Routine::printParameters()
         for (char* identifier : *(parameterSet->identList)) std::cout << identifier << ", ";
         std::cout << " : ";
         parameterSet->type->print();
+        std::cout << " ; ";
     }
 }
 

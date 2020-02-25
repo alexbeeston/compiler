@@ -6,10 +6,13 @@
 #define COMPILERS_FUNCTION_H
 
 #include "Routine.h"
+#include "Body.h"
+#include "../prelude/types/BaseType.h"
 
 struct Function:Routine
 {
-    Function(char*, std::vector<ParameterSet*>*);
+    BaseType* type;
+    Function(char*, std::vector<ParameterSet*>*, Body*, BaseType*);
     void print();
 };
 #endif //COMPILERS_FUNCTION_H
