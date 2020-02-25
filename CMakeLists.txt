@@ -25,7 +25,7 @@ set(calc_srcs
 		constructs/expressions/Expression.cpp
 		constructs/expressions/CharLit.cpp
 		constructs/expressions/NumericLit.cpp
-
+		constructs/prelude/types/BaseType.cpp
 		constructs/prelude/constants/Constant.cpp
 		constructs/prelude/Prelude.cpp
 	)

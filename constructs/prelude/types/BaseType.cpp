@@ -2,9 +2,6 @@
 
 BaseType::BaseType()
 {
+    int dog = 10;
 }
 
-void BaseType:setIdent(char* p_ident)
-{
-    ident = p_ident;
-};

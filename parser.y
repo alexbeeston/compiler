@@ -13,7 +13,6 @@
 #include "constructs/expressions/CharLit.h"
 #include "constructs/expressions/NumericLit.h"
 #include "constructs/prelude/types/BaseType.h"
-#include "constructs/prelude/types/SimpleType.h"
 
 extern int yylex();
 void yyerror(const char*);
@@ -37,7 +36,6 @@ struct Prelude* preludePointer;
 struct NumericLit* numericLitPointer;
 
 struct BaseType* baseTypePointer;
-struct SimpleType* simpleTypePointer;
 std::vector<BaseType*>* baseTypePointerVectorPointer;
 
 }
@@ -193,10 +191,10 @@ TypeDecl : TYPE TypeList { $$ = $2;}
 TypeList : TypeList TypeListItem { $1->push_back($2); }
     | { $$ = new std::vector<BaseType*>; };
 TypeListItem : IDENT EQUAL Type DONE { $$ = $3; };
-Type : SimpleType
-    | RecordType
-    | ArrayType;
-    SimpleType : IDENT { $$ = new SimpleType($1); };
+Type : SimpleType { $$ = new BaseType(); }
+    | RecordType { $$ = new BaseType(); }
+    | ArrayType { $$ = new BaseType(); };
+    SimpleType : IDENT;
     RecordType : RECORD TypedLists END;
         TypedLists : TypedLists TypedList | ;
             TypedList: IdentList COLON Type DONE;
