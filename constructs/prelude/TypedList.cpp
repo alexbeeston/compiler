@@ -16,4 +16,7 @@ void TypedList::print()
     {
         std::cout << identifier << ", ";
     }
+    std::cout << " : ";
+    type->print();
+    std::cout << std::endl;
 }

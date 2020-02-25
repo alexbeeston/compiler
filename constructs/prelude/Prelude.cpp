@@ -16,10 +16,5 @@ void Prelude::print()
     for (TypeDeclItem* item : *types) { item->print(); }
 
     std::cout << "\nVAR" << std::endl;
-    for (TypedList* item : *vars)
-    {
-        std::cout << "Identifiers in this typelist:";
-        item->print();
-        std::cout << std::endl;
-    }
+    for (TypedList* item : *vars) { item->print(); }
 }
