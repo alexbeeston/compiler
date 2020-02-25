@@ -6,7 +6,7 @@ struct BaseType
     char* ident;
     int test;
     BaseType();
-    void setIdent(char*);
+    void print();
 };
 
 #endif //COMPILERS_SIMPLETYPE_H

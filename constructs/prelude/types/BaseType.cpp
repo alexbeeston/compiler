@@ -7,7 +7,8 @@ BaseType::BaseType()
 {
     int test = 1234;
 }
-void BaseType::setIdent(char *p_ident)
+
+void BaseType::print()
 {
-    ident = p_ident;
+    std::cout << "This is a base type. It should be over-written.";
 }

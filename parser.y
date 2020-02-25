@@ -13,6 +13,7 @@
 #include "constructs/expressions/CharLit.h"
 #include "constructs/expressions/NumericLit.h"
 #include "constructs/prelude/types/BaseType.h"
+#include "constructs/prelude/types/TypeDeclItem.h"
 #include "constructs/prelude/TypedList.h"
 #include "constructs/routines/Routine.h"
 #include "constructs/routines/Procedure.h"
@@ -39,8 +40,9 @@ std::vector<Constant*>* constantPointerVectorPointer;
 struct Prelude* preludePointer;
 struct NumericLit* numericLitPointer;
 
+struct TypeDeclItem* typeDeclItemPointer;
 struct BaseType* baseTypePointer;
-std::vector<BaseType*>* baseTypePointerVectorPointer;
+std::vector<TypeDeclItem*>* typeDeclItemPointerVectorPointer;
 
 struct TypedList* typedListPointer;
 std::vector<TypedList*>* typedListPointerVectorPointer;
@@ -69,10 +71,10 @@ struct Function* functionPointer;
 %type <constantPointerVectorPointer> ConstDecl
 %type <numericLitPointer> NumericLiteral
 
-%type <baseTypePointerVectorPointer> TypeDecl
-%type <baseTypePointerVectorPointer> TypeList
+%type <typeDeclItemPointerVectorPointer> TypeDecl
+%type <typeDeclItemPointerVectorPointer> TypeList
 %type <baseTypePointer> Type
-%type <baseTypePointer> TypeListItem
+%type <typeDeclItemPointer> TypeListItem
 %type <baseTypePointer> SimpleType
 
 %type <typedListPointer> TypedList
@@ -211,8 +213,8 @@ Expression : NumericLiteral
 TypeDecl : TYPE TypeList { $$ = $2; }
     | ;
 TypeList : TypeList TypeListItem { $1->push_back($2); }
-    | { $$ = new std::vector<BaseType*>; };
-TypeListItem : IDENT EQUAL Type DONE { $3->setIdent($1);  $$ = $3; }  ;
+    | { $$ = new std::vector<TypeDeclItem*>; };
+TypeListItem : IDENT EQUAL Type DONE { $$ = new TypeDeclItem($1, $3); }  ;
 Type : SimpleType { $$ = new BaseType(); }
     | RecordType { $$ = new BaseType(); }
     | ArrayType  { $$ = new BaseType(); };
