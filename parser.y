@@ -155,7 +155,8 @@ struct Function* functionPointer;
 Program : Prelude RoutineDeclList Block DOT { program.prelude = $1; };
 Prelude : ConstDecl TypeDecl VarDecl { $$ = new Prelude($1, $2, $3); };
 
-RoutineDeclList : RoutineDeclList RoutineDeclListItem | ;
+RoutineDeclList : RoutineDeclList RoutineDeclListItem { $2->print(); }
+    | ;
     RoutineDeclListItem : ProcedureDecl
         | FunctionDecl ;
 ProcedureDecl : PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE FORWARD DONE { $$ = new Procedure(); }

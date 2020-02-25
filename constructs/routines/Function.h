@@ -10,5 +10,6 @@
 struct Function:Routine
 {
     Function();
+    void print();
 };
 #endif //COMPILERS_FUNCTION_H

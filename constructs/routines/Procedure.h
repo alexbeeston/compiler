@@ -10,5 +10,6 @@
 struct Procedure:Routine
 {
     Procedure();
+    void print();
 };
 #endif //COMPILERS_PROCEDURE_H

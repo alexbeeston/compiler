@@ -8,6 +8,7 @@
 struct Routine
 {
     char* ident;
+    virtual void print();
     Routine();
 };
 #endif //COMPILERS_ROUTINE_H
