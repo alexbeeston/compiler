@@ -193,16 +193,16 @@ Expression : NumericLiteral
     NumericLiteral : DECINT { $$ = new NumericLit($1); }
     | HEXINT
     | OCTINT;
-TypeDecl : TYPE TypeList { $$ = $2;}
+TypeDecl : TYPE TypeList { $$ = $2; }
     | ;
 TypeList : TypeListItem { $$ = new std::vector<BaseType*>{$1}; }
     | TypeList TypeListItem { $1->push_back($2); }
-    | ;
-TypeListItem : IDENT EQUAL Type DONE ;
-Type : SimpleType
-    | RecordType
-    | ArrayType ;
-    SimpleType : IDENT { $$ = new BaseType($1); };
+    | { $$ = new std::vector<BaseType*>; };
+TypeListItem : IDENT EQUAL Type DONE { $$ = $3; }  ;
+Type : SimpleType { $$ = new BaseType(); }
+    | RecordType { $$ = new BaseType(); }
+    | ArrayType  { $$ = new BaseType(); };
+    SimpleType : IDENT
     RecordType : RECORD TypedLists END;
         TypedLists : TypedLists TypedList
             |;

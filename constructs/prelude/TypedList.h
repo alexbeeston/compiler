@@ -7,12 +7,13 @@
 
 #include <vector>
 #include <iostream>
+
 #include "types/BaseType.h"
 
 struct TypedList
 {
-   std::vector<std::string> identList;
-   BaseType type;
+   std::vector<std::string>* identList;
+   BaseType* type;
    TypedList();
 };
 #endif //COMPILERS_TYPEDLIST_H

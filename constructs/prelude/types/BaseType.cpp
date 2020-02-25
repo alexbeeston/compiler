@@ -3,9 +3,8 @@
 #include "BaseType.h"
 
 
-BaseType::BaseType(char* p_identAsType)
+BaseType::BaseType()
 {
-    identAsType = p_identAsType;
     int test = 1234;
 }
 

@@ -2,5 +2,4 @@
 
 TypedList::TypedList()
 {
-    int dog = 10;
 }

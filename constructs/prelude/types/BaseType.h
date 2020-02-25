@@ -4,9 +4,8 @@
 struct BaseType
 {
     char* ident;
-    char* identAsType;
     int test;
-    BaseType(char*);
+    BaseType();
 };
 
 #endif //COMPILERS_SIMPLETYPE_H

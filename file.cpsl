@@ -6,6 +6,7 @@ type
 i = integer;
 dog = dog;
 cat = cat;
+hello = hello;
 
 var
  A, b, c : a;
