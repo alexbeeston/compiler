@@ -16,5 +16,6 @@ struct Prelude
     std::vector<TypeDeclItem*>* types;
     std::vector<TypedList*>* vars;
     Prelude(std::vector<Constant*>*, std::vector<TypeDeclItem*>*, std::vector<TypedList*>*);
+    void print();
 };
 #endif //COMPILERS_PRELUDE_H
