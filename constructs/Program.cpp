@@ -14,11 +14,10 @@ void Program::prettyPrint()
     {
         std::cout << item->identifier << " = " << item->value->prettyPrintValue << ";" << std::endl;
     }
-    std::cout << "TYPE" << std::endl;
-    std::cout << " items in the TYPES list" << std::endl;
+    std::cout << "\nTYPE" << std::endl;
     for (BaseType* item : *(prelude->types))
     {
-        std::cout << "here is a type" << std::endl;
+        std::cout << item->ident << " = [fill in later, idk if it is a record, array, or simple yet" << std::endl;
     }
 
 }

@@ -198,7 +198,7 @@ TypeDecl : TYPE TypeList { $$ = $2; }
 TypeList : TypeListItem { $$ = new std::vector<BaseType*>{$1}; }
     | TypeList TypeListItem { $1->push_back($2); }
     | { $$ = new std::vector<BaseType*>; };
-TypeListItem : IDENT EQUAL Type DONE { $$ = $3; }  ;
+TypeListItem : IDENT EQUAL Type DONE { $3->setIdent($1);  $$ = $3; }  ;
 Type : SimpleType { $$ = new BaseType(); }
     | RecordType { $$ = new BaseType(); }
     | ArrayType  { $$ = new BaseType(); };
