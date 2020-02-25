@@ -69,6 +69,7 @@ std::vector<TypedList*>* typedListPointerVectorPointer;
 
 %type <typedListPointer> TypedList
 %type <typedListPointerVectorPointer> TypedLists
+%type <typedListPointerVectorPointer> VarDecl
 
 %token ADD
 %token SUB
@@ -140,7 +141,7 @@ std::vector<TypedList*>* typedListPointerVectorPointer;
 %%
 
 Program : Prelude RoutineDeclList Block DOT { program.prelude = $1; };
-Prelude : ConstDecl TypeDecl VarDecl { $$ = new Prelude($1, $2); };
+Prelude : ConstDecl TypeDecl VarDecl { $$ = new Prelude($1, $2, $3); };
 
 RoutineDeclList : RoutineDeclList RoutineDeclListItem | ;
     RoutineDeclListItem : ProcedureDecl | FunctionDecl;
@@ -204,8 +205,8 @@ Type : SimpleType { $$ = new BaseType(); }
     | ArrayType  { $$ = new BaseType(); };
     SimpleType : IDENT
     RecordType : RECORD TypedLists END;
-        TypedLists : TypedLists TypedList
-            |;
+        TypedLists : TypedLists TypedList { $1->push_back($2); }
+            | { $$ = new std::vector<TypedList*>; };
             TypedList: IdentList COLON Type DONE ;
                 IdentList : IDENT IdentListExtraSet;
                     IdentListExtraSet : IdentListExtraSet IdentExtra
@@ -213,7 +214,8 @@ Type : SimpleType { $$ = new BaseType(); }
                         IdentExtra : COMMA IDENT;
     ArrayType : ARRAY LBRACKET Expression COLON Expression RBRACKET OF Type ;
 
-VarDecl : VAR TypedList TypedLists | ;
+VarDecl : VAR TypedList TypedLists { $3->push_back($2); $$ = $3; }
+    | VAR TypedList { $$ = new std::vector<TypedList*>{$2}; };
 
 Block: BEGIN_TOKEN StatementSequence END
     | ;

@@ -11,8 +11,8 @@ a = array[BASE:SIZE]of r;
 
 
 var
- A, b, c : a;
- A, B, C: d;
+a,b,c:dog;
+a,b,c:dog;
 
 begin
 end.

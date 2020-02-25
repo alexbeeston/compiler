@@ -15,6 +15,6 @@ struct Prelude
     std::vector<Constant*>* constants;
     std::vector<BaseType*>* types;
     std::vector<TypedList*>* vars;
-    Prelude(std::vector<Constant*>*, std::vector<BaseType*>*);
+    Prelude(std::vector<Constant*>*, std::vector<BaseType*>*, std::vector<TypedList*>*);
 };
 #endif //COMPILERS_PRELUDE_H

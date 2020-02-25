@@ -20,5 +20,10 @@ void Program::prettyPrint()
         std::cout << item->ident << " = [fill in later, idk if it is a record, array, or simple yet" << std::endl;
     }
 
+    std::cout << "\nVAR" << std::endl;
+    for (TypedList* item : *(prelude->vars))
+    {
+        std::cout << "The type of this TypeList is " << item->type << std::endl;
+    }
 }
 
