@@ -1,6 +1,8 @@
 const
  base = 5;
  size = 10;
+ testing = "another shrubbery";
+ dog = 'a';
 
 type i = integer;
 r = record a,b,c:i; end;

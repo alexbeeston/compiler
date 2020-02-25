@@ -12,5 +12,6 @@ struct Constant
     Expression* value;
     char* identifier;
     Constant(char* p_identifier, Expression* p_value);
+    void print();
 };
 #endif //COMPILERS_CONSTANT_H

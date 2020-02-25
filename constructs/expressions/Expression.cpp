@@ -1,3 +1,4 @@
+#include <iostream>
 #include <string>
 
 #include "Expression.h"
@@ -14,6 +15,11 @@ Expression::Expression(int p_value)
     std::copy(temp.begin(), temp.end(), writable);
     writable[temp.size()] = '\0';
     prettyPrintValue = writable;
+}
+
+void Expression::print()
+{
+    std::cout << "Base Expression print()";
 }
 
 

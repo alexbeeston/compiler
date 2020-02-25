@@ -10,10 +10,7 @@ Program::Program()
 void Program::prettyPrint()
 {
     std::cout << "CONST" << std::endl;
-    for (Constant* item : *(prelude->constants))
-    {
-        std::cout << item->identifier << " = " << item->value->prettyPrintValue << ";" << std::endl;
-    }
+    for (Constant* item : *(prelude->constants)) { item->print(); }
     std::cout << "\nTYPE" << std::endl;
     for (BaseType* item : *(prelude->types))
     {
