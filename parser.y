@@ -14,6 +14,8 @@
 #include "constructs/expressions/NumericLit.h"
 #include "constructs/prelude/types/BaseType.h"
 #include "constructs/prelude/TypedList.h"
+#include "constructs/routines/Routine.h"
+#include "constructs/routines/Procedure.h"
 
 extern int yylex();
 void yyerror(const char*);
@@ -41,6 +43,9 @@ std::vector<BaseType*>* baseTypePointerVectorPointer;
 
 struct TypedList* typedListPointer;
 std::vector<TypedList*>* typedListPointerVectorPointer;
+
+struct Routine* routinePointer;
+struct Procedure* procedurePointer;
 
 }
 %type <preludePointer> Prelude
@@ -71,6 +76,9 @@ std::vector<TypedList*>* typedListPointerVectorPointer;
 %type <typedListPointer> TypedList
 %type <typedListPointerVectorPointer> TypedLists
 %type <typedListPointerVectorPointer> VarDecl
+
+%type <routinePointer> RoutineDeclListItem
+%type <procedurePointer> ProcedureDecl
 
 %token ADD
 %token SUB
@@ -145,9 +153,10 @@ Program : Prelude RoutineDeclList Block DOT { program.prelude = $1; };
 Prelude : ConstDecl TypeDecl VarDecl { $$ = new Prelude($1, $2, $3); };
 
 RoutineDeclList : RoutineDeclList RoutineDeclListItem | ;
-    RoutineDeclListItem : ProcedureDecl | FunctionDecl;
-ProcedureDecl : PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE FORWARD DONE
-    | PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE Body DONE;
+    RoutineDeclListItem : ProcedureDecl
+        | FunctionDecl { $$ = new Routine();};
+ProcedureDecl : PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE FORWARD DONE { $$ = new Procedure(); }
+    | PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE Body DONE { $$ = new Procedure(); };
     FormalParameters : ParameterSet ParameterSetList | ;
             ParameterSet : VarOrRef IdentList COLON Type;
                 VarOrRef : VAR | REF | ;
