@@ -2,18 +2,20 @@ const
  base = 5;
  size = 10;
 
-type
-i = integer;
+type i = integer;
 r = record a,b,c:i; end;
 a = array[BASE:SIZE]of r;
+dog = record dog,cat,hen,rat:animal; end;
+
+
 
 
 
 
 
 var
-a,b,c:dog;
-a,b,c:dog;
+ A, b, c : a;
+ A, B, C: d;
 
 begin
 end.

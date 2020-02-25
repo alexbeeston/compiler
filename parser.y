@@ -197,8 +197,7 @@ Expression : NumericLiteral
     | OCTINT;
 TypeDecl : TYPE TypeList { $$ = $2; }
     | ;
-TypeList : TypeListItem { $$ = new std::vector<BaseType*>{$1}; }
-    | TypeList TypeListItem { $1->push_back($2); }
+TypeList : TypeList TypeListItem { $1->push_back($2); }
     | { $$ = new std::vector<BaseType*>; };
 TypeListItem : IDENT EQUAL Type DONE { $3->setIdent($1);  $$ = $3; }  ;
 Type : SimpleType { $$ = new BaseType(); }
@@ -215,8 +214,8 @@ Type : SimpleType { $$ = new BaseType(); }
                         IdentExtra : COMMA IDENT { $$ = $2; };
     ArrayType : ARRAY LBRACKET Expression COLON Expression RBRACKET OF Type ;
 
-VarDecl : VAR TypedList TypedLists { $3->push_back($2); $$ = $3; }
-    | VAR TypedList { $$ = new std::vector<TypedList*>{$2}; };
+VarDecl : VAR TypedLists { $$ = $2; }
+    | ;
 
 Block: BEGIN_TOKEN StatementSequence END
     | ;
