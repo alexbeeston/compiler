@@ -33,6 +33,8 @@ set(calc_srcs
         	constructs/routines/Routine.cpp
 		constructs/routines/Procedure.cpp
 		constructs/routines/Function.cpp
+		constructs/routines/ParameterSet.cpp
+		constructs/routines/Body.cpp
 	)
 source_group("Calc" FILES ${calc_srcs})
 

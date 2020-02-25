@@ -9,7 +9,7 @@
 
 struct Procedure:Routine
 {
-    Procedure(char*);
+    Procedure(char*, std::vector<ParameterSet*>*);
     void print();
 };
 #endif //COMPILERS_PROCEDURE_H

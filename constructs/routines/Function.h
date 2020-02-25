@@ -9,7 +9,7 @@
 
 struct Function:Routine
 {
-    Function(char*);
+    Function(char*, std::vector<ParameterSet*>*);
     void print();
 };
 #endif //COMPILERS_FUNCTION_H
