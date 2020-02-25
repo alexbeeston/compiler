@@ -1,8 +1,11 @@
 const
- BASE = 5;
- SIZE = 10;
+ base = 5;
+ size = 10;
 
-type i = integer;
+type
+i = integer;
+dog = dog;
+cat = cat;
 
 var
  A, b, c : a;

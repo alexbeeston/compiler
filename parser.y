@@ -65,7 +65,7 @@ std::vector<TypedList*>* typedListPointerVectorPointer;
 %type <baseTypePointerVectorPointer> TypeList
 %type <baseTypePointer> Type
 %type <baseTypePointer> TypeListItem
-%type <simpleTypePointer> SimpleType
+%type <baseTypePointer> SimpleType
 
 %type <typedListPointer> TypedList
 %type <typedListPointerVectorPointer> TypedLists
@@ -195,24 +195,25 @@ Expression : NumericLiteral
     | OCTINT;
 TypeDecl : TYPE TypeList { $$ = $2;}
     | ;
-TypeList : TypeList TypeListItem { $1->push_back($2); }
-    | { $$ = new std::vector<BaseType*>; };
-TypeListItem : IDENT EQUAL Type DONE { $$ = $3; };
-Type : SimpleType { $$ = new BaseType(); }
-    | RecordType { $$ = new BaseType(); }
-    | ArrayType { $$ = new BaseType(); };
-    SimpleType : IDENT;
+TypeList : TypeListItem { $$ = new std::vector<BaseType*>{$1}; }
+    | TypeList TypeListItem { $1->push_back($2); }
+    | ;
+TypeListItem : IDENT EQUAL Type DONE ;
+Type : SimpleType
+    | RecordType
+    | ArrayType ;
+    SimpleType : IDENT { $$ = new BaseType($1); };
     RecordType : RECORD TypedLists END;
-        TypedLists : TypedLists TypedList { $1->push_back($2); }
-            | { $$ = new std::vector<TypedList*>; };
-            TypedList: IdentList COLON Type DONE { std::cout << "got a typed list" << std::endl;} // { $$ = new TypedList(); };
+        TypedLists : TypedLists TypedList
+            |;
+            TypedList: IdentList COLON Type DONE ;
                 IdentList : IDENT IdentListExtraSet;
                     IdentListExtraSet : IdentListExtraSet IdentExtra
                         | ;
                         IdentExtra : COMMA IDENT;
     ArrayType : ARRAY LBRACKET Expression COLON Expression RBRACKET OF Type ;
 
-VarDecl : VAR TypedList TypedLists| ;
+VarDecl : VAR TypedList TypedLists | ;
 
 Block: BEGIN_TOKEN StatementSequence END
     | ;

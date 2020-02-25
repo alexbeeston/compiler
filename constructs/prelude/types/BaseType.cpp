@@ -1,7 +1,11 @@
+#include <iostream>
+
 #include "BaseType.h"
 
-BaseType::BaseType()
+
+BaseType::BaseType(char* p_identAsType)
 {
-    int dog = 10;
+    identAsType = p_identAsType;
+    int test = 1234;
 }
 
