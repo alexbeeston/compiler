@@ -8,12 +8,13 @@
 #include <vector>
 #include "constants/Constant.h"
 #include "types/BaseType.h"
-#include "vars/Var.h"
+#include "TypedList.h"
 
 struct Prelude
 {
     std::vector<Constant*>* constants;
     std::vector<BaseType*>* types;
+    std::vector<TypedList*>* vars;
     Prelude(std::vector<Constant*>*, std::vector<BaseType*>*);
 };
 #endif //COMPILERS_PRELUDE_H

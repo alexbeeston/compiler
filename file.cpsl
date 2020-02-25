@@ -8,5 +8,8 @@ number = 10;
 TYPE
 dog = hen;
 
+var
+testing, dog : anotherTesting;
+
 begin
 end.

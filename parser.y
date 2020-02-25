@@ -13,6 +13,7 @@
 #include "constructs/expressions/CharLit.h"
 #include "constructs/expressions/NumericLit.h"
 #include "constructs/prelude/types/BaseType.h"
+#include "constructs/prelude/TypedList.h"
 
 extern int yylex();
 void yyerror(const char*);
@@ -38,6 +39,8 @@ struct NumericLit* numericLitPointer;
 struct BaseType* baseTypePointer;
 std::vector<BaseType*>* baseTypePointerVectorPointer;
 
+struct TypedList* typedListPointer;
+
 }
 %type <preludePointer> Prelude
 
@@ -62,6 +65,8 @@ std::vector<BaseType*>* baseTypePointerVectorPointer;
 %type <baseTypePointer> Type
 %type <baseTypePointer> TypeListItem
 %type <simpleTypePointer> SimpleType
+
+%type <typedListPointer> TypedList
 
 %token ADD
 %token SUB
@@ -197,7 +202,7 @@ Type : SimpleType { $$ = new BaseType(); }
     SimpleType : IDENT;
     RecordType : RECORD TypedLists END;
         TypedLists : TypedLists TypedList | ;
-            TypedList: IdentList COLON Type DONE;
+            TypedList: IdentList COLON Type DONE { $$ = new TypedList(); };
                 IdentList : IDENT IdentListExtraSet;
                     IdentListExtraSet : IdentListExtraSet IdentExtra
                         | ;
