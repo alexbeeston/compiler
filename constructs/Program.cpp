@@ -23,7 +23,9 @@ void Program::prettyPrint()
     std::cout << "\nVAR" << std::endl;
     for (TypedList* item : *(prelude->vars))
     {
-        std::cout << "The type of this TypeList is " << item->type << std::endl;
+        std::cout << "Identifiers in this typelist:";
+        item->print();
+        std::cout << std::endl;
     }
 }
 
