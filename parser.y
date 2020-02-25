@@ -16,6 +16,7 @@
 #include "constructs/prelude/TypedList.h"
 #include "constructs/routines/Routine.h"
 #include "constructs/routines/Procedure.h"
+#include "constructs/routines/Function.h"
 
 extern int yylex();
 void yyerror(const char*);
@@ -46,6 +47,7 @@ std::vector<TypedList*>* typedListPointerVectorPointer;
 
 struct Routine* routinePointer;
 struct Procedure* procedurePointer;
+struct Function* functionPointer;
 
 }
 %type <preludePointer> Prelude
@@ -79,6 +81,7 @@ struct Procedure* procedurePointer;
 
 %type <routinePointer> RoutineDeclListItem
 %type <procedurePointer> ProcedureDecl
+%type <functionPointer> FunctionDecl
 
 %token ADD
 %token SUB
@@ -154,7 +157,7 @@ Prelude : ConstDecl TypeDecl VarDecl { $$ = new Prelude($1, $2, $3); };
 
 RoutineDeclList : RoutineDeclList RoutineDeclListItem | ;
     RoutineDeclListItem : ProcedureDecl
-        | FunctionDecl { $$ = new Routine();};
+        | FunctionDecl ;
 ProcedureDecl : PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE FORWARD DONE { $$ = new Procedure(); }
     | PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE Body DONE { $$ = new Procedure(); };
     FormalParameters : ParameterSet ParameterSetList | ;
@@ -163,8 +166,8 @@ ProcedureDecl : PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE FORWARD DONE
             ParameterSetList : ParameterSetList ParameterSetListItem | ;
                 ParameterSetListItem : DONE ParameterSet;
     Body : Prelude Block;
-FunctionDecl : FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE FORWARD DONE
-    | FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE Body DONE;
+FunctionDecl : FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE FORWARD DONE { $$ = new Function(); }
+    | FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE Body DONE { $$ = new Function(); }
 
 ConstDecl : CONST ConstantList { $$ = $2;}
     | ;

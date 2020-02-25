@@ -31,6 +31,7 @@ set(calc_srcs
 		constructs/prelude/TypedList.cpp
         	constructs/routines/Routine.cpp
 		constructs/routines/Procedure.cpp
+		constructs/routines/Function.cpp
 	)
 source_group("Calc" FILES ${calc_srcs})
 

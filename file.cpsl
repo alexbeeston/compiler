@@ -16,6 +16,11 @@ begin
   write("Hi\n");
 end;
 
+FUNCTION add (a,b: integer) : integer;
+BEGIN
+  return a + b;
+END;
+
 BEGIN
   sayHi();
   sayHi();
