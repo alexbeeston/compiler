@@ -1,15 +1,12 @@
-CONST
-stringOne = "string 1";
-stringTwo = "string 2";
-thing = 'x';
-stringThree = "string 3";
-number = 10;
+const
+ BASE = 5;
+ SIZE = 10;
 
-TYPE
-dog = hen;
+type i = integer;
 
 var
-testing, dog : anotherTesting;
+ A, b, c : a;
+ A, B, C: d;
 
 begin
 end.

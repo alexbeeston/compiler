@@ -40,6 +40,7 @@ struct BaseType* baseTypePointer;
 std::vector<BaseType*>* baseTypePointerVectorPointer;
 
 struct TypedList* typedListPointer;
+std::vector<TypedList*>* typedListPointerVectorPointer;
 
 }
 %type <preludePointer> Prelude
@@ -67,6 +68,7 @@ struct TypedList* typedListPointer;
 %type <simpleTypePointer> SimpleType
 
 %type <typedListPointer> TypedList
+%type <typedListPointerVectorPointer> TypedLists
 
 %token ADD
 %token SUB
@@ -201,8 +203,9 @@ Type : SimpleType { $$ = new BaseType(); }
     | ArrayType { $$ = new BaseType(); };
     SimpleType : IDENT;
     RecordType : RECORD TypedLists END;
-        TypedLists : TypedLists TypedList | ;
-            TypedList: IdentList COLON Type DONE { $$ = new TypedList(); };
+        TypedLists : TypedLists TypedList { $1->push_back($2); }
+            | { $$ = new std::vector<TypedList*>; };
+            TypedList: IdentList COLON Type DONE { std::cout << "got a typed list" << std::endl;} // { $$ = new TypedList(); };
                 IdentList : IDENT IdentListExtraSet;
                     IdentListExtraSet : IdentListExtraSet IdentExtra
                         | ;
