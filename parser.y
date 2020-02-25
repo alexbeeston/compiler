@@ -207,7 +207,7 @@ Type : SimpleType { $$ = new BaseType(); }
     RecordType : RECORD TypedLists END;
         TypedLists : TypedLists TypedList { $1->push_back($2); }
             | { $$ = new std::vector<TypedList*>; };
-            TypedList: IdentList COLON Type DONE ;
+            TypedList: IdentList COLON Type DONE { $$ = new TypedList($3); };
                 IdentList : IDENT IdentListExtraSet;
                     IdentListExtraSet : IdentListExtraSet IdentExtra
                         | ;

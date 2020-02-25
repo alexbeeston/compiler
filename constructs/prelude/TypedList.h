@@ -14,6 +14,6 @@ struct TypedList
 {
    std::vector<std::string>* identList;
    BaseType* type;
-   TypedList();
+   TypedList(BaseType*);
 };
 #endif //COMPILERS_TYPEDLIST_H
