@@ -30,5 +30,12 @@ BEGIN
 
     while a < 10 do
         dummy := 4;
-    end
+    end;
+
+    repeat
+      write("i: ", i, " \n");
+      i := i+1;
+    until i > 5;
+
+
 END.
