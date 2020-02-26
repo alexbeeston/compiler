@@ -26,6 +26,7 @@
 #include "constructs/routines/Block.h"
 
 #include "constructs/statements/Statement.h"
+#include "constructs/statements/Assignment.h"
 
 extern int yylex();
 void yyerror(const char*);
@@ -66,6 +67,7 @@ struct Block* blockPointer;
 
 struct Statement* statementPointer;
 std::vector<Statement*>* statementPointerVectorPointer;
+struct Assignment* assignmentStatementPointer;
 
 }
 %type <preludePointer> Prelude
@@ -113,6 +115,8 @@ std::vector<Statement*>* statementPointerVectorPointer;
 %type <statementPointer> ExtraStatement
 %type <statementPointerVectorPointer> ExtraStatementList
 %type <statementPointerVectorPointer> StatementSequence
+
+%type <assignmentStatementPointer> Assignment
 
 %token ADD
 %token SUB
@@ -263,7 +267,7 @@ VarDecl : VAR TypedLists { $$ = $2; }
 
 Block: BEGIN_TOKEN StatementSequence END { $$ = new Block($2); };
 StatementSequence : Statement ExtraStatementList { $2->insert($2->begin(), $1); $$ = $2; };
-Statement : Assignment { $$ = new Statement(); }
+Statement : Assignment { $$ = new Assignment(); }
     | IfStatement
     | WhileStatement
     | RepeatStatement
