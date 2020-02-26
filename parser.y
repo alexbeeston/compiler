@@ -28,6 +28,7 @@
 #include "constructs/statements/Statement.h"
 #include "constructs/statements/Assignment.h"
 #include "constructs/statements/If.h"
+#include "constructs/statements/While.h"
 
 extern int yylex();
 void yyerror(const char*);
@@ -70,6 +71,7 @@ struct Statement* statementPointer;
 std::vector<Statement*>* statementPointerVectorPointer;
 struct Assignment* assignmentStatementPointer;
 struct If* ifStatementPointer;
+struct While* whileStatementPointer;
 
 }
 %type <preludePointer> Prelude
@@ -120,6 +122,7 @@ struct If* ifStatementPointer;
 
 %type <assignmentStatementPointer> Assignment
 %type <ifStatementPointer> IfStatement
+%type <whileStatementPointer> WhileStatement
 
 %token ADD
 %token SUB
@@ -272,7 +275,7 @@ Block: BEGIN_TOKEN StatementSequence END { $$ = new Block($2); };
 StatementSequence : Statement ExtraStatementList { $2->insert($2->begin(), $1); $$ = $2; };
 Statement : Assignment { $$ = new Assignment(); }
     | IfStatement { $$ = new If(); }
-    | WhileStatement
+    | WhileStatement { $$ = new While(); }
     | RepeatStatement
     | ForStatement
     | StopStatement

@@ -39,6 +39,7 @@ set(calc_srcs
 		constructs/statements/Statement.cpp
 		constructs/statements/Assignment.cpp
 		constructs/statements/If.cpp
+		constructs/statements/While.cpp
 		)
 source_group("Calc" FILES ${calc_srcs})
 

@@ -28,4 +28,7 @@ BEGIN
        write("i is greater than 5!");
      end;
 
+    while a < 10 do
+        dummy := 4;
+    end
 END.
