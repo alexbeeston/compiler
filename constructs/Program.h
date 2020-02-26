@@ -1,12 +1,14 @@
 #include <vector>
 #include "prelude/Prelude.h"
 #include "routines/Routine.h"
+#include "routines/Block.h"
 
 struct Program
 {
     Prelude* prelude;
     std::vector<Routine*>* routines;
-    Program(Prelude*, std::vector<Routine*>*);
+    Block* block;
+    Program(Prelude*, std::vector<Routine*>*, Block*);
     void prettyPrint();
 };
 

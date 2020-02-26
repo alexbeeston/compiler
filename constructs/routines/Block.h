@@ -5,9 +5,11 @@
 #ifndef COMPILERS_BLOCK_H
 #define COMPILERS_BLOCK_H
 
+#include "../statements/StatementSequence.h"
 struct Block
 {
-    Block();
+    StatementSequence* statementSequence;
+    Block(StatementSequence*);
     void print();
 };
 #endif //COMPILERS_BLOCK_H

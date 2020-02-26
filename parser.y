@@ -10,16 +10,23 @@
 #include "constructs/prelude/constants/Constant.h"
 #include "constructs/Program.h"
 #include "constructs/prelude/Prelude.h"
+
 #include "constructs/expressions/CharLit.h"
 #include "constructs/expressions/NumericLit.h"
+
 #include "constructs/prelude/types/BaseType.h"
 #include "constructs/prelude/types/TypeDeclItem.h"
 #include "constructs/prelude/TypedList.h"
+
 #include "constructs/routines/Routine.h"
 #include "constructs/routines/Procedure.h"
 #include "constructs/routines/Function.h"
 #include "constructs/routines/ParameterSet.h"
 #include "constructs/routines/Body.h"
+#include "constructs/routines/Block.h"
+
+#include "constructs/statements/Statement.h"
+#include "constructs/statements/StatementSequence.h"
 
 extern int yylex();
 void yyerror(const char*);
@@ -56,6 +63,11 @@ struct Function* functionPointer;
 struct ParameterSet* parameterSetPointer;
 std::vector<ParameterSet*>* parameterSetPointerVectorPointer;
 struct Body* bodyPointer;
+struct Block* blockPointer;
+
+struct Statement* statementPointer;
+std::vector<Statement*>* statementPointerVectorPointer;
+struct StatementSequence* statementSequencePointer;
 
 }
 %type <preludePointer> Prelude
@@ -97,6 +109,11 @@ struct Body* bodyPointer;
 %type <parameterSetPointerVectorPointer> ParameterSetList
 %type <integer> VarOrRef
 %type <bodyPointer> Body
+%type <blockPointer> Block
+
+%type <statementPointer> Statement
+%type <statementPointerVectorPointer> ExtraStatementList
+%type <statementSequencePointer> StatementSequence
 
 %token ADD
 %token SUB
@@ -167,7 +184,7 @@ struct Body* bodyPointer;
 %token DECINT
 %%
 
-Program : Prelude RoutineDeclList Block DOT { program = new Program($1, $2); };
+Program : Prelude RoutineDeclList Block DOT { program = new Program($1, $2, $3); };
 Prelude : ConstDecl TypeDecl VarDecl { $$ = new Prelude($1, $2, $3); };
 
 RoutineDeclList : RoutineDeclList RoutineDeclListItem { $1->push_back($2); }
@@ -245,10 +262,10 @@ Type : SimpleType { $$ = new BaseType(); }
 VarDecl : VAR TypedLists { $$ = $2; }
     | ;
 
-Block: BEGIN_TOKEN StatementSequence END
-    | ;
-StatementSequence : Statement ExtraStatementList;
-Statement : Assignment
+Block: BEGIN_TOKEN StatementSequence END { $$ = new Block($2); }
+    | { $$ = new Block(new StatementSequence(new Statement(), new std::vector<Statement*>)); };
+StatementSequence : Statement ExtraStatementList { $$ = new StatementSequence($1, $2); };
+Statement : Assignment { $$ = new Statement(); }
     | IfStatement
     | WhileStatement
     | RepeatStatement
@@ -280,7 +297,7 @@ Statement : Assignment
     WriteStatement : WRITE LPAREN Expression CommaExpressionList RPAREN;
     ProcedureCall : IDENT LPAREN ProcedureParams RPAREN;
         ProcedureParams : Expression CommaExpressionList | ;
-ExtraStatementList : ExtraStatementList ExtraStatement | ;
+ExtraStatementList : ExtraStatementList ExtraStatement | { $$ = new std::vector<Statement*>; };
 ExtraStatement : DONE Statement;
 %%
 

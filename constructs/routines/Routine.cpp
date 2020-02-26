@@ -28,6 +28,7 @@ void Routine::printParameters()
         std::cout << " : ";
         parameterSet->type->print();
         std::cout << " ; ";
+        body->print();
     }
 }
 
