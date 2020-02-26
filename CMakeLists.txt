@@ -41,6 +41,7 @@ set(calc_srcs
 		constructs/statements/If.cpp
 		constructs/statements/While.cpp
 		constructs/statements/Repeat.cpp
+		constructs/statements/For.cpp
 		)
 source_group("Calc" FILES ${calc_srcs})
 

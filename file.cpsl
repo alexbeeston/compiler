@@ -37,5 +37,8 @@ BEGIN
       i := i+1;
     until i > 5;
 
+    for i := 0 to 5 do
+        write(i, " ");
+      end;
 
 END.

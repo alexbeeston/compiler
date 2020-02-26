@@ -30,6 +30,7 @@
 #include "constructs/statements/If.h"
 #include "constructs/statements/While.h"
 #include "constructs/statements/Repeat.h"
+#include "constructs/statements/For.h"
 
 extern int yylex();
 void yyerror(const char*);
@@ -74,6 +75,7 @@ struct Assignment* assignmentStatementPointer;
 struct If* ifStatementPointer;
 struct While* whileStatementPointer;
 struct Repeat* repeatStatementPointer;
+struct For* forStatementPointer;
 
 }
 %type <preludePointer> Prelude
@@ -126,6 +128,7 @@ struct Repeat* repeatStatementPointer;
 %type <ifStatementPointer> IfStatement
 %type <whileStatementPointer> WhileStatement
 %type <repeatStatementPointer> RepeatStatement
+%type <forStatementPointer> ForStatement
 
 %token ADD
 %token SUB
@@ -280,7 +283,7 @@ Statement : Assignment { $$ = new Assignment(); }
     | IfStatement { $$ = new If(); }
     | WhileStatement { $$ = new While(); }
     | RepeatStatement { $$ = new Repeat(); }
-    | ForStatement
+    | ForStatement { $$ = new For(); }
     | StopStatement
     | ReturnStatement
     | ReadStatement
