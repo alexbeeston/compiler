@@ -15,4 +15,7 @@ var
 
 
 BEGIN
+    testing := 4;
+    dog := 4;
+       cat :=3;
 END.

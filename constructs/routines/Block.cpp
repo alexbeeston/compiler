@@ -1,9 +1,9 @@
 #include <iostream>
 
 #include "Block.h"
-#include "../statements/StatementSequence.h"
+#include "../statements/Statement.h"
 
-Block::Block(StatementSequence* p_statementSequence)
+Block::Block(std::vector<Statement*>* p_statementSequence)
 {
     statementSequence = p_statementSequence;
 }
@@ -11,10 +11,10 @@ Block::Block(StatementSequence* p_statementSequence)
 void Block::print()
 {
     std::cout << "BEGIN\n";
-    for (Statement* statement: *(statementSequence->statements))
+    for (Statement* item : *statementSequence)
     {
-        statement->print();
-        std::cout << ";\n";
+        item->print();
+        std::cout << std::endl;
     }
     std::cout << "END\n";
 }

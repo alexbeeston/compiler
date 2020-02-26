@@ -26,7 +26,6 @@
 #include "constructs/routines/Block.h"
 
 #include "constructs/statements/Statement.h"
-#include "constructs/statements/StatementSequence.h"
 
 extern int yylex();
 void yyerror(const char*);
@@ -67,7 +66,6 @@ struct Block* blockPointer;
 
 struct Statement* statementPointer;
 std::vector<Statement*>* statementPointerVectorPointer;
-struct StatementSequence* statementSequencePointer;
 
 }
 %type <preludePointer> Prelude
@@ -112,8 +110,9 @@ struct StatementSequence* statementSequencePointer;
 %type <blockPointer> Block
 
 %type <statementPointer> Statement
+%type <statementPointer> ExtraStatement
 %type <statementPointerVectorPointer> ExtraStatementList
-%type <statementSequencePointer> StatementSequence
+%type <statementPointerVectorPointer> StatementSequence
 
 %token ADD
 %token SUB
@@ -263,7 +262,7 @@ VarDecl : VAR TypedLists { $$ = $2; }
     | ;
 
 Block: BEGIN_TOKEN StatementSequence END { $$ = new Block($2); };
-StatementSequence : Statement ExtraStatementList { $$ = new StatementSequence($1, $2); };
+StatementSequence : Statement ExtraStatementList { $2->insert($2->begin(), $1); $$ = $2; };
 Statement : Assignment { $$ = new Statement(); }
     | IfStatement
     | WhileStatement
@@ -296,8 +295,9 @@ Statement : Assignment { $$ = new Statement(); }
     WriteStatement : WRITE LPAREN Expression CommaExpressionList RPAREN;
     ProcedureCall : IDENT LPAREN ProcedureParams RPAREN;
         ProcedureParams : Expression CommaExpressionList | ;
-ExtraStatementList : ExtraStatementList ExtraStatement | { $$ = new std::vector<Statement*>; };
-ExtraStatement : DONE Statement;
+ExtraStatementList : ExtraStatementList ExtraStatement { $1->push_back($2); }
+    | { $$ = new std::vector<Statement*>; };
+ExtraStatement : DONE Statement { $$ = $2; };
 %%
 
 void yyerror(const char* msg)

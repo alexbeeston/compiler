@@ -5,11 +5,13 @@
 #ifndef COMPILERS_BLOCK_H
 #define COMPILERS_BLOCK_H
 
-#include "../statements/StatementSequence.h"
+#include <vector>
+
+#include "../statements/Statement.h"
 struct Block
 {
-    StatementSequence* statementSequence;
-    Block(StatementSequence*);
+    std::vector<Statement*>* statementSequence;
+    Block(std::vector<Statement*>*);
     void print();
 };
 #endif //COMPILERS_BLOCK_H
