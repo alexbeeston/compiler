@@ -173,7 +173,7 @@ Prelude : ConstDecl TypeDecl VarDecl { $$ = new Prelude($1, $2, $3); };
 RoutineDeclList : RoutineDeclList RoutineDeclListItem { $1->push_back($2); }
     | { $$ = new std::vector<Routine*>; };
     RoutineDeclListItem : ProcedureDecl | FunctionDecl ;
-ProcedureDecl : PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE FORWARD DONE { $$ = new Procedure($2, $4, new Body()); }
+ProcedureDecl : PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE FORWARD DONE { $$ = new Procedure($2, $4, NULL); }
     | PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE Body DONE { $$ = new Procedure($2, $4, $7); };
     FormalParameters : ParameterSet ParameterSetList { $2->push_back($1); $$ = $2; } | { std::cout << "no formal paramters\n"; $$ = new std::vector<ParameterSet*>; } ;
             ParameterSet : VarOrRef IdentList COLON Type { $$ = new ParameterSet($1, $2, $4); };
@@ -181,8 +181,8 @@ ProcedureDecl : PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE FORWARD DONE
             ParameterSetList : ParameterSetList ParameterSetListItem { $1->push_back($2); }
                 | { $$ = new std::vector<ParameterSet*>; } ;
                 ParameterSetListItem : DONE ParameterSet { $$ = $2; };
-    Body : Prelude Block { $$ = new Body(); };
-FunctionDecl : FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE FORWARD DONE { $$ = new Function($2, $4, new Body(), $7); }
+    Body : Prelude Block { $$ = new Body($1); };
+FunctionDecl : FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE FORWARD DONE { $$ = new Function($2, $4, NULL, $7); }
     | FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE Body DONE { $$ = new Function($2, $4, $9, $7); }
 
 ConstDecl : CONST ConstantList { $$ = $2;}

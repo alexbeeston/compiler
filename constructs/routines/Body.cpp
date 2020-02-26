@@ -1,13 +1,16 @@
 #include <iostream>
 
 #include "Body.h"
+#include "../prelude/Prelude.h"
+#include "Block.h"
 
-Body::Body()
+Body::Body(Prelude* p_prelude)
 {
-
+    prelude = p_prelude;
 }
 
 void Body::print()
 {
-    std::cout << "Body\n";
+    prelude->print();
+    block->print();
 }

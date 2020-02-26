@@ -6,11 +6,13 @@
 #define COMPILERS_BODY_H
 
 #include "../prelude/Prelude.h"
+#include "Block.h"
 
 struct Body
 {
     Prelude* prelude;
-    Body();
+    Block* block;
+    Body(Prelude*);
     void print();
 };
 #endif //COMPILERS_BODY_H
