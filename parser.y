@@ -262,8 +262,7 @@ Type : SimpleType { $$ = new BaseType(); }
 VarDecl : VAR TypedLists { $$ = $2; }
     | ;
 
-Block: BEGIN_TOKEN StatementSequence END { $$ = new Block($2); }
-    | { $$ = new Block(new StatementSequence(new Statement(), new std::vector<Statement*>)); };
+Block: BEGIN_TOKEN StatementSequence END { $$ = new Block($2); };
 StatementSequence : Statement ExtraStatementList { $$ = new StatementSequence($1, $2); };
 Statement : Assignment { $$ = new Statement(); }
     | IfStatement
@@ -275,7 +274,7 @@ Statement : Assignment { $$ = new Statement(); }
     | ReadStatement
     | WriteStatement
     | ProcedureCall
-    | ;
+    | { $$ = new Statement(); };
     Assignment : LValue ASSIGN Expression;
         LValue : IDENT LValueList;
         LValueList : LValueList LValueItem | ;

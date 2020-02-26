@@ -15,5 +15,4 @@ var
 
 
 BEGIN
-     number := 42;
 END.
