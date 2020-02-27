@@ -39,6 +39,8 @@ BEGIN
 
     for i := 0 to 5 do
         write(i, " ");
-      end;
+    end;
+
+    stop;
 
 END.

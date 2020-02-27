@@ -31,6 +31,7 @@
 #include "constructs/statements/While.h"
 #include "constructs/statements/Repeat.h"
 #include "constructs/statements/For.h"
+#include "constructs/statements/Stop.h"
 
 extern int yylex();
 void yyerror(const char*);
@@ -76,6 +77,7 @@ struct If* ifStatementPointer;
 struct While* whileStatementPointer;
 struct Repeat* repeatStatementPointer;
 struct For* forStatementPointer;
+struct Stop* stopStatementPointer;
 
 }
 %type <preludePointer> Prelude
@@ -129,6 +131,7 @@ struct For* forStatementPointer;
 %type <whileStatementPointer> WhileStatement
 %type <repeatStatementPointer> RepeatStatement
 %type <forStatementPointer> ForStatement
+%type <stopStatementPointer> StopStatement
 
 %token ADD
 %token SUB
@@ -284,7 +287,7 @@ Statement : Assignment { $$ = new Assignment(); }
     | WhileStatement { $$ = new While(); }
     | RepeatStatement { $$ = new Repeat(); }
     | ForStatement { $$ = new For(); }
-    | StopStatement
+    | StopStatement { $$ = new Stop(); }
     | ReturnStatement
     | ReadStatement
     | WriteStatement
