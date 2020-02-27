@@ -15,6 +15,7 @@
 #include "constructs/expressions/NumericLit.h"
 
 #include "constructs/prelude/types/BaseType.h"
+#include "constructs/prelude/types/SimpleType.h"
 #include "constructs/prelude/types/TypeDeclItem.h"
 #include "constructs/prelude/TypedList.h"
 
@@ -62,6 +63,7 @@ struct NumericLit* numericLitPointer;
 
 struct TypeDeclItem* typeDeclItemPointer;
 struct BaseType* baseTypePointer;
+struct SimpleType* simpleTypePointer;
 std::vector<TypeDeclItem*>* typeDeclItemPointerVectorPointer;
 
 struct TypedList* typedListPointer;
@@ -113,7 +115,7 @@ struct ProcedureCall* procedureCallStatementPointer;
 %type <typeDeclItemPointerVectorPointer> TypeList
 %type <baseTypePointer> Type
 %type <typeDeclItemPointer> TypeListItem
-%type <baseTypePointer> SimpleType
+%type <simpleTypePointer> SimpleType
 
 %type <typedListPointer> TypedList
 %type <typedListPointerVectorPointer> TypedLists
@@ -277,7 +279,7 @@ TypeDecl : TYPE TypeList { $$ = $2; }
 TypeList : TypeList TypeListItem { $1->push_back($2); }
     | { $$ = new std::vector<TypeDeclItem*>; };
 TypeListItem : IDENT EQUAL Type DONE { $$ = new TypeDeclItem($1, $3); }  ;
-Type : SimpleType { $$ = new BaseType(); }
+Type : SimpleType { $$ = new SimpleType(); }
     | RecordType { $$ = new BaseType(); }
     | ArrayType  { $$ = new BaseType(); };
     SimpleType : IDENT

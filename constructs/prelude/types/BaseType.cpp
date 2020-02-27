@@ -5,7 +5,6 @@
 
 BaseType::BaseType()
 {
-    int test = 1234;
 }
 
 void BaseType::print()
