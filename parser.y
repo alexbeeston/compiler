@@ -32,6 +32,7 @@
 #include "constructs/statements/Repeat.h"
 #include "constructs/statements/For.h"
 #include "constructs/statements/Stop.h"
+#include "constructs/statements/Return.h"
 
 extern int yylex();
 void yyerror(const char*);
@@ -78,6 +79,7 @@ struct While* whileStatementPointer;
 struct Repeat* repeatStatementPointer;
 struct For* forStatementPointer;
 struct Stop* stopStatementPointer;
+struct Return* returnStatementPointer;
 
 }
 %type <preludePointer> Prelude
@@ -132,6 +134,7 @@ struct Stop* stopStatementPointer;
 %type <repeatStatementPointer> RepeatStatement
 %type <forStatementPointer> ForStatement
 %type <stopStatementPointer> StopStatement
+%type <returnStatementPointer> ReturnStatement
 
 %token ADD
 %token SUB
@@ -288,7 +291,7 @@ Statement : Assignment { $$ = new Assignment(); }
     | RepeatStatement { $$ = new Repeat(); }
     | ForStatement { $$ = new For(); }
     | StopStatement { $$ = new Stop(); }
-    | ReturnStatement
+    | ReturnStatement { $$ = new Return(); }
     | ReadStatement
     | WriteStatement
     | ProcedureCall

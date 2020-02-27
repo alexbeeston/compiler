@@ -43,6 +43,7 @@ set(calc_srcs
 		constructs/statements/Repeat.cpp
 		constructs/statements/For.cpp
 		constructs/statements/Stop.cpp
+		constructs/statements/Return.cpp
 		)
 source_group("Calc" FILES ${calc_srcs})
 
