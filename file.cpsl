@@ -43,5 +43,6 @@ BEGIN
     stop;
     return dog;
     read(i, c);
+    write(a, b, c, "hello");
 
 END.

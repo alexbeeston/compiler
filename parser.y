@@ -34,6 +34,7 @@
 #include "constructs/statements/Stop.h"
 #include "constructs/statements/Return.h"
 #include "constructs/statements/Read.h"
+#include "constructs/statements/Write.h"
 
 extern int yylex();
 void yyerror(const char*);
@@ -82,6 +83,7 @@ struct For* forStatementPointer;
 struct Stop* stopStatementPointer;
 struct Return* returnStatementPointer;
 struct Read* readStatementPointer;
+struct Write* writeStatementPointer;
 
 }
 %type <preludePointer> Prelude
@@ -138,6 +140,7 @@ struct Read* readStatementPointer;
 %type <stopStatementPointer> StopStatement
 %type <returnStatementPointer> ReturnStatement
 %type <readStatementPointer> ReadStatement
+%type <writeStatementPointer> WriteStatement
 
 %token ADD
 %token SUB
@@ -296,7 +299,7 @@ Statement : Assignment { $$ = new Assignment(); }
     | StopStatement { $$ = new Stop(); }
     | ReturnStatement { $$ = new Return(); }
     | ReadStatement { $$ = new Read(); }
-    | WriteStatement
+    | WriteStatement { $$ = new Write(); }
     | ProcedureCall
     | { $$ = new Statement(); };
     Assignment : LValue ASSIGN Expression;
