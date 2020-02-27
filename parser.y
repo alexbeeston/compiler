@@ -35,6 +35,7 @@
 #include "constructs/statements/Return.h"
 #include "constructs/statements/Read.h"
 #include "constructs/statements/Write.h"
+#include "constructs/statements/ProcedureCall.h"
 
 extern int yylex();
 void yyerror(const char*);
@@ -84,6 +85,7 @@ struct Stop* stopStatementPointer;
 struct Return* returnStatementPointer;
 struct Read* readStatementPointer;
 struct Write* writeStatementPointer;
+struct ProcedureCall* procedureCallStatementPointer;
 
 }
 %type <preludePointer> Prelude
@@ -141,6 +143,7 @@ struct Write* writeStatementPointer;
 %type <returnStatementPointer> ReturnStatement
 %type <readStatementPointer> ReadStatement
 %type <writeStatementPointer> WriteStatement
+%type <procedureCallStatementPointer> ProcedureCallStatement
 
 %token ADD
 %token SUB
@@ -300,7 +303,7 @@ Statement : Assignment { $$ = new Assignment(); }
     | ReturnStatement { $$ = new Return(); }
     | ReadStatement { $$ = new Read(); }
     | WriteStatement { $$ = new Write(); }
-    | ProcedureCall
+    | ProcedureCallStatement { $$ = new ProcedureCall(); }
     | { $$ = new Statement(); };
     Assignment : LValue ASSIGN Expression;
         LValue : IDENT LValueList;
@@ -321,7 +324,7 @@ Statement : Assignment { $$ = new Assignment(); }
         CommaExpressionList: CommaExpressionList CommaExpressionListItem | ;
             CommaExpressionListItem: COMMA Expression;
     WriteStatement : WRITE LPAREN Expression CommaExpressionList RPAREN;
-    ProcedureCall : IDENT LPAREN ProcedureParams RPAREN;
+    ProcedureCallStatement : IDENT LPAREN ProcedureParams RPAREN;
         ProcedureParams : Expression CommaExpressionList | ;
 ExtraStatementList : ExtraStatementList ExtraStatement { $1->push_back($2); }
     | { $$ = new std::vector<Statement*>; };
