@@ -42,5 +42,6 @@ BEGIN
     end;
     stop;
     return dog;
+    read(i, c);
 
 END.
