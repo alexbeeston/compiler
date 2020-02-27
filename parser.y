@@ -36,6 +36,8 @@
 #include "constructs/statements/Read.h"
 #include "constructs/statements/Write.h"
 #include "constructs/statements/ProcedureCall.h"
+#include "constructs/statements/NullStatement.h"
+
 
 extern int yylex();
 void yyerror(const char*);
@@ -304,7 +306,7 @@ Statement : Assignment { $$ = new Assignment(); }
     | ReadStatement { $$ = new Read(); }
     | WriteStatement { $$ = new Write(); }
     | ProcedureCallStatement { $$ = new ProcedureCall(); }
-    | { $$ = new Statement(); };
+    | { $$ = new NullStatement(); };
     Assignment : LValue ASSIGN Expression;
         LValue : IDENT LValueList;
         LValueList : LValueList LValueItem | ;

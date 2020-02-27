@@ -47,6 +47,7 @@ set(calc_srcs
 		constructs/statements/Read.cpp
 		constructs/statements/Write.cpp
 		constructs/statements/ProcedureCall.cpp
+		constructs/statements/NullStatement.cpp
 		)
 source_group("Calc" FILES ${calc_srcs})
 
