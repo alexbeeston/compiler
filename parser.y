@@ -17,6 +17,7 @@
 #include "constructs/prelude/types/BaseType.h"
 #include "constructs/prelude/types/SimpleType.h"
 #include "constructs/prelude/types/ArrayType.h"
+#include "constructs/prelude/types/RecordType.h"
 #include "constructs/prelude/types/TypeDeclItem.h"
 #include "constructs/prelude/TypedList.h"
 
@@ -66,6 +67,7 @@ struct TypeDeclItem* typeDeclItemPointer;
 struct BaseType* baseTypePointer;
 struct SimpleType* simpleTypePointer;
 struct ArrayType* arrayTypePointer;
+struct RecordType* recordTypePointer;
 std::vector<TypeDeclItem*>* typeDeclItemPointerVectorPointer;
 
 struct TypedList* typedListPointer;
@@ -119,6 +121,7 @@ struct ProcedureCall* procedureCallStatementPointer;
 %type <typeDeclItemPointer> TypeListItem
 %type <simpleTypePointer> SimpleType
 %type <arrayTypePointer> ArrayType
+%type <recordTypePointer> RecordType
 
 %type <typedListPointer> TypedList
 %type <typedListPointerVectorPointer> TypedLists
@@ -283,7 +286,7 @@ TypeList : TypeList TypeListItem { $1->push_back($2); }
     | { $$ = new std::vector<TypeDeclItem*>; };
 TypeListItem : IDENT EQUAL Type DONE { $$ = new TypeDeclItem($1, $3); }  ;
 Type : SimpleType { $$ = new SimpleType(); }
-    | RecordType { $$ = new BaseType(); }
+    | RecordType { $$ = new RecordType(); }
     | ArrayType  { $$ = new ArrayType(); };
     SimpleType : IDENT
     RecordType : RECORD TypedLists END;
