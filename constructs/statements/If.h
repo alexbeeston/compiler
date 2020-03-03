@@ -12,7 +12,8 @@
 struct If:Statement
 {
     ConditionalSequence* ifBlock;
-    If(ConditionalSequence*);
+    std::vector<ConditionalSequence*>* elseIfBlocks;
+    If(ConditionalSequence*, std::vector<ConditionalSequence*>*);
     void print() override;
 };
 #endif //COMPILERS_IF_H

@@ -10,5 +10,5 @@ ConditionalSequence::ConditionalSequence(Expression* p_expression, std::vector<S
 
 void ConditionalSequence::print()
 {
-    std::cout << "[conditional sequence]";
+    std::cout << "[conditional sequence] ";
 }

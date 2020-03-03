@@ -90,6 +90,7 @@ std::vector<Statement*>* statementPointerVectorPointer;
 struct Assignment* assignmentStatementPointer;
 struct If* ifStatementPointer;
 struct ConditionalSequence* conditionalSequencePointer;
+std::vector<ConditionalSequence*>* conditionalSequencePointerVectorPointer;
 struct While* whileStatementPointer;
 struct Repeat* repeatStatementPointer;
 struct For* forStatementPointer;
@@ -150,6 +151,8 @@ struct ProcedureCall* procedureCallStatementPointer;
 
 %type <assignmentStatementPointer> Assignment
 %type <ifStatementPointer> IfStatement
+%type <conditionalSequencePointer> ConditionalSequence
+%type <conditionalSequencePointerVectorPointer> ConditionalSequenceList
 %type <whileStatementPointer> WhileStatement
 %type <repeatStatementPointer> RepeatStatement
 %type <forStatementPointer> ForStatement
@@ -324,9 +327,10 @@ Statement : Assignment
         LValueList : LValueList LValueItem | ;
         LValueItem : DOT IDENT
             | LBRACKET Expression RBRACKET;
-    IfStatement : IF Expression THEN StatementSequence ElseIfList Else END { $$ = new If(new ConditionalSequence($2, $4)); };
-        ElseIfList : ElseIfList ElseIfListItem | ;
-            ElseIfListItem : ELSEIF Expression THEN StatementSequence;
+    IfStatement : IF Expression THEN StatementSequence ConditionalSequenceList Else END { $$ = new If(new ConditionalSequence($2, $4), $5); };
+        ConditionalSequenceList : ConditionalSequenceList ConditionalSequence { $1->push_back($2); }
+            | { $$ = new std::vector<ConditionalSequence*>; };
+            ConditionalSequence: ELSEIF Expression THEN StatementSequence { $$ = new ConditionalSequence($2, $4); };
         Else : ELSE StatementSequence | ;
     WhileStatement : WHILE Expression DO StatementSequence END;
     RepeatStatement : REPEAT StatementSequence UNTIL Expression;
