@@ -43,6 +43,7 @@ set(calc_srcs
 		constructs/statements/Statement.cpp
 		constructs/statements/Assignment.cpp
 		constructs/statements/If.cpp
+		constructs/statements/ConditionalSequence.cpp
 		constructs/statements/While.cpp
 		constructs/statements/Repeat.cpp
 		constructs/statements/For.cpp

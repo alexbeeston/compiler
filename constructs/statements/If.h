@@ -7,11 +7,12 @@
 
 #include <vector>
 
-#include "Statement.h"
+#include "ConditionalSequence.h"
 
 struct If:Statement
 {
-    If();
+    ConditionalSequence* ifBlock;
+    If(ConditionalSequence*);
     void print() override;
 };
 #endif //COMPILERS_IF_H

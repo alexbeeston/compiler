@@ -32,6 +32,7 @@
 #include "constructs/statements/Statement.h"
 #include "constructs/statements/Assignment.h"
 #include "constructs/statements/If.h"
+#include "constructs/statements/ConditionalSequence.h"
 #include "constructs/statements/While.h"
 #include "constructs/statements/Repeat.h"
 #include "constructs/statements/For.h"
@@ -88,6 +89,7 @@ struct Statement* statementPointer;
 std::vector<Statement*>* statementPointerVectorPointer;
 struct Assignment* assignmentStatementPointer;
 struct If* ifStatementPointer;
+struct ConditionalSequence* conditionalSequencePointer;
 struct While* whileStatementPointer;
 struct Repeat* repeatStatementPointer;
 struct For* forStatementPointer;
@@ -307,7 +309,7 @@ VarDecl : VAR TypedLists { $$ = $2; }
 Block: BEGIN_TOKEN StatementSequence END { $$ = new Block($2); };
 StatementSequence : Statement ExtraStatementList { $2->insert($2->begin(), $1); $$ = $2; };
 Statement : Assignment
-    | IfStatement { $$ = new If(); }
+    | IfStatement
     | WhileStatement { $$ = new While(); }
     | RepeatStatement { $$ = new Repeat(); }
     | ForStatement { $$ = new For(); }
@@ -322,7 +324,7 @@ Statement : Assignment
         LValueList : LValueList LValueItem | ;
         LValueItem : DOT IDENT
             | LBRACKET Expression RBRACKET;
-    IfStatement : IF Expression THEN StatementSequence ElseIfList Else END;
+    IfStatement : IF Expression THEN StatementSequence ElseIfList Else END { $$ = new If(new ConditionalSequence($2, $4)); };
         ElseIfList : ElseIfList ElseIfListItem | ;
             ElseIfListItem : ELSEIF Expression THEN StatementSequence;
         Else : ELSE StatementSequence | ;
