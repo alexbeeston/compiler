@@ -21,6 +21,7 @@ set(calc_srcs
   ${FLEX_Scanner_OUTPUTS}
 		constructs/
 		constructs/Program.cpp
+		constructs/LValue.cpp
 		constructs/expressions/StringLit.cpp
 		constructs/expressions/Expression.cpp
 		constructs/expressions/CharLit.cpp

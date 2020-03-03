@@ -5,7 +5,7 @@
 
 void Expression::print()
 {
-    std::cout << "Base Expression print()";
+    std::cout << "[Base Expression]";
 }
 
 

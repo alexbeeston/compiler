@@ -11,6 +11,6 @@ struct CharLit : Expression
 {
     char charLitValue;
     CharLit(char p_charLitValue);
-    void print();
+    void print() override;
 };
 #endif //COMPILERS_CHARLIT_H

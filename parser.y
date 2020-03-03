@@ -9,6 +9,7 @@
 #include "constructs/expressions/StringLit.h"
 #include "constructs/prelude/constants/Constant.h"
 #include "constructs/Program.h"
+#include "constructs/LValue.h"
 #include "constructs/prelude/Prelude.h"
 
 #include "constructs/expressions/CharLit.h"
@@ -54,6 +55,7 @@ float val;
 int integer;
 char* charPointer;
 char character;
+struct LValue* lValuePointer;
 std::vector<char*>* charPointerVectorPointer;
 struct Constant* constantPointer;
 struct Expression* expressionPointer;
@@ -97,9 +99,9 @@ struct ProcedureCall* procedureCallStatementPointer;
 
 }
 %type <preludePointer> Prelude
+%type <lValuePointer> LValue
 
 %type <charPointer> IDENT
-%type <val> LValue
 %type <character> CHARLIT
 %type <charPointer> STRLIT
 %type <integer> DECINT
@@ -304,7 +306,7 @@ VarDecl : VAR TypedLists { $$ = $2; }
 
 Block: BEGIN_TOKEN StatementSequence END { $$ = new Block($2); };
 StatementSequence : Statement ExtraStatementList { $2->insert($2->begin(), $1); $$ = $2; };
-Statement : Assignment { $$ = new Assignment(); }
+Statement : Assignment
     | IfStatement { $$ = new If(); }
     | WhileStatement { $$ = new While(); }
     | RepeatStatement { $$ = new Repeat(); }
@@ -315,8 +317,8 @@ Statement : Assignment { $$ = new Assignment(); }
     | WriteStatement { $$ = new Write(); }
     | ProcedureCallStatement { $$ = new ProcedureCall(); }
     | { $$ = new NullStatement(); };
-    Assignment : LValue ASSIGN Expression;
-        LValue : IDENT LValueList;
+    Assignment : LValue ASSIGN Expression { $$ = new Assignment($1, $3); };
+        LValue : IDENT LValueList { $$ = new LValue(); };
         LValueList : LValueList LValueItem | ;
         LValueItem : DOT IDENT
             | LBRACKET Expression RBRACKET;

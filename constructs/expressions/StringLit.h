@@ -11,6 +11,6 @@ struct StringLit : Expression
 {
     char* stringLitValue;
     StringLit(char* p_value);
-    void print();
+    void print() override;
 };
 #endif //COMPILERS_STRINGLIT_H

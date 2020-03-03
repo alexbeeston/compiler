@@ -6,10 +6,14 @@
 #define COMPILERS_ASSIGNMENT_H
 
 #include "Statement.h"
+#include "../LValue.h"
+#include "../expressions/Expression.h"
 
 struct Assignment:Statement
 {
-    Assignment();
+    Expression* expression;
+    LValue* lValue;
+    Assignment(LValue*, Expression*);
     void print() override;
 };
 #endif //COMPILERS_ASSIGNMENT_H

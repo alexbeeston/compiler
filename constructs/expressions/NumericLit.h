@@ -11,6 +11,6 @@ struct NumericLit : Expression
 {
     int numericLitValue;
     NumericLit(int);
-    void print();
+    void print() override;
 };
 #endif //COMPILERS_NUMERICLIT_H
