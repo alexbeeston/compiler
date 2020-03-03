@@ -23,6 +23,8 @@ BEGIN
        then write("i is 5! (expected result)");
      elseif (j = 10)
         then write("i is greater than 5!");
+     else
+        write("dog");
      end;
 
     while a < 10 do

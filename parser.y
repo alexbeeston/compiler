@@ -153,6 +153,7 @@ struct ProcedureCall* procedureCallStatementPointer;
 %type <ifStatementPointer> IfStatement
 %type <conditionalSequencePointer> ConditionalSequence
 %type <conditionalSequencePointerVectorPointer> ConditionalSequenceList
+%type <statementPointerVectorPointer> Else
 %type <whileStatementPointer> WhileStatement
 %type <repeatStatementPointer> RepeatStatement
 %type <forStatementPointer> ForStatement
@@ -327,11 +328,12 @@ Statement : Assignment
         LValueList : LValueList LValueItem | ;
         LValueItem : DOT IDENT
             | LBRACKET Expression RBRACKET;
-    IfStatement : IF Expression THEN StatementSequence ConditionalSequenceList Else END { $$ = new If(new ConditionalSequence($2, $4), $5); };
+    IfStatement : IF Expression THEN StatementSequence ConditionalSequenceList Else END { $$ = new If(new ConditionalSequence($2, $4), $5, $6); };
         ConditionalSequenceList : ConditionalSequenceList ConditionalSequence { $1->push_back($2); }
             | { $$ = new std::vector<ConditionalSequence*>; };
             ConditionalSequence: ELSEIF Expression THEN StatementSequence { $$ = new ConditionalSequence($2, $4); };
-        Else : ELSE StatementSequence | ;
+        Else : ELSE StatementSequence { $$ = $2; }
+            | { $$ = new std::vector<Statement*>;} ;
     WhileStatement : WHILE Expression DO StatementSequence END;
     RepeatStatement : REPEAT StatementSequence UNTIL Expression;
     ForStatement : FOR IDENT ASSIGN Expression Location Expression DO StatementSequence END;
