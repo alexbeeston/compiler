@@ -9,5 +9,5 @@ SimpleType::SimpleType()
 
 void SimpleType::print()
 {
-    std::cout << "[simple type]";
+    std::cout << "simple type";
 }
