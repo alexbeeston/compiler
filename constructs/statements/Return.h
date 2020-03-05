@@ -6,10 +6,13 @@
 #define COMPILERS_RETURN_H
 
 #include "Statement.h"
+#include "../expressions/Expression.h"
 
 struct Return:Statement
 {
+    Expression* expression;
     Return();
+    Return(Expression*);
     void print() override;
 };
 #endif //COMPILERS_RETURN_H

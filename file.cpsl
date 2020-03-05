@@ -41,7 +41,7 @@ BEGIN
         write(i, " ");
     end;
     stop;
-    return dog;
+    return;
     read(i, c);
     write(a, b, c, "hello");
     callMe();

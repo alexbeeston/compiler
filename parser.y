@@ -319,7 +319,7 @@ Statement : Assignment
     | RepeatStatement
     | ForStatement
     | StopStatement { $$ = new Stop(); }
-    | ReturnStatement { $$ = new Return(); }
+    | ReturnStatement
     | ReadStatement { $$ = new Read(); }
     | WriteStatement { $$ = new Write(); }
     | ProcedureCallStatement { $$ = new ProcedureCall(); }
@@ -340,7 +340,7 @@ Statement : Assignment
     ForStatement : FOR IDENT ASSIGN Expression Location Expression DO StatementSequence END { $$ = new For($4, $5, $6, $8); };
         Location : TO { $$ = 1;} | DOWNTO { $$ = 0; };
     StopStatement : STOP;
-    ReturnStatement : RETURN_TOKEN | RETURN_TOKEN Expression;
+    ReturnStatement : RETURN_TOKEN { $$ = new Return(); } | RETURN_TOKEN Expression { $$ = new Return($2); };
     ReadStatement : READ LPAREN LValue CommaExpressionList RPAREN;
         CommaExpressionList: CommaExpressionList CommaExpressionListItem | ;
             CommaExpressionListItem: COMMA Expression;
