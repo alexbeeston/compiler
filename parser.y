@@ -61,6 +61,7 @@ std::vector<LValue*>* lValuePointerVectorPointer;
 std::vector<char*>* charPointerVectorPointer;
 struct Constant* constantPointer;
 struct Expression* expressionPointer;
+std::vector<Expression*>* expressionPointerVectorPointer;
 struct StringLit* stringLitPointer;
 struct CharLit* charLitPointer;
 std::vector<Constant*>* constantPointerVectorPointer;
@@ -118,6 +119,8 @@ struct ProcedureCall* procedureCallStatementPointer;
 %type <charPointerVectorPointer> IdentList
 
 %type <expressionPointer> Expression
+%type <expressionPointer> CommaExpression
+%type <expressionPointerVectorPointer> CommaExpressionList
 %type <constantPointer> Constant
 %type <constantPointerVectorPointer> ConstantList
 %type <constantPointerVectorPointer> ConstDecl
@@ -324,7 +327,7 @@ Statement : Assignment
     | StopStatement { $$ = new Stop(); }
     | ReturnStatement
     | ReadStatement
-    | WriteStatement { $$ = new Write(); }
+    | WriteStatement
     | ProcedureCallStatement { $$ = new ProcedureCall(); }
     | { $$ = new NullStatement(); };
     Assignment : LValue ASSIGN Expression { $$ = new Assignment($1, $3); };
@@ -348,9 +351,10 @@ Statement : Assignment
         LValueCommaList: LValueCommaList LValueCommaListItem { $1->push_back($2); }
             | { $$ = new std::vector<LValue*>; };
             LValueCommaListItem : COMMA LValue { $$ = $2; };
-    WriteStatement : WRITE LPAREN Expression CommaExpressionList RPAREN;
-    CommaExpressionList : CommaExpressionList CommaExpression | ;
-        CommaExpression : COMMA Expression;
+    WriteStatement : WRITE LPAREN Expression CommaExpressionList RPAREN { $$ = new Write($3, $4); };
+    CommaExpressionList : CommaExpressionList CommaExpression { $1->push_back($2); }
+        | { $$ = new std::vector<Expression*>; };
+        CommaExpression : COMMA Expression { $$ = $2; };
     ProcedureCallStatement : IDENT LPAREN ProcedureParams RPAREN;
         ProcedureParams : Expression CommaExpressionList | ;
 ExtraStatementList : ExtraStatementList ExtraStatement { $1->push_back($2); }

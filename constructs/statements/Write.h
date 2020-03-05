@@ -5,11 +5,15 @@
 #ifndef COMPILERS_WRITE_H
 #define COMPILERS_WRITE_H
 
+#include <vector>
+
 #include "Statement.h"
+#include "../expressions/Expression.h"
 
 struct Write:Statement
 {
-    Write();
+    std::vector<Expression*>* expressions;
+    Write(Expression*, std::vector<Expression*>*);
     void print() override;
 };
 #endif //COMPILERS_WRITE_H
