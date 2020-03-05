@@ -44,6 +44,6 @@ BEGIN
     return;
     read(i, c, dog, a, sb, d, e, e);
     write(a, b, c, "hello");
-    callMe();
+    callMe(a, b, c, d, e);
 
 END.

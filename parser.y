@@ -121,6 +121,7 @@ struct ProcedureCall* procedureCallStatementPointer;
 %type <expressionPointer> Expression
 %type <expressionPointer> CommaExpression
 %type <expressionPointerVectorPointer> CommaExpressionList
+%type <expressionPointerVectorPointer> ProcedureParams
 %type <constantPointer> Constant
 %type <constantPointerVectorPointer> ConstantList
 %type <constantPointerVectorPointer> ConstDecl
@@ -328,7 +329,7 @@ Statement : Assignment
     | ReturnStatement
     | ReadStatement
     | WriteStatement
-    | ProcedureCallStatement { $$ = new ProcedureCall(); }
+    | ProcedureCallStatement
     | { $$ = new NullStatement(); };
     Assignment : LValue ASSIGN Expression { $$ = new Assignment($1, $3); };
         LValue : IDENT LValueList { $$ = new LValue(); };
@@ -355,8 +356,10 @@ Statement : Assignment
     CommaExpressionList : CommaExpressionList CommaExpression { $1->push_back($2); }
         | { $$ = new std::vector<Expression*>; };
         CommaExpression : COMMA Expression { $$ = $2; };
-    ProcedureCallStatement : IDENT LPAREN ProcedureParams RPAREN;
-        ProcedureParams : Expression CommaExpressionList | ;
+    ProcedureCallStatement : IDENT LPAREN ProcedureParams RPAREN { $$ = new ProcedureCall($3); };
+        ProcedureParams : Expression CommaExpressionList { $2->insert($2->begin(), $1); $$ = $2; }
+            | { $$ = new std::vector<Expression*>; };
+
 ExtraStatementList : ExtraStatementList ExtraStatement { $1->push_back($2); }
     | { $$ = new std::vector<Statement*>; };
 ExtraStatement : DONE Statement { $$ = $2; };

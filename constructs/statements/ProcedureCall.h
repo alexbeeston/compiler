@@ -5,11 +5,15 @@
 #ifndef COMPILERS_PROCEDURECALL_H
 #define COMPILERS_PROCEDURECALL_H
 
+#include <vector>
+
 #include "Statement.h"
+#include "../expressions/Expression.h"
 
 struct ProcedureCall:Statement
 {
-    ProcedureCall();
+    std::vector<Expression*>* expressions;
+    ProcedureCall(std::vector<Expression*>*);
     void print() override;
 };
 #endif //COMPILERS_PROCEDURECALL_H

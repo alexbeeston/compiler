@@ -2,12 +2,13 @@
 
 #include "ProcedureCall.h"
 
-ProcedureCall::ProcedureCall()
+ProcedureCall::ProcedureCall(std::vector<Expression*>* p_expressions)
 {
-
+    expressions = p_expressions;
 }
 
 void ProcedureCall::print()
 {
-    std::cout << "Procedure Call Statement";
+    std::cout << "Procedure Call Statement: ";
+    for (Expression* express : *expressions) express->print();
 }
