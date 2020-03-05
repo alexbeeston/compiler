@@ -42,7 +42,7 @@ BEGIN
     end;
     stop;
     return;
-    read(i, c);
+    read(i, c, dog, a, sb, d, e, e);
     write(a, b, c, "hello");
     callMe();
 

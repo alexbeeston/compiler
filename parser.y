@@ -57,6 +57,7 @@ int integer;
 char* charPointer;
 char character;
 struct LValue* lValuePointer;
+std::vector<LValue*>* lValuePointerVectorPointer;
 std::vector<char*>* charPointerVectorPointer;
 struct Constant* constantPointer;
 struct Expression* expressionPointer;
@@ -103,6 +104,8 @@ struct ProcedureCall* procedureCallStatementPointer;
 }
 %type <preludePointer> Prelude
 %type <lValuePointer> LValue
+%type <lValuePointerVectorPointer> LValueCommaList
+%type <lValuePointer> LValueCommaListItem
 
 %type <charPointer> IDENT
 %type <character> CHARLIT
@@ -320,7 +323,7 @@ Statement : Assignment
     | ForStatement
     | StopStatement { $$ = new Stop(); }
     | ReturnStatement
-    | ReadStatement { $$ = new Read(); }
+    | ReadStatement
     | WriteStatement { $$ = new Write(); }
     | ProcedureCallStatement { $$ = new ProcedureCall(); }
     | { $$ = new NullStatement(); };
@@ -341,10 +344,13 @@ Statement : Assignment
         Location : TO { $$ = 1;} | DOWNTO { $$ = 0; };
     StopStatement : STOP;
     ReturnStatement : RETURN_TOKEN { $$ = new Return(); } | RETURN_TOKEN Expression { $$ = new Return($2); };
-    ReadStatement : READ LPAREN LValue CommaExpressionList RPAREN;
-        CommaExpressionList: CommaExpressionList CommaExpressionListItem | ;
-            CommaExpressionListItem: COMMA Expression;
+    ReadStatement : READ LPAREN LValue LValueCommaList RPAREN { $$ = new Read($3, $4); };
+        LValueCommaList: LValueCommaList LValueCommaListItem { $1->push_back($2); }
+            | { $$ = new std::vector<LValue*>; };
+            LValueCommaListItem : COMMA LValue { $$ = $2; };
     WriteStatement : WRITE LPAREN Expression CommaExpressionList RPAREN;
+    CommaExpressionList : CommaExpressionList CommaExpression | ;
+        CommaExpression : COMMA Expression;
     ProcedureCallStatement : IDENT LPAREN ProcedureParams RPAREN;
         ProcedureParams : Expression CommaExpressionList | ;
 ExtraStatementList : ExtraStatementList ExtraStatement { $1->push_back($2); }
