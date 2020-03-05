@@ -267,7 +267,7 @@ Expression : NumericLiteral
     | Expression MOD Expression
     | Expression ADD Expression
     | Expression SUB Expression
-    | Expression EQUAL Expression
+    | Expression EQUAL Expression { $$ = new NumericLit(-1); }
     | Expression NOTEQUAL Expression
     | Expression LESS_THAN Expression
     | Expression LESS_THAN_OR_EQUAL Expression
@@ -314,7 +314,7 @@ Block: BEGIN_TOKEN StatementSequence END { $$ = new Block($2); };
 StatementSequence : Statement ExtraStatementList { $2->insert($2->begin(), $1); $$ = $2; };
 Statement : Assignment
     | IfStatement
-    | WhileStatement { $$ = new While(); }
+    | WhileStatement
     | RepeatStatement { $$ = new Repeat(); }
     | ForStatement { $$ = new For(); }
     | StopStatement { $$ = new Stop(); }
@@ -334,7 +334,7 @@ Statement : Assignment
             ConditionalSequence: ELSEIF Expression THEN StatementSequence { $$ = new ConditionalSequence($2, $4); };
         Else : ELSE StatementSequence { $$ = $2; }
             | { $$ = new std::vector<Statement*>;} ;
-    WhileStatement : WHILE Expression DO StatementSequence END;
+    WhileStatement : WHILE Expression DO StatementSequence END { $$ = new While($2, $4); };
     RepeatStatement : REPEAT StatementSequence UNTIL Expression;
     ForStatement : FOR IDENT ASSIGN Expression Location Expression DO StatementSequence END;
         Location : TO | DOWNTO;
