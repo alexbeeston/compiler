@@ -157,6 +157,7 @@ struct ProcedureCall* procedureCallStatementPointer;
 %type <whileStatementPointer> WhileStatement
 %type <repeatStatementPointer> RepeatStatement
 %type <forStatementPointer> ForStatement
+%type <integer> Location
 %type <stopStatementPointer> StopStatement
 %type <returnStatementPointer> ReturnStatement
 %type <readStatementPointer> ReadStatement
@@ -316,7 +317,7 @@ Statement : Assignment
     | IfStatement
     | WhileStatement
     | RepeatStatement
-    | ForStatement { $$ = new For(); }
+    | ForStatement
     | StopStatement { $$ = new Stop(); }
     | ReturnStatement { $$ = new Return(); }
     | ReadStatement { $$ = new Read(); }
@@ -336,8 +337,8 @@ Statement : Assignment
             | { $$ = new std::vector<Statement*>;} ;
     WhileStatement : WHILE Expression DO StatementSequence END { $$ = new While($2, $4); };
     RepeatStatement : REPEAT StatementSequence UNTIL Expression { $$ = new Repeat($4, $2); };
-    ForStatement : FOR IDENT ASSIGN Expression Location Expression DO StatementSequence END;
-        Location : TO | DOWNTO;
+    ForStatement : FOR IDENT ASSIGN Expression Location Expression DO StatementSequence END { $$ = new For($4, $5, $6, $8); };
+        Location : TO { $$ = 1;} | DOWNTO { $$ = 0; };
     StopStatement : STOP;
     ReturnStatement : RETURN_TOKEN | RETURN_TOKEN Expression;
     ReadStatement : READ LPAREN LValue CommaExpressionList RPAREN;
