@@ -257,31 +257,31 @@ ConstantList : Constant { $$ = new std::vector<Constant*>{$1}; }
     | ;
 
 Constant : IDENT EQUAL Expression DONE { $$ = new Constant($1, $3); };
-Expression : NumericLiteral
+Expression : NumericLiteral { $$ = new Expression(); }
     | CHARLIT { $$ = new CharLit($1); }
     | STRLIT { $$ = new StringLit($1); }
-    | LPAREN Expression RPAREN
-    | SUB Expression
-    | Expression MULT Expression
-    | Expression DIV Expression
-    | Expression MOD Expression
-    | Expression ADD Expression
-    | Expression SUB Expression
+    | LPAREN Expression RPAREN { $$ = new Expression(); }
+    | SUB Expression { $$ = new Expression(); }
+    | Expression MULT Expression { $$ = new Expression(); }
+    | Expression DIV Expression { $$ = new Expression(); }
+    | Expression MOD Expression { $$ = new Expression(); }
+    | Expression ADD Expression { $$ = new Expression(); }
+    | Expression SUB Expression { $$ = new Expression(); }
     | Expression EQUAL Expression { $$ = new NumericLit(-1); }
-    | Expression NOTEQUAL Expression
-    | Expression LESS_THAN Expression
-    | Expression LESS_THAN_OR_EQUAL Expression
-    | Expression GREATER_THAN Expression
-    | Expression GREATER_THAN_OR_EQUAL Expression
-    | Expression AND Expression
-    | NEGATION Expression
-    | Expression OR Expression
-    | IDENT LPAREN MysterySet RPAREN
-    | CHR LPAREN Expression RPAREN
-    | ORD LPAREN Expression RPAREN
-    | PRED LPAREN Expression RPAREN
-    | SUCC LPAREN Expression RPAREN
-    | LValue;
+    | Expression NOTEQUAL Expression { $$ = new Expression(); }
+    | Expression LESS_THAN Expression { $$ = new Expression(); }
+    | Expression LESS_THAN_OR_EQUAL Expression { $$ = new Expression(); }
+    | Expression GREATER_THAN Expression { $$ = new Expression(); }
+    | Expression GREATER_THAN_OR_EQUAL Expression { $$ = new Expression(); }
+    | Expression AND Expression { $$ = new Expression(); }
+    | NEGATION Expression { $$ = new Expression(); }
+    | Expression OR Expression { $$ = new Expression(); }
+    | IDENT LPAREN MysterySet RPAREN { $$ = new Expression(); }
+    | CHR LPAREN Expression RPAREN { $$ = new Expression(); }
+    | ORD LPAREN Expression RPAREN { $$ = new Expression(); }
+    | PRED LPAREN Expression RPAREN { $$ = new Expression(); }
+    | SUCC LPAREN Expression RPAREN { $$ = new Expression(); }
+    | LValue { $$ = new Expression(); };
     MysterySet : Expression MysterySetList | ;
         MysterySetList : MysterySetList MysterySetListItem | ;
             MysterySetListItem : COMMA Expression;
@@ -315,7 +315,7 @@ StatementSequence : Statement ExtraStatementList { $2->insert($2->begin(), $1); 
 Statement : Assignment
     | IfStatement
     | WhileStatement
-    | RepeatStatement { $$ = new Repeat(); }
+    | RepeatStatement
     | ForStatement { $$ = new For(); }
     | StopStatement { $$ = new Stop(); }
     | ReturnStatement { $$ = new Return(); }
@@ -335,7 +335,7 @@ Statement : Assignment
         Else : ELSE StatementSequence { $$ = $2; }
             | { $$ = new std::vector<Statement*>;} ;
     WhileStatement : WHILE Expression DO StatementSequence END { $$ = new While($2, $4); };
-    RepeatStatement : REPEAT StatementSequence UNTIL Expression;
+    RepeatStatement : REPEAT StatementSequence UNTIL Expression { $$ = new Repeat($4, $2); };
     ForStatement : FOR IDENT ASSIGN Expression Location Expression DO StatementSequence END;
         Location : TO | DOWNTO;
     StopStatement : STOP;

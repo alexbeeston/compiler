@@ -27,7 +27,7 @@ BEGIN
         write("dog");
      end;
 
-    while a = 10 do
+    while a < 10 do
         dummy := 4;
         dog := 3;
     end;
