@@ -1,39 +1,5 @@
-var
- A, b, c : a;
- A, B, C: d;
- a,b,c : dog;
-
-
+const
+dog = "hello world";
 BEGIN
-    testing := 4;
-
-   if (i < 5)
-       then write("i less than 5!\n");
-     elseif (i = 5)
-       then write("i is 5! (expected result)");
-     elseif (j = 10)
-        then write("i is greater than 5!");
-     else
-        write("dog");
-     end;
-
-    while a < 10 do
-        dummy := 4;
-        dog := 3;
-    end;
-
-    repeat
-      write("i: ", i, " \n");
-      i := i+1;
-    until i > 5;
-
-    for i := 0 to 5 do
-        write(i, " ");
-    end;
-    stop;
-    return;
-    read(i, c, dog, a, sb, d, e, e);
-    write(a, b, c, "hello");
-    callMe(a, b, c, d, e);
 
 END.

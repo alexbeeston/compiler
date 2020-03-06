@@ -12,7 +12,7 @@ struct Body
 {
     Prelude* prelude;
     Block* block;
-    Body(Prelude*);
+    Body(Prelude*, Block*);
     void print();
 };
 #endif //COMPILERS_BODY_H

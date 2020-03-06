@@ -4,9 +4,10 @@
 #include "../prelude/Prelude.h"
 #include "Block.h"
 
-Body::Body(Prelude* p_prelude)
+Body::Body(Prelude* p_prelude, Block* p_block)
 {
     prelude = p_prelude;
+    block = p_block;
 }
 
 void Body::print()
