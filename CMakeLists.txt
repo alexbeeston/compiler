@@ -28,6 +28,9 @@ set(calc_srcs
 		constructs/expressions/NumericLit.cpp
 		constructs/expressions/Or.cpp
 		constructs/expressions/And.cpp
+		constructs/expressions/NotEqual.cpp
+		constructs/expressions/LessThanEqual.cpp
+		constructs/expressions/GreaterThanEqual.cpp
 
 
 		constructs/prelude/types/BaseType.cpp

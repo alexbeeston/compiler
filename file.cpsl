@@ -1,6 +1,10 @@
 const
 dog = 8 | 9;
 cat = 8 & 0;
+dog = 8 <> 8;
+dog = 9 <= 10;
+dog = 9 >= 11;
+
 BEGIN
 
 END.

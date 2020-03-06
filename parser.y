@@ -46,6 +46,10 @@
 
 #include "constructs/expressions/Or.h"
 #include "constructs/expressions/And.h"
+#include "constructs/expressions/NotEqual.h"
+#include "constructs/expressions/LessThanEqual.h"
+#include "constructs/expressions/GreaterThanEqual.h"
+
 
 extern int yylex();
 void yyerror(const char*);
@@ -280,11 +284,11 @@ Expression : NumericLiteral { $$ = new Expression(); }
     | Expression ADD Expression { $$ = new Expression(); }
     | Expression SUB Expression { $$ = new Expression(); }
     | Expression EQUAL Expression { $$ = new NumericLit(-1); }
-    | Expression NOTEQUAL Expression { $$ = new Expression(); }
+    | Expression NOTEQUAL Expression { $$ = new NotEqual($1, $3); }
     | Expression LESS_THAN Expression { $$ = new Expression(); }
-    | Expression LESS_THAN_OR_EQUAL Expression { $$ = new Expression(); }
+    | Expression LESS_THAN_OR_EQUAL Expression { $$ = new LessThanEqual($1, $3); }
     | Expression GREATER_THAN Expression { $$ = new Expression(); }
-    | Expression GREATER_THAN_OR_EQUAL Expression { $$ = new Expression(); }
+    | Expression GREATER_THAN_OR_EQUAL Expression { $$ = new GreaterThanEqual($1, $3); }
     | Expression AND Expression { $$ = new And($1, $3); }
     | NEGATION Expression { $$ = new Expression(); }
     | Expression OR Expression { $$ = new Or($1, $3); }

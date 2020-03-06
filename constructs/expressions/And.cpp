@@ -10,7 +10,6 @@ And::And(Expression* p_left, Expression* p_right)
 
 void And::print()
 {
-    std::cout << "AND: ";
     left->print();
     std::cout << " & ";
     right->print();
