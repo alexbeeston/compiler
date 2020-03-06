@@ -2,10 +2,9 @@ const
 a = 10;
 b = 20;
 
-type i = integer;
-r = record a,b,c:i; end;
-a = array[BASE:SIZE]of r;
-dog = record dog,cat,hen,rat:animal; end;
+type
+test = record a,b,c:dog;end;
+dog = cat;
 
 var
  A, b, c : a;

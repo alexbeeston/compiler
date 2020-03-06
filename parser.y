@@ -296,8 +296,8 @@ Expression : NumericLiteral { $$ = new Expression(); }
     NumericLiteral : DECINT { $$ = new NumericLit($1); }
     | HEXINT
     | OCTINT;
-TypeDecl : TYPE TypeList { $$ = $2; }
-    | ;
+TypeDecl : TYPE TypeListItem TypeList { $3->insert($3->begin(), $2); $$ = $3; }
+    | { $$ = nullptr; };
 TypeList : TypeList TypeListItem { $1->push_back($2); }
     | { $$ = new std::vector<TypeDeclItem*>; };
 TypeListItem : IDENT EQUAL Type DONE { $$ = new TypeDeclItem(new std::string($1), $3); }  ;

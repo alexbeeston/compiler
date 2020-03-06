@@ -13,11 +13,18 @@ void Prelude::print()
     {
         std::cout << "CONST\n";
         for (Constant* item : *constants) { item->print(); }
+        std::cout << std::endl;
     }
-
-    std::cout << "\nTYPE" << std::endl;
-    for (TypeDeclItem* item : *types) { item->print(); }
-
-    std::cout << "\nVAR" << std::endl;
-    for (TypedList* item : *vars) { item->print(); }
+    if (types != nullptr)
+    {
+        std::cout << "TYPE" << std::endl;
+        for (TypeDeclItem* item : *types) { item->print(); }
+        std::cout << std::endl;
+    }
+    if (vars != nullptr)
+    {
+        std::cout << "VAR" << std::endl;
+        for (TypedList* item : *vars) { item->print(); }
+        std::cout << std::endl;
+    }
 }
