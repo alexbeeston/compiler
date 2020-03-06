@@ -9,5 +9,5 @@ SimpleType::SimpleType(std::string* p_ident)
 
 void SimpleType::print()
 {
-    std::cout << "simple type: ident - " << *ident;
+    std::cout << *ident;
 }

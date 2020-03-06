@@ -5,13 +5,15 @@
 #ifndef COMPILERS_TYPEDITEM_H
 #define COMPILERS_TYPEDITEM_H
 
+#include <string>
+
 #include "BaseType.h"
 
 struct TypeDeclItem
 {
-    char* ident;
+    std::string* ident;
     BaseType* type;
-    TypeDeclItem(char*, BaseType*);
+    TypeDeclItem(std::string*, BaseType*);
     void print();
 };
 #endif //COMPILERS_TYPEDITEM_H

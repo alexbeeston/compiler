@@ -301,7 +301,7 @@ TypeDecl : TYPE TypeList { $$ = $2; }
     | ;
 TypeList : TypeList TypeListItem { $1->push_back($2); }
     | { $$ = new std::vector<TypeDeclItem*>; };
-TypeListItem : IDENT EQUAL Type DONE { $$ = new TypeDeclItem($1, $3); }  ;
+TypeListItem : IDENT EQUAL Type DONE { $$ = new TypeDeclItem(new std::string($1), $3); }  ;
 Type : SimpleType
     | RecordType { $$ = new RecordType(); }
     | ArrayType  { $$ = new ArrayType(); };
