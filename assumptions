@@ -1,2 +1,1 @@
-all type declarions are a simple type
 it is permissible to have the VAR heading in the prelude and then have zero variable definitions. Not allowed by the specs, but I'm making the assumption that this won't happen and moving on. Not a serious syntactic error. Same with the type declarations. You could have TYPE and then nothing, and that is accepted for now.

@@ -259,11 +259,10 @@ ProcedureDecl : PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE FORWARD DONE
 FunctionDecl : FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE FORWARD DONE { $$ = new Function($2, $4, NULL, $7); }
     | FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE Body DONE { $$ = new Function($2, $4, $9, $7); }
 
-ConstDecl : CONST ConstantList { $$ = $2;}
-    | ;
-ConstantList : Constant { $$ = new std::vector<Constant*>{$1}; }
-    | ConstantList Constant { $1->push_back($2); }
-    | ;
+ConstDecl : CONST Constant ConstantList { $3->insert($3->begin(), $2);  $$ = $3;}
+    | { $$ = nullptr; };
+ConstantList : ConstantList Constant { $1->push_back($2); }
+    | { $$ = new std::vector<Constant*>; };
 
 Constant : IDENT EQUAL Expression DONE { $$ = new Constant($1, $3); };
 Expression : NumericLiteral { $$ = new Expression(); }

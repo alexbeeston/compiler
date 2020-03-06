@@ -9,8 +9,11 @@ Prelude::Prelude(std::vector<Constant*>* p_constants, std::vector<TypeDeclItem*>
 
 void Prelude::print()
 {
-    std::cout << "CONST" << std::endl;
-    for (Constant* item : *constants) { item->print(); }
+    if (constants != nullptr)
+    {
+        std::cout << "CONST\n";
+        for (Constant* item : *constants) { item->print(); }
+    }
 
     std::cout << "\nTYPE" << std::endl;
     for (TypeDeclItem* item : *types) { item->print(); }
