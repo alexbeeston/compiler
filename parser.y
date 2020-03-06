@@ -44,6 +44,8 @@
 #include "constructs/statements/ProcedureCall.h"
 #include "constructs/statements/NullStatement.h"
 
+#include "constructs/expressions/Or.h"
+#include "constructs/expressions/And.h"
 
 extern int yylex();
 void yyerror(const char*);
@@ -61,10 +63,12 @@ struct LValue* lValuePointer;
 std::vector<LValue*>* lValuePointerVectorPointer;
 std::vector<char*>* charPointerVectorPointer;
 struct Constant* constantPointer;
+
 struct Expression* expressionPointer;
 std::vector<Expression*>* expressionPointerVectorPointer;
 struct StringLit* stringLitPointer;
 struct CharLit* charLitPointer;
+
 std::vector<Constant*>* constantPointerVectorPointer;
 struct Prelude* preludePointer;
 struct NumericLit* numericLitPointer;
@@ -281,9 +285,9 @@ Expression : NumericLiteral { $$ = new Expression(); }
     | Expression LESS_THAN_OR_EQUAL Expression { $$ = new Expression(); }
     | Expression GREATER_THAN Expression { $$ = new Expression(); }
     | Expression GREATER_THAN_OR_EQUAL Expression { $$ = new Expression(); }
-    | Expression AND Expression { $$ = new Expression(); }
+    | Expression AND Expression { $$ = new And($1, $3); }
     | NEGATION Expression { $$ = new Expression(); }
-    | Expression OR Expression { $$ = new Expression(); }
+    | Expression OR Expression { $$ = new Or($1, $3); }
     | IDENT LPAREN MysterySet RPAREN { $$ = new Expression(); }
     | CHR LPAREN Expression RPAREN { $$ = new Expression(); }
     | ORD LPAREN Expression RPAREN { $$ = new Expression(); }

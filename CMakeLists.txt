@@ -26,6 +26,10 @@ set(calc_srcs
 		constructs/expressions/Expression.cpp
 		constructs/expressions/CharLit.cpp
 		constructs/expressions/NumericLit.cpp
+		constructs/expressions/Or.cpp
+		constructs/expressions/And.cpp
+
+
 		constructs/prelude/types/BaseType.cpp
 		constructs/prelude/types/SimpleType.cpp
 		constructs/prelude/types/ArrayType.cpp
