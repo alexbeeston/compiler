@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <string>
 #include "symbol_table.hpp"
 #include "global.h"
 
@@ -301,10 +302,10 @@ TypeDecl : TYPE TypeList { $$ = $2; }
 TypeList : TypeList TypeListItem { $1->push_back($2); }
     | { $$ = new std::vector<TypeDeclItem*>; };
 TypeListItem : IDENT EQUAL Type DONE { $$ = new TypeDeclItem($1, $3); }  ;
-Type : SimpleType { $$ = new SimpleType(); }
+Type : SimpleType
     | RecordType { $$ = new RecordType(); }
     | ArrayType  { $$ = new ArrayType(); };
-    SimpleType : IDENT
+    SimpleType : IDENT { $$ = new SimpleType(new std::string($1)); };
     RecordType : RECORD TypedLists END;
         TypedLists : TypedLists TypedList { $1->push_back($2); }
             | { $$ = new std::vector<TypedList*>; };

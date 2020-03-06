@@ -5,11 +5,14 @@
 #ifndef COMPILERS_SIMPLETYPE_H
 #define COMPILERS_SIMPLETYPE_H
 
+#include <string>
+
 #include "BaseType.h"
 
 struct SimpleType:BaseType
 {
-    SimpleType();
+    std::string* ident;
+    SimpleType(std::string*);
     void print() override;
 };
 #endif //COMPILERS_SIMPLETYPE_H
