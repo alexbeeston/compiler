@@ -315,8 +315,8 @@ Type : SimpleType
                         IdentExtra : COMMA IDENT { $$ = $2; };
     ArrayType : ARRAY LBRACKET Expression COLON Expression RBRACKET OF Type { $$ = new ArrayType($3, $5, $8); };
 
-VarDecl : VAR TypedLists { $$ = $2; }
-    | ;
+VarDecl : VAR TypedList TypedLists { $3->insert($3->begin(), $2); $$ = $3; }
+    | { $$ = nullptr; };
 
 Block: BEGIN_TOKEN StatementSequence END { $$ = new Block($2); };
 StatementSequence : Statement ExtraStatementList { $2->insert($2->begin(), $1); $$ = $2; };

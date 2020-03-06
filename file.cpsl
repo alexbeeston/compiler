@@ -1,14 +1,7 @@
-const
-a = 10;
-b = 20;
-
-type
-test = record a,b,c:dog;end;
-dog = cat;
-
 var
  A, b, c : a;
  A, B, C: d;
+ a,b,c : dog;
 
 
 BEGIN
