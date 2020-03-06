@@ -51,6 +51,9 @@
 #include "constructs/expressions/GreaterThanEqual.h"
 #include "constructs/expressions/GreaterThan.h"
 #include "constructs/expressions/LessThan.h"
+#include "constructs/expressions/Add.h"
+#include "constructs/expressions/Sub.h"
+#include "constructs/expressions/Multiply.h"
 
 extern int yylex();
 void yyerror(const char*);
@@ -279,11 +282,11 @@ Expression : NumericLiteral { $$ = new Expression(); }
     | STRLIT { $$ = new StringLit($1); }
     | LPAREN Expression RPAREN { $$ = new Expression(); }
     | SUB Expression { $$ = new Expression(); }
-    | Expression MULT Expression { $$ = new Expression(); }
+    | Expression MULT Expression { $$ = new Multiply($1, $3); }
     | Expression DIV Expression { $$ = new Expression(); }
     | Expression MOD Expression { $$ = new Expression(); }
-    | Expression ADD Expression { $$ = new Expression(); }
-    | Expression SUB Expression { $$ = new Expression(); }
+    | Expression ADD Expression { $$ = new Add($1, $3); }
+    | Expression SUB Expression { $$ = new Sub($1, $3); }
     | Expression EQUAL Expression { $$ = new NumericLit(-1); }
     | Expression NOTEQUAL Expression { $$ = new NotEqual($1, $3); }
     | Expression LESS_THAN Expression { $$ = new LessThan($1, $3); }

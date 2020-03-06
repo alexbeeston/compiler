@@ -33,6 +33,9 @@ set(calc_srcs
 		constructs/expressions/GreaterThanEqual.cpp
 		constructs/expressions/GreaterThan.cpp
 		constructs/expressions/LessThan.cpp
+		constructs/expressions/Add.cpp
+		constructs/expressions/Sub.cpp
+		constructs/expressions/Multiply.cpp
 
 
 		constructs/prelude/types/BaseType.cpp
