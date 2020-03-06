@@ -303,10 +303,10 @@ TypeList : TypeList TypeListItem { $1->push_back($2); }
     | { $$ = new std::vector<TypeDeclItem*>; };
 TypeListItem : IDENT EQUAL Type DONE { $$ = new TypeDeclItem(new std::string($1), $3); }  ;
 Type : SimpleType
-    | RecordType { $$ = new RecordType(); }
+    | RecordType
     | ArrayType
     SimpleType : IDENT { $$ = new SimpleType(new std::string($1)); };
-    RecordType : RECORD TypedLists END;
+    RecordType : RECORD TypedLists END { $$ = new RecordType($2); };
         TypedLists : TypedLists TypedList { $1->push_back($2); }
             | { $$ = new std::vector<TypedList*>; };
             TypedList: IdentList COLON Type DONE { $$ = new TypedList($1, $3); };

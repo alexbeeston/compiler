@@ -2,12 +2,13 @@
 
 #include "RecordType.h"
 
-RecordType::RecordType()
+RecordType::RecordType(std::vector<TypedList*>* p_typedLists)
 {
-
+    typedLists = p_typedLists;
 }
 
 void RecordType::print()
 {
-    std::cout << "Record Type";
+    std::cout << "record ";
+    for (TypedList* list : *typedLists) list->print();
 }

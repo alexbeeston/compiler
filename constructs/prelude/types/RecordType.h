@@ -5,11 +5,15 @@
 #ifndef COMPILERS_RECORDTYPE_H
 #define COMPILERS_RECORDTYPE_H
 
+#include <vector>
+
 #include "BaseType.h"
+#include "../TypedList.h"
 
 struct RecordType:BaseType
 {
-    RecordType();
+    std::vector<TypedList*>* typedLists;
+    RecordType(std::vector<TypedList*>*);
     void print() override;
 };
 #endif //COMPILERS_RECORDTYPE_H
