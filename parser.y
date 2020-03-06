@@ -304,7 +304,7 @@ TypeList : TypeList TypeListItem { $1->push_back($2); }
 TypeListItem : IDENT EQUAL Type DONE { $$ = new TypeDeclItem(new std::string($1), $3); }  ;
 Type : SimpleType
     | RecordType { $$ = new RecordType(); }
-    | ArrayType  { $$ = new ArrayType(); };
+    | ArrayType
     SimpleType : IDENT { $$ = new SimpleType(new std::string($1)); };
     RecordType : RECORD TypedLists END;
         TypedLists : TypedLists TypedList { $1->push_back($2); }
@@ -314,7 +314,7 @@ Type : SimpleType
                     IdentListExtraSet : IdentListExtraSet IdentExtra { $1->push_back($2); }
                         | { $$ = new std::vector<char*>; };
                         IdentExtra : COMMA IDENT { $$ = $2; };
-    ArrayType : ARRAY LBRACKET Expression COLON Expression RBRACKET OF Type ;
+    ArrayType : ARRAY LBRACKET Expression COLON Expression RBRACKET OF Type { $$ = new ArrayType($3, $5, $8); };
 
 VarDecl : VAR TypedLists { $$ = $2; }
     | ;
