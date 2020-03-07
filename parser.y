@@ -11,6 +11,8 @@
 #include "constructs/prelude/constants/Constant.h"
 #include "constructs/Program.h"
 #include "constructs/LValue.h"
+#include "constructs/LValueIdent.h"
+#include "constructs/LValueExpression.h"
 #include "constructs/prelude/Prelude.h"
 
 #include "constructs/expressions/CharLit.h"
@@ -78,7 +80,6 @@ float val;
 int integer;
 char* charPointer;
 char character;
-struct LValue* lValuePointer;
 std::vector<LValue*>* lValuePointerVectorPointer;
 std::vector<char*>* charPointerVectorPointer;
 struct Constant* constantPointer;
