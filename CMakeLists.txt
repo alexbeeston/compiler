@@ -40,6 +40,8 @@ set(calc_srcs
 		constructs/expressions/Divide.cpp
 		constructs/expressions/Mod.cpp
 		constructs/expressions/Negate.cpp
+		constructs/expressions/Negative.cpp
+		constructs/expressions/ParenExpression.cpp
 
 
 		constructs/prelude/types/BaseType.cpp

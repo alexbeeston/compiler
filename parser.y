@@ -57,6 +57,8 @@
 #include "constructs/expressions/Divide.h"
 #include "constructs/expressions/Mod.h"
 #include "constructs/expressions/Negate.h"
+#include "constructs/expressions/Negative.h"
+#include "constructs/expressions/ParenExpression.h"
 
 extern int yylex();
 void yyerror(const char*);
@@ -283,8 +285,8 @@ Constant : IDENT EQUAL Expression DONE { $$ = new Constant($1, $3); };
 Expression : NumericLiteral { $$ = new Expression(); }
     | CHARLIT { $$ = new CharLit($1); }
     | STRLIT { $$ = new StringLit($1); }
-    | LPAREN Expression RPAREN { $$ = new Expression(); }
-    | SUB Expression { $$ = new Expression(); }
+    | LPAREN Expression RPAREN { $$ = new ParenExpression($2); }
+    | SUB Expression { $$ = new Negative($2); }
     | Expression MULT Expression { $$ = new Multiply($1, $3); }
     | Expression DIV Expression { $$ = new Divide($1, $3); }
     | Expression MOD Expression { $$ = new Mod($1, $3); }

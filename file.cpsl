@@ -12,6 +12,8 @@ hello = 1 * 2;
 hello = 1 / 1;
 hello = 1 % 1;
 hello = ~10;
+hello = -50;
+parenExpressionTest = (40 + 40);
 
 BEGIN
 
