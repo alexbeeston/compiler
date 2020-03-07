@@ -38,6 +38,8 @@ set(calc_srcs
 		constructs/expressions/Sub.cpp
 		constructs/expressions/Multiply.cpp
 		constructs/expressions/Divide.cpp
+		constructs/expressions/Mod.cpp
+		constructs/expressions/Negate.cpp
 
 
 		constructs/prelude/types/BaseType.cpp

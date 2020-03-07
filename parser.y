@@ -55,6 +55,8 @@
 #include "constructs/expressions/Sub.h"
 #include "constructs/expressions/Multiply.h"
 #include "constructs/expressions/Divide.h"
+#include "constructs/expressions/Mod.h"
+#include "constructs/expressions/Negate.h"
 
 extern int yylex();
 void yyerror(const char*);
@@ -285,7 +287,7 @@ Expression : NumericLiteral { $$ = new Expression(); }
     | SUB Expression { $$ = new Expression(); }
     | Expression MULT Expression { $$ = new Multiply($1, $3); }
     | Expression DIV Expression { $$ = new Divide($1, $3); }
-    | Expression MOD Expression { $$ = new Expression(); }
+    | Expression MOD Expression { $$ = new Mod($1, $3); }
     | Expression ADD Expression { $$ = new Add($1, $3); }
     | Expression SUB Expression { $$ = new Sub($1, $3); }
     | Expression EQUAL Expression { $$ = new NumericLit(-1); }
@@ -295,7 +297,7 @@ Expression : NumericLiteral { $$ = new Expression(); }
     | Expression GREATER_THAN Expression { $$ = new GreaterThan($1, $3); }
     | Expression GREATER_THAN_OR_EQUAL Expression { $$ = new GreaterThanEqual($1, $3); }
     | Expression AND Expression { $$ = new And($1, $3); }
-    | NEGATION Expression { $$ = new Expression(); }
+    | NEGATION Expression { $$ = new Negate($2); }
     | Expression OR Expression { $$ = new Or($1, $3); }
     | IDENT LPAREN MysterySet RPAREN { $$ = new Expression(); }
     | CHR LPAREN Expression RPAREN { $$ = new Expression(); }
