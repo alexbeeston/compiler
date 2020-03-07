@@ -5,12 +5,10 @@
 #ifndef COMPILERS_GREATTHAN_H
 #define COMPILERS_GREATTHAN_H
 
-#include "Expression.h"
+#include "BinaryOp.h"
 
-struct GreaterThan:Expression
+struct GreaterThan:BinaryOp
 {
-    Expression* left;
-    Expression* right;
     GreaterThan(Expression*, Expression*);
     void print() override;
 };

@@ -24,6 +24,7 @@ set(calc_srcs
 		constructs/LValue.cpp
 		constructs/expressions/StringLit.cpp
 		constructs/expressions/Expression.cpp
+		constructs/expressions/BinaryOp.cpp
 		constructs/expressions/CharLit.cpp
 		constructs/expressions/NumericLit.cpp
 		constructs/expressions/Or.cpp

@@ -5,12 +5,10 @@
 #ifndef COMPILERS_ADD_H
 #define COMPILERS_ADD_H
 
-#include "Expression.h"
+#include "BinaryOp.h"
 
-struct Add:Expression
+struct Add:BinaryOp
 {
-    Expression* left;
-    Expression* right;
     Add(Expression*, Expression*);
     void print() override;
 };

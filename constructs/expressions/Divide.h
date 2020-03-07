@@ -5,12 +5,10 @@
 #ifndef COMPILERS_DIVIDE_H
 #define COMPILERS_DIVIDE_H
 
-#include "Expression.h"
+#include "BinaryOp.h"
 
-struct Divide:Expression
+struct Divide:BinaryOp
 {
-    Expression* left;
-    Expression* right;
     Divide(Expression*, Expression*);
     void print() override;
 };

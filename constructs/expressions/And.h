@@ -5,12 +5,10 @@
 #ifndef COMPILERS_AND_H
 #define COMPILERS_AND_H
 
-#include "Expression.h"
+#include "BinaryOp.h"
 
-struct And:Expression
+struct And:BinaryOp
 {
-    Expression* left;
-    Expression* right;
     And(Expression*, Expression*);
     void print() override;
 };

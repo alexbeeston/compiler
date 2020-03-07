@@ -5,12 +5,10 @@
 #ifndef COMPILERS_LESSTHANEQUAL_H
 #define COMPILERS_LESSTHANEQUAL_H
 
-#include "Expression.h"
+#include "BinaryOp.h"
 
-struct LessThanEqual:Expression
+struct LessThanEqual:BinaryOp
 {
-    Expression* left;
-    Expression* right;
     LessThanEqual(Expression*, Expression*);
     void print() override;
 };

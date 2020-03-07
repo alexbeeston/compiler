@@ -5,12 +5,10 @@
 #ifndef COMPILERS_LESSTHAN_H
 #define COMPILERS_LESSTHAN_H
 
-#include "Expression.h"
+#include "BinaryOp.h"
 
-struct LessThan:Expression
+struct LessThan:BinaryOp
 {
-    Expression* left;
-    Expression* right;
     LessThan(Expression*, Expression*);
     void print() override;
 };

@@ -5,12 +5,10 @@
 #ifndef COMPILERS_NOTEQUAL_H
 #define COMPILERS_NOTEQUAL_H
 
-#include "Expression.h"
+#include "BinaryOp.h"
 
-struct NotEqual:Expression
+struct NotEqual:BinaryOp
 {
-    Expression* left;
-    Expression* right;
     NotEqual(Expression*, Expression*);
     void print() override;
 };

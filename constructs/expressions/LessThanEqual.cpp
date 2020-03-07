@@ -2,10 +2,8 @@
 
 #include "LessThanEqual.h"
 
-LessThanEqual::LessThanEqual(Expression* p_l, Expression* p_r)
+LessThanEqual::LessThanEqual(Expression* p_l, Expression* p_r):BinaryOp(p_l, p_r)
 {
-    left = p_l;
-    right = p_r;
 }
 
 void LessThanEqual::print()

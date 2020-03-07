@@ -2,10 +2,8 @@
 
 #include "And.h"
 
-And::And(Expression* p_left, Expression* p_right)
+And::And(Expression* p_left, Expression* p_right):BinaryOp(p_left, p_right)
 {
-    left = p_left;
-    right = p_right;
 }
 
 void And::print()

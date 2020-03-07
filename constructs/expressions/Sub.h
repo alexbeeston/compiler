@@ -5,12 +5,10 @@
 #ifndef COMPILERS_SUB_H
 #define COMPILERS_SUB_H
 
-#include "Expression.h"
+#include "BinaryOp.h"
 
-struct Sub:Expression
+struct Sub:BinaryOp
 {
-    Expression* left;
-    Expression* right;
     Sub(Expression*, Expression*);
     void print() override;
 };

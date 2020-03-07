@@ -5,12 +5,10 @@
 #ifndef COMPILERS_OR_H
 #define COMPILERS_OR_H
 
-#include "Expression.h"
+#include "BinaryOp.h"
 
-struct Or:Expression
+struct Or:BinaryOp
 {
-    Expression* left;
-    Expression* right;
     Or(Expression*, Expression*);
     void print() override;
 };

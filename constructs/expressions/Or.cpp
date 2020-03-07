@@ -2,10 +2,8 @@
 
 #include "Or.h"
 
-Or::Or(Expression* p_left, Expression* p_right)
+Or::Or(Expression* p_left, Expression* p_right):BinaryOp(p_left, p_right)
 {
-    left = p_left;
-    right = p_right;
 }
 
 void Or::print()

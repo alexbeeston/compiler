@@ -5,12 +5,10 @@
 #ifndef COMPILERS_MULTIPLY_H
 #define COMPILERS_MULTIPLY_H
 
-#include "Expression.h"
+#include "BinaryOp.h"
 
-struct Multiply:Expression
+struct Multiply:BinaryOp
 {
-    Expression* left;
-    Expression* right;
     Multiply(Expression*, Expression*);
     void print() override;
 };
