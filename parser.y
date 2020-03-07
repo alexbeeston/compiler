@@ -288,7 +288,7 @@ ConstantList : ConstantList Constant { $1->push_back($2); }
     | { $$ = new std::vector<Constant*>; };
 
 Constant : IDENT EQUAL Expression DONE { $$ = new Constant($1, $3); };
-Expression : NumericLiteral { $$ = new Expression(); }
+Expression : NumericLiteral
     | CHARLIT { $$ = new CharLit($1); }
     | STRLIT { $$ = new StringLit($1); }
     | LPAREN Expression RPAREN { $$ = new ParenExpression($2); }
@@ -317,8 +317,8 @@ Expression : NumericLiteral { $$ = new Expression(); }
         MysterySetList : MysterySetList MysterySetListItem | ;
             MysterySetListItem : COMMA Expression;
     NumericLiteral : DECINT { $$ = new NumericLit($1); }
-    | HEXINT
-    | OCTINT;
+    | HEXINT { $$ = new NumericLit(-1); }
+    | OCTINT { $$ = new NumericLit(-1); };
 TypeDecl : TYPE TypeListItem TypeList { $3->insert($3->begin(), $2); $$ = $3; }
     | { $$ = nullptr; };
 TypeList : TypeList TypeListItem { $1->push_back($2); }

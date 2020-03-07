@@ -1,5 +1,7 @@
 const
 dog = 8 | 9;
+charLit = 'a';
+stringLit = "hello world";
 cat = 8 & 0;
 dog = 8 <> 8;
 dog = 9 <= 10;
@@ -18,7 +20,7 @@ hello = chr(50);
 hello = ord(40 - 10);
 dog = pred(true);
 dcat = succ(false);
-lValueExpression = lValue;
+lValueExpression = lValue[hello[40]];
 
 BEGIN
 
