@@ -59,6 +59,12 @@
 #include "constructs/expressions/Negate.h"
 #include "constructs/expressions/Negative.h"
 #include "constructs/expressions/ParenExpression.h"
+#include "constructs/expressions/ChrFunc.h"
+#include "constructs/expressions/OrdFunc.h"
+#include "constructs/expressions/PredFunc.h"
+#include "constructs/expressions/SuccFunc.h"
+#include "constructs/expressions/LValueExpression.h"
+
 
 extern int yylex();
 void yyerror(const char*);
@@ -302,11 +308,11 @@ Expression : NumericLiteral { $$ = new Expression(); }
     | NEGATION Expression { $$ = new Negate($2); }
     | Expression OR Expression { $$ = new Or($1, $3); }
     | IDENT LPAREN MysterySet RPAREN { $$ = new Expression(); }
-    | CHR LPAREN Expression RPAREN { $$ = new Expression(); }
-    | ORD LPAREN Expression RPAREN { $$ = new Expression(); }
-    | PRED LPAREN Expression RPAREN { $$ = new Expression(); }
-    | SUCC LPAREN Expression RPAREN { $$ = new Expression(); }
-    | LValue { $$ = new Expression(); };
+    | CHR LPAREN Expression RPAREN { $$ = new ChrFunc($3); }
+    | ORD LPAREN Expression RPAREN { $$ = new OrdFunc($3); }
+    | PRED LPAREN Expression RPAREN { $$ = new PredFunc($3); }
+    | SUCC LPAREN Expression RPAREN { $$ = new SuccFunc($3); }
+    | LValue { $$ = new LValueExpression($1); };
     MysterySet : Expression MysterySetList | ;
         MysterySetList : MysterySetList MysterySetListItem | ;
             MysterySetListItem : COMMA Expression;

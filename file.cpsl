@@ -14,6 +14,11 @@ hello = 1 % 1;
 hello = ~10;
 hello = -50;
 parenExpressionTest = (40 + 40);
+hello = chr(50);
+hello = ord(40 - 10);
+dog = pred(true);
+dcat = succ(false);
+lValueExpression = lValue;
 
 BEGIN
 

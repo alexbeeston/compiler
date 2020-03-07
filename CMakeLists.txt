@@ -42,8 +42,11 @@ set(calc_srcs
 		constructs/expressions/Negate.cpp
 		constructs/expressions/Negative.cpp
 		constructs/expressions/ParenExpression.cpp
-
-
+		constructs/expressions/ChrFunc.cpp
+		constructs/expressions/OrdFunc.cpp
+		constructs/expressions/PredFunc.cpp
+		constructs/expressions/SuccFunc.cpp
+		constructs/expressions/LValueExpression.cpp
 		constructs/prelude/types/BaseType.cpp
 		constructs/prelude/types/SimpleType.cpp
 		constructs/prelude/types/ArrayType.cpp
