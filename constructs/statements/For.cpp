@@ -12,13 +12,11 @@ For::For(Expression* p_left, int p_location, Expression* p_right, std::vector<St
 
 void For::print()
 {
-    std::cout << "For Statement: left Expression - ";
+    std::cout << "FOR";
     left->print();
-    std::cout << " right expression - ";
-    right->print();
-    std::cout << " statements - ";
-    for (Statement* statement : *statements) statement->print();
-    std::cout << " location - ";
+    std::cout << " := ";
     if (location == 0) std::cout << "down to";
     else std::cout << "to";
+    right->print();
+    for (Statement* statement : *statements) statement->print();
 }

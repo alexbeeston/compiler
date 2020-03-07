@@ -11,10 +11,13 @@ If::If(ConditionalSequence* p_ifBlock, std::vector<ConditionalSequence*>* p_else
 
 void If::print()
 {
-    std::cout << "If Statement. If Block: ";
+    std::cout << "if";
     ifBlock->print();
-    std::cout << " Else If Blocks:";
-    for (ConditionalSequence* elseIfBlock : *elseIfBlocks) elseIfBlock->print();
-    std::cout << " Else Block: ";
+    for (ConditionalSequence* elseIfBlock : *elseIfBlocks)
+    {
+        std::cout << " else";
+        elseIfBlock->print();
+    }
+    std::cout << " else ";
     for (Statement* statement : *elseBlock) statement->print();
 }

@@ -6,14 +6,16 @@
 #define COMPILERS_PROCEDURECALL_H
 
 #include <vector>
+#include <string>
 
 #include "Statement.h"
 #include "../expressions/Expression.h"
 
 struct ProcedureCall:Statement
 {
+    std::string* ident;
     std::vector<Expression*>* expressions;
-    ProcedureCall(std::vector<Expression*>*);
+    ProcedureCall(char*, std::vector<Expression*>*);
     void print() override;
 };
 #endif //COMPILERS_PROCEDURECALL_H

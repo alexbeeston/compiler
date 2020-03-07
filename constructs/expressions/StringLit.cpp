@@ -6,7 +6,6 @@
 StringLit::StringLit(char* p_value):Expression()
 {
     stringLitValue = std::string(p_value);
-    contents = STRING;
 }
 
 void StringLit::print()

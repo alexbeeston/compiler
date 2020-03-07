@@ -3,7 +3,8 @@
 #include "Expression.h"
 #include "CharLit.h"
 
-CharLit::CharLit(char p_charLitValue):Expression() {
+CharLit::CharLit(char p_charLitValue):Expression()
+{
     charLitValue = p_charLitValue;
 }
 

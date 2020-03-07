@@ -23,5 +23,6 @@ dcat = succ(false);
 lValueExpression = lValue[hello[40]];
 
 BEGIN
+call(dog, cat);
 
 END.

@@ -7,7 +7,6 @@
 NumericLit::NumericLit(int p_numericLitValue) : Expression ()
 {
     numericLitValue = p_numericLitValue;
-    contents = NUMBER;
 }
 
 void NumericLit::print()

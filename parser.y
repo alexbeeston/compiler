@@ -379,7 +379,7 @@ Statement : Assignment
     CommaExpressionList : CommaExpressionList CommaExpression { $1->push_back($2); }
         | { $$ = new std::vector<Expression*>; };
         CommaExpression : COMMA Expression { $$ = $2; };
-    ProcedureCallStatement : IDENT LPAREN ProcedureParams RPAREN { $$ = new ProcedureCall($3); };
+    ProcedureCallStatement : IDENT LPAREN ProcedureParams RPAREN { $$ = new ProcedureCall($1, $3); };
         ProcedureParams : Expression CommaExpressionList { $2->insert($2->begin(), $1); $$ = $2; }
             | { $$ = new std::vector<Expression*>; };
 

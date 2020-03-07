@@ -9,5 +9,4 @@ NullStatement::NullStatement()
 
 void NullStatement::print()
 {
-    std::cout << "Null Statement";
 }
