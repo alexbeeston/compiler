@@ -84,11 +84,10 @@ int integer;
 char* charPointer;
 char character;
 
+struct LValueBase* lValueBasePointer;
 struct LValue* lValuePointer;
 std::vector<LValue*>* lValuePointerVectorPointer;
 std::vector<LValueBase*>* lValueBasePointerVectorPointer;
-struct LValueBase* lValueBasePointer;
-
 
 std::vector<char*>* charPointerVectorPointer;
 struct Constant* constantPointer;

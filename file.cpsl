@@ -1,7 +1,6 @@
 const
-dog = 10;
+dog = testing.hello[10].dog[20 - 40];
 
 BEGIN
-call(dog, cat);
-
+dog := 10;
 END.
