@@ -1,26 +1,5 @@
 const
-dog = 8 | 9;
-charLit = 'a';
-stringLit = "hello world";
-cat = 8 & 0;
-dog = 8 <> 8;
-dog = 9 <= 10;
-dog = 9 >= 11;
-dog = 0 > 1;
-dog = 1 < 3;
-hello = 1 + 1;
-hello = 1 - 1;
-hello = 1 * 2;
-hello = 1 / 1;
-hello = 1 % 1;
-hello = ~10;
-hello = -50;
-parenExpressionTest = (40 + 40);
-hello = chr(50);
-hello = ord(40 - 10);
-dog = pred(true);
-dcat = succ(false);
-lValueExpression = lValue[hello[40]];
+dog = 10;
 
 BEGIN
 call(dog, cat);

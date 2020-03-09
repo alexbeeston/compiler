@@ -10,9 +10,12 @@
 #include "constructs/expressions/StringLit.h"
 #include "constructs/prelude/constants/Constant.h"
 #include "constructs/Program.h"
+
 #include "constructs/LValue.h"
+#include "constructs/LValueBase.h"
 #include "constructs/LValueIdent.h"
-#include "constructs/LValueExpression.h"
+#include "constructs/LValueWithExpression.h"
+
 #include "constructs/prelude/Prelude.h"
 
 #include "constructs/expressions/CharLit.h"
@@ -80,7 +83,13 @@ float val;
 int integer;
 char* charPointer;
 char character;
+
+struct LValue* lValuePointer;
 std::vector<LValue*>* lValuePointerVectorPointer;
+std::vector<LValueBase*>* lValueBasePointerVectorPointer;
+struct LValueBase* lValueBasePointer;
+
+
 std::vector<char*>* charPointerVectorPointer;
 struct Constant* constantPointer;
 
@@ -126,10 +135,13 @@ struct Return* returnStatementPointer;
 struct Read* readStatementPointer;
 struct Write* writeStatementPointer;
 struct ProcedureCall* procedureCallStatementPointer;
-
 }
 %type <preludePointer> Prelude
+
 %type <lValuePointer> LValue
+%type <lValueBasePointerVectorPointer>  LValueBaseList
+%type <lValueBasePointer> LValueBaseItem
+
 %type <lValuePointerVectorPointer> LValueCommaList
 %type <lValuePointer> LValueCommaListItem
 
@@ -314,6 +326,7 @@ Expression : NumericLiteral
     | PRED LPAREN Expression RPAREN { $$ = new PredFunc($3); }
     | SUCC LPAREN Expression RPAREN { $$ = new SuccFunc($3); }
     | LValue { $$ = new LValueExpression($1); };
+
     MysterySet : Expression MysterySetList | ;
         MysterySetList : MysterySetList MysterySetListItem | ;
             MysterySetListItem : COMMA Expression;
@@ -356,10 +369,11 @@ Statement : Assignment
     | ProcedureCallStatement
     | { $$ = new NullStatement(); };
     Assignment : LValue ASSIGN Expression { $$ = new Assignment($1, $3); };
-        LValue : IDENT LValueList { $$ = new LValue(); };
-        LValueList : LValueList LValueItem | ;
-        LValueItem : DOT IDENT
-            | LBRACKET Expression RBRACKET;
+        LValue : IDENT LValueBaseList { $2->insert($2->begin(), new LValueIdent($1)); $$ = new LValue($2); };
+        LValueBaseList : LValueBaseList LValueBaseItem { $1->push_back($2); }
+            | { $$ = new std::vector<LValueBase*>; };
+        LValueBaseItem : DOT IDENT { $$ = new LValueIdent($2); }
+            | LBRACKET Expression RBRACKET { $$ = new LValueWithExpression($2); };
     IfStatement : IF Expression THEN StatementSequence ConditionalSequenceList Else END { $$ = new If(new ConditionalSequence($2, $4), $5, $6); };
         ConditionalSequenceList : ConditionalSequenceList ConditionalSequence { $1->push_back($2); }
             | { $$ = new std::vector<ConditionalSequence*>; };

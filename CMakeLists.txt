@@ -22,8 +22,9 @@ set(calc_srcs
 		constructs/
 		constructs/Program.cpp
 		constructs/LValue.cpp
+		constructs/LValueBase.cpp
 		constructs/LValueIdent.cpp
-		constructs/LValueExpression.cpp
+	        constructs/LValueWithExpression.cpp
 		constructs/expressions/StringLit.cpp
 		constructs/expressions/Expression.cpp
 		constructs/expressions/BinaryOp.cpp

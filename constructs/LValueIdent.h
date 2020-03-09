@@ -7,12 +7,12 @@
 
 #include <string>
 
-#include "LValue.h"
+#include "LValueBase.h"
 
-struct LValueIdent:LValue
+struct LValueIdent:LValueBase
 {
     std::string* ident;
-    LValueIdent(std::string*);
+    LValueIdent(char*);
     void print() override;
 };
 #endif //COMPILERS_LVALUEIDENT_H

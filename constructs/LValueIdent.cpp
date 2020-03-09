@@ -1,10 +1,11 @@
 #include <iostream>
+#include <string>
 
 #include "LValueIdent.h"
 
-LValueIdent::LValueIdent(std::string* p_ident)
+LValueIdent::LValueIdent(char* p_ident)
 {
-    ident = p_ident;
+    ident = new std::string(p_ident);
 }
 
 void LValueIdent::print()

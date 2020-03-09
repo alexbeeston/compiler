@@ -5,9 +5,14 @@
 #ifndef COMPILERS_LVALUE_H
 #define COMPILERS_LVALUE_H
 
+#include <vector>
+
+#include "LValueBase.h"
+
 struct LValue
 {
-    LValue();
+    std::vector<LValueBase*>* sequence;
+    LValue(std::vector<LValueBase*>*);
     void print();
 };
 #endif //COMPILERS_LVALUE_H
