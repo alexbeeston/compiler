@@ -381,7 +381,7 @@ Statement : Assignment
             | { $$ = new std::vector<Statement*>;} ;
     WhileStatement : WHILE Expression DO StatementSequence END { $$ = new While($2, $4); };
     RepeatStatement : REPEAT StatementSequence UNTIL Expression { $$ = new Repeat($4, $2); };
-    ForStatement : FOR IDENT ASSIGN Expression Location Expression DO StatementSequence END { $$ = new For($4, $5, $6, $8); };
+    ForStatement : FOR IDENT ASSIGN Expression Location Expression DO StatementSequence END { $$ = new For($2, $4, $5, $6, $8); };
         Location : TO { $$ = 1;} | DOWNTO { $$ = 0; };
     StopStatement : STOP;
     ReturnStatement : RETURN_TOKEN { $$ = new Return(); } | RETURN_TOKEN Expression { $$ = new Return($2); };
