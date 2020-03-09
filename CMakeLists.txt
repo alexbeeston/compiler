@@ -39,6 +39,7 @@ set(calc_srcs
 		constructs/expressions/LessThan.cpp
 		constructs/expressions/Add.cpp
 		constructs/expressions/Sub.cpp
+		constructs/expressions/FunctionCall.cpp
 		constructs/expressions/Multiply.cpp
 		constructs/expressions/Divide.cpp
 		constructs/expressions/Mod.cpp

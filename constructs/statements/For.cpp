@@ -14,11 +14,11 @@ For::For(char* p_ident, Expression* p_left, int p_location, Expression* p_right,
 
 void For::print()
 {
-    std::cout << "FOR " << *ident << " = ";
+    std::cout << "FOR " << *ident << " := ";
     left->print();
-    std::cout << " := ";
-    if (location == 0) std::cout << "down to";
-    else std::cout << "to";
+    std::cout << " ";
+    if (location == 0) std::cout << "down to ";
+    else std::cout << "to ";
     right->print();
     std::cout << "  ";
     for (Statement* statement : *statements)

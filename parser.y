@@ -57,6 +57,7 @@
 #include "constructs/expressions/GreaterThan.h"
 #include "constructs/expressions/LessThan.h"
 #include "constructs/expressions/Add.h"
+#include "constructs/expressions/FunctionCall.h"
 #include "constructs/expressions/Sub.h"
 #include "constructs/expressions/Multiply.h"
 #include "constructs/expressions/Divide.h"
@@ -319,16 +320,13 @@ Expression : NumericLiteral
     | Expression AND Expression { $$ = new And($1, $3); }
     | NEGATION Expression { $$ = new Negate($2); }
     | Expression OR Expression { $$ = new Or($1, $3); }
-    | IDENT LPAREN MysterySet RPAREN { $$ = new Expression(); }
+    | IDENT LPAREN ProcedureParams RPAREN { $$ = new FunctionCall($1, $3); }
     | CHR LPAREN Expression RPAREN { $$ = new ChrFunc($3); }
     | ORD LPAREN Expression RPAREN { $$ = new OrdFunc($3); }
     | PRED LPAREN Expression RPAREN { $$ = new PredFunc($3); }
     | SUCC LPAREN Expression RPAREN { $$ = new SuccFunc($3); }
     | LValue { $$ = new LValueExpression($1); };
 
-    MysterySet : Expression MysterySetList | ;
-        MysterySetList : MysterySetList MysterySetListItem | ;
-            MysterySetListItem : COMMA Expression;
     NumericLiteral : DECINT { $$ = new NumericLit($1); }
     | HEXINT { $$ = new NumericLit(-1); }
     | OCTINT { $$ = new NumericLit(-1); };
