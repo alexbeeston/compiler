@@ -10,6 +10,11 @@ Read::Read(LValue* p_lValue, std::vector<LValue*>* p_lvals)
 
 void Read::print()
 {
-    std::cout << "Read Statement: lValues: ";
-    for (LValue* lVal : *lValues) lVal->print();
+    std::cout << "read(";
+    for (LValue* lVal : *lValues)
+    {
+        lVal->print();
+        std::cout << ",";
+    }
+    std::cout << ")";
 }

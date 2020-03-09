@@ -9,5 +9,5 @@ Stop::Stop()
 
 void Stop::print()
 {
-    std::cout << "Stop Statement";
+    std::cout << "stop";
 }

@@ -10,8 +10,12 @@ While::While(Expression* p_expression, std::vector<Statement*>* p_statements)
 
 void While::print()
 {
-    std::cout << "While Statement: Expression - ";
+    std::cout << "while ";
     expression->print();
-    std::cout << " Statements - ";
-    for (Statement* statement : *statements) statement->print();
+    std::cout << " do ";
+    for (Statement* statement : *statements)
+    {
+        statement->print();
+        std::cout << "; ";
+    }
 }

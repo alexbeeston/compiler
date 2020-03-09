@@ -11,6 +11,10 @@ Write::Write(Expression* p_expression1, std::vector<Expression*>* p_expressions)
 
 void Write::print()
 {
-    std::cout << "Write Statement: ";
-    for (Expression* express : *expressions) express->print();
+    std::cout << "write(";
+    for (Expression* express : *expressions)
+    {
+        express->print();
+        std::cout << ", ";
+    }
 }
