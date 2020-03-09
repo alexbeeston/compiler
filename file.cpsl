@@ -1,6 +1,7 @@
 const
 dog = testing.hello[10].dog[20 - 40];
 
+
 BEGIN
 dog := 10;
 read(dog, dog[10])

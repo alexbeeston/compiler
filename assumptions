@@ -1,3 +1,1 @@
-it is permissible to have the VAR heading in the prelude and then have zero variable definitions. Not allowed by the specs, but I'm making the assumption that this won't happen and moving on. Not a serious syntactic error. Same with the type declarations. You could have TYPE and then nothing, and that is accepted for now.
-it's okay to have the order of the items in a record type be out of order. Same with variable declarations, I think. 
 -1 is showing up as a semantic value for some expressions. Can't remember which, but it's a placeholder anyway."

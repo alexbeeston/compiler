@@ -343,7 +343,7 @@ Type : SimpleType
         TypedLists : TypedLists TypedList { $1->push_back($2); }
             | { $$ = new std::vector<TypedList*>; };
             TypedList: IdentList COLON Type DONE { $$ = new TypedList($1, $3); };
-                IdentList : IDENT IdentListExtraSet { $2->push_back($1); $$ = $2;} ;
+                IdentList : IDENT IdentListExtraSet { $2->insert($2->begin(), $1); $$ = $2;} ;
                     IdentListExtraSet : IdentListExtraSet IdentExtra { $1->push_back($2); }
                         | { $$ = new std::vector<char*>; };
                         IdentExtra : COMMA IDENT { $$ = $2; };
