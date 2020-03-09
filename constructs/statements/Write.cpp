@@ -17,4 +17,5 @@ void Write::print()
         express->print();
         std::cout << ", ";
     }
+    std::cout << ")";
 }
