@@ -3,7 +3,6 @@
 
 struct BaseType
 {
-    char* ident;
     BaseType();
     virtual void print();
 };

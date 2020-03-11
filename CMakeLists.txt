@@ -19,7 +19,10 @@ set(calc_srcs
   symbol_table.cpp
   ${BISON_Parser_OUTPUTS}
   ${FLEX_Scanner_OUTPUTS}
-		constructs/
+		symbolTable/Scope.cpp
+		symbolTable/SymbolTable.cpp
+
+
 		constructs/Program.cpp
 		constructs/LValue.cpp
 		constructs/LValueBase.cpp
