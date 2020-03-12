@@ -12,5 +12,7 @@ int main()
 	yyparse();
 	std::cout << std::endl;
     SymbolTable st;
+    st.prettyPrint();
+    std::cout << std::endl;
 
 }
