@@ -1,6 +1,9 @@
-type
+const
+dog = 10;
+hello = 20;
 
-i = integer;
+type
+char = newType;
 
 BEGIN
 dog := 10;

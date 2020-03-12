@@ -21,7 +21,7 @@ struct SymbolTable
     BaseType* lookUpType(std::string);
     Routine* lookUpRoutine(std::string);
 
-    SymbolTable();
+    SymbolTable(Prelude);
     void prettyPrint();
 
 };

@@ -3,9 +3,9 @@
 #include "SymbolTable.h"
 #include "Scope.h"
 
-SymbolTable::SymbolTable()
+SymbolTable::SymbolTable(Prelude topLevelPrelude)
 {
-    levels.push_back(Scope());
+    levels.push_back(Scope(topLevelPrelude));
 }
 
 

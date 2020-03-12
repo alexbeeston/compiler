@@ -15,10 +15,10 @@
 
 struct Scope
 {
-    std::map<std::string, Expression*> expressions;
-    std::map<std::string, BaseType*> types;
-    std::map<std::string, Routine*> routines;
-    Scope();
+    std::map<std::string, Expression> expressions;
+    std::map<std::string, BaseType> types;
+    std::map<std::string, Routine> routines;
+    Scope(Prelude);
     void prettyPrint();
     void printTab();
 };
