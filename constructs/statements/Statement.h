@@ -8,6 +8,7 @@
 struct Statement
 {
     Statement();
+    virtual void emit();
     virtual void print();
 };
 #endif //COMPILERS_STATEMENT_H

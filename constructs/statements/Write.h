@@ -14,6 +14,7 @@ struct Write:Statement
 {
     std::vector<Expression*>* expressions;
     Write(Expression*, std::vector<Expression*>*);
+    void emit() override;
     void print() override;
 };
 #endif //COMPILERS_WRITE_H

@@ -1,12 +1,9 @@
 const
-dog = 10;
-hello = 20;
+ int = 5;
+ char = 'a';
+ bool = true;
+ str = "Hello world";
 
-type
-char = newType;
-custom = dog;
-
-BEGIN
-dog := 10;
-read(dog, dog[10])
-END.
+begin
+stop;
+end.

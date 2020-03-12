@@ -12,5 +12,7 @@ make
 #	cat $1 | ./calc > 
 #fi
 
+echo "===== Compiling to assembly.asm ====="
 cat $1 | ./calc > assembly.asm
+echo "====== Running assembly.asm ====="
 java -jar mars.jar nc assembly.asm

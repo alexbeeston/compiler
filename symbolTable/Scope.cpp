@@ -7,9 +7,12 @@
 Scope::Scope(Prelude topLevelPrelude)
 {
     // add constants
-    for (Constant* constant : *topLevelPrelude.constants)
+    if (topLevelPrelude.constants != nullptr)
     {
-        expressions[*constant->identifier] = *constant->value;
+        for (Constant* constant : *topLevelPrelude.constants)
+        {
+            expressions[*constant->identifier] = *constant->value;
+        }
     }
 
     // initialize with primitive types
@@ -20,9 +23,12 @@ Scope::Scope(Prelude topLevelPrelude)
     }
 
     // add types
-    for (TypeDeclItem* type: *topLevelPrelude.types)
+    if (topLevelPrelude.types != nullptr)
     {
-        types[*type->ident] = *type->type;
+        for (TypeDeclItem* type: *topLevelPrelude.types)
+        {
+            types[*type->ident] = *type->type;
+        }
     }
 
     // add variables to a scope - I guess for each variable, we just check to make sure that is

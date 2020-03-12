@@ -19,3 +19,8 @@ void Write::print()
     }
     std::cout << ")";
 }
+
+void Write::emit()
+{
+    std::cout << "dog";
+}
