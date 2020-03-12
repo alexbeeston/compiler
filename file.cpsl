@@ -4,6 +4,7 @@ hello = 20;
 
 type
 char = newType;
+custom = dog;
 
 BEGIN
 dog := 10;

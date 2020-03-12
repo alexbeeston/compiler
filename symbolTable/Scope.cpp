@@ -34,16 +34,12 @@ void Scope::prettyPrint()
     std::cout << "\t Constants/Variables, which have an expressions:\n";
     for (std::pair<std::string, Expression> item: expressions)
     {
-        std::cout << "\t\t" << item.first << ": ";
-        item.second.print();
-        std::cout << "\n";
+        std::cout << "\t\t" << item.first << "\n";
     }
     std::cout << "\t Types:\n";
     for( std::pair<std::string, BaseType> type: types)
     {
-        std::cout << "\t\t" << type.first << " : ";
-        type.second.print();
-        std::cout << "\n";
+        std::cout << "\t\t" << type.first << " : " << "\n";
     }
     std::cout << "\t Functions:\n";
     std::cout << "\t\t[placeholder]\n";
