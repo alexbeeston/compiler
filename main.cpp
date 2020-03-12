@@ -17,5 +17,14 @@ int main()
 	std::cout << std::endl;
 
 	SymbolTable st = SymbolTable(*program->prelude);
-    st.prettyPrint();
+
+	std::cout << ".txt\n";
+	std::cout << ".globl main\n";
+	std::cout << "main:\n";
+	std::cout << "li $v0, 11\n";
+	std::cout << "la $a0, 'a'\n";
+	std::cout << "syscall\n";
+	std::cout << "li $v0, 10\n";
+	std::cout << "syscall\n";
+
 }

@@ -6,5 +6,5 @@ bld/parser.cpp
 bld/parser.hpp
 bld/Makefile
 cpslExamples/
-bld/mipsFiles
 bld/mars.jar
+bld/assembly.asm
