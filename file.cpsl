@@ -1,6 +1,6 @@
-const
-dog = testing.hello[10].dog[20 - 40];
+type
 
+i = integer;
 
 BEGIN
 dog := 10;

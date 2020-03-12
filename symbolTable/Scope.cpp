@@ -6,7 +6,11 @@
 
 Scope::Scope()
 {
-    types["dog"] = new SimpleType(new std::string("hello world"));
+    std::string primitives[] = {"integer", "char", "boolean", "string", "true", "false"};
+    for (std::string primitive : primitives)
+    {
+        types[std::string(primitive)] = new SimpleType(new std::string(primitive));
+    }
 
 }
 
@@ -17,6 +21,7 @@ void Scope::prettyPrint()
     {
         std::cout << "\t\t" << type.first << " : ";
         type.second->print();
+        std::cout << "\n";
     }
 
 }
