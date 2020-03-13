@@ -5,9 +5,12 @@
 
 void Expression::print()
 {
-    std::cout << "[Base Expression]";
+    std::cout << "[pretty print base expression]";
 }
 
-
+void Expression::emitLabel()
+{
+    std::cout << "[emit base expression]\n";
+}
 
 

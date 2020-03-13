@@ -11,5 +11,6 @@ struct Expression
 {
     Contents* contents;
     virtual void print();
+    virtual void emitLabel();
 };
 #endif //COMPILERS_EXPRESSION_H

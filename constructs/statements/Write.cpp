@@ -22,11 +22,25 @@ void Write::print()
 
 void Write::emit()
 {
+    // for each expression, create a label to be used in the system call
+    std::cout << "\n# declare labels for write statement\n";
     std::cout << ".data\n";
-    // for each expression, write out the data
     int counter = 0;
     for (Expression* expression : *expressions)
     {
-        std::cout << "message" + std::to_string(counter) + ": .asciiz \"String literal, assuming it's a string type\"\n";
+        std::cout << "message" + std::to_string(counter) + ": ";
+        expression->emitLabel();
+        std::cout << "\n";
+        counter++;
+    }
+
+    // for each expression, make a system call using the labels
+    std::cout << "\n# print labels for write statement\n";
+    std::cout << ".text\n";
+    for (int i = 0; i < counter; i++)
+    {
+       std::cout << "li \t $v0, 4\n";
+       std::cout << "la \t $a0, message" + std::to_string(i) + "\n";
+       std::cout << "syscall\n";
     }
 }

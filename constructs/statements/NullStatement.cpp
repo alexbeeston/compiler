@@ -10,3 +10,5 @@ NullStatement::NullStatement()
 void NullStatement::print()
 {
 }
+
+void NullStatement::emit() {}

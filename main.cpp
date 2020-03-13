@@ -18,4 +18,8 @@ int main()
 
 	SymbolTable st = SymbolTable(*program->prelude);
 	program->emit();
+
+
+
+	std::cout << "\n"; // do not move; we want to see PS1 after!
 }

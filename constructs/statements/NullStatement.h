@@ -11,5 +11,6 @@ struct NullStatement:Statement
 {
     NullStatement();
     void print() override;
+    void emit() override;
 };
 #endif //COMPILERS_NULLSTATEMENT_H

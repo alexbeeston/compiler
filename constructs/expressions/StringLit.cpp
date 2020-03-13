@@ -13,3 +13,7 @@ void StringLit::print()
     std::cout << stringLitValue;
 }
 
+void StringLit::emitLabel()
+{
+    std::cout << ".asciiz   " << stringLitValue;
+}
