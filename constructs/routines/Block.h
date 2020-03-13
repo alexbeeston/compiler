@@ -13,5 +13,6 @@ struct Block
     std::vector<Statement*>* statementSequence;
     Block(std::vector<Statement*>*);
     void print();
+    void emit();
 };
 #endif //COMPILERS_BLOCK_H

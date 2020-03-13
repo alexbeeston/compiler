@@ -22,5 +22,11 @@ void Write::print()
 
 void Write::emit()
 {
-    std::cout << "dog";
+    std::cout << ".data\n";
+    // for each expression, write out the data
+    int counter = 0;
+    for (Expression* expression : *expressions)
+    {
+        std::cout << "message" + std::to_string(counter) + ": .asciiz \"String literal, assuming it's a string type\"\n";
+    }
 }

@@ -16,3 +16,9 @@ void Program::prettyPrint()
     block->print();
 }
 
+void Program::emit()
+{
+//    prelude->emit();
+    // emit each function declaration
+    block->emit();
+}

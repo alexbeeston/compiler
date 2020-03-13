@@ -10,5 +10,6 @@ struct Program
     Block* block;
     Program(Prelude*, std::vector<Routine*>*, Block*);
     void prettyPrint();
+    void emit();
 };
 

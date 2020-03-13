@@ -18,3 +18,12 @@ void Block::print()
     }
     std::cout << "END\n";
 }
+
+void Block::emit()
+{
+    // emit each statement
+    for (Statement* statement : *statementSequence)
+    {
+        statement->emit();
+    }
+}

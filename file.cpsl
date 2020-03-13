@@ -1,9 +1,3 @@
-const
- int = 5;
- char = 'a';
- bool = true;
- str = "Hello world";
-
 begin
-stop;
+write("dog");
 end.

@@ -17,4 +17,5 @@ int main()
 	std::cout << std::endl;
 
 	SymbolTable st = SymbolTable(*program->prelude);
+	program->emit();
 }
