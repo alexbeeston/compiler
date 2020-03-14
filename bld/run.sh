@@ -16,5 +16,5 @@ echo "===== Compiling to assembly.asm ====="
 cat $1 | ./calc > assembly.asm
 echo "====== Running assembly.asm ====="
 java -jar mars.jar nc assembly.asm
-echo "===== assembly.asm ====="
+echo "===== std::cout ====="
 cat assembly.asm

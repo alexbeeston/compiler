@@ -16,8 +16,11 @@ int main()
 	yyparse();
 	std::cout << std::endl;
 
-	SymbolTable st = SymbolTable(*program->prelude);
-	program->emit();
+
+	program->prettyPrint();
+//	SymbolTable st = SymbolTable(*program->prelude);
+
+//	program->emit();
 
 
 

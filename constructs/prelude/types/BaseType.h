@@ -4,6 +4,7 @@
 struct BaseType
 {
     BaseType();
+    int size;
     virtual void print();
 };
 

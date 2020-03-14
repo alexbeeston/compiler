@@ -5,6 +5,7 @@
 
 BaseType::BaseType()
 {
+    size = 4;
 }
 
 void BaseType::print()

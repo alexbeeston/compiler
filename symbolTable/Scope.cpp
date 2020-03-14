@@ -3,6 +3,7 @@
 
 #include "Scope.h"
 #include "../constructs/prelude/types/SimpleType.h"
+#include "../constructs/expressions/Expression.h"
 
 Scope::Scope(Prelude topLevelPrelude)
 {
@@ -31,7 +32,15 @@ Scope::Scope(Prelude topLevelPrelude)
         }
     }
 
-    // add variables to a scope - I guess for each variable, we just check to make sure that is
+    // add variables
+    if (topLevelPrelude.vars != nullptr)
+    {
+        // check to make sure the type is in the symbol table already
+        for (Variable* var : *topLevelPrelude.vars)
+        {
+
+        }
+    }
     // has a valid type, and then add it to the expressions map with a new Expression
 }
 

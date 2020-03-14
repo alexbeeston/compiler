@@ -1,3 +1,6 @@
+var
+number, dog, cat : integer;
+
 begin
 write("Hello World!");
 end.

@@ -1,10 +1,27 @@
+#include <string>
+
 #include "Prelude.h"
 
 Prelude::Prelude(std::vector<Constant*>* p_constants, std::vector<TypeDeclItem*>* p_types, std::vector<TypedList*>* p_vars)
 {
    constants = p_constants;
    types = p_types;
-   vars = p_vars;
+   if (p_vars != nullptr)
+   {
+       vars = new std::vector<Variable*>;
+       for (TypedList* typedList : *p_vars)
+       {
+           int sizeOfType = typedList->type->size;
+           for (std::string* identifier : *typedList->identList)
+           {
+               vars->push_back(new Variable(*identifier, Expression(), sizeOfType, BaseType()));
+           }
+       }
+   }
+   else
+   {
+       vars = nullptr;
+   }
 }
 
 void Prelude::print()
@@ -24,7 +41,7 @@ void Prelude::print()
     if (vars != nullptr)
     {
         std::cout << "VAR" << std::endl;
-        for (TypedList* item : *vars) { item->print(); }
+        for (Variable* item : *vars) { item->print(); std::cout << "\n"; }
         std::cout << std::endl;
     }
 }
