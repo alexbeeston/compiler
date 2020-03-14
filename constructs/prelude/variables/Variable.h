@@ -14,9 +14,10 @@ struct Variable
 {
     std::string ident;
     Expression expression;
-    int offsetFromGlobal;
+    int address;
     BaseType type;
-    Variable(std::string, Expression, int, BaseType);
+    Variable();
+    Variable(std::string, Expression, BaseType);
     void print();
 };
 #endif //COMPILERS_VARIABLE_H

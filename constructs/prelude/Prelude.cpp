@@ -11,10 +11,9 @@ Prelude::Prelude(std::vector<Constant*>* p_constants, std::vector<TypeDeclItem*>
        vars = new std::vector<Variable*>;
        for (TypedList* typedList : *p_vars)
        {
-           int sizeOfType = typedList->type->size;
            for (std::string* identifier : *typedList->identList)
            {
-               vars->push_back(new Variable(*identifier, Expression(), sizeOfType, BaseType()));
+               vars->push_back(new Variable(*identifier, Expression(), *typedList->type));
            }
        }
    }

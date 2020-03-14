@@ -1,5 +1,5 @@
 var
-number, dog, cat : integer;
+dog, cat, hen, rat : integer;
 
 begin
 write("Hello World!");

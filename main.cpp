@@ -18,9 +18,10 @@ int main()
 
 
 	program->prettyPrint();
-//	SymbolTable st = SymbolTable(*program->prelude);
+	SymbolTable st = SymbolTable(*program->prelude);
+	st.prettyPrint();
 
-//	program->emit();
+	program->emit();
 
 
 
