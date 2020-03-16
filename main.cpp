@@ -17,9 +17,9 @@ int main()
 	std::cout << std::endl;
 
 
-	program->prettyPrint();
+//	program->prettyPrint();
 	SymbolTable st = SymbolTable(*program->prelude);
-	st.prettyPrint();
+//	st.prettyPrint();
 
 	program->emit();
 

@@ -13,4 +13,9 @@ void Expression::emitLabel()
     std::cout << "[emit base expression]\n";
 }
 
+std::string Expression::emit()
+{
+   return "[a register]" ;
+}
+
 

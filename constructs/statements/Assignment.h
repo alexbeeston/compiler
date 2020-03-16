@@ -15,5 +15,6 @@ struct Assignment:Statement
     LValue* lValue;
     Assignment(LValue*, Expression*);
     void print() override;
+    void emit() override;
 };
 #endif //COMPILERS_ASSIGNMENT_H

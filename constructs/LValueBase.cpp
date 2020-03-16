@@ -4,7 +4,7 @@
 
 LValueBase::LValueBase()
 {
-
+    keyString = std::string("[LValue Base keyString]");
 }
 
 void LValueBase::print()

@@ -47,6 +47,12 @@ Scope::Scope(Prelude topLevelPrelude)
     // has a valid type, and then add it to the expressions map with a new Expression
 }
 
+Variable Scope::lookUpVar(std::string key)
+{
+   // do something like variables.find(key) !-= variables.end();
+   return variables[key]; // assumes that the key exists
+}
+
 void Scope::prettyPrint()
 {
     std::cout << "\t Types:\n";

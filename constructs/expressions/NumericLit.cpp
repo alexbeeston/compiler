@@ -13,3 +13,9 @@ void NumericLit::print()
 {
     std::cout << numericLitValue;
 }
+
+std::string NumericLit::emit()
+{
+    std::cout << "lw    $t0, " << numericLitValue << "\n";
+    return "$t0";
+}

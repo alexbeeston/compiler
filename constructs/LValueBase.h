@@ -9,5 +9,6 @@ struct LValueBase
 {
     LValueBase();
     virtual void print();
+    std::string keyString;
 };
 #endif //COMPILERS_unique_guard_for_LValueBase

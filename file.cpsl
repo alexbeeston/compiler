@@ -1,6 +1,7 @@
 var
-dog, cat, hen, rat : integer;
+dog, cat: integer;
 
 begin
-write("Hello World!");
+dog := 10;
+cat := 20;
 end.
