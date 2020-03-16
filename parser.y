@@ -3,7 +3,6 @@
 #include <vector>
 #include <map>
 #include <string>
-#include "symbol_table.hpp"
 #include "global.h"
 
 #include "constructs/expressions/Expression.h"

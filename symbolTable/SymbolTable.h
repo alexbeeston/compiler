@@ -9,7 +9,7 @@
 #include <string>
 
 #include "Scope.h"
-#include "../constructs/expressions/Expression.h"
+#include "../constructs/prelude/variables/Variable.h"
 #include "../constructs/prelude/types/BaseType.h"
 #include "../constructs/routines/Routine.h"
 
@@ -17,9 +17,7 @@ struct SymbolTable
 {
     std::vector<Scope> levels;
 
-    Expression* lookUpExpression(std::string);
-    BaseType* lookUpType(std::string);
-    Routine* lookUpRoutine(std::string);
+    Variable retrieveVariable(std::string);
 
     SymbolTable(Prelude);
     void prettyPrint();

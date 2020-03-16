@@ -16,9 +16,8 @@ struct Scope
 {
     std::map<std::string, Variable> variables;
     std::map<std::string, BaseType> types;
-    std::map<std::string, Routine> routines;
 
-    Variable lookUpVar(std::string);
+    Variable lookUpVariable(std::string);
     Scope(Prelude);
     void prettyPrint();
     void printTab();

@@ -3,8 +3,6 @@
 
 #include "global.h"
 #include "constructs/Program.h"
-#include "symbolTable/SymbolTable.h"
-
 #include "constructs/prelude/types/BaseType.h"
 #include "constructs/prelude/types/SimpleType.h"
 
@@ -18,9 +16,8 @@ int main()
 
 
 //	program->prettyPrint();
-	SymbolTable st = SymbolTable(*program->prelude);
+    SymbolTable st = SymbolTable(*program->prelude);
 //	st.prettyPrint();
-
 	program->emit();
 
 

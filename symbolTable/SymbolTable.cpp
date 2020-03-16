@@ -19,3 +19,8 @@ void SymbolTable::prettyPrint()
     }
 }
 
+Variable SymbolTable::retrieveVariable(std::string key)
+{
+    levels[0].lookUpVariable(key); // assumes it's in the first scope
+}
+

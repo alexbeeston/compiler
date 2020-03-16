@@ -15,8 +15,6 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}")
 
 set(calc_srcs
   main.cpp
-  symbol_table.hpp
-  symbol_table.cpp
   ${BISON_Parser_OUTPUTS}
   ${FLEX_Scanner_OUTPUTS}
 		symbolTable/Scope.cpp

@@ -38,16 +38,15 @@ Scope::Scope(Prelude topLevelPrelude)
         int address = 0;
         for (Variable* var : *topLevelPrelude.vars)
         {
-//            // check to make sure the type is in the symbol table
+            // check to make sure the type is in the symbol table
             var->address = address;
             variables[var->ident] = *var;
             address += var->type.size;
         }
     }
-    // has a valid type, and then add it to the expressions map with a new Expression
 }
 
-Variable Scope::lookUpVar(std::string key)
+Variable Scope::lookUpVariable(std::string key)
 {
    // do something like variables.find(key) !-= variables.end();
    return variables[key]; // assumes that the key exists
@@ -69,9 +68,4 @@ void Scope::prettyPrint()
 
     std::cout << "\t Functions:\n";
     std::cout << "\t\t[placeholder]\n";
-}
-
-void Scope::printTab()
-{
-    std::cout << "\t";
 }

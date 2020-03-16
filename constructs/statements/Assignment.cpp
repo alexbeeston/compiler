@@ -1,9 +1,8 @@
 #include <iostream>
 
-#include "../../symbolTable/SymbolTable.h"
+#include "../../global.h"
+#include "../prelude/variables/Variable.h"
 #include "Assignment.h"
-
-extern SymbolTable st;
 
 Assignment::Assignment(LValue* p_lValue, Expression* p_expression)
 {
@@ -21,7 +20,9 @@ void Assignment::print()
 void Assignment::emit()
 {
     std::string location = expression->emit();
-    std::cout << "[sw function] LValue::lookUpValue: " << lValue->getKey() << ", offset from base: \n";
+    Variable var = st.retrieveVariable(lValue->getKey());
+    std::cout << "[sw function] address: " << var.address << "\n";
+
 }
 
 /*
