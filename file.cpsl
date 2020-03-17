@@ -2,6 +2,5 @@ var
 dog, cat: integer;
 
 begin
-dog := 10;
-cat := 20;
+write(10, 'C', "doggie", "I'm awesome");
 end.

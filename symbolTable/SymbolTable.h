@@ -16,6 +16,8 @@
 struct SymbolTable
 {
     std::vector<Scope> levels;
+    std::vector<std::string> strings;
+    int insertMessage(std::string);
 
     Variable retrieveVariable(std::string);
 

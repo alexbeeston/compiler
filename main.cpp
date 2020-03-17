@@ -21,7 +21,5 @@ int main()
 //	st.prettyPrint();
 	program->emit();
 
-
-
 	std::cout << "\n"; // do not move; we want to see PS1 after!
 }
