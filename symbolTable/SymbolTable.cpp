@@ -3,6 +3,8 @@
 #include "SymbolTable.h"
 #include "Scope.h"
 
+SymbolTable::SymbolTable() {}
+
 SymbolTable::SymbolTable(Prelude topLevelPrelude)
 {
     levels.push_back(Scope(topLevelPrelude));
@@ -24,3 +26,4 @@ Variable SymbolTable::retrieveVariable(std::string key)
     levels[0].lookUpVariable(key); // assumes it's in the first scope
 }
 
+void SymbolTable::testPrint() {std::cout << "Access to a symbol table.\n";}

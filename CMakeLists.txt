@@ -13,19 +13,16 @@ set(EXTRA_COMPILE_FLAGS "-g3 -std=c++14")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${EXTRA_COMPILE_FLAGS}")
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}")
 
-set(calc_srcs
-  main.cpp
-  ${BISON_Parser_OUTPUTS}
-  ${FLEX_Scanner_OUTPUTS}
-		symbolTable/Scope.cpp
-		symbolTable/SymbolTable.cpp
-
+set(
+		calc_srcs
+		main.cpp
 
 		constructs/Program.cpp
 		constructs/LValue.cpp
 		constructs/LValueBase.cpp
 		constructs/LValueIdent.cpp
 	        constructs/LValueWithExpression.cpp
+
 		constructs/prelude/variables/Variable.cpp
 		constructs/expressions/StringLit.cpp
 		constructs/expressions/Expression.cpp
@@ -53,6 +50,7 @@ set(calc_srcs
 		constructs/expressions/PredFunc.cpp
 		constructs/expressions/SuccFunc.cpp
 		constructs/expressions/LValueExpression.cpp
+
 		constructs/prelude/types/BaseType.cpp
 		constructs/prelude/types/SimpleType.cpp
 		constructs/prelude/types/ArrayType.cpp
@@ -61,12 +59,14 @@ set(calc_srcs
 		constructs/prelude/constants/Constant.cpp
 		constructs/prelude/Prelude.cpp
 		constructs/prelude/TypedList.cpp
+
         	constructs/routines/Routine.cpp
 		constructs/routines/Procedure.cpp
 		constructs/routines/Function.cpp
 		constructs/routines/ParameterSet.cpp
 		constructs/routines/Body.cpp
 		constructs/routines/Block.cpp
+
 		constructs/statements/Statement.cpp
 		constructs/statements/Assignment.cpp
 		constructs/statements/If.cpp
@@ -80,7 +80,14 @@ set(calc_srcs
 		constructs/statements/Write.cpp
 		constructs/statements/ProcedureCall.cpp
 		constructs/statements/NullStatement.cpp
+
+		symbolTable/SymbolTable.cpp
+		symbolTable/Scope.cpp
+
+  		${BISON_Parser_OUTPUTS}
+		${FLEX_Scanner_OUTPUTS}
 		)
+
 source_group("Calc" FILES ${calc_srcs})
 
 add_executable(calc ${calc_srcs})

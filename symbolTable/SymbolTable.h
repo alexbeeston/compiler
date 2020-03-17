@@ -20,7 +20,9 @@ struct SymbolTable
     Variable retrieveVariable(std::string);
 
     SymbolTable(Prelude);
+    SymbolTable();
     void prettyPrint();
+    void testPrint();
 
 };
 #endif //COMPILERS_SYMBOLTABLE_H
