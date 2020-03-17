@@ -39,7 +39,7 @@ Scope::Scope(Prelude topLevelPrelude)
         for (Variable* var : *topLevelPrelude.vars)
         {
             // check to make sure the type is in the symbol table
-            var->address = address;
+            var->offset = address;
             variables[var->ident] = *var;
             address += var->type.size;
         }
@@ -63,7 +63,7 @@ void Scope::prettyPrint()
     std::cout << "\t Constants/Variables, which have an expression:\n";
     for (std::pair<std::string, Variable> item: variables )
     {
-        std::cout << "\t\t" << "Identifier: " << item.first << "  Address: " << item.second.address << "\n";
+        std::cout << "\t\t" << "Identifier: " << item.first << "  Address: " << item.second.offset << "\n";
     }
 
     std::cout << "\t Functions:\n";

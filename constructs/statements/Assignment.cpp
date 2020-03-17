@@ -22,9 +22,8 @@ void Assignment::print()
 void Assignment::emit()
 {
     std::string location = expression->emit();
-    st.testPrint();
-//    Variable var = st.retrieveVariable(lValue->getKey());
-//    std::cout << "[sw function] address: " << var.address << "\n";
+    Variable var = st.retrieveVariable(lValue->getKey()); // assumes that the lValue refers to a variable
+    std::cout << "sw " << location << " " << var.offset << "(" << var.baseRegister << ")\n";
 }
 
 /*

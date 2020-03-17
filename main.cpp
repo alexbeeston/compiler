@@ -9,6 +9,7 @@
 extern int yyparse();
 extern Program* program;
 SymbolTable st;
+
 int main()
 {
 	yyparse();

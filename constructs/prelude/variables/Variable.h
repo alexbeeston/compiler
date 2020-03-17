@@ -14,7 +14,8 @@ struct Variable
 {
     std::string ident;
     Expression expression;
-    int address;
+    int offset;
+    std::string baseRegister;
     BaseType type;
     Variable();
     Variable(std::string, Expression, BaseType);

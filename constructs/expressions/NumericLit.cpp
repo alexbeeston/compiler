@@ -16,6 +16,6 @@ void NumericLit::print()
 
 std::string NumericLit::emit()
 {
-    std::cout << "lw    $t0, " << numericLitValue << "\n";
-    return "$t0";
+    std::cout << "li   $t0   " << numericLitValue << "\n";
+    return "$t0"; // assumes same temp register every time
 }
