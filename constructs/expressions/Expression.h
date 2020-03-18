@@ -6,12 +6,14 @@
 #define COMPILERS_EXPRESSION_H
 
 #include <string>
+#include "../../global.h"
+
 
 struct Expression
 {
     int value;
     int type;
     virtual void print();
-    virtual std::string emit();
+    virtual Register emit();
 };
 #endif //COMPILERS_EXPRESSION_H

@@ -14,6 +14,6 @@ struct StringLit : Expression
     std::string stringLitValue;
     StringLit(char* p_value);
     void print() override;
-    std::string emit() override;
+    Register emit() override;
 };
 #endif //COMPILERS_STRINGLIT_H

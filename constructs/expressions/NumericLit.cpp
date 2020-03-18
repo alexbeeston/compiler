@@ -16,8 +16,9 @@ void NumericLit::print()
     std::cout << numericLitValue;
 }
 
-std::string NumericLit::emit()
+Register NumericLit::emit()
 {
-    std::cout << "li   $t0   " << numericLitValue << "\n";
-    return "$t0"; // assumes same temp register every time
+    Register r = rp.getRegister();
+    std::cout << "li " << r.name << " " << numericLitValue << "\n";
+    return r; // assumes same temp register every time
 }

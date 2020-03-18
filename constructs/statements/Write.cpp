@@ -28,8 +28,8 @@ void Write::emit()
         else if (expression->type == 1) std::cout << "li $v0 11   # 11 = system call to print an char\n";
         else if (expression->type == 2)std::cout << "li $v0 4   # 4 = system call to print a (label to a) string\n";
         else std::cout << "error: the expression doesn't know if it's an int, char, or string\n";
-        std::string location = expression->emit();
-        std::cout << "la $a0 (" << location << ")\n";
+        Register r = expression->emit();
+        std::cout << "la $a0 (" << r.name << ")\n";
         std::cout << "syscall\n";
     }
 }

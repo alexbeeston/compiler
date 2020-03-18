@@ -12,6 +12,6 @@ struct NumericLit : Expression
     int numericLitValue;
     NumericLit(int);
     void print() override;
-    std::string emit() override;
+    Register emit() override;
 };
 #endif //COMPILERS_NUMERICLIT_H

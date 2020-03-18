@@ -15,9 +15,10 @@ void LValueExpression::print()
     lValue->print();
 }
 
-std::string LValueExpression::emit()
+Register LValueExpression::emit()
 {
     Variable var = st.retrieveVariable(lValue->getKey());
-    std::cout << "lw $t0 " << var.offset << "(" << var.baseRegister << ")\n";
-    return "$t0";
+    Register r = rp.getRegister();
+    std::cout << "lw " << r.name << " " << var.offset << "(" << var.baseRegister << ")\n";
+    return r;
 }

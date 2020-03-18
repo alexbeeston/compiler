@@ -84,6 +84,9 @@ set(
 		symbolTable/SymbolTable.cpp
 		symbolTable/Scope.cpp
 
+		Register.cpp
+		RegisterPool.cpp
+
   		${BISON_Parser_OUTPUTS}
 		${FLEX_Scanner_OUTPUTS}
 		)

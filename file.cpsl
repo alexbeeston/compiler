@@ -3,8 +3,6 @@ dog, cat, hen, rat : integer;
 
 begin
 dog := 1;
-cat := 2;
-hen := 3;
 rat := 4;
-write("dog = ", dog, ", cat = ", cat, ", hen = ", hen, ", rat = ", rat);
+write("dog = ", dog, ", rat = ", cat);
 end.

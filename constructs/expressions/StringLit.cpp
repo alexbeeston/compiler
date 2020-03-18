@@ -17,10 +17,11 @@ void StringLit::print()
     std::cout << stringLitValue;
 }
 
-std::string StringLit::emit()
+Register StringLit::emit()
 {
+    Register r = rp.getRegister();
     int offset = st.insertMessage(stringLitValue);
-    std::cout << "la $t0 message" << std::to_string(offset) << "   # loaded a string label\n";
-    return "$t0";
+    std::cout << "la " << r.name << " message" << std::to_string(offset) << "   # loaded a string label\n";
+    return r;
 }
 

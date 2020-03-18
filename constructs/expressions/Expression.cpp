@@ -8,9 +8,10 @@ void Expression::print()
     std::cout << "[pretty print base expression]";
 }
 
-std::string Expression::emit()
+Register Expression::emit()
 {
-   return "[a register]" ;
+    std::cout << "Error: calling the base Expression emit function. Going to return Register().\n";
+    return Register();
 }
 
 

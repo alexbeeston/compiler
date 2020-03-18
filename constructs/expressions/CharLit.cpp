@@ -15,8 +15,9 @@ void CharLit::print()
     std::cout << charLitValue;
 }
 
-std::string CharLit::emit()
+Register CharLit::emit()
 {
-    std::cout << "li $t0 '" << (char)value << "' # load a character\n";
-    return "$t0";
+    Register r = rp.getRegister();
+    std::cout << "li " << r.name << " " << (char)value << "' # load a character\n";
+    return r;
 }
