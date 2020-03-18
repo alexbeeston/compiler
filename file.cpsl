@@ -1,6 +1,10 @@
 var
-dog, cat: integer;
+dog, cat, hen, rat : integer;
 
 begin
-write(10, 'C', "doggie", "I'm awesome");
+dog := 1;
+cat := 2;
+hen := 3;
+rat := 4;
+write("dog = ", dog, ", cat = ", cat, ", hen = ", hen, ", rat = ", rat);
 end.

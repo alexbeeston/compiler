@@ -35,4 +35,8 @@ void Program::emit()
         std::cout << "message" << std::to_string(counter) << ":  " << message << "\n";
         ++counter;
     }
+
+    // terminate the program
+    std::cout << "\nli $v0 10\n   # 10 = system call to terminate\n";
+    std::cout << "syscall\n";
 }

@@ -12,7 +12,6 @@ struct Expression
     int value;
     int type;
     virtual void print();
-    virtual void emitLabel();
     virtual std::string emit();
 };
 #endif //COMPILERS_EXPRESSION_H

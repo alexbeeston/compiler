@@ -1,0 +1,7 @@
+replace std::string with register pools on emit functions; I WILL do this eventually, and better now than later so that I don't have to re-work too much"
+
+build a simple register pool, also before it is too late. I'll be able to get away with assuming that there will be enough temp registers for a long time for the simple things that I'm doing.
+
+do some type checking when inserting variables into the symbol table
+
+consolidate numericLit, charLit, and stringLit into a single class? Perhaps THIS is what is meant by a constant inheriting from an esxpression. YES, probably. I've been allowing constants to be expression all along, I've just labeled then as numericLit, charList, and stringLit, and pull them all into different classes.

@@ -26,7 +26,3 @@ void Assignment::emit()
     std::cout << "sw " << location << " " << var.offset << "(" << var.baseRegister << ")\n";
 }
 
-/*
- * Lvalue return base register and function - sw and lw needs this
- *
- */
