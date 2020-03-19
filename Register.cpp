@@ -6,3 +6,8 @@ Register::Register(std::string p_name)
 }
 
 Register::Register() {}
+
+std::string Register::getName()
+{
+    return name;
+}

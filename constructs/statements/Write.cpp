@@ -30,7 +30,7 @@ void Write::emit()
         else if (expression->getTypeIndicator() == 2)std::cout << "li $v0 4   # 4 = system call to print a (label to a) string\n";
         else std::cout << "error: the expression doesn't know if its an int, char, or string (Inside Write::emit(); check the typeIndicator for an expression or one of its derived structs)\n";
         Register r = expression->emit();
-        std::cout << "la $a0 (" << r.name << ")\n";
+        std::cout << "la $a0 (" << r.getName() << ")\n";
         std::cout << "syscall\n\n";
         rp.returnRegister(r);
     }

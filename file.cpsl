@@ -1,7 +1,7 @@
 var
-i: integer;
 c: char;
 
 begin
-write('\n');
+c := 'b';
+write(c);
 end.

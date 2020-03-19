@@ -18,7 +18,7 @@ Register StringLit::emit()
 {
     Register r = rp.getRegister();
     int offset = st.insertMessage(stringLitValue);
-    std::cout << "la " << r.name << " message" << std::to_string(offset) << "   # loaded a string label\n";
+    std::cout << "la " << r.getName() << " message" << std::to_string(offset) << "   # loaded a string label\n";
     return r;
 }
 

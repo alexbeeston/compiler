@@ -21,7 +21,7 @@ void Assignment::emit()
     std::cout << "# assignment\n";
     Register r = expression->emit();
     Variable var = st.retrieveVariable(lValue->getKey()); // assumes that the lValue refers to a variable
-    std::cout << "sw " << r.name << " " << var.offset << "(" << var.baseRegister << ")\n\n";
+    std::cout << "sw " << r.getName() << " " << var.offset << "(" << var.baseRegister << ")\n\n";
     rp.returnRegister(r);
 }
 

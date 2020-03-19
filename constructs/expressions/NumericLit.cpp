@@ -18,6 +18,6 @@ void NumericLit::print()
 Register NumericLit::emit()
 {
     Register r = rp.getRegister();
-    std::cout << "li " << r.name << " " << numericLitValue << "\n";
+    std::cout << "li " << r.getName() << " " << numericLitValue << "\n";
     return r;
 }

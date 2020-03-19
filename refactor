@@ -1,18 +1,9 @@
-do some type checking when inserting variables into the symbol table
-consolidate numericLit, charLit, and stringLit into a single class? Perhaps THIS is what is meant by a constant inheriting from an esxpression. YES, probably. I've been allowing constants to be expression all along, I've just labeled then as numericLit, charList, and stringLit, and pull them all into different classes. Name the new class constant
-
-Figure out where to put type, offset, and base register (maybe look at Branden's)
-in Read::emit() and Assignment::emit(), change v.baseRegister and r.name to a gettter so that I can modify it latter without having to change the value every time; I think getters are the way to go; that way, I can change the functionality once and have it affect all the things that use it, as long as the return type is the same. Will be helpful as I beef up the registers/register pool
-
 ### Refactor ###
-everything above
-change address in Scope to a member field, or pass it by reference in Scope::Scope()
 
 #### TO DO ####
-assignment can emit assignmment for chars (currently only assigns if it's an int
-
-
-make it so default bool vars are capitalzied too (?)
+check types as they go into the symbol table
+consoidate literal expressions into a constant expression class
+figure out where to put type, offset, and base register, definiatively
 
 ##### NOTES #####
 Type Indicator:

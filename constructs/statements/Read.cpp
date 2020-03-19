@@ -31,8 +31,8 @@ void Read::emit()
         else throw "attempting to read a non-integer or character lValue\n";
         std::cout << "syscall\n";
         Register r = rp.getRegister();
-        std::cout << "move " << r.name << " $v0\n";
-        std::cout << "sw " << r.name << " " << v.offset << "(" << v.baseRegister << ")\n\n";
+        std::cout << "move " << r.getName() << " $v0\n";
+        std::cout << "sw " << r.getName() << " " << v.offset << "(" << v.baseRegister << ")\n\n";
         rp.returnRegister(r);
     }
 }

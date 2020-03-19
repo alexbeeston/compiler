@@ -12,5 +12,6 @@ struct Register
     std::string name;
     Register(std::string);
     Register();
+    std::string getName();
 };
 #endif //COMPILERS_REGISTER_H

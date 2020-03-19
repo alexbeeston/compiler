@@ -48,8 +48,8 @@ int Scope::initializeBool(std::string name, int &address, int semanticValue)
     variables[name] = booleanVar; // provide key to booleanVar that is capitalized too, will be easy, look at docs
     Register r = rp.getRegister();
     std::cout << "# create the " << name << " variable\n";
-    std::cout << "li " << r.name << " " << semanticValue << "\n";
-    std::cout << "sw " << r.name << " " << booleanVar.offset << "(" << booleanVar.baseRegister << ")   # loaded " << name << "\n\n";
+    std::cout << "li " << r.getName() << " " << semanticValue << "\n";
+    std::cout << "sw " << r.getName() << " " << booleanVar.offset << "(" << booleanVar.baseRegister << ")   # loaded " << name << "\n\n";
     rp.returnRegister(r);
 }
 

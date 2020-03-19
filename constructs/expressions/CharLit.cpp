@@ -17,6 +17,6 @@ void CharLit::print()
 Register CharLit::emit()
 {
     Register r = rp.getRegister();
-    std::cout << "li " << r.name << " " << value << " # load a character\n";
+    std::cout << "li " << r.getName() << " " << value << " # load a character\n";
     return r;
 }

@@ -19,6 +19,6 @@ Register LValueExpression::emit()
 {
     Variable var = st.retrieveVariable(lValue->getKey());
     Register r = rp.getRegister();
-    std::cout << "lw " << r.name << " " << var.offset << "(" << var.baseRegister << ")\n";
+    std::cout << "lw " << r.getName() << " " << var.offset << "(" << var.baseRegister << ")\n";
     return r;
 }
