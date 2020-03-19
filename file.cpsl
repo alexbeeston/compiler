@@ -3,7 +3,7 @@ dog: integer;
 testChar : char;
 
 begin
-write("Type a char\n");
-read(testChar);
-write("Read in for testChar: ", testChar);
+write("Type a char, then an int\n");
+read(testChar, dog);
+write("Read in for testChar: ", testChar, ", and read in for dog of type int: ", dog);
 end.

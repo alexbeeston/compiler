@@ -14,5 +14,6 @@ struct Expression
     int typeIndicator;
     virtual void print();
     virtual Register emit();
+    virtual int getTypeIndicator();
 };
 #endif //COMPILERS_EXPRESSION_H

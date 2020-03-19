@@ -32,5 +32,6 @@ void Read::emit()
         Register r = rp.getRegister();
         std::cout << "move " << r.name << " $v0\n";
         std::cout << "sw " << r.name << " " << v.offset << "(" << v.baseRegister << ")\n\n";
+        rp.returnRegister(r);
     }
 }
