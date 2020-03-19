@@ -5,7 +5,7 @@
 
 StringLit::StringLit(char* p_value):Expression()
 {
-    type = 2;
+    typeIndicator = 2;
     stringLitValue = std::string(p_value);
 }
 

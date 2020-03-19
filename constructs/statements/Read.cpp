@@ -25,8 +25,8 @@ void Read::emit()
     {
         std::cout << "li $v0 ";
         Variable v = st.retrieveVariable(lValue->getKey());
-        if (v.expression.type == 0) std::cout << " 5   # 5 = code to read an integer\n";
-        else if (v.expression.type == 1) std::cout << " 12   # 12 = code to read a character\n";
+        if (v.type.typeIndicator == 0) std::cout << " 5   # 5 = code to read an integer\n";
+        else if (v.type.typeIndicator == 1) std::cout << " 12   # 12 = code to read a character\n";
         else throw "attempting to read a non-integer or character lValue\n";
         std::cout << "syscall\n";
         Register r = rp.getRegister();

@@ -18,7 +18,7 @@ struct Variable
     std::string baseRegister;
     BaseType type;
     Variable();
-    Variable(std::string, Expression, BaseType);
+    Variable(std::string, BaseType);
     void print();
 };
 #endif //COMPILERS_VARIABLE_H

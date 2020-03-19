@@ -17,7 +17,7 @@ Scope::Scope(Prelude topLevelPrelude)
 //    }
 
     // initialize with primitive types
-    std::string primitives[] = {"integer", "char", "boolean", "string", "true", "false"};
+    std::string primitives[] = {"integer", "char", "string", "boolean"};
     for (std::string primitive : primitives)
     {
         types[std::string(primitive)] = SimpleType(new std::string(primitive));

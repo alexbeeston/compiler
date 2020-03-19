@@ -13,7 +13,7 @@ Prelude::Prelude(std::vector<Constant*>* p_constants, std::vector<TypeDeclItem*>
        {
            for (std::string* identifier : *typedList->identList)
            {
-               vars->push_back(new Variable(*identifier, Expression(), *typedList->type));
+               vars->push_back(new Variable(*identifier, *typedList->type));
            }
        }
    }

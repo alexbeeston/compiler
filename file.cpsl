@@ -1,9 +1,9 @@
 var
 dog: integer;
-a : char;
+testChar : char;
 
 begin
-write("Type an integer\n");
-read(dog);
-write("Read in for dog: ", dog);
+write("Type a char\n");
+read(testChar);
+write("Read in for testChar: ", testChar);
 end.

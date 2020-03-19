@@ -11,7 +11,7 @@
 struct Expression
 {
     int value;
-    int type;
+    int typeIndicator;
     virtual void print();
     virtual Register emit();
 };

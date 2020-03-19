@@ -3,3 +3,15 @@ consolidate numericLit, charLit, and stringLit into a single class? Perhaps THIS
 
 Figure out where to put type, offset, and base register (maybe look at Branden's)
 in Read::emit() and Assignment::emit(), change v.baseRegister and r.name to a gettter so that I can modify it latter without having to change the value every time; I think getters are the way to go; that way, I can change the functionality once and have it affect all the things that use it, as long as the return type is the same. Will be helpful as I beef up the registers/register pool
+
+
+#### TO DO ####
+
+##### NOTES #####
+Type Indicator:
+0 = int
+1 = char
+2 = string
+3 = boolean
+4 = array
+5 = record

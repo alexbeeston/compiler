@@ -7,6 +7,7 @@ ArrayType::ArrayType(Expression* p_low, Expression* p_high, BaseType* p_type)
     low = p_low;
     high = p_high;
     type = p_type;
+    typeIndicator = 4;
 }
 
 void ArrayType::print()

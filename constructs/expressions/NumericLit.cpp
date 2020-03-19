@@ -5,7 +5,7 @@
 
 NumericLit::NumericLit(int p_numericLitValue) : Expression ()
 {
-    type = 0;
+    typeIndicator = 0;
     value = p_numericLitValue;
     numericLitValue = p_numericLitValue;
 }

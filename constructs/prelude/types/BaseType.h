@@ -3,6 +3,7 @@
 
 struct BaseType
 {
+    int typeIndicator;
     BaseType();
     int size;
     virtual void print();

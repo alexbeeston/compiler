@@ -5,7 +5,7 @@
 
 CharLit::CharLit(char p_charLitValue):Expression()
 {
-    type = 1;
+    typeIndicator = 1;
     value = p_charLitValue;
     charLitValue = p_charLitValue;
 }
