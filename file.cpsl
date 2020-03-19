@@ -4,4 +4,7 @@ c: char;
 begin
 c := 'b';
 write(c);
+write("hey dog");
+stop;
+write("hey dog");
 end.

@@ -11,5 +11,6 @@ struct Stop:Statement
 {
     Stop();
     void print() override;
+    void emit() override;
 };
 #endif //COMPILERS_STOP_H
