@@ -19,7 +19,6 @@ void Program::prettyPrint()
 
 void Program::emit()
 {
-    std::cout << "# ===== assembly.asm =====\n";
 //    prelude->emit();
     // emit each function declaration
     block->emit();

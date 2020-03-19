@@ -6,6 +6,9 @@ in Read::emit() and Assignment::emit(), change v.baseRegister and r.name to a ge
 
 
 #### TO DO ####
+assignment can emit assignmment for chars (currently only assigns if it's an int
+
+make it so default bool vars are capitalzied too (?)
 
 ##### NOTES #####
 Type Indicator:

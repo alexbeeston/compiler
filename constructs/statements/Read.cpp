@@ -21,6 +21,7 @@ void Read::print()
 
 void Read::emit()
 {
+    std::cout << "# read\n";
     for (LValue* lValue : *lValues)
     {
         std::cout << "li $v0 ";

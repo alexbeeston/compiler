@@ -22,9 +22,10 @@ void Write::print()
 
 void Write::emit()
 {
+    std::cout << "# write\n";
     for (Expression* expression : *expressions)
     {
-        if (expression->getTypeIndicator() == 0) std::cout << "li $v0 1   # 1 = system call to print an integer\n";
+        if (expression->getTypeIndicator() == 0 || expression->getTypeIndicator() == 3) std::cout << "li $v0 1   # 1 = system call to print an integer\n";
         else if (expression->getTypeIndicator() == 1) std::cout << "li $v0 11   # 11 = system call to print an char\n";
         else if (expression->getTypeIndicator() == 2)std::cout << "li $v0 4   # 4 = system call to print a (label to a) string\n";
         else std::cout << "error: the expression doesn't know if its an int, char, or string (Inside Write::emit(); check the typeIndicator for an expression or one of its derived structs)\n";

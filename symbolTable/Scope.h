@@ -16,6 +16,8 @@ struct Scope
 {
     std::map<std::string, Variable> variables;
     std::map<std::string, BaseType> types;
+    int initializeBool(std::string, int&, int);
+    int addVariable(Variable&, int&); // returns the next available offset from the base register
 
     Variable lookUpVariable(std::string);
     Scope(Prelude);

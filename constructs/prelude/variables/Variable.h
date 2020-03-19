@@ -14,7 +14,7 @@ struct Variable
 {
     std::string ident;
     Expression expression;
-    int offset;
+    int offset; // set by the symbol table;
     std::string baseRegister;
     BaseType type;
     Variable();
