@@ -1,10 +1,7 @@
 #include <iostream>
 #include <string>
-
 #include "StringLit.h"
-#include "../../symbolTable/SymbolTable.h"
-
-extern SymbolTable st;
+#include "../../global.h"
 
 StringLit::StringLit(char* p_value):Expression()
 {

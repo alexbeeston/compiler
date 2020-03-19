@@ -1,8 +1,6 @@
 #include <iostream>
 #include "Program.h"
-#include "../symbolTable/SymbolTable.h"
-
-extern SymbolTable st;
+#include "../global.h"
 
 Program::Program(Prelude* p_prelude, std::vector<Routine*>* p_routines, Block* p_block)
 {

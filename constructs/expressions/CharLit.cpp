@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include "../../global.h"
 #include "Expression.h"
 #include "CharLit.h"
 

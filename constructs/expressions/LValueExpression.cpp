@@ -1,9 +1,7 @@
 #include <iostream>
 
 #include "LValueExpression.h"
-#include "../../symbolTable/SymbolTable.h"
-
-extern SymbolTable st;
+#include "../../global.h"
 
 LValueExpression::LValueExpression(LValue* p_lValue)
 {

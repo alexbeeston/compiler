@@ -6,8 +6,7 @@
 #define COMPILERS_EXPRESSION_H
 
 #include <string>
-#include "../../global.h"
-
+#include "../../Register.h"
 
 struct Expression
 {

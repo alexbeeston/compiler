@@ -1,10 +1,7 @@
 #include <iostream>
-
-#include "../../symbolTable/SymbolTable.h"
+#include "../../global.h"
 #include "../prelude/variables/Variable.h"
 #include "Assignment.h"
-
-extern SymbolTable st;
 
 Assignment::Assignment(LValue* p_lValue, Expression* p_expression)
 {
