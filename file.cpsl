@@ -1,8 +1,9 @@
 var
-dog, cat, hen, rat : integer;
+dog: integer;
+a : char;
 
 begin
-dog := 1;
-rat := 4;
-write("dog = ", dog, ", rat = ", cat);
+write("Type an integer\n");
+read(dog);
+write("Read in for dog: ", dog);
 end.

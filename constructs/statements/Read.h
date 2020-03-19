@@ -15,5 +15,6 @@ struct Read:Statement
     std::vector<LValue*>* lValues;
     Read(LValue*, std::vector<LValue*>*);
     void print() override;
+    void emit() override;
 };
 #endif //COMPILERS_READ_H
