@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include "../../global.h"
 #include "Write.h"
 
 Write::Write(Expression* p_expression1, std::vector<Expression*>* p_expressions)
@@ -30,6 +30,7 @@ void Write::emit()
         else std::cout << "error: the expression doesn't know if it's an int, char, or string\n";
         Register r = expression->emit();
         std::cout << "la $a0 (" << r.name << ")\n";
-        std::cout << "syscall\n";
+        std::cout << "syscall\n\n";
+        rp.returnRegister(r);
     }
 }
