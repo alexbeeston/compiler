@@ -26,7 +26,7 @@ Scope::Scope(Prelude topLevelPrelude)
         }
     }
 
-    // add true and false (variable for now so satisfy my assumption that everything is a variable in the symbol table)
+    // add true and false as variables (variable for now so satisfy my assumption that everything is a variable in the symbol table)
     int address = 0;
     std::string booleans[] = {"false", "true"};
     for (int i = 0; i < 2; ++i) initializeBool(booleans[i], address, i);
@@ -34,11 +34,14 @@ Scope::Scope(Prelude topLevelPrelude)
     // add other variables
     if (topLevelPrelude.vars != nullptr)
     {
-        for (Variable* var : *topLevelPrelude.vars) address = addVariable(*var, address) ;
+        for (Variable* var : *topLevelPrelude.vars)
+        {
+            addVariable(*var, address);
+        }
     }
 }
 
-int Scope::initializeBool(std::string name, int &address, int semanticValue) // check to make sure the address is valued by reference so that it maintains a cummulative total
+int Scope::initializeBool(std::string name, int &address, int semanticValue)
 {
     Variable booleanVar = Variable(name, SimpleType(new std::string("boolean")));
     addVariable(booleanVar, address);

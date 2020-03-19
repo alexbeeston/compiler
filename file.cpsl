@@ -1,8 +1,7 @@
 var
-dog: integer;
-testChar : char;
+i: integer;
+c: char;
 
 begin
-dog := 2;
-write(false);
+write('\n');
 end.

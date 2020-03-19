@@ -7,17 +7,16 @@ CharLit::CharLit(char p_charLitValue):Expression()
 {
     typeIndicator = 1;
     value = p_charLitValue;
-    charLitValue = p_charLitValue;
 }
 
 void CharLit::print()
 {
-    std::cout << charLitValue;
+    std::cout << (char)value;
 }
 
 Register CharLit::emit()
 {
     Register r = rp.getRegister();
-    std::cout << "li " << r.name << " " << (char)value << "' # load a character\n";
+    std::cout << "li " << r.name << " " << value << " # load a character\n";
     return r;
 }

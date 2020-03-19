@@ -9,7 +9,6 @@
 
 struct CharLit : Expression
 {
-    char charLitValue;
     CharLit(char p_charLitValue);
     void print() override;
     Register emit() override;
