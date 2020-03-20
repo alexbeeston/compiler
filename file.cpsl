@@ -1,5 +1,8 @@
+var
+dog, cat : integer;
+
 begin
-write("2 + 2 = ", 2+2, '\n');
-write("4 / 2 = ", 4/2, '\n');
-write("10 - 7 = ", 10 - 7, '\n');
+dog := 21;
+cat := 3;
+write("The quotient of dog / cat = ", dog / cat, "\n");
 end.
