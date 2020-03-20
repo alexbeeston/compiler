@@ -7,17 +7,14 @@
 
 #include <string>
 
-#include "../../expressions/Expression.h"
-#include "../types/BaseType.h"
+#include "../LookUpItem.h"
 
-struct Variable
+struct Variable:LookUpItem
 {
-    std::string ident;
     int offset; // set by the symbol table;
     std::string baseRegister;
-    BaseType type;
     Variable();
     Variable(std::string, BaseType);
-    void print();
+    void print() override;
 };
 #endif //COMPILERS_VARIABLE_H
