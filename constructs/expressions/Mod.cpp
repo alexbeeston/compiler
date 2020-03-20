@@ -13,3 +13,13 @@ void Mod::print()
     std::cout << " % ";
     right->print();
 }
+
+Register Mod::emit()
+{
+    std::vector<Register> opRegs = emitOperands();
+    Register r = rp.getRegister();
+    std::cout << "div " << opRegs[0].getName() << " " << opRegs[1].getName() << "\n";
+    std::cout << "mfhi " << r.getName() << "\n";
+    returnRegisters(opRegs);
+    return r;
+}

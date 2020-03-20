@@ -1,8 +1,15 @@
 var
-dog, cat : integer;
+a, b : integer;
 
 begin
-dog := 21;
-cat := 3;
-write("The quotient of dog / cat = ", dog / cat, "\n");
+  write("2+2=",2+2,'\n');
+  write("2*2=",2*2,'\n');
+  write("2/2=",2/2,'\n');
+  write("2-2=",2-2,'\n');
+  write("Enter A:");
+  read(a);
+  write("\nEnter b:");
+  read(b);
+  write('\n');
+write("a%b=",a%b,'\n');
 end.
