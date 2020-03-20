@@ -6,6 +6,9 @@
 #define COMPILERS_BINARYOP_H
 
 #include "Expression.h"
+#include "../../Register.h"
+#include "../../global.h"
+#include <vector>
 
 struct BinaryOp:Expression
 {
@@ -13,5 +16,7 @@ struct BinaryOp:Expression
     Expression* right;
     BinaryOp(Expression*, Expression*);
     void print() override;
+    std::vector<Register> emitOperands();
+    void returnRegisters(std::vector<Register>);
 };
 #endif //COMPILERS_BINARYOP_H

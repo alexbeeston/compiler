@@ -11,5 +11,6 @@ struct Add:BinaryOp
 {
     Add(Expression*, Expression*);
     void print() override;
+    Register emit() override;
 };
 #endif //COMPILERS_ADD_H

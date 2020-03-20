@@ -1,4 +1,5 @@
 ### Refactor ###
+replace typeIndicator with an enum
 
 #### TO DO ####
 check types as they go into the symbol table
