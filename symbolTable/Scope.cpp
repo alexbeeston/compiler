@@ -8,6 +8,7 @@
 
 extern RegisterPool rp;
 
+// used during initialization
 Scope::Scope(Prelude topLevelPrelude)
 {
     // initialize with primitive types
@@ -53,6 +54,7 @@ int Scope::initializeBool(std::string name, int &address, int semanticValue)
     rp.returnRegister(r);
 }
 
+// used to handle LookUpItems (variables and constants)
 int Scope::addVariable(Variable &var, int &address)
 {
     // check to make sure the type is in the symbol table
@@ -67,6 +69,9 @@ Variable Scope::lookUpVariable(std::string key)
    return variables[key]; // assumes that the key exists
 }
 
+// used to handle types
+
+// validation
 void Scope::prettyPrint()
 {
     std::cout << "\t Types:\n";

@@ -24,7 +24,6 @@ BaseType Constant::generateBaseType(Expression e)
     }
 }
 
-//LookUpItem(std::string, BaseType);
 void Constant::print()
 {
     std::cout << ident << " = ";
