@@ -12,3 +12,12 @@ void Sub::print()
     std::cout << " - ";
     right->print();
 }
+
+Register Sub::emit()
+{
+    std::vector<Register> opRegs = emitOperands();
+    Register r = rp.getRegister();
+    std::cout << "sub " << r.getName() << " " << opRegs[0].getName() << " " << opRegs[1].getName() << "\n";
+    returnRegisters(opRegs);
+    return r;
+}

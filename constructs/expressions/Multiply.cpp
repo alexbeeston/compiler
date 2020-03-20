@@ -12,3 +12,12 @@ void Multiply::print()
     std::cout << " * ";
     right->print();
 }
+
+Register Multiply::emit()
+{
+    std::vector<Register> opRegs = emitOperands();
+    Register r = rp.getRegister();
+    std::cout << "mult " << r.getName() << " " << opRegs[0].getName() << " " << opRegs[1].getName() << "\n";
+    returnRegisters(opRegs);
+    return r;
+}

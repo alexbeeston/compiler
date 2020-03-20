@@ -11,5 +11,6 @@ struct Multiply:BinaryOp
 {
     Multiply(Expression*, Expression*);
     void print() override;
+    Register emit() override;
 };
 #endif //COMPILERS_MULTIPLY_H

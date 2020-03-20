@@ -11,5 +11,6 @@ struct Divide:BinaryOp
 {
     Divide(Expression*, Expression*);
     void print() override;
+    Register emit() override;
 };
 #endif //COMPILERS_DIVIDE_H

@@ -11,5 +11,6 @@ struct Sub:BinaryOp
 {
     Sub(Expression*, Expression*);
     void print() override;
+    Register emit() override;
 };
 #endif //COMPILERS_SUB_H

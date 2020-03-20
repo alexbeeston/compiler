@@ -16,9 +16,8 @@ void Add::print()
 Register Add::emit()
 {
     std::vector<Register> opRegs = emitOperands();
-    std::cout << "# add expression\n";
     Register r = rp.getRegister();
-    std::cout << "add " << r.getName() << " " << opRegs[0].getName() << " " << opRegs[1].getName() << " #   end add binary operator\n";
+    std::cout << "add " << r.getName() << " " << opRegs[0].getName() << " " << opRegs[1].getName() << "\n";
     returnRegisters(opRegs);
     return r;
 }
