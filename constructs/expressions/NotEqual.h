@@ -5,11 +5,12 @@
 #ifndef COMPILERS_NOTEQUAL_H
 #define COMPILERS_NOTEQUAL_H
 
-#include "BinaryOp.h"
+#include "BinaryOpUndeterministicOperands.h"
 
-struct NotEqual:BinaryOp
+struct NotEqual:BinaryOpUndeterministicOperands
 {
     NotEqual(Expression*, Expression*);
     void print() override;
+    Register emit() override;
 };
 #endif //COMPILERS_NOTEQUAL_H
