@@ -9,10 +9,11 @@ Equal::Equal(Expression* p_l, Expression* p_r):BinaryOpUndeterministicOperands(p
 
 Register Equal::emit()
 {
-//    std::vector<Register> opRegs = checkAndEmitOperands();
-//    Register r = rp.getRegister();
-//    std::cout << "sub " << r.getName() << opRegs[0].getName() << " " << opRegs[1].getName()
-    std::cout << "# Testing for equality not supported yet\n";
-    return Register();
+    std::vector<Register> opRegs = checkAndEmitOperands();
+    Register r = rp.getRegister();
+    std::cout << "subu " << r.getName() << " " << opRegs[0].getName() << " " << opRegs[1].getName() << "\n";
+    std::cout << "sltu " << r.getName() << " $zero " << r.getName() << "\n";
+    std::cout << "xori " << r.getName() << " " << r.getName() << " 1\n";
+    returnRegisters(opRegs);
+    return r;
 }
-
