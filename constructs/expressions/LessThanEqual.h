@@ -11,5 +11,6 @@ struct LessThanEqual:BinaryOp
 {
     LessThanEqual(Expression*, Expression*);
     void print() override;
+    Register emit() override;
 };
 #endif //COMPILERS_LESSTHANEQUAL_H

@@ -11,5 +11,6 @@ struct GreaterThan:BinaryOp
 {
     GreaterThan(Expression*, Expression*);
     void print() override;
+    Register emit() override;
 };
 #endif //COMPILERS_GREATTHAN_H

@@ -12,3 +12,13 @@ void GreaterThan::print()
     std::cout << " > ";
     right->print();
 }
+
+Register GreaterThan::emit()
+{
+    int INT = 0;
+    std::vector<Register> opRegs = emitOperands(INT);
+    Register r = rp.getRegister();
+    std::cout << "sgtu " << r.getName() << " " << opRegs[0].getName() << " " << opRegs[1].getName() << "\n";
+    returnRegisters(opRegs);
+    return r;
+}
