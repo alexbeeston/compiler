@@ -16,7 +16,7 @@ struct BinaryOp:Expression
     Expression* right;
     BinaryOp(Expression*, Expression*);
     void print() override;
-    std::vector<Register> emitOperands();
+    std::vector<Register> emitOperands(int);
     void returnRegisters(std::vector<Register>);
 };
 #endif //COMPILERS_BINARYOP_H

@@ -12,13 +12,13 @@ void BinaryOp::print()
     std::cout << "[binary Op]";
 }
 
-std::vector<Register> BinaryOp::emitOperands()
+std::vector<Register> BinaryOp::emitOperands(int requiredType)
 {
-    if (!(left->getTypeIndicator() == 0 && right->getTypeIndicator() == 0))
+    if (!(left->getTypeIndicator() == requiredType && right->getTypeIndicator() == requiredType))
     {
         std::cout << "# ERROR: binary operation attempted on left operand of typeIndicator " << left->getTypeIndicator();
         std::cout << " and right operand typeIndicator " << right->getTypeIndicator();
-        std::cout << ". They should both be 0.\n";
+        std::cout << ". They should both be " << requiredType << ".\n";
         return std::vector<Register>();
     }
     else

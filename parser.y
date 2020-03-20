@@ -69,6 +69,7 @@
 #include "constructs/expressions/PredFunc.h"
 #include "constructs/expressions/SuccFunc.h"
 #include "constructs/expressions/LValueExpression.h"
+#include "constructs/expressions/Equal.h"
 
 
 extern int yylex();
@@ -310,7 +311,7 @@ Expression : NumericLiteral
     | Expression MOD Expression { $$ = new Mod($1, $3); }
     | Expression ADD Expression { $$ = new Add($1, $3); }
     | Expression SUB Expression { $$ = new Sub($1, $3); }
-    | Expression EQUAL Expression { $$ = new NumericLit(-1); }
+    | Expression EQUAL Expression { $$ = new Equal($1, $3); }
     | Expression NOTEQUAL Expression { $$ = new NotEqual($1, $3); }
     | Expression LESS_THAN Expression { $$ = new LessThan($1, $3); }
     | Expression LESS_THAN_OR_EQUAL Expression { $$ = new LessThanEqual($1, $3); }

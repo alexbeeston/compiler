@@ -16,7 +16,8 @@ void Divide::print()
 
 Register Divide::emit()
 {
-    std::vector<Register> opRegs = emitOperands();
+    int INT = 0;
+    std::vector<Register> opRegs = emitOperands(INT);
     Register r = rp.getRegister();
     std::cout << "div " << opRegs[0].getName() << " " << opRegs[1].getName() << "\n";
     std::cout << "mflo " << r.getName() << "\n";

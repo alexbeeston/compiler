@@ -4,7 +4,7 @@
 
 Mod::Mod(Expression* p_left, Expression* p_right):BinaryOp(p_left, p_right)
 {
-
+    typeIndicator = 0;
 }
 
 void Mod::print()
@@ -16,7 +16,8 @@ void Mod::print()
 
 Register Mod::emit()
 {
-    std::vector<Register> opRegs = emitOperands();
+    int INT = 0;
+    std::vector<Register> opRegs = emitOperands(INT);
     Register r = rp.getRegister();
     std::cout << "div " << opRegs[0].getName() << " " << opRegs[1].getName() << "\n";
     std::cout << "mfhi " << r.getName() << "\n";

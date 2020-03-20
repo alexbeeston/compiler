@@ -15,7 +15,8 @@ void Add::print()
 
 Register Add::emit()
 {
-    std::vector<Register> opRegs = emitOperands();
+    int INT = 0;
+    std::vector<Register> opRegs = emitOperands(INT);
     Register r = rp.getRegister();
     std::cout << "add " << r.getName() << " " << opRegs[0].getName() << " " << opRegs[1].getName() << "\n";
     returnRegisters(opRegs);

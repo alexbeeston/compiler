@@ -50,6 +50,8 @@ set(
 		constructs/expressions/PredFunc.cpp
 		constructs/expressions/SuccFunc.cpp
 		constructs/expressions/LValueExpression.cpp
+		constructs/expressions/Equal.cpp
+	        constructs/expressions/BinaryOpUndeterministicOperands.cpp
 
 		constructs/prelude/types/BaseType.cpp
 		constructs/prelude/types/SimpleType.cpp

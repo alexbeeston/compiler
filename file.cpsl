@@ -2,14 +2,5 @@ var
 a, b : integer;
 
 begin
-  write("2+2=",2+2,'\n');
-  write("2*2=",2*2,'\n');
-  write("2/2=",2/2,'\n');
-  write("2-2=",2-2,'\n');
-  write("Enter A:");
-  read(a);
-  write("\nEnter b:");
-  read(b);
-  write('\n');
-write("a%b=",a%b,'\n');
+write("7<7:",7<7,'\n');
 end.
