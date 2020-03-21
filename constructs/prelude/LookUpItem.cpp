@@ -2,6 +2,7 @@
 
 #include "LookUpItem.h"
 #include "types/SimpleType.h"
+#include "../../global.h"
 
 LookUpItem::LookUpItem() {}
 
@@ -34,7 +35,11 @@ BaseType LookUpItem::generateBaseType(Expression e)
 
 Register LookUpItem::emit(Register r)
 {
-    if (offset == -1) std::cout << "li " << r.getName() << " " << value.value << "   # load a constant\n"; // include logic to see if the constant is a string expression, in which case, load a messageN
+    if (offset == -1)
+    {
+        if (value.typeIndicator == 2) std::cout << "la " << r.getName() << " message" << value.value << "   # loaded a string constant\n";
+        else std::cout << "li " << r.getName() << " " << value.value << "   # load a constant\n";
+    }
     else std::cout << "lw " << r.getName() << " " << offset << "(" << baseRegister << ")   # load a variable\n";
     return r;
 }

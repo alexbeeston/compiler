@@ -15,10 +15,13 @@ RegisterPool rp;
 
 int main()
 {
+    st = SymbolTable();
+
 	yyparse();
 	std::cout << std::endl;
 //	program->prettyPrint();
-    st = SymbolTable(*program->prelude);
+    st.addStuff(*program->prelude);
+
     rp = RegisterPool();
 //	st.prettyPrint();
 	program->emit();

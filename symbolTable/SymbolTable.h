@@ -21,8 +21,9 @@ struct SymbolTable
 
     LookUpItem retrieveItem(std::string);
 
-    SymbolTable(Prelude);
+    // init
     SymbolTable();
+    void addStuff(Prelude);
     void prettyPrint();
     void testPrint();
 

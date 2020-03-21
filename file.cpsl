@@ -1,6 +1,8 @@
 const
-dog = 10;
+two = "hello";
+three = "testing";
+
 
 begin
-write(dog);
+write(three);
 end.

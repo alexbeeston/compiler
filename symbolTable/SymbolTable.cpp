@@ -5,7 +5,7 @@
 
 SymbolTable::SymbolTable() {}
 
-SymbolTable::SymbolTable(Prelude topLevelPrelude)
+void SymbolTable::addStuff(Prelude topLevelPrelude)
 {
     levels.push_back(Scope(topLevelPrelude));
 }

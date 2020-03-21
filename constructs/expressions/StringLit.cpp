@@ -7,6 +7,7 @@ StringLit::StringLit(char* p_value):Expression()
 {
     typeIndicator = 2;
     stringLitValue = std::string(p_value);
+    value = st.insertMessage(stringLitValue);
 }
 
 void StringLit::print()
@@ -17,8 +18,7 @@ void StringLit::print()
 Register StringLit::emit()
 {
     Register r = rp.getRegister();
-    int offset = st.insertMessage(stringLitValue);
-    std::cout << "la " << r.getName() << " message" << std::to_string(offset) << "   # loaded a string label\n";
+    std::cout << "la " << r.getName() << " message" << value << "   # loaded a string literal\n";
     return r;
 }
 
