@@ -14,9 +14,11 @@ struct Constant:LookUpItem
 {
     Expression* value;
     Constant();
-    Constant(char* p_identifier, Expression* p_value);
+    Constant(char*, Expression*);
+    Constant(std::string, Expression*);
     void print();
     BaseType generateBaseType(Expression);
+    Register emit() override;
 };
 #endif //COMPILERS_CONSTANT_H
 

@@ -13,6 +13,11 @@ Constant::Constant(char* p_identifier, Expression* p_value):LookUpItem(std::stri
     value = p_value;
 }
 
+Constant::Constant(std::string p_ident, Expression* p_value):LookUpItem(p_ident, generateBaseType(*p_value))
+{
+    value = p_value;
+}
+
 BaseType Constant::generateBaseType(Expression e)
 {
     if (e.typeIndicator == 0) return SimpleType(new std::string("integer"));
@@ -31,4 +36,9 @@ void Constant::print()
     std::cout << ident << " = ";
     value->print();
     std::cout << ";" << std::endl;
+}
+
+Register Constant::emit()
+{
+    return Register();
 }

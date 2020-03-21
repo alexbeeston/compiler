@@ -16,5 +16,6 @@ struct Variable:LookUpItem
     Variable();
     Variable(std::string, BaseType);
     void print() override;
+    Register emit() override;
 };
 #endif //COMPILERS_VARIABLE_H

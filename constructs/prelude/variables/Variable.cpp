@@ -16,3 +16,8 @@ void Variable::print()
     std::cout << ident << " : ";
     type.print();
 }
+
+Register Variable::emit()
+{
+    return Register();
+}

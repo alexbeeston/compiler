@@ -14,3 +14,9 @@ void LookUpItem::print()
 {
     std::cout << "[Look Up Item print, this should be overriden]\n";
 }
+
+Register LookUpItem::emit()
+{
+    std::cout << "Error: Calling emit() on a base LookUpItem\n";
+    return Register();
+}

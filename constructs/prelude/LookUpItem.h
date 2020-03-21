@@ -6,6 +6,7 @@
 #define COMPILERS_LOOKUPITEM_H
 
 #include "types/BaseType.h"
+#include "../../Register.h"
 
 struct LookUpItem
 {
@@ -14,6 +15,7 @@ struct LookUpItem
     LookUpItem();
     LookUpItem(std::string, BaseType);
     virtual void print();
+    virtual Register emit();
 };
 
 #endif //COMPILERS_LOOKUPITEM_H

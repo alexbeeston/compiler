@@ -3,7 +3,7 @@
 
 #include "Scope.h"
 #include "../constructs/prelude/types/SimpleType.h"
-#include "../constructs/expressions/Expression.h"
+#include "../constructs/expressions/BooleanLit.h"
 #include "../RegisterPool.h"
 
 extern RegisterPool rp;
@@ -14,6 +14,11 @@ Scope::Scope(Prelude topLevelPrelude)
     // add user defined constants
     for (Constant* i : *topLevelPrelude.constants) if (constants.count(i->ident) == 0) constants[i->ident] = *i;
 
+    // add boolean constants if they are not already defined
+    int NUM_BOOLS = 2;
+    std::string booleans[] = {"false", "true"};
+    for (int i = 0; i < NUM_BOOLS; ++i) if (constants.count(booleans[i]) == 0) constants[booleans[i]] = Constant(booleans[i], new BooleanLit(i));
+
     // initialize with primitive types
     std::string primitives[] = {"integer", "char", "string", "boolean"};
     for (std::string primitive : primitives)
@@ -22,23 +27,11 @@ Scope::Scope(Prelude topLevelPrelude)
     }
 
     // add types
-    if (topLevelPrelude.types != nullptr)
-    {
-        for (TypeDeclItem* type: *topLevelPrelude.types)
-        {
-            types[*type->ident] = *type->type;
-        }
-    }
+    for (TypeDeclItem* type: *topLevelPrelude.types) types[*type->ident] = *type->type;
 
     // add other variables
     int address = 0;
-    if (topLevelPrelude.vars != nullptr)
-    {
-        for (Variable* var : *topLevelPrelude.vars)
-        {
-            addVariable(*var, address);
-        }
-    }
+    for (Variable* var : *topLevelPrelude.vars) addVariable(*var, address);
 }
 
 int Scope::initializeBool(std::string name, int &address, int semanticValue)
