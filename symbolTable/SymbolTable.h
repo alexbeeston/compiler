@@ -19,7 +19,7 @@ struct SymbolTable
     std::vector<std::string> strings;
     int insertMessage(std::string);
 
-    Variable retrieveVariable(std::string);
+    LookUpItem retrieveItem(std::string);
 
     SymbolTable(Prelude);
     SymbolTable();

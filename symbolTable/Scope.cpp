@@ -21,44 +21,33 @@ Scope::Scope(Prelude topLevelPrelude)
 
     // initialize with primitive types
     std::string primitives[] = {"integer", "char", "string", "boolean"};
-    for (std::string primitive : primitives)
-    {
-        types[std::string(primitive)] = SimpleType(new std::string(primitive));
-    }
+    for (std::string primitive : primitives) types[std::string(primitive)] = SimpleType(new std::string(primitive));
 
-    // add types
+    // add user defined types
     for (TypeDeclItem* type: *topLevelPrelude.types) types[*type->ident] = *type->type;
 
     // add other variables
-    int address = 0;
-    for (Variable* var : *topLevelPrelude.vars) addVariable(*var, address);
-}
-
-int Scope::initializeBool(std::string name, int &address, int semanticValue)
-{
-    Variable booleanVar = Variable(name, SimpleType(new std::string("boolean")));
-    addVariable(booleanVar, address);
-    variables[name] = booleanVar; // provide key to booleanVar that is capitalized too, will be easy, look at docs
-    Register r = rp.getRegister();
-    std::cout << "# create the " << name << " variable\n";
-    std::cout << "li " << r.getName() << " " << semanticValue << "\n";
-    std::cout << "sw " << r.getName() << " " << booleanVar.offset << "(" << booleanVar.baseRegister << ")   # loaded " << name << "\n\n";
-    rp.returnRegister(r);
+    for (Variable* var : *topLevelPrelude.vars) addVariable(*var);
 }
 
 // used to handle LookUpItems (variables and constants)
-int Scope::addVariable(Variable &var, int &address)
+int Scope::addVariable(Variable &var)
 {
     // check to make sure the type is in the symbol table
-   var.offset = address;
+   var.offset = nextAddress;
    variables[var.ident] = var;
-   address += var.type.size;
+   nextAddress += var.type.size;
 }
 
-Variable Scope::lookUpVariable(std::string key)
+LookUpItem Scope::getLookUpItem(std::string key)
 {
-   // do something like variables.find(key) !-= variables.end();
-   return variables[key]; // assumes that the key exists
+    if (constants.count(key) == 1) return constants[key];
+    else if (variables.count(key) == 1) return variables[key];
+    else
+    {
+        std::cout << "error: lookUpItem is not in the symbol table.";
+        return LookUpItem();
+    }
 }
 
 // used to handle types

@@ -1,6 +1,7 @@
-const
-dog = 10;
+var
+dog : integer;
 
 begin
-write("4=3: ",4=3,'\n');
+dog := 10;
+write(dog);
 end.

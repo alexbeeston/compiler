@@ -17,8 +17,9 @@ int LValueExpression::getTypeIndicator() { return st.retrieveVariable(lValue->ge
 
 Register LValueExpression::emit()
 {
-    Variable var = st.retrieveVariable(lValue->getKey());
+    LookUpItem item = st.retrieveItem(lValue->getKey());
     Register r = rp.getRegister();
-    std::cout << "lw " << r.getName() << " " << var.offset << "(" << var.baseRegister << ")\n";
+    // HERE IS WHERE IT GETS VRITUALIZED
+    std::cout << "lw " << r.getName() << " " << item.<< "(" << var.baseRegister << ")\n";
     return r;
 }

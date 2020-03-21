@@ -21,9 +21,9 @@ void SymbolTable::prettyPrint()
     }
 }
 
-Variable SymbolTable::retrieveVariable(std::string key)
+LookUpItem SymbolTable::retrieveItem(std::string key)
 {
-    return levels[0].lookUpVariable(key); // assumes it's in the first scope
+    return levels[0].getLookUpItem(key); // assumes it's in the first scope
 }
 
 int SymbolTable::insertMessage(std::string message)

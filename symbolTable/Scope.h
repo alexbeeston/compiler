@@ -18,14 +18,13 @@ struct Scope
 {
     // used during initialization
     Scope(Prelude);
-    int initializeBool(std::string, int&, int);
 
     // used to handle LookUpItems (variables and constants)
+    int nextAddress = 0;
     std::map<std::string, Variable> variables;
     std::map<std::string, Constant> constants;
     LookUpItem getLookUpItem(std::string);
-    Variable lookUpVariable(std::string); // about to be replaced by getLookUpItem()
-    int addVariable(Variable&, int&); // returns the next available offset from the base register
+    int addVariable(Variable&); // returns the next available offset from the base register
 
     // used to handle types
     std::map<std::string, BaseType> types;
