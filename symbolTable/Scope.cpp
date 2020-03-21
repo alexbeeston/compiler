@@ -11,6 +11,9 @@ extern RegisterPool rp;
 // used during initialization
 Scope::Scope(Prelude topLevelPrelude)
 {
+    // add user defined constants
+    for (Constant* i : *topLevelPrelude.constants) if (constants.count(i->ident) == 0) constants[i->ident] = *i;
+
     // initialize with primitive types
     std::string primitives[] = {"integer", "char", "string", "boolean"};
     for (std::string primitive : primitives)
@@ -27,12 +30,8 @@ Scope::Scope(Prelude topLevelPrelude)
         }
     }
 
-    // add true and false as variables (variable for now so satisfy my assumption that everything is a variable in the symbol table)
-    int address = 0;
-    std::string booleans[] = {"false", "true"};
-    for (int i = 0; i < 2; ++i) initializeBool(booleans[i], address, i);
-
     // add other variables
+    int address = 0;
     if (topLevelPrelude.vars != nullptr)
     {
         for (Variable* var : *topLevelPrelude.vars)

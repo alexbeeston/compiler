@@ -13,6 +13,7 @@
 struct Constant:LookUpItem
 {
     Expression* value;
+    Constant();
     Constant(char* p_identifier, Expression* p_value);
     void print();
     BaseType generateBaseType(Expression);

@@ -1,3 +1,6 @@
+const
+dog = 10;
+
 begin
 write("4=3: ",4=3,'\n');
 end.

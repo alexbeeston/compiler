@@ -296,7 +296,7 @@ FunctionDecl : FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE FOR
     | FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE Body DONE { $$ = new Function($2, $4, $9, $7); }
 
 ConstDecl : CONST Constant ConstantList { $3->insert($3->begin(), $2);  $$ = $3;}
-    | { $$ = nullptr; };
+    | { $$ = new std::vector<Constant*>; };
 ConstantList : ConstantList Constant { $1->push_back($2); }
     | { $$ = new std::vector<Constant*>; };
 
@@ -331,7 +331,7 @@ Expression : NumericLiteral
     | HEXINT { $$ = new NumericLit(-1); }
     | OCTINT { $$ = new NumericLit(-1); };
 TypeDecl : TYPE TypeListItem TypeList { $3->insert($3->begin(), $2); $$ = $3; }
-    | { $$ = nullptr; };
+    | { $$ = new std::vector<TypeDeclItem*>; };
 TypeList : TypeList TypeListItem { $1->push_back($2); }
     | { $$ = new std::vector<TypeDeclItem*>; };
 TypeListItem : IDENT EQUAL Type DONE { $$ = new TypeDeclItem(new std::string($1), $3); }  ;
@@ -350,7 +350,7 @@ Type : SimpleType
     ArrayType : ARRAY LBRACKET Expression COLON Expression RBRACKET OF Type { $$ = new ArrayType($3, $5, $8); };
 
 VarDecl : VAR TypedList TypedLists { $3->insert($3->begin(), $2); $$ = $3; }
-    | { $$ = nullptr; };
+    | { $$ = new std::vector<TypedList*>; };
 
 Block: BEGIN_TOKEN StatementSequence END { $$ = new Block($2); };
 StatementSequence : Statement ExtraStatementList { $2->insert($2->begin(), $1); $$ = $2; };

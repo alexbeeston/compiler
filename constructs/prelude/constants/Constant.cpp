@@ -6,6 +6,8 @@
 #include "../types/SimpleType.h"
 #include "../types/BaseType.h"
 
+Constant::Constant() {}
+
 Constant::Constant(char* p_identifier, Expression* p_value):LookUpItem(std::string(p_identifier), generateBaseType(*p_value))
 {
     value = p_value;
