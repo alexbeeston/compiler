@@ -8,7 +8,6 @@ Variable::Variable(std::string p_ident, BaseType p_type)
 {
     ident = p_ident;
     type = p_type;
-    baseRegister = "$gp";
 }
 
 void Variable::print()
@@ -17,7 +16,3 @@ void Variable::print()
     type.print();
 }
 
-Register Variable::emit()
-{
-    return Register();
-}

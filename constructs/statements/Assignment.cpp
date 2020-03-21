@@ -19,9 +19,10 @@ void Assignment::print()
 void Assignment::emit()
 {
     std::cout << "# assignment\n";
+    LookUpItem item = st.retrieveItem(lValue->getKey());
     Register r = expression->emit();
-    Variable var = st.retrieveVariable(lValue->getKey()); // assumes that the lValue refers to a variable
-    std::cout << "sw " << r.getName() << " " << var.offset << "(" << var.baseRegister << ")\n\n";
+    if (item.offset == -1) std::cout << "Error: can not assign to a constant\n";
+    else std::cout << "sw " << r.getName() << " " << item.offset << "(" << item.baseRegister << ")\n\n";
     rp.returnRegister(r);
 }
 

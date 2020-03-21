@@ -8,25 +8,13 @@
 #include <string>
 
 #include "../../expressions/Expression.h"
-#include "../LookUpItem.h"
 
-struct Constant:LookUpItem
+struct Constant
 {
     Expression* value;
+    std::string ident;
     Constant();
     Constant(char*, Expression*);
-    Constant(std::string, Expression*);
     void print();
-    BaseType generateBaseType(Expression);
-    Register emit() override;
 };
 #endif //COMPILERS_CONSTANT_H
-
-//struct LookUpItem
-//{
-//    std::string ident;
-//    BaseType type;
-//    LookUpItem();
-//    LookUpItem(std::string, BaseType);
-//    virtual void print();
-//};

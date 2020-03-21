@@ -8,11 +8,10 @@
 #include <map>
 #include <string>
 
-#include "../constructs/prelude/variables/Variable.h"
-#include "../constructs/prelude/constants/Constant.h"
 #include "../constructs/prelude/types/BaseType.h"
-#include "../constructs/routines/Routine.h"
+#include "../constructs/prelude/Prelude.h"
 #include "../constructs/prelude/LookUpItem.h"
+#include "../constructs/prelude/variables/Variable.h"
 
 struct Scope
 {
@@ -21,15 +20,14 @@ struct Scope
 
     // used to handle LookUpItems (variables and constants)
     int nextAddress = 0;
-    std::map<std::string, Variable> variables;
-    std::map<std::string, Constant> constants;
+    std::map<std::string, LookUpItem> lookUpItems;
     LookUpItem getLookUpItem(std::string);
-    int addVariable(Variable&); // returns the next available offset from the base register
+//    int addVariable(Variable&); // returns the next available offset from the base register
 
     // used to handle types
     std::map<std::string, BaseType> types;
 
     // validation
-    void prettyPrint();
+//    void prettyPrint();
 };
 #endif //COMPILERS_SCOPE_H

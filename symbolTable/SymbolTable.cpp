@@ -17,7 +17,7 @@ void SymbolTable::prettyPrint()
     for (Scope scope : levels)
     {
         std::cout << "Scope Level " << levelCounter << "\n";
-        scope.prettyPrint();
+//        scope.prettyPrint();
     }
 }
 

@@ -6,16 +6,14 @@
 #define COMPILERS_VARIABLE_H
 
 #include <string>
+#include "../types/BaseType.h"
 
-#include "../LookUpItem.h"
-
-struct Variable:LookUpItem
+struct Variable
 {
-    int offset; // set by the symbol table;
-    std::string baseRegister;
+    std::string ident;
+    BaseType type;
     Variable();
     Variable(std::string, BaseType);
-    void print() override;
-    Register emit() override;
+    void print();
 };
 #endif //COMPILERS_VARIABLE_H

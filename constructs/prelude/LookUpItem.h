@@ -7,15 +7,25 @@
 
 #include "types/BaseType.h"
 #include "../../Register.h"
+#include "../expressions/Expression.h"
 
 struct LookUpItem
 {
+    // fields
+    int offset; // -1 for constants (set by symbol table)
+    std::string baseRegister; // for variables only
     std::string ident;
+    Expression value; // used by constants only
     BaseType type;
+
+    // init
     LookUpItem();
-    LookUpItem(std::string, BaseType);
+    LookUpItem(std::string, Expression);
+    BaseType generateBaseType(Expression);
+
+    // other functions
     virtual void print();
-    virtual Register emit();
+    Register emit(Register);
 };
 
 #endif //COMPILERS_LOOKUPITEM_H

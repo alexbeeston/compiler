@@ -1,7 +1,6 @@
-var
-dog : integer;
+const
+dog = 10;
 
 begin
-dog := 10;
 write(dog);
 end.
