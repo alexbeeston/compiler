@@ -12,7 +12,7 @@ extern RegisterPool rp;
 Scope::Scope(Prelude topLevelPrelude)
 {
     // add user defined constants
-    for (Constant* i : *topLevelPrelude.constants) if (lookUpItems.count(i->ident) == 0) lookUpItems[i->ident] = LookUpItem(i->ident, *i->value);
+    for (Constant* i : *topLevelPrelude.constants) if (lookUpItems.count(i->ident) == 0) lookUpItems[i->ident] = LookUpItem(i->ident, i->value);
 
 //    // add boolean constants if they are not already defined
 //    int NUM_BOOLS = 2;

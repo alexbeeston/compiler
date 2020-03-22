@@ -15,17 +15,17 @@ struct LookUpItem
     int offset; // -1 for constants (set by symbol table)
     std::string baseRegister; // for variables only
     std::string ident;
-    Expression value; // used by constants only
+    Expression* value; // used by constants only
     BaseType type;
 
     // init
     LookUpItem();
-    LookUpItem(std::string, Expression);
-    BaseType generateBaseType(Expression);
+    LookUpItem(std::string, Expression*);
+    BaseType generateBaseType();
 
     // other functions
     virtual void print();
-    Register emit(Register);
+    Register emit();
 };
 
 #endif //COMPILERS_LOOKUPITEM_H

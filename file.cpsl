@@ -4,5 +4,5 @@ three = "testing";
 
 
 begin
-write(three);
+write(three, "\n", two);
 end.

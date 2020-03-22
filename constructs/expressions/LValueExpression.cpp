@@ -17,8 +17,5 @@ int LValueExpression::getTypeIndicator() { return st.retrieveItem(lValue->getKey
 
 Register LValueExpression::emit()
 {
-    LookUpItem item = st.retrieveItem(lValue->getKey());
-    Register r = rp.getRegister();
-    item.emit(r);
-    return r;
+    return st.retrieveItem(lValue->getKey()).emit();
 }
