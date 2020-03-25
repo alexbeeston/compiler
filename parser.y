@@ -18,7 +18,6 @@
 #include "constructs/prelude/Prelude.h"
 
 #include "constructs/expressions/CharLit.h"
-#include "constructs/expressions/NumericLit.h"
 
 #include "constructs/prelude/types/BaseType.h"
 #include "constructs/prelude/types/SimpleType.h"
@@ -48,6 +47,7 @@
 #include "constructs/statements/ProcedureCall.h"
 #include "constructs/statements/NullStatement.h"
 
+#include "constructs/expressions/Literal.h"
 #include "constructs/expressions/Or.h"
 #include "constructs/expressions/And.h"
 #include "constructs/expressions/NotEqual.h"
@@ -100,7 +100,7 @@ struct CharLit* charLitPointer;
 
 std::vector<Constant*>* constantPointerVectorPointer;
 struct Prelude* preludePointer;
-struct NumericLit* numericLitPointer;
+struct Literal* literalPointer;
 
 struct TypeDeclItem* typeDeclItemPointer;
 struct BaseType* baseTypePointer;
@@ -162,7 +162,7 @@ struct ProcedureCall* procedureCallStatementPointer;
 %type <constantPointer> Constant
 %type <constantPointerVectorPointer> ConstantList
 %type <constantPointerVectorPointer> ConstDecl
-%type <numericLitPointer> NumericLiteral
+%type <literalPointer> NumericLiteral
 
 %type <typeDeclItemPointerVectorPointer> TypeDecl
 %type <typeDeclItemPointerVectorPointer> TypeList
@@ -327,9 +327,9 @@ Expression : NumericLiteral
     | SUCC LPAREN Expression RPAREN { $$ = new SuccFunc($3); }
     | LValue { $$ = new LValueExpression($1); };
 
-    NumericLiteral : DECINT { $$ = new NumericLit($1); }
-    | HEXINT { $$ = new NumericLit(-1); }
-    | OCTINT { $$ = new NumericLit(-1); };
+    NumericLiteral : DECINT { $$ = new Literal($1); }
+    | HEXINT { $$ = new Literal(-1); }
+    | OCTINT { $$ = new Literal(-1); };
 TypeDecl : TYPE TypeListItem TypeList { $3->insert($3->begin(), $2); $$ = $3; }
     | { $$ = new std::vector<TypeDeclItem*>; };
 TypeList : TypeList TypeListItem { $1->push_back($2); }

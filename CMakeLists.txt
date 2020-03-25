@@ -24,13 +24,13 @@ set(
 	        constructs/LValueWithExpression.cpp
 
 		constructs/prelude/variables/Variable.cpp
+		constructs/expressions/Literal.cpp
 		constructs/expressions/StringLit.cpp
 		constructs/expressions/BooleanLit.cpp
 		constructs/expressions/Expression.cpp
 		constructs/expressions/BinaryOp.cpp
 		constructs/expressions/CharLit.cpp
-		constructs/expressions/NumericLit.cpp
-		constructs/expressions/Or.cpp
+        constructs/expressions/Or.cpp
 		constructs/expressions/And.cpp
 		constructs/expressions/NotEqual.cpp
 		constructs/expressions/LessThanEqual.cpp
