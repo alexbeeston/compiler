@@ -20,7 +20,6 @@
 #include "constructs/prelude/types/SimpleType.h"
 #include "constructs/prelude/types/ArrayType.h"
 #include "constructs/prelude/types/RecordType.h"
-#include "constructs/prelude/types/TypeDeclItem.h"
 #include "constructs/prelude/TypedList.h"
 
 #include "constructs/routines/Routine.h"
@@ -97,12 +96,11 @@ std::vector<Constant*>* constantPointerVectorPointer;
 struct Prelude* preludePointer;
 struct Literal* literalPointer;
 
-struct TypeDeclItem* typeDeclItemPointer;
 struct BaseType* baseTypePointer;
 struct SimpleType* simpleTypePointer;
 struct ArrayType* arrayTypePointer;
 struct RecordType* recordTypePointer;
-std::vector<TypeDeclItem*>* typeDeclItemPointerVectorPointer;
+std::vector<BaseType*>* baseTypePointerVectorPointer;
 
 struct TypedList* typedListPointer;
 std::vector<TypedList*>* typedListPointerVectorPointer;
@@ -159,10 +157,11 @@ struct ProcedureCall* procedureCallStatementPointer;
 %type <constantPointerVectorPointer> ConstDecl
 %type <literalPointer> NumericLiteral
 
-%type <typeDeclItemPointerVectorPointer> TypeDecl
-%type <typeDeclItemPointerVectorPointer> TypeList
+%type <baseTypePointerVectorPointer> TypeDecl
+%type <baseTypePointerVectorPointer> TypeList
 %type <baseTypePointer> Type
-%type <typeDeclItemPointer> TypeListItem
+%type <baseTypePointer> TypeListItem
+
 %type <simpleTypePointer> SimpleType
 %type <arrayTypePointer> ArrayType
 %type <recordTypePointer> RecordType
@@ -326,10 +325,10 @@ Expression : NumericLiteral
     | HEXINT { $$ = new Literal(-1); }
     | OCTINT { $$ = new Literal(-1); };
 TypeDecl : TYPE TypeListItem TypeList { $3->insert($3->begin(), $2); $$ = $3; }
-    | { $$ = new std::vector<TypeDeclItem*>; };
+    | { $$ = new std::vector<BaseType*>; };
 TypeList : TypeList TypeListItem { $1->push_back($2); }
-    | { $$ = new std::vector<TypeDeclItem*>; };
-TypeListItem : IDENT EQUAL Type DONE { $$ = new TypeDeclItem(new std::string($1), $3); }  ;
+    | { $$ = new std::vector<BaseType*>; };
+TypeListItem : IDENT EQUAL Type DONE { $3->identifier = std::string($1); $$ = $3; } ;
 Type : SimpleType
     | RecordType
     | ArrayType

@@ -22,23 +22,20 @@ Scope::Scope(Prelude topLevelPrelude)
 
     // initialize with primitive types
     std::string primitives[] = {"integer", "char", "string", "boolean"};
-    for (std::string primitive : primitives) addType(TypeDeclItem(&primitive, new SimpleType(&primitive), true));
+    for (std::string primitive :primitives) addType(new SimpleType(&primitive, primitive, true));
 
     // add user defined types
-    for (TypeDeclItem* type: *topLevelPrelude.types) addType(*type);
+    for (BaseType* type: *topLevelPrelude.types) addType(type);
 
-    // add variables, which are all user defined
-    for (Variable* var : *topLevelPrelude.vars) if (addItem(LookUpItem(var->ident, var->type, nextAddress))) nextAddress += var->type.size;
+//    // add variables, which are all user defined
+//    for (Variable* var : *topLevelPrelude.vars)
+//    {
+//        // here, we need to look up the type in the type map and assign the value of the key to this LookUpItem, or variable
+//        TypeDeclItem = get
+//        if (addItem(LookUpItem(var->ident, var->type, nextAddress))) nextAddress += var->type.size;
+//    }
 }
 
-// used to handle LookUpItems (variables and constants)
-//int Scope::addVariable(Variable &var)
-//{
-//    // check to make sure the type is in the symbol table
-//   var.offset = nextAddress;
-//   variables[var.ident] = var;
-//   nextAddress += var.type.size;
-//}
 bool Scope::addItem(LookUpItem item)
 {
     if (lookUpItems.count(item.ident) == 0) // replace with a single || statement
@@ -55,25 +52,30 @@ bool Scope::addItem(LookUpItem item)
     else return false;
 }
 
-bool Scope::addType(TypeDeclItem type)
+bool Scope::addType(BaseType* type)
 {
-    if (types.count(*type.ident) == 0)
+    if (types.count(type->identifier) == 0)
     {
-        std::cout << "# case 1: " << *type.ident << " is not already in the map.\n";
-        types[*type.ident] = type;
+        std::cout << "# case 1: " << type->identifier << " is not already in the map.\n";
+        types[type->identifier] = type;
         return true;
     }
-    else if (types[*type.ident].isRedeclarable)
+    else if (types[type->identifier]->isRedeclarable)
     {
-        std::cout << "# case 2: " << *type.ident << " is aready in the map, but it's redeclarable.\n";
-       types[*type.ident] = type;
+        std::cout << "# case 2: " << type->identifier << " is aready in the map, but it's redeclarable.\n";
+       types[type->identifier] = type;
        return true;
     }
     else
     {
-        std::cout << "# case 3: " << *type.ident << " is already in the map and it's not redeclarable\n";
+        std::cout << "# case 3: " << type->identifier << " is already in the map and it's not redeclarable\n";
         return true;
     }
+}
+
+BaseType* Scope::getBaseType(std::string key)
+{
+    return types[key];
 }
 
 LookUpItem Scope::getLookUpItem(std::string key)

@@ -26,6 +26,11 @@ LookUpItem SymbolTable::retrieveItem(std::string key)
     return levels[0].getLookUpItem(key); // assumes it's in the first scope
 }
 
+BaseType* SymbolTable::retrieveType(std::string key)
+{
+    return levels[0].getBaseType(key); // assumes it's in the first scope
+}
+
 int SymbolTable::insertMessage(std::string message)
 {
     strings.push_back(message);

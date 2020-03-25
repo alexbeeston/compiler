@@ -25,7 +25,7 @@ set(
 
 		constructs/prelude/variables/Variable.cpp
 		constructs/expressions/Literal.cpp
-        constructs/expressions/Expression.cpp
+        	constructs/expressions/Expression.cpp
 		constructs/expressions/BinaryOp.cpp
 		constructs/expressions/Or.cpp
 		constructs/expressions/And.cpp
@@ -55,8 +55,7 @@ set(
 		constructs/prelude/types/SimpleType.cpp
 		constructs/prelude/types/ArrayType.cpp
 		constructs/prelude/types/RecordType.cpp
-		constructs/prelude/types/TypeDeclItem.cpp
-		constructs/prelude/constants/Constant.cpp
+        constructs/prelude/constants/Constant.cpp
 		constructs/prelude/Prelude.cpp
 		constructs/prelude/TypedList.cpp
 		constructs/prelude/LookUpItem.cpp

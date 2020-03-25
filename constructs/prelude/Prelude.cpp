@@ -2,7 +2,7 @@
 
 #include "Prelude.h"
 
-Prelude::Prelude(std::vector<Constant*>* p_constants, std::vector<TypeDeclItem*>* p_types, std::vector<TypedList*>* p_vars)
+Prelude::Prelude(std::vector<Constant*>* p_constants, std::vector<BaseType*>* p_types, std::vector<TypedList*>* p_vars)
 {
    constants = p_constants;
    types = p_types;
@@ -13,7 +13,8 @@ Prelude::Prelude(std::vector<Constant*>* p_constants, std::vector<TypeDeclItem*>
        {
            for (std::string* identifier : *typedList->identList)
            {
-               vars->push_back(new Variable(*identifier, *typedList->type));
+               // yes, please, construct the LookUpItem here, once and for all. #include the symbol table and let's stop doing intermediate constructions. Then, maybe, we can get rid of the variable class altogether! Less is more. We've elimiated TypeDeclItem and Variable!
+               vars->push_back(new Variable(*identifier, *typedList->type)); // don't modify for now, run the code first since so many changes were made to the parser.
            }
        }
    }
@@ -34,7 +35,7 @@ void Prelude::print()
     if (types != nullptr)
     {
         std::cout << "TYPE" << std::endl;
-        for (TypeDeclItem* item : *types) { item->print(); }
+        for (BaseType* item : *types) { item->print(); }
         std::cout << std::endl;
     }
     if (vars != nullptr)

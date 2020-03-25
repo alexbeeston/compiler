@@ -6,6 +6,7 @@ RecordType::RecordType(std::vector<TypedList*>* p_typedLists)
 {
     typedLists = p_typedLists;
     typeIndicator = 5;
+    isRedeclarable = false;
 }
 
 void RecordType::print()

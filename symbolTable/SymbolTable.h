@@ -20,6 +20,7 @@ struct SymbolTable
     int insertMessage(std::string);
 
     LookUpItem retrieveItem(std::string);
+    BaseType* retrieveType(std::string);
 
     // init
     SymbolTable();

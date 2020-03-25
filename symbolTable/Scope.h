@@ -8,7 +8,7 @@
 #include <map>
 #include <string>
 
-#include "../constructs/prelude/types/TypeDeclItem.h"
+#include "../constructs/prelude/types/BaseType.h"
 #include "../constructs/prelude/Prelude.h"
 #include "../constructs/prelude/LookUpItem.h"
 #include "../constructs/prelude/variables/Variable.h"
@@ -26,8 +26,9 @@ struct Scope
 //    int addVariable(Variable&); // returns the next available offset from the base register
 
     // used to handle types
-    std::map<std::string, TypeDeclItem> types;
-    bool addType(TypeDeclItem);
+    std::map<std::string, BaseType*> types;
+    bool addType(BaseType*);
+    BaseType* getBaseType(std::string);
 
     // validation
 //    void prettyPrint();
