@@ -9,6 +9,12 @@ Literal::Literal(int p_value)
     value = p_value;
 }
 
+Literal::Literal(char p_value)
+{
+    typeIndicator = 1;
+    value = p_value;
+}
+
 Register Literal::emit()
 {
     Register r = rp.getRegister();

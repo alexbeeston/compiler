@@ -1,7 +1,7 @@
 var
-dog : integer;
+hello : integer;
 
  begin
- dog := 40;
- write(dog, "\n");
+ hello := 'b';
+ write(hello, "\n");
  end.

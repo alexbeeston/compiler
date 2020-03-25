@@ -5,10 +5,6 @@
 #include "parser.hpp"
 #include "global.h"
 
-#include "constructs/expressions/Expression.h"
-#include "constructs/expressions/CharLit.h"
-#include "constructs/prelude/constants/Constant.h"
-
 int lineNumber = 0;
 %}
 

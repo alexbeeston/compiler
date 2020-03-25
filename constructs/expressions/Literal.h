@@ -12,6 +12,7 @@ struct Literal:Expression
     int typeIndicator;
     int value;
     Literal(int);
+    Literal(char);
 //    Literal(bool);
 //    Literal(std::string);
 //    Literal(char);

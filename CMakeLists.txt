@@ -29,8 +29,7 @@ set(
 		constructs/expressions/BooleanLit.cpp
 		constructs/expressions/Expression.cpp
 		constructs/expressions/BinaryOp.cpp
-		constructs/expressions/CharLit.cpp
-        constructs/expressions/Or.cpp
+		constructs/expressions/Or.cpp
 		constructs/expressions/And.cpp
 		constructs/expressions/NotEqual.cpp
 		constructs/expressions/LessThanEqual.cpp

@@ -17,8 +17,6 @@
 
 #include "constructs/prelude/Prelude.h"
 
-#include "constructs/expressions/CharLit.h"
-
 #include "constructs/prelude/types/BaseType.h"
 #include "constructs/prelude/types/SimpleType.h"
 #include "constructs/prelude/types/ArrayType.h"
@@ -96,7 +94,6 @@ struct Constant* constantPointer;
 struct Expression* expressionPointer;
 std::vector<Expression*>* expressionPointerVectorPointer;
 struct StringLit* stringLitPointer;
-struct CharLit* charLitPointer;
 
 std::vector<Constant*>* constantPointerVectorPointer;
 struct Prelude* preludePointer;
@@ -302,7 +299,7 @@ ConstantList : ConstantList Constant { $1->push_back($2); }
 
 Constant : IDENT EQUAL Expression DONE { $$ = new Constant($1, $3); };
 Expression : NumericLiteral
-    | CHARLIT { $$ = new CharLit($1); }
+    | CHARLIT { $$ = new Literal($1); }
     | STRLIT { $$ = new StringLit($1); }
     | LPAREN Expression RPAREN { $$ = new ParenExpression($2); }
     | SUB Expression { $$ = new Negative($2); }
