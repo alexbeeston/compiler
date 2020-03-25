@@ -22,6 +22,7 @@ struct LookUpItem
     // init
     LookUpItem();
     LookUpItem(std::string, Expression*, bool);
+    LookUpItem(std::string, BaseType, int);
     BaseType generateBaseType();
 
     // other functions

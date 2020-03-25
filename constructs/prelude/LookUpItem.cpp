@@ -16,6 +16,15 @@ LookUpItem::LookUpItem(std::string p_ident, Expression* p_expression, bool p_isR
     type = generateBaseType();
 }
 
+LookUpItem::LookUpItem(std::string p_ident, BaseType p_type, int p_offset)
+{
+    ident = p_ident;
+    type = p_type;
+    isRedeclarable = false;
+    offset = p_offset;
+    baseRegister = "$gp"; // assumes all variables are offset from the global pointer
+}
+
 void LookUpItem::print()
 {
     std::cout << "[Look Up Item print, this should be overriden]\n";

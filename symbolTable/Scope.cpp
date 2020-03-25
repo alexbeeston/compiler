@@ -20,16 +20,17 @@ Scope::Scope(Prelude topLevelPrelude)
     // add user defined constants
     for (Constant* i : *topLevelPrelude.constants) addItem(LookUpItem(i->ident, i->value, false));
 
-//
 //    // initialize with primitive types
 //    std::string primitives[] = {"integer", "char", "string", "boolean"};
 //    for (std::string primitive : primitives) types[std::string(primitive)] = SimpleType(new std::string(primitive));
-//
 //    // add user defined types
 //    for (TypeDeclItem* type: *topLevelPrelude.types) types[*type->ident] = *type->type;
-//
-//    // add other variables
-//    for (Variable* var : *topLevelPrelude.vars) addVariable(*var);
+
+    // add other variables
+    for (Variable* var : *topLevelPrelude.vars)
+    {
+        if (addItem(LookUpItem(var->ident, var->type, nextAddress))) nextAddress += var->type.size;
+    }
 }
 
 // used to handle LookUpItems (variables and constants)
