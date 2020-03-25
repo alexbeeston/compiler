@@ -11,7 +11,6 @@ extern RegisterPool rp;
 // used during initialization
 Scope::Scope(Prelude topLevelPrelude)
 {
-
     // add boolean constants, implemented as redeclarable constants; they can't be variables because we need to pull their semantic value in const_declarations, but they can't be constants because we over write their value in badidea.cpsl
     int NUM_BOOLS = 2;
     std::string booleans[] = {"false", "true"};
@@ -25,10 +24,10 @@ Scope::Scope(Prelude topLevelPrelude)
     std::string primitives[] = {"integer", "char", "string", "boolean"};
     for (std::string primitive : primitives) addType(TypeDeclItem(&primitive, new SimpleType(&primitive), true));
 
-//    // add user defined types
-//    for (TypeDeclItem* type: *topLevelPrelude.types) types[*type->ident] = *type->type;
+    // add user defined types
+    for (TypeDeclItem* type: *topLevelPrelude.types) addType(*type);
 
-    // add other variables
+    // add variables, which are all user defined
     for (Variable* var : *topLevelPrelude.vars) if (addItem(LookUpItem(var->ident, var->type, nextAddress))) nextAddress += var->type.size;
 }
 
@@ -60,15 +59,21 @@ bool Scope::addType(TypeDeclItem type)
 {
     if (types.count(*type.ident) == 0)
     {
+        std::cout << "# case 1: " << *type.ident << " is not already in the map.\n";
         types[*type.ident] = type;
         return true;
     }
     else if (types[*type.ident].isRedeclarable)
     {
+        std::cout << "# case 2: " << *type.ident << " is aready in the map, but it's redeclarable.\n";
        types[*type.ident] = type;
        return true;
     }
-    else return false;
+    else
+    {
+        std::cout << "# case 3: " << *type.ident << " is already in the map and it's not redeclarable\n";
+        return true;
+    }
 }
 
 LookUpItem Scope::getLookUpItem(std::string key)

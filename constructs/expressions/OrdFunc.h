@@ -12,5 +12,7 @@ struct OrdFunc:Expression
     Expression* expression;
     OrdFunc(Expression*);
     void print() override;
+    Register emit() override;
+    int getTypeIndicator() override;
 };
 #endif //COMPILERS_ORDFUNC_H
