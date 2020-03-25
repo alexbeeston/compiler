@@ -21,9 +21,10 @@ Scope::Scope(Prelude topLevelPrelude)
     // add user defined constants
     for (Constant* i : *topLevelPrelude.constants) addItem(LookUpItem(i->ident, i->value, false));
 
-//    // initialize with primitive types
-//    std::string primitives[] = {"integer", "char", "string", "boolean"};
-//    for (std::string primitive : primitives) types[std::string(primitive)] = SimpleType(new std::string(primitive));
+    // initialize with primitive types
+    std::string primitives[] = {"integer", "char", "string", "boolean"};
+    for (std::string primitive : primitives) addType(TypeDeclItem(&primitive, new SimpleType(&primitive), true));
+
 //    // add user defined types
 //    for (TypeDeclItem* type: *topLevelPrelude.types) types[*type->ident] = *type->type;
 
@@ -41,7 +42,7 @@ Scope::Scope(Prelude topLevelPrelude)
 //}
 bool Scope::addItem(LookUpItem item)
 {
-    if (lookUpItems.count(item.ident) == 0)
+    if (lookUpItems.count(item.ident) == 0) // replace with a single || statement
     {
         lookUpItems[item.ident] = item;
         return true;
@@ -50,6 +51,21 @@ bool Scope::addItem(LookUpItem item)
     {
         std::cout << "# about to insert a redeclarable item.\n";
        lookUpItems[item.ident] = item;
+       return true;
+    }
+    else return false;
+}
+
+bool Scope::addType(TypeDeclItem type)
+{
+    if (types.count(*type.ident) == 0)
+    {
+        types[*type.ident] = type;
+        return true;
+    }
+    else if (types[*type.ident].isRedeclarable)
+    {
+       types[*type.ident] = type;
        return true;
     }
     else return false;

@@ -1,12 +1,7 @@
 const
- int = 5;
- char = 'a';
- bool = true;
- str = "Hello world";
+true = 3<>3;
+false = 3=3;
 
 begin
-write("5=",int,'\n');
-write("a=",char,'\n');
-write("true=",bool,'\n');
-write("str=",str,'\n');
+write(true, '\n', false, '\n');
 end.

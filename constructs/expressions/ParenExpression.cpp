@@ -13,3 +13,8 @@ void ParenExpression::print()
     expression->print();
     std::cout << " ) ";
 }
+
+Register ParenExpression::emit()
+{
+    return expression->emit();
+}

@@ -12,5 +12,6 @@ struct ParenExpression:Expression
     Expression* expression;
     ParenExpression(Expression*);
     void print() override;
+    Register emit() override;
 };
 #endif //COMPILERS_PARENEXPRESSION_H

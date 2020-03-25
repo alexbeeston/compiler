@@ -13,7 +13,9 @@ struct TypeDeclItem
 {
     std::string* ident;
     BaseType* type;
-    TypeDeclItem(std::string*, BaseType*);
+    bool isRedeclarable;
+    TypeDeclItem();
+    TypeDeclItem(std::string*, BaseType*, bool p_isRedeclarable = false);
     void print();
 };
 #endif //COMPILERS_TYPEDITEM_H
