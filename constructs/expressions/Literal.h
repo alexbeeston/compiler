@@ -13,9 +13,9 @@ struct Literal:Expression
     int value;
     Literal(int);
     Literal(char);
-//    Literal(bool);
-//    Literal(std::string);
-//    Literal(char);
+    Literal(bool);
+    Literal(char*);
     Register emit() override;
+    int getTypeIndicator() override;
 };
 #endif //COMPILERS_LITERAL_H

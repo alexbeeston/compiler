@@ -6,7 +6,6 @@
 #include "global.h"
 
 #include "constructs/expressions/Expression.h"
-#include "constructs/expressions/StringLit.h"
 #include "constructs/prelude/constants/Constant.h"
 #include "constructs/Program.h"
 
@@ -93,7 +92,6 @@ struct Constant* constantPointer;
 
 struct Expression* expressionPointer;
 std::vector<Expression*>* expressionPointerVectorPointer;
-struct StringLit* stringLitPointer;
 
 std::vector<Constant*>* constantPointerVectorPointer;
 struct Prelude* preludePointer;
@@ -300,7 +298,7 @@ ConstantList : ConstantList Constant { $1->push_back($2); }
 Constant : IDENT EQUAL Expression DONE { $$ = new Constant($1, $3); };
 Expression : NumericLiteral
     | CHARLIT { $$ = new Literal($1); }
-    | STRLIT { $$ = new StringLit($1); }
+    | STRLIT { $$ = new Literal($1); }
     | LPAREN Expression RPAREN { $$ = new ParenExpression($2); }
     | SUB Expression { $$ = new Negative($2); }
     | Expression MULT Expression { $$ = new Multiply($1, $3); }

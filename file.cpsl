@@ -1,7 +1,3 @@
-var
-hello : integer;
-
  begin
- hello := 'b';
- write(hello, "\n");
+ write(10, '\n', "hello world\n", 'c', '\n', false);
  end.

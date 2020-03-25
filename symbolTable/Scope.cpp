@@ -3,7 +3,7 @@
 
 #include "Scope.h"
 #include "../constructs/prelude/types/SimpleType.h"
-#include "../constructs/expressions/BooleanLit.h"
+#include "../constructs/expressions/Literal.h"
 #include "../RegisterPool.h"
 
 extern RegisterPool rp;
@@ -15,7 +15,8 @@ Scope::Scope(Prelude topLevelPrelude)
     // add boolean constants, implemented as redeclarable constants; they can't be variables because we need to pull their semantic value in const_declarations, but they can't be constants because we over write their value in badidea.cpsl
     int NUM_BOOLS = 2;
     std::string booleans[] = {"false", "true"};
-    for (int i = 0; i < NUM_BOOLS; ++i) lookUpItems[booleans[i]] = LookUpItem(booleans[i], new BooleanLit(i), true);
+    bool booleanLiterals[] = {false, true};
+    for (int i = 0; i < NUM_BOOLS; ++i) lookUpItems[booleans[i]] = LookUpItem(booleans[i], new Literal(booleanLiterals[i]), true);
 
     // add user defined constants
     for (Constant* i : *topLevelPrelude.constants) addItem(LookUpItem(i->ident, i->value, false));

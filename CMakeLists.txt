@@ -25,9 +25,7 @@ set(
 
 		constructs/prelude/variables/Variable.cpp
 		constructs/expressions/Literal.cpp
-		constructs/expressions/StringLit.cpp
-		constructs/expressions/BooleanLit.cpp
-		constructs/expressions/Expression.cpp
+        constructs/expressions/Expression.cpp
 		constructs/expressions/BinaryOp.cpp
 		constructs/expressions/Or.cpp
 		constructs/expressions/And.cpp
