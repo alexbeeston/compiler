@@ -28,10 +28,7 @@ Scope::Scope(Prelude topLevelPrelude)
 //    for (TypeDeclItem* type: *topLevelPrelude.types) types[*type->ident] = *type->type;
 
     // add other variables
-    for (Variable* var : *topLevelPrelude.vars)
-    {
-        if (addItem(LookUpItem(var->ident, var->type, nextAddress))) nextAddress += var->type.size;
-    }
+    for (Variable* var : *topLevelPrelude.vars) if (addItem(LookUpItem(var->ident, var->type, nextAddress))) nextAddress += var->type.size;
 }
 
 // used to handle LookUpItems (variables and constants)
