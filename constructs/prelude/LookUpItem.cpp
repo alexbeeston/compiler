@@ -6,10 +6,11 @@
 
 LookUpItem::LookUpItem() {}
 
-LookUpItem::LookUpItem(std::string p_ident, Expression* p_expression) // called by Constants
+LookUpItem::LookUpItem(std::string p_ident, Expression* p_expression, bool p_isRedeclarable) // called by Constants
 {
     ident = p_ident;
     value = p_expression;
+    isRedeclarable = p_isRedeclarable;
     offset = -1;
     baseRegister = "Error: constants do not have a base register.\n";
     type = generateBaseType();
@@ -35,7 +36,10 @@ BaseType LookUpItem::generateBaseType()
 
 Register LookUpItem::emit()
 {
-    if (offset == -1) return value->emit(); // emit a constant
+    if (offset == -1)
+    {
+        return value->emit(); // emit a constant
+    }
     else // emit a variable
     {
         Register r = rp.getRegister();

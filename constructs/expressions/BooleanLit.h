@@ -10,5 +10,6 @@
 struct BooleanLit:Expression
 {
    BooleanLit(int);
+   Register emit() override;
 };
 #endif //COMPILERS_BOOLEANLIT_H

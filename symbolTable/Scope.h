@@ -22,6 +22,7 @@ struct Scope
     int nextAddress = 0;
     std::map<std::string, LookUpItem> lookUpItems;
     LookUpItem getLookUpItem(std::string);
+    bool addItem(LookUpItem);
 //    int addVariable(Variable&); // returns the next available offset from the base register
 
     // used to handle types

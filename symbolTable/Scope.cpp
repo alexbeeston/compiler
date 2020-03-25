@@ -11,13 +11,15 @@ extern RegisterPool rp;
 // used during initialization
 Scope::Scope(Prelude topLevelPrelude)
 {
-    // add user defined constants
-    for (Constant* i : *topLevelPrelude.constants) if (lookUpItems.count(i->ident) == 0) lookUpItems[i->ident] = LookUpItem(i->ident, i->value);
 
-//    // add boolean constants if they are not already defined
-//    int NUM_BOOLS = 2;
-//    std::string booleans[] = {"false", "true"};
-//    for (int i = 0; i < NUM_BOOLS; ++i) if (constants.count(booleans[i]) == 0) constants[booleans[i]] = Constant(booleans[i], new BooleanLit(i));
+    // add boolean constants, implemented as redeclarable constants; they can't be variables because we need to pull their semantic value in const_declarations, but they can't be constants because we over write their value in badidea.cpsl
+    int NUM_BOOLS = 2;
+    std::string booleans[] = {"false", "true"};
+    for (int i = 0; i < NUM_BOOLS; ++i) lookUpItems[booleans[i]] = LookUpItem(booleans[i], new BooleanLit(i), true);
+
+    // add user defined constants
+    for (Constant* i : *topLevelPrelude.constants) addItem(LookUpItem(i->ident, i->value, false));
+
 //
 //    // initialize with primitive types
 //    std::string primitives[] = {"integer", "char", "string", "boolean"};
@@ -38,6 +40,21 @@ Scope::Scope(Prelude topLevelPrelude)
 //   variables[var.ident] = var;
 //   nextAddress += var.type.size;
 //}
+bool Scope::addItem(LookUpItem item)
+{
+    if (lookUpItems.count(item.ident) == 0)
+    {
+        lookUpItems[item.ident] = item;
+        return true;
+    }
+    else if (lookUpItems[item.ident].isRedeclarable)
+    {
+        std::cout << "# about to insert a redeclarable item.\n";
+       lookUpItems[item.ident] = item;
+       return true;
+    }
+    else return false;
+}
 
 LookUpItem Scope::getLookUpItem(std::string key)
 {

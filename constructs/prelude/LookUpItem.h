@@ -13,6 +13,7 @@ struct LookUpItem
 {
     // fields
     int offset; // -1 for constants (set by symbol table)
+    bool isRedeclarable; // false for everything except the true/false mutable constants
     std::string baseRegister; // for variables only
     std::string ident;
     Expression* value; // used by constants only
@@ -20,7 +21,7 @@ struct LookUpItem
 
     // init
     LookUpItem();
-    LookUpItem(std::string, Expression*);
+    LookUpItem(std::string, Expression*, bool);
     BaseType generateBaseType();
 
     // other functions

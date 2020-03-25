@@ -1,8 +1,7 @@
 const
-two = "hello";
-three = "testing";
+ true = 3<>3;
+ false = 3=3;
 
-
-begin
-write(three, "\n", two);
-end.
+ begin
+ write(true, false);
+ end.
