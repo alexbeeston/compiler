@@ -22,18 +22,20 @@ Scope::Scope(Prelude topLevelPrelude)
 
     // initialize with primitive types
     std::string primitives[] = {"integer", "char", "string", "boolean"};
-    for (std::string primitive :primitives) addType(new SimpleType(&primitive, primitive, true));
+    for (std::string primitive : primitives) addType(new SimpleType(&primitive, true));
 
     // add user defined types
     for (BaseType* type: *topLevelPrelude.types) addType(type);
 
-//    // add variables, which are all user defined
-//    for (Variable* var : *topLevelPrelude.vars)
-//    {
-//        // here, we need to look up the type in the type map and assign the value of the key to this LookUpItem, or variable
-//        TypeDeclItem = get
-//        if (addItem(LookUpItem(var->ident, var->type, nextAddress))) nextAddress += var->type.size;
-//    }
+    // add variables, which are all user defined
+    for (TypedList* list: *topLevelPrelude.vars)
+    {
+        for (std::string* name: *list->identList)
+        {
+            addItem(LookUpItem(*name, *list->type, nextAddress));
+            nextAddress += list->type->size;
+        }
+    }
 }
 
 bool Scope::addItem(LookUpItem item)

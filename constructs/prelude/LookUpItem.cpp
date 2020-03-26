@@ -6,7 +6,7 @@
 
 LookUpItem::LookUpItem() {}
 
-LookUpItem::LookUpItem(std::string p_ident, Expression* p_expression, bool p_isRedeclarable) // called by Constants
+LookUpItem::LookUpItem(std::string p_ident, Expression* p_expression, bool p_isRedeclarable) // called by constants
 {
     ident = p_ident;
     value = p_expression;
@@ -16,7 +16,7 @@ LookUpItem::LookUpItem(std::string p_ident, Expression* p_expression, bool p_isR
     type = generateBaseType();
 }
 
-LookUpItem::LookUpItem(std::string p_ident, BaseType p_type, int p_offset)
+LookUpItem::LookUpItem(std::string p_ident, BaseType p_type, int p_offset) // called by variables
 {
     ident = p_ident;
     type = p_type;

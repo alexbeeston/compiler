@@ -11,9 +11,8 @@
 
 struct SimpleType:BaseType
 {
-    std::string* ident; // think of this as a pointer to another type in the symbol table; used for arrays and records as shorthand; when we come across it, we'll look up the referenced type in the symbol table. See syntax/type_decl.cpsl
-    SimpleType(std::string*);
-    SimpleType(std::string*, std::string, bool);
+    std::string* name; // think of this as a pointer to another type in the symbol table; used for arrays and records as shorthand; when we come across it, we'll look up the referenced type in the symbol table. See syntax/type_decl.cpsl
+    SimpleType(std::string*, bool p_isRedeclarable = false);
     void print() override;
 };
 #endif //COMPILERS_SIMPLETYPE_H
