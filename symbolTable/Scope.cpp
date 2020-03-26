@@ -34,10 +34,10 @@ Scope::Scope(Prelude topLevelPrelude)
         {
             // If the type is in the symbol table, then we should use it for the variable. Otherwise, the type was declared inline, which is okay.
             BaseType* temp;
-            if (types.count(*name) == 1) temp = types[*name];
+            if (types.count(list->type->identifier) == 1) temp = types[list->type->identifier];
             else temp = list->type;
             nextAddress += temp->size;
-            addItem(LookUpItem(*name, *list->type, nextAddress));
+            addItem(LookUpItem(*name, *temp , nextAddress));
         }
     }
 }

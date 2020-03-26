@@ -9,6 +9,7 @@ ArrayType::ArrayType(Expression* p_low, Expression* p_high, BaseType* p_type)
     type = p_type;
     typeIndicator = 4;
     isRedeclarable = false;
+    identifier = std::string("junk");
 }
 
 void ArrayType::print()
