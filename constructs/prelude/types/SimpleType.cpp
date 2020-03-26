@@ -5,6 +5,7 @@
 
 SimpleType::SimpleType(std::string* p_identifier, bool p_isRedeclarable)
 {
+    // symbol table consolation may be necessary here. See line when we set the size.
     name = p_identifier;
     identifier = *p_identifier; // this assumes that the type is not declared inline and that its identifier is the same as the name. If it is not, the identifier will be changed in the parser.
     isRedeclarable = p_isRedeclarable;

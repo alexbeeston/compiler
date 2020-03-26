@@ -9,7 +9,6 @@ type
  char = integer;
 
 var
-i: ; end;
 c:integer;
 
 

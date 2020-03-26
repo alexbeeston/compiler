@@ -4,7 +4,7 @@
 #include "Scope.h"
 #include "../constructs/prelude/types/SimpleType.h"
 #include "../constructs/expressions/Literal.h"
-#include "../RegisterPool.h"
+#include "../global.h"
 
 extern RegisterPool rp;
 
@@ -32,8 +32,12 @@ Scope::Scope(Prelude topLevelPrelude)
     {
         for (std::string* name: *list->identList)
         {
+            // If the type is in the symbol table, then we should use it for the variable. Otherwise, the type was declared inline, which is okay.
+            BaseType* temp;
+            if (types.count(*name) == 1) temp = types[*name];
+            else temp = list->type;
+            nextAddress += temp->size;
             addItem(LookUpItem(*name, *list->type, nextAddress));
-            nextAddress += list->type->size;
         }
     }
 }
@@ -47,30 +51,26 @@ bool Scope::addItem(LookUpItem item)
     }
     else if (lookUpItems[item.ident].isRedeclarable)
     {
-        std::cout << "# about to insert a redeclarable item.\n";
        lookUpItems[item.ident] = item;
        return true;
     }
     else return false;
 }
 
-bool Scope::addType(BaseType* type)
-{
+bool Scope::addType(BaseType* type) // consider the case for records and arrays, which will have another type, which will need to be looked up in the symbol table or declared in-line. Save for later with UDD
+{ // assumes for now no arrays nor records
     if (types.count(type->identifier) == 0)
     {
-        std::cout << "# case 1: " << type->identifier << " is not already in the map.\n";
         types[type->identifier] = type;
         return true;
     }
     else if (types[type->identifier]->isRedeclarable)
     {
-        std::cout << "# case 2: " << type->identifier << " is aready in the map, but it's redeclarable.\n";
        types[type->identifier] = type;
        return true;
     }
     else
     {
-        std::cout << "# case 3: " << type->identifier << " is already in the map and it's not redeclarable\n";
         return true;
     }
 }
