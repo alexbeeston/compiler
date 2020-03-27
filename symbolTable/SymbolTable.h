@@ -9,7 +9,6 @@
 #include <string>
 
 #include "Scope.h"
-#include "../constructs/prelude/variables/Variable.h"
 #include "../constructs/prelude/types/BaseType.h"
 #include "../constructs/routines/Routine.h"
 

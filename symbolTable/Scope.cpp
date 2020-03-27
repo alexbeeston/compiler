@@ -87,21 +87,3 @@ LookUpItem Scope::getLookUpItem(std::string key)
 
 // used to handle types
 
-// validation
-//void Scope::prettyPrint()
-//{
-//    std::cout << "\t Types:\n";
-//    for( std::pair<std::string, BaseType> type: types)
-//    {
-//        std::cout << "\t\t" << type.first << " : " << "\n";
-//    }
-//
-//    std::cout << "\t Constants/Variables, which have an expression:\n";
-//    for (std::pair<std::string, Variable> item: variables )
-//    {
-//        std::cout << "\t\t" << "Identifier: " << item.first << "  Address: " << item.second.offset << "\n";
-//    }
-//
-//    std::cout << "\t Functions:\n";
-//    std::cout << "\t\t[placeholder]\n";
-//}

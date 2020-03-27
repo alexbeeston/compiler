@@ -23,8 +23,7 @@ set(
 		constructs/LValueIdent.cpp
 	        constructs/LValueWithExpression.cpp
 
-		constructs/prelude/variables/Variable.cpp
-		constructs/expressions/Literal.cpp
+        constructs/expressions/Literal.cpp
         	constructs/expressions/Expression.cpp
 		constructs/expressions/BinaryOp.cpp
 		constructs/expressions/Or.cpp

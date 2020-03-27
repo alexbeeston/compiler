@@ -11,7 +11,6 @@
 #include "../constructs/prelude/types/BaseType.h"
 #include "../constructs/prelude/Prelude.h"
 #include "../constructs/prelude/LookUpItem.h"
-#include "../constructs/prelude/variables/Variable.h"
 
 struct Scope
 {
@@ -23,7 +22,6 @@ struct Scope
     std::map<std::string, LookUpItem> lookUpItems;
     LookUpItem getLookUpItem(std::string);
     bool addItem(LookUpItem);
-//    int addVariable(Variable&); // returns the next available offset from the base register
 
     // used to handle types
     std::map<std::string, BaseType*> types;
@@ -31,6 +29,5 @@ struct Scope
     BaseType* getBaseType(std::string);
 
     // validation
-//    void prettyPrint();
 };
 #endif //COMPILERS_SCOPE_H

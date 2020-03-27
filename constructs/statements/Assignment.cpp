@@ -2,7 +2,6 @@
 #include <string>
 
 #include "../../global.h"
-#include "../prelude/variables/Variable.h"
 #include "Assignment.h"
 
 Assignment::Assignment(LValue* p_lValue, Expression* p_expression)
