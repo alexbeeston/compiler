@@ -9,7 +9,7 @@ struct BaseType
     bool isRedeclarable;
     int typeIndicator;
     BaseType();
-    int size;
+    virtual int computeSize();
     virtual void print();
 };
 

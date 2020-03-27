@@ -36,7 +36,7 @@ Scope::Scope(Prelude topLevelPrelude)
             BaseType* temp;
             if (types.count(list->type->identifier) == 1) temp = types[list->type->identifier];
             else temp = list->type;
-            nextAddress += temp->size;
+            nextAddress += temp->computeSize();
             addItem(LookUpItem(*name, *temp , nextAddress));
         }
     }

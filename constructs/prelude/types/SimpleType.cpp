@@ -18,10 +18,14 @@ SimpleType::SimpleType(std::string* p_identifier, bool p_isRedeclarable)
     else if (name->compare("boolean") == 0) typeIndicator = 3;
     else if (name->compare("BOOLEAN") == 0) typeIndicator = 3;
     else typeIndicator = 6;
-    size = 4; // assumes this is a primitive. May need to consult the symbol table is the typeIndicator is a 6, since it acts as a pointer to a another type
 }
 
 void SimpleType::print()
 {
     std::cout << *name;
+}
+
+int SimpleType::computeSize()
+{
+    return 4;
 }

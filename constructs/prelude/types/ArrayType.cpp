@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "ArrayType.h"
+#include "../../../global.h"
 
 ArrayType::ArrayType(Expression* p_low, Expression* p_high, BaseType* p_type)
 {
@@ -9,7 +10,12 @@ ArrayType::ArrayType(Expression* p_low, Expression* p_high, BaseType* p_type)
     type = p_type;
     typeIndicator = 4;
     isRedeclarable = false;
-    identifier = std::string("junk");
+    identifier = std::string("[declared inline]");
+
+//    // compute the size of the array in memory
+//    int multiplier = st.retrieveType(type->identifier).size;
+//
+//
 }
 
 void ArrayType::print()
