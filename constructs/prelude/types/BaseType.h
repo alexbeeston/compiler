@@ -11,6 +11,7 @@ struct BaseType
     BaseType();
     virtual int computeSize();
     virtual void print();
+    virtual int getTypeIndicator();
 };
 
 #endif //COMPILERS_SIMPLETYPE_H

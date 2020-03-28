@@ -15,5 +15,6 @@ struct SimpleType:BaseType
     SimpleType(std::string*, bool p_isRedeclarable = false);
     void print() override;
     int computeSize() override;
+    int getTypeIndicator() override;
 };
 #endif //COMPILERS_SIMPLETYPE_H

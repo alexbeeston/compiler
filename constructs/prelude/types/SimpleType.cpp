@@ -18,7 +18,6 @@ SimpleType::SimpleType(std::string* p_name, bool p_isRedeclarable)
     else if (name->compare("STRING") == 0) typeIndicator = 2;
     else if (name->compare("boolean") == 0) typeIndicator = 3;
     else if (name->compare("BOOLEAN") == 0) typeIndicator = 3;
-    else typeIndicator = 6;
 }
 
 void SimpleType::print()
@@ -31,4 +30,9 @@ int SimpleType::computeSize()
     if (typeIndicator == 6) return st.retrieveType(*name)->computeSize(); // the simple type is actually a string that refers to another type in the symbol table, so consult its size function
     else if (typeIndicator == 0 || typeIndicator == 1 || typeIndicator == 2 || typeIndicator == 3) return 4; // the simple type is a primitive
     else throw std::runtime_error("Attempting to get the size of a simple type that does have a typeIndicator of 0, 1, 2, 3, or 6");
+}
+
+int SimpleType::getTypeIndicator()
+{
+    return st.retrieveType(identifier)->getTypeIndicator();
 }
