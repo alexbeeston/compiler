@@ -15,5 +15,6 @@ struct RecordType:BaseType
     std::vector<TypedList*>* typedLists;
     RecordType(std::vector<TypedList*>*);
     void print() override;
+    int computeSize() override;
 };
 #endif //COMPILERS_RECORDTYPE_H

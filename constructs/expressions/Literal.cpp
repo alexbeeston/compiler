@@ -3,6 +3,8 @@
 #include "Literal.h"
 #include "../../global.h"
 
+Literal::Literal() {}
+
 Literal::Literal(int p_value)
 {
     typeIndicator = 0;

@@ -16,8 +16,9 @@ struct LookUpItem
     bool isRedeclarable; // false for everything except the true/false mutable constants
     std::string baseRegister; // for variables only
     std::string ident;
-    Expression* value; // used by constants only
+    Expression* value = nullptr; // used by constants only
     BaseType type;
+    Register getRegister();
 
     // init
     LookUpItem();

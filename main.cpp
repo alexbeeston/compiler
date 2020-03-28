@@ -16,13 +16,12 @@ RegisterPool rp;
 int main()
 {
     st = SymbolTable();
-
+    rp = RegisterPool();
 	yyparse();
 	std::cout << std::endl;
 //	program->prettyPrint();
     st.addStuff(*program->prelude);
 
-    rp = RegisterPool();
 //	st.prettyPrint();
 	program->emit();
 

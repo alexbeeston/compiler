@@ -13,9 +13,19 @@ void LValueExpression::print()
     lValue->print();
 }
 
-int LValueExpression::getTypeIndicator() { return st.retrieveItem(lValue->getKey()).type.typeIndicator; } // is there a better way to do this? An Lvalue is a just an identifier, dot operator, or index, so it doesn't inherently know its type
+int LValueExpression::getTypeIndicator() { return st.retrieveItem(lValue->getKey()).type.typeIndicator; }
 
 Register LValueExpression::emit()
 {
     return st.retrieveItem(lValue->getKey()).emit();
+}
+
+int LValueExpression::getValue()
+{
+    LookUpItem l = st.retrieveItem(lValue->getKey());
+//    if (l.value == nullptr) std::cout << "flag\n";
+//    Expression* expressionContainingValue = st.retrieveItem(lValue->getKey()).value;
+//    if (expressionContainingValue == nullptr) throw std::runtime_error("Attempting to get an expression on a lookUpItem, but the expression is nullptr. Likely, this LookUpItem represents a variable, not a constant");
+//    else return expressionContainingValue->getValue();
+    return 10;
 }

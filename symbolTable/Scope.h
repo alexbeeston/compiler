@@ -27,7 +27,5 @@ struct Scope
     std::map<std::string, BaseType*> types;
     bool addType(BaseType*);
     BaseType* getBaseType(std::string);
-
-    // validation
 };
 #endif //COMPILERS_SCOPE_H

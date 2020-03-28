@@ -9,6 +9,10 @@ RecordType::RecordType(std::vector<TypedList*>* p_typedLists)
     isRedeclarable = false;
     identifier = std::string("[declared inline]");
 }
+int RecordType::computeSize()
+{
+    std::cout << "inside recordType::computeSize()\n";
+}
 
 void RecordType::print()
 {

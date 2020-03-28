@@ -24,7 +24,6 @@ void Program::emit()
     block->emit();
 
     // emit the string declarations
-    std::cout << "# size of string table: " << st.strings.size() << "\n";
     std::cout << "\n\n .data\n";
     std::cout << ".asciiz\n";
     int counter = 0;

@@ -9,7 +9,7 @@
 
 struct Literal:Expression
 {
-    int value;
+    Literal();
     Literal(int);
     Literal(char);
     Literal(bool);

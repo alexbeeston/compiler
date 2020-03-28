@@ -10,10 +10,11 @@ void Expression::print()
 
 Register Expression::emit()
 {
-    std::cout << "Error: calling the base Expression emit function. Going to return Register().\n";
-    return Register();
+    throw std::runtime_error("Constructing the base Expression struct");
 }
 
 int Expression::getTypeIndicator() { return typeIndicator; }
+
+int Expression::getValue() { return value; }
 
 

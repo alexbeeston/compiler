@@ -32,12 +32,17 @@ Scope::Scope(Prelude topLevelPrelude)
     {
         for (std::string* name: *list->identList)
         {
-            // If the type is in the symbol table, then we should use it for the variable. Otherwise, the type was declared inline, which is okay.
+            // method one: if the type is in the symbol table, pull it; otherwise, just use the type declared inline. THIS MAY NOT BE NECESSARY
             BaseType* temp;
-            if (types.count(list->type->identifier) == 1) temp = types[list->type->identifier];
+            if (types.count(list->type->identifier) == 1) temp = types[list->type->identifier]; // probably only necessary when the type is primitive
             else temp = list->type;
-            nextAddress += temp->computeSize();
             addItem(LookUpItem(*name, *temp , nextAddress));
+            std::cout << "# added " << *name << " at address " << nextAddress << "\n";
+            nextAddress += temp->computeSize();
+
+//            // method two: just add the type (preferred for its simplicity; results in seg fault, but seems like it should work. Consider later. Possible downside too is that there might be many instances of a primitive types
+//            nextAddress += list->type->computeSize();
+//            addItem(LookUpItem(*name, *list->type, nextAddress));
         }
     }
 }
@@ -84,6 +89,3 @@ LookUpItem Scope::getLookUpItem(std::string key)
 {
     return lookUpItems[key];
 }
-
-// used to handle types
-
