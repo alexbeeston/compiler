@@ -11,11 +11,14 @@
 
 struct SimpleType:BaseType
 {
-    std::string* name; // think of this as a pointer to another type in the symbol table; used for arrays and records as shorthand; when we come across it, we'll look up the referenced type in the symbol table. See syntax/type_decl.cpsl
+    std::string* name;
     SimpleType(std::string*, bool p_isRedeclarable = false);
     void print() override;
-    int computeSize() override;
-    TypeIndicator getTypeIndicator() override;
+
+    // the following functions are necessary because a simple type is a string, which could be a primitive type or the name of an array or record type
     bool isPrimitive();
+    TypeIndicator getTypeIndicator() override;
+    LValueType getLValueType() override;
+    int computeSize() override;
 };
 #endif //COMPILERS_SIMPLETYPE_H

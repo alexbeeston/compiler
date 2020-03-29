@@ -2,13 +2,12 @@
 #include <stdexcept>
 
 #include "SimpleType.h"
-#include "../../../global.h" // used to lookup the size of simple types that are names of array or record types
+#include "../../../global.h"
 
 SimpleType::SimpleType(std::string* p_name, bool p_isRedeclarable)
 {
-    // if the simple type is not a primitive, but rather a string that references another type in the symbol table, the identifier field will be over-written in the parser
     name = p_name;
-    identifier = *p_name;
+    identifier = *p_name; // if the simple type is the name of an array or record, it will be picked up and modified in the parser
     isRedeclarable = p_isRedeclarable;
     typeIndicator = UNDEFINED;
     if (name->compare("integer") == 0) typeIndicator = INTEGER;
@@ -36,6 +35,12 @@ TypeIndicator SimpleType::getTypeIndicator()
 {
     if (isPrimitive()) return typeIndicator;
     else return st.retrieveType(identifier)->getTypeIndicator();
+}
+
+LValueType SimpleType::getLValueType()
+{
+    if(isPrimitive()) return PRIMITIVE_TYPE;
+    else return st.retrieveType(identifier)->getLValueType();
 }
 
 bool SimpleType::isPrimitive()

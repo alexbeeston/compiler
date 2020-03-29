@@ -5,6 +5,7 @@
 
 ArrayType::ArrayType(Expression* p_low, Expression* p_high, BaseType* p_type)
 {
+    lValueType = ARRAY_TYPE;
     low = p_low;
     high = p_high;
     type = p_type;
