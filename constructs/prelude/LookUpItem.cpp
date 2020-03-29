@@ -25,6 +25,7 @@ LookUpItem::LookUpItem(std::string p_ident, BaseType p_type, int p_offset)
     isRedeclarable = false;
     offset = p_offset;
     baseRegister = rp.getGlobalPointer(); // assumes all variables are offset from the global pointer, for now
+    lValueType = p_type.getLValueType();
 }
 
 void LookUpItem::print()
@@ -64,10 +65,9 @@ Register LookUpItem::emit()
 
 Register LookUpItem::loadBaseRegister()
 {
+    if (lValueType == PRIMITIVE_TYPE) std::cout << "# about to load a primitive type\n";
+    else if (lValueType == ARRAY_TYPE) std::cout << "# about to load an array type\n";
+    else if (lValueType == RECORD_TYPE) std::cout << "# about to load a record type\n";
+    else throw std::runtime_error("LValueType not known\n");
     return Register();
-
-    // the LookUpItem is an array
-
-
-    // the LookUpItem is a record
 }
