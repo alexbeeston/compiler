@@ -8,11 +8,12 @@
 #include "types/BaseType.h"
 #include "../../Register.h"
 #include "../expressions/Expression.h"
+#include "../../Enums.h"
 
 struct LookUpItem
 {
     // fields
-    int lValueType;
+    LValueType lValueType;
     int offset; // -1 for constants (set by symbol table)
     bool isRedeclarable; // false for everything except the true/false mutable constants
     Register baseRegister; // for variables only

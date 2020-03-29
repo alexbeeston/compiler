@@ -8,10 +8,9 @@ ArrayType::ArrayType(Expression* p_low, Expression* p_high, BaseType* p_type)
     low = p_low;
     high = p_high;
     type = p_type;
-    typeIndicator = p_type->typeIndicator; // contains the typeIndicator of the contained type about the type the array holds
+    typeIndicator = p_type->getTypeIndicator();
     isRedeclarable = false;
     identifier = std::string("[declared inline]");
-    lValueType = 1;
 }
 
 int ArrayType::computeSize()

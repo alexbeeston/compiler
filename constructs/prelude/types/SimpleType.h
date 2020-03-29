@@ -16,7 +16,6 @@ struct SimpleType:BaseType
     void print() override;
     int computeSize() override;
     TypeIndicator getTypeIndicator() override;
-    int getLValueType() override;
     bool isPrimitive();
 };
 #endif //COMPILERS_SIMPLETYPE_H

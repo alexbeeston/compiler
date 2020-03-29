@@ -4,7 +4,6 @@
 
 RecordType::RecordType(std::vector<TypedList*>* p_typedLists)
 {
-    lValueType = 2;
     typedLists = p_typedLists;
     isRedeclarable = false;
     identifier = std::string("[declared inline]");

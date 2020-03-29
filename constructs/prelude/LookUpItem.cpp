@@ -6,22 +6,25 @@
 
 LookUpItem::LookUpItem() {}
 
-LookUpItem::LookUpItem(std::string p_ident, Expression* p_expression, bool p_isRedeclarable) // called by constants
+// Called by constants
+LookUpItem::LookUpItem(std::string p_ident, Expression* p_expression, bool p_isRedeclarable)
 {
     ident = p_ident;
     value = p_expression;
     isRedeclarable = p_isRedeclarable;
     offset = -1;
     type = generateBaseType();
+    lValueType = PRIMITIVE_TYPE;
 }
 
-LookUpItem::LookUpItem(std::string p_ident, BaseType p_type, int p_offset) // called by variables
+// Called by variables
+LookUpItem::LookUpItem(std::string p_ident, BaseType p_type, int p_offset)
 {
     ident = p_ident;
     type = p_type;
     isRedeclarable = false;
     offset = p_offset;
-    baseRegister = rp.getGlobalPointer(); // assumes all variables are offset from the global pointer
+    baseRegister = rp.getGlobalPointer(); // assumes all variables are offset from the global pointer, for now
 }
 
 void LookUpItem::print()
@@ -61,10 +64,6 @@ Register LookUpItem::emit()
 
 Register LookUpItem::loadBaseRegister()
 {
-    if (type.getLValueType() == 0)
-    {
-        return Register();
-    }
     return Register();
 
     // the LookUpItem is an array

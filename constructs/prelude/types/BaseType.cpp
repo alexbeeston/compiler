@@ -15,5 +15,3 @@ void BaseType::print()
 int BaseType::computeSize() { return -1; }
 
 TypeIndicator BaseType::getTypeIndicator() { return typeIndicator; }
-
-int BaseType::getLValueType() { return lValueType; }

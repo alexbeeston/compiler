@@ -38,12 +38,6 @@ TypeIndicator SimpleType::getTypeIndicator()
     else return st.retrieveType(identifier)->getTypeIndicator();
 }
 
-int SimpleType::getLValueType()
-{
-    if (isPrimitive()) return 0;
-    else return st.retrieveType(identifier)->getLValueType();
-}
-
 bool SimpleType::isPrimitive()
 {
    if (typeIndicator == INTEGER || typeIndicator == CHAR || typeIndicator == STRING || typeIndicator == BOOLEAN) return true;
