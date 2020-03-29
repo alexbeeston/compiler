@@ -1,0 +1,10 @@
+//
+// Created by abeeston on 3/28/20.
+//
+
+#ifndef COMPILERS_TYPEINDICATOR_H
+#define COMPILERS_TYPEINDICATOR_H
+
+enum TypeIndicator {INTEGER, CHAR, STRING, BOOLEAN, UNDEFINED};
+
+#endif //COMPILERS_TYPEINDICATOR_H

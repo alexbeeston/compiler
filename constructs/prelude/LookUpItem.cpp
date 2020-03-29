@@ -31,10 +31,11 @@ void LookUpItem::print()
 
 BaseType LookUpItem::generateBaseType()
 {
-    if (value->typeIndicator == 0) return SimpleType(new std::string("integer"));
-    else if (value->typeIndicator == 1) return SimpleType(new std::string("char"));
-    else if (value->typeIndicator == 2) return SimpleType(new std::string("string"));
-    else if (value->typeIndicator == 3) return SimpleType(new std::string("boolean"));
+    // error here: before, calling getTypeIndicator() resulted in an error. Try again to see if it works next time you see this.
+    if (value->typeIndicator == INTEGER) return SimpleType(new std::string("integer"));
+    else if (value->typeIndicator == CHAR) return SimpleType(new std::string("char"));
+    else if (value->typeIndicator == STRING) return SimpleType(new std::string("string"));
+    else if (value->typeIndicator == BOOLEAN) return SimpleType(new std::string("boolean"));
     else
     {
         std::cout << "Error constructing a BaseType from a constant (since it inherits from LookUpItem, which needs a BaseType), and the expression isn't of a primitive type\n";
@@ -60,8 +61,11 @@ Register LookUpItem::emit()
 
 Register LookUpItem::loadBaseRegister()
 {
-    // the LookUpItem is a variable
-    return baseRegister;
+    if (type.getLValueType() == 0)
+    {
+        return Register();
+    }
+    return Register();
 
     // the LookUpItem is an array
 

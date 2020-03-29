@@ -4,7 +4,7 @@
 
 Equal::Equal(Expression* p_l, Expression* p_r):BinaryOpUndeterministicOperands(p_l, p_r)
 {
-    typeIndicator = 3;
+    typeIndicator = BOOLEAN;
 }
 
 Register Equal::emit()

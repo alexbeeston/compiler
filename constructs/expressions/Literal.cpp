@@ -7,33 +7,33 @@ Literal::Literal() {}
 
 Literal::Literal(int p_value)
 {
-    typeIndicator = 0;
+    typeIndicator = INTEGER;
     value = p_value;
 }
 
 Literal::Literal(char p_value)
 {
-    typeIndicator = 1;
+    typeIndicator = CHAR;
     value = p_value;
 }
 
 Literal::Literal(bool p_value)
 {
-    typeIndicator = 3;
+    typeIndicator = BOOLEAN;
     value = p_value;
 }
 
 Literal::Literal(char* p_value)
 {
-    typeIndicator = 2;
+    typeIndicator = STRING;
     value = st.insertMessage(std::string(p_value));
 }
 
 Register Literal::emit()
 {
     Register r = rp.getRegister();
-    if (typeIndicator == 0 || typeIndicator == 1 || typeIndicator == 3) std::cout << "li " << r.getName() << " " << value << "   # loaded in integer. Could be used for a integer, char, or bool.\n";
-    else if (typeIndicator == 2) std::cout << "la " << r.getName() << " message" << value << "   # loaded a string literal\n";
+    if (typeIndicator == INTEGER || typeIndicator == CHAR || typeIndicator == BOOLEAN) std::cout << "li " << r.getName() << " " << value << "   # loaded in integer. Could be used for a integer, char, or bool.\n";
+    else if (typeIndicator == STRING) std::cout << "la " << r.getName() << " message" << value << "   # loaded a string literal\n";
     else std::cout << "Error: attempting to load an expression that is not an integer, character, bool, or string.\n";
     return r;
 }

@@ -7,14 +7,15 @@
 
 #include <string>
 #include "../../Register.h"
+#include "../../Enums.h"
 
 struct Expression
 {
     int value;
-    int typeIndicator;
+    TypeIndicator typeIndicator;
     virtual int getValue();
     virtual void print();
     virtual Register emit();
-    virtual int getTypeIndicator();
+    virtual TypeIndicator getTypeIndicator();
 };
 #endif //COMPILERS_EXPRESSION_H

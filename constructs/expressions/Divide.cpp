@@ -4,7 +4,7 @@
 
 Divide::Divide(Expression* p_l, Expression* p_r):BinaryOp(p_l, p_r)
 {
-    typeIndicator = 0;
+    typeIndicator = INTEGER;
 }
 
 void Divide::print()

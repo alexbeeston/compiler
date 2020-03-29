@@ -16,15 +16,15 @@ void ChrFunc::print()
 
 Register ChrFunc::emit()
 {
-    if (expression->getTypeIndicator() == 0)
+    if (expression->getTypeIndicator() == INTEGER)
     {
-        expression->typeIndicator = 1;
+        expression->typeIndicator = CHAR;
         return expression->emit();
     }
-    else throw std::runtime_error("Error: chr() was called on a something other an an integer\n");
+    else throw std::runtime_error("Error: chr() was called on something other than an integer. Sorry, can't print what it was without a lot of annoying if statements, at least as far as I know.");
 }
 
-int ChrFunc::getTypeIndicator()
+TypeIndicator ChrFunc::getTypeIndicator()
 {
-    return 1;
+    return CHAR;
 }

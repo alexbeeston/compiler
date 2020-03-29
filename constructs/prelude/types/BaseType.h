@@ -2,17 +2,18 @@
 #define COMPILERS_BASETYPE_H
 
 #include <string>
+#include "../../../Enums.h"
 
 struct BaseType
 {
     std::string identifier;
     bool isRedeclarable;
     int lValueType;
-    int typeIndicator;
+    TypeIndicator typeIndicator;
     BaseType();
     virtual int computeSize();
     virtual void print();
-    virtual int getTypeIndicator();
+    virtual TypeIndicator getTypeIndicator();
     virtual int getLValueType();
 };
 

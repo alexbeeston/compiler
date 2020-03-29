@@ -10,14 +10,15 @@ SimpleType::SimpleType(std::string* p_name, bool p_isRedeclarable)
     name = p_name;
     identifier = *p_name;
     isRedeclarable = p_isRedeclarable;
-    if (name->compare("integer") == 0) typeIndicator = 0;
-    else if (name->compare("INTEGER") == 0) typeIndicator = 0;
-    else if (name->compare("char") == 0) typeIndicator = 1;
-    else if (name->compare("CHAR") == 0) typeIndicator = 1;
-    else if (name->compare("string") == 0) typeIndicator = 2;
-    else if (name->compare("STRING") == 0) typeIndicator = 2;
-    else if (name->compare("boolean") == 0) typeIndicator = 3;
-    else if (name->compare("BOOLEAN") == 0) typeIndicator = 3;
+    typeIndicator = UNDEFINED;
+    if (name->compare("integer") == 0) typeIndicator = INTEGER;
+    else if (name->compare("INTEGER") == 0) typeIndicator = INTEGER;
+    else if (name->compare("char") == 0) typeIndicator = CHAR;
+    else if (name->compare("CHAR") == 0) typeIndicator = CHAR;
+    else if (name->compare("string") == 0) typeIndicator = STRING;
+    else if (name->compare("STRING") == 0) typeIndicator = STRING;
+    else if (name->compare("boolean") == 0) typeIndicator = BOOLEAN;
+    else if (name->compare("BOOLEAN") == 0) typeIndicator = BOOLEAN;
 }
 
 void SimpleType::print()
@@ -31,7 +32,7 @@ int SimpleType::computeSize()
     else return st.retrieveType(*name)->computeSize();
 }
 
-int SimpleType::getTypeIndicator()
+TypeIndicator SimpleType::getTypeIndicator()
 {
     if (isPrimitive()) return typeIndicator;
     else return st.retrieveType(identifier)->getTypeIndicator();
@@ -45,6 +46,6 @@ int SimpleType::getLValueType()
 
 bool SimpleType::isPrimitive()
 {
-   if (typeIndicator == 0 || typeIndicator == 1 || typeIndicator == 2 || typeIndicator == 3) return true;
+   if (typeIndicator == INTEGER || typeIndicator == CHAR || typeIndicator == STRING || typeIndicator == BOOLEAN) return true;
    else return false;
 }

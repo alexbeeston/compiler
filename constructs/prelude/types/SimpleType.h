@@ -15,7 +15,7 @@ struct SimpleType:BaseType
     SimpleType(std::string*, bool p_isRedeclarable = false);
     void print() override;
     int computeSize() override;
-    int getTypeIndicator() override;
+    TypeIndicator getTypeIndicator() override;
     int getLValueType() override;
     bool isPrimitive();
 };

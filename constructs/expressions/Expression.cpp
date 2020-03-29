@@ -13,7 +13,7 @@ Register Expression::emit()
     throw std::runtime_error("Constructing the base Expression struct");
 }
 
-int Expression::getTypeIndicator() { return typeIndicator; }
+TypeIndicator Expression::getTypeIndicator() { return typeIndicator; }
 
 int Expression::getValue() { return value; }
 

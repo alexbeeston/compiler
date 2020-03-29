@@ -4,6 +4,7 @@
 
 LessThanEqual::LessThanEqual(Expression* p_l, Expression* p_r):BinaryOp(p_l, p_r)
 {
+    typeIndicator = BOOLEAN;
 }
 
 void LessThanEqual::print()

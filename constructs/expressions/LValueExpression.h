@@ -14,7 +14,7 @@ struct LValueExpression:Expression
    LValueExpression(LValue*);
    void print() override;
    Register emit() override;
-   int getTypeIndicator() override;
+   TypeIndicator getTypeIndicator() override;
    int getValue() override;
 };
 #endif //COMPILERS_LVALUEEXPRESSION_H

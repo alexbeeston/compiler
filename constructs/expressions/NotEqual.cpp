@@ -4,7 +4,7 @@
 
 NotEqual::NotEqual(Expression* p_left, Expression* p_right):BinaryOpUndeterministicOperands(p_left, p_right)
 {
-    typeIndicator = 3;
+    typeIndicator = BOOLEAN;
 }
 
 void NotEqual::print()

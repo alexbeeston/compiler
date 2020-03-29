@@ -17,12 +17,12 @@ void OrdFunc::print()
 
 Register OrdFunc::emit()
 {
-    if (expression->getTypeIndicator() == 1)
+    if (expression->getTypeIndicator() == CHAR)
     {
-        expression->typeIndicator = 0;
+        expression->typeIndicator = INTEGER;
         return expression->emit();
     }
     else throw std::runtime_error("Error: Ord() attempted on a non-character.");
 }
 
-int OrdFunc::getTypeIndicator() { return 0; }
+TypeIndicator OrdFunc::getTypeIndicator() { return INTEGER; }

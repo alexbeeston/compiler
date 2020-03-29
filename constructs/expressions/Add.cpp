@@ -3,7 +3,7 @@
 
 Add::Add(Expression* p_l, Expression* p_r):BinaryOp(p_l, p_r)
 {
-    typeIndicator = 0;
+    typeIndicator = INTEGER;
 }
 
 void Add::print()

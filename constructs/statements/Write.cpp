@@ -25,10 +25,10 @@ void Write::emit()
     std::cout << "# write\n";
     for (Expression* expression : *expressions)
     {
-        if (expression->getTypeIndicator() == 0 || expression->getTypeIndicator() == 3) std::cout << "li $v0 1   # 1 = system call to print an integer; used for ints and bools\n";
-        else if (expression->getTypeIndicator() == 1) std::cout << "li $v0 11   # 11 = system call to print an char\n";
-        else if (expression->getTypeIndicator() == 2) std::cout << "li $v0 4   # 4 = system call to print a label to a string\n";
-        else std::cout << "error: the expression doesn't know if its an int, char, or string (Inside Write::emit(); check the typeIndicator for an expression or one of its derived structs): VALUE: " << expression->typeIndicator << "\n";
+        if (expression->getTypeIndicator() == INTEGER || expression->getTypeIndicator() == BOOLEAN) std::cout << "li $v0 1   # 1 = system call to print an integer; used for ints and bools\n";
+        else if (expression->getTypeIndicator() == CHAR) std::cout << "li $v0 11   # 11 = system call to print an char\n";
+        else if (expression->getTypeIndicator() == STRING) std::cout << "li $v0 4   # 4 = system call to print a label to a string\n";
+        else std::cout << "error: the expression doesn't know if its an int, char, or string (Inside Write::emit(); check the typeIndicator for an expression or one of its derived structs): VALUE: " << expression->getTypeIndicator() << "\n";
         Register r = expression->emit();
         std::cout << "la $a0 (" << r.getName() << ")\n";
         std::cout << "syscall\n\n";

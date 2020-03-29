@@ -4,11 +4,10 @@
 
 RecordType::RecordType(std::vector<TypedList*>* p_typedLists)
 {
+    lValueType = 2;
     typedLists = p_typedLists;
-    typeIndicator = 5;
     isRedeclarable = false;
     identifier = std::string("[declared inline]");
-    lValueType = 2;
 }
 int RecordType::computeSize()
 {

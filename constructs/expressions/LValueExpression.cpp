@@ -13,7 +13,7 @@ void LValueExpression::print()
     lValue->print();
 }
 
-int LValueExpression::getTypeIndicator() { return st.retrieveItem(lValue->getKey()).type.typeIndicator; }
+TypeIndicator LValueExpression::getTypeIndicator() { return st.retrieveItem(lValue->getKey()).type.getTypeIndicator(); }
 
 Register LValueExpression::emit()
 {

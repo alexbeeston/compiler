@@ -13,6 +13,6 @@ struct ChrFunc:Expression
     ChrFunc(Expression*);
     void print() override;
     Register emit() override;
-    int getTypeIndicator() override;
+    TypeIndicator getTypeIndicator() override;
 };
 #endif //COMPILERS_CHRFUNC_H
