@@ -13,6 +13,7 @@ struct RegisterPool
 {
     std::vector<Register> registers;
     Register getRegister();
+    Register getGlobalPointer();
     void returnRegister(Register);
     RegisterPool();
 };

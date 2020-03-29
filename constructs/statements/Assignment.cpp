@@ -25,7 +25,7 @@ void Assignment::emit()
     if (item.type.typeIndicator != expression->getTypeIndicator()) throw std::runtime_error("Attempting to assign an expression of typeIndicator " + std::to_string(expression->getTypeIndicator()) + " to a LookUpItem with typeindicator " + std::to_string(item.type.typeIndicator) + ".\n");
     Register r = expression->emit();
     if (item.offset == -1) std::cout << "Error: can not assign to a constant\n";
-    else std::cout << "sw " << r.getName() << " " << item.offset << "(" << item.baseRegister << ")\n\n";
+    else std::cout << "sw " << r.getName() << " " << item.offset << "(" << item.loadBaseRegister().getName() << ")\n\n";
     rp.returnRegister(r);
 }
 

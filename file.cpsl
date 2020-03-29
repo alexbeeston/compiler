@@ -1,9 +1,13 @@
+const
+hey = 10;
+
 type
 a = array[1:5] of char;
 
 var
 c : a;
+test : integer;
 
 begin
-c[1] := 'a';
+write(hey);
 end.

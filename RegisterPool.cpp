@@ -17,6 +17,11 @@ Register RegisterPool::getRegister()
     return temp;
 }
 
+Register RegisterPool::getGlobalPointer()
+{
+    return Register(std::string("$gp"));
+}
+
 void RegisterPool::returnRegister(Register reg)
 {
     registers.push_back(reg);

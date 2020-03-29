@@ -21,7 +21,7 @@ Register LValueExpression::emit()
 }
 
 int LValueExpression::getValue()
-{
+{ // LOCATION OF BUG; has to be pre-mature accessing of the st before things were added to it. What else could it possibly be? Make sure I'm not calling this in the constructor of any construct
     LookUpItem l = st.retrieveItem(lValue->getKey());
 //    if (l.value == nullptr) std::cout << "flag\n";
 //    Expression* expressionContainingValue = st.retrieveItem(lValue->getKey()).value;

@@ -14,11 +14,10 @@ struct LookUpItem
     // fields
     int offset; // -1 for constants (set by symbol table)
     bool isRedeclarable; // false for everything except the true/false mutable constants
-    std::string baseRegister; // for variables only
+    Register baseRegister; // for variables only
     std::string ident;
     Expression* value = nullptr; // used by constants only
     BaseType type;
-    Register getRegister();
 
     // init
     LookUpItem();
@@ -29,6 +28,7 @@ struct LookUpItem
     // other functions
     virtual void print();
     Register emit();
+    Register loadBaseRegister();
 };
 
 #endif //COMPILERS_LOOKUPITEM_H

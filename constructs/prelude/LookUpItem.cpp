@@ -12,7 +12,6 @@ LookUpItem::LookUpItem(std::string p_ident, Expression* p_expression, bool p_isR
     value = p_expression;
     isRedeclarable = p_isRedeclarable;
     offset = -1;
-    baseRegister = "Error: constants do not have a base register.\n";
     type = generateBaseType();
 }
 
@@ -22,7 +21,7 @@ LookUpItem::LookUpItem(std::string p_ident, BaseType p_type, int p_offset) // ca
     type = p_type;
     isRedeclarable = false;
     offset = p_offset;
-    baseRegister = "$gp"; // assumes all variables are offset from the global pointer
+    baseRegister = rp.getGlobalPointer(); // assumes all variables are offset from the global pointer
 }
 
 void LookUpItem::print()
@@ -45,14 +44,27 @@ BaseType LookUpItem::generateBaseType()
 
 Register LookUpItem::emit()
 {
+    // emit, or load, a constant
     if (offset == -1)
     {
-        return value->emit(); // emit a constant
+        return value->emit();
     }
-    else // emit a variable
+    // emit, or load, a variable
+    else
     {
         Register r = rp.getRegister();
-        std::cout << "lw " << r.getName() << " " << offset << "(" << baseRegister << ")   # load a variable\n";
+        std::cout << "lw " << r.getName() << " " << offset << "(" << baseRegister.getName() << ")   # load a variable\n";
         return r;
     }
+}
+
+Register LookUpItem::loadBaseRegister()
+{
+    // the LookUpItem is a variable
+    return baseRegister;
+
+    // the LookUpItem is an array
+
+
+    // the LookUpItem is a record
 }
