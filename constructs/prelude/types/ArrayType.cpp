@@ -11,6 +11,7 @@ ArrayType::ArrayType(Expression* p_low, Expression* p_high, BaseType* p_type)
     typeIndicator = p_type->typeIndicator; // contains the typeIndicator of the contained type about the type the array holds
     isRedeclarable = false;
     identifier = std::string("[declared inline]");
+    lValueType = 1;
 }
 
 int ArrayType::computeSize()

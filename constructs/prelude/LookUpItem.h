@@ -12,6 +12,7 @@
 struct LookUpItem
 {
     // fields
+    int lValueType;
     int offset; // -1 for constants (set by symbol table)
     bool isRedeclarable; // false for everything except the true/false mutable constants
     Register baseRegister; // for variables only

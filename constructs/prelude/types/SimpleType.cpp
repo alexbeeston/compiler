@@ -27,12 +27,24 @@ void SimpleType::print()
 
 int SimpleType::computeSize()
 {
-    if (typeIndicator == 6) return st.retrieveType(*name)->computeSize(); // the simple type is actually a string that refers to another type in the symbol table, so consult its size function
-    else if (typeIndicator == 0 || typeIndicator == 1 || typeIndicator == 2 || typeIndicator == 3) return 4; // the simple type is a primitive
-    else throw std::runtime_error("Attempting to get the size of a simple type that does have a typeIndicator of 0, 1, 2, 3, or 6");
+    if (isPrimitive()) return 4;
+    else return st.retrieveType(*name)->computeSize();
 }
 
 int SimpleType::getTypeIndicator()
 {
-    return st.retrieveType(identifier)->getTypeIndicator();
+    if (isPrimitive()) return typeIndicator;
+    else return st.retrieveType(identifier)->getTypeIndicator();
+}
+
+int SimpleType::getLValueType()
+{
+    if (isPrimitive()) return 0;
+    else return st.retrieveType(identifier)->getLValueType();
+}
+
+bool SimpleType::isPrimitive()
+{
+   if (typeIndicator == 0 || typeIndicator == 1 || typeIndicator == 2 || typeIndicator == 3) return true;
+   else return false;
 }
