@@ -6,5 +6,5 @@ dummy : integer;
 testArray : array[1:5] of integer;
 
 begin
-testArray[2] := 9899;
+testArray[8] := 9899;
 end.

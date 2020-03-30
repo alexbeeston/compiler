@@ -13,7 +13,7 @@ LValue::LValue(std::vector<LValueBase*>* p_sequence)
 
 std::string LValue::getKey()
 {
-    return (*sequence)[0]->keyString;
+    return (*sequence)[0]->accessor;
 }
 
 Register LValue::loadBaseRegister()
@@ -26,7 +26,7 @@ Register LValue::loadBaseRegister()
         Register rLower = rp.getRegister();
         std::cout << "li " << rLower.getName() << " " << array->low->getValue() << "   # lower bound of array\n";
         Register rIndex = rp.getRegister();
-        std::cout << "# li " << rIndex.getName() << " " << " [index]" << "  # index of item in array\n";
+        std::cout << "li " << rIndex.getName() << " " << (*sequence)[1]->index->getValue()  << "  # index of item in array\n";
         return rLower;
     }
     else if (item.lValueType == RECORD_TYPE) std::cout << "# about to load a record type\n";

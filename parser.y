@@ -11,8 +11,6 @@
 
 #include "constructs/LValue.h"
 #include "constructs/LValueBase.h"
-#include "constructs/LValueIdent.h"
-#include "constructs/LValueWithExpression.h"
 
 #include "constructs/prelude/Prelude.h"
 
@@ -360,11 +358,11 @@ Statement : Assignment
     | ProcedureCallStatement
     | { $$ = new NullStatement(); };
     Assignment : LValue ASSIGN Expression { $$ = new Assignment($1, $3); };
-        LValue : IDENT LValueBaseList { $2->insert($2->begin(), new LValueIdent($1)); $$ = new LValue($2); };
+        LValue : IDENT LValueBaseList { $2->insert($2->begin(), new LValueBase($1)); $$ = new LValue($2); };
         LValueBaseList : LValueBaseList LValueBaseItem { $1->push_back($2); }
             | { $$ = new std::vector<LValueBase*>; };
-        LValueBaseItem : DOT IDENT { $$ = new LValueIdent($2); }
-            | LBRACKET Expression RBRACKET { $$ = new LValueWithExpression($2); };
+        LValueBaseItem : DOT IDENT { $$ = new LValueBase($2); }
+            | LBRACKET Expression RBRACKET { $$ = new LValueBase($2); };
     IfStatement : IF Expression THEN StatementSequence ConditionalSequenceList Else END { $$ = new If(new ConditionalSequence($2, $4), $5, $6); };
         ConditionalSequenceList : ConditionalSequenceList ConditionalSequence { $1->push_back($2); }
             | { $$ = new std::vector<ConditionalSequence*>; };

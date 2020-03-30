@@ -20,10 +20,8 @@ set(
 		constructs/Program.cpp
 		constructs/LValue.cpp
 		constructs/LValueBase.cpp
-		constructs/LValueIdent.cpp
-	        constructs/LValueWithExpression.cpp
 
-        constructs/expressions/Literal.cpp
+	        constructs/expressions/Literal.cpp
         	constructs/expressions/Expression.cpp
 		constructs/expressions/BinaryOp.cpp
 		constructs/expressions/Or.cpp
