@@ -23,11 +23,17 @@ Register LValue::loadBaseRegister()
     else if (item.lValueType == ARRAY_TYPE)
     {
         ArrayType* array = dynamic_cast<ArrayType*>(item.type);
-        Register rLower = rp.getRegister();
-        std::cout << "li " << rLower.getName() << " " << array->low->getValue() << "   # lower bound of array\n";
-        Register rIndex = rp.getRegister();
-        std::cout << "li " << rIndex.getName() << " " << (*sequence)[1]->index->getValue()  << "  # index of item in array\n";
-        return rLower;
+        Register r1 = rp.getRegister();
+        std::cout << "li " << r1.getName() << " " << array->low->getValue() << "   # lower bound of array\n";
+        Register r2 = rp.getRegister();
+        std::cout << "li " << r2.getName() << " " << (*sequence)[1]->index->getValue()  << "  # index of item in array\n"; // assumes that the second item (index 1) of the LValueBase array refers to an index.
+        std::cout << "sub " << r1.getName() << " " << r2.getName() << " " << r1.getName() << "   # number of elements offset from lower bound\n";
+        std::cout << "li " << r2.getName() << " " << array->type->computeSize() << "   # loaded size of underlying type of array\n";
+        std::cout << "mult " << r1.getName() << " " << r2.getName() << "\n";
+        rp.returnRegister(r2);
+        std::cout << "mflo " << r1.getName() << "\n";
+        std::cout << "add " << r1.getName() << " " << item.baseRegister.getName() << " " << r1.getName() << "\n";
+        return r1;
     }
     else if (item.lValueType == RECORD_TYPE) std::cout << "# about to load a record type\n";
     else throw std::runtime_error("LValueType not known. Inside LValue::loadBaseRegister\n");

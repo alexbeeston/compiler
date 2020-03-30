@@ -2,7 +2,6 @@ const
 hey = 10;
 
 var
-dummy : integer;
 testArray : array[1:5] of integer;
 
 begin
