@@ -19,18 +19,17 @@ struct LookUpItem
     Register baseRegister; // for variables only
     std::string ident;
     Expression* value = nullptr; // used by constants only
-    BaseType type;
+    BaseType* type;
 
     // init
     LookUpItem();
     LookUpItem(std::string, Expression*, bool);
-    LookUpItem(std::string, BaseType, int);
-    BaseType generateBaseType();
+    LookUpItem(std::string, BaseType*, int);
+    BaseType* generateBaseType();
 
     // other functions
     virtual void print();
     Register emit();
-    Register loadBaseRegister();
 };
 
 #endif //COMPILERS_LOOKUPITEM_H

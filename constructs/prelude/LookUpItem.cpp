@@ -18,14 +18,14 @@ LookUpItem::LookUpItem(std::string p_ident, Expression* p_expression, bool p_isR
 }
 
 // Called by variables
-LookUpItem::LookUpItem(std::string p_ident, BaseType p_type, int p_offset)
+LookUpItem::LookUpItem(std::string p_ident, BaseType* p_type, int p_offset)
 {
     ident = p_ident;
     type = p_type;
     isRedeclarable = false;
     offset = p_offset;
     baseRegister = rp.getGlobalPointer(); // assumes all variables are offset from the global pointer, for now
-    lValueType = p_type.getLValueType();
+    lValueType = p_type->getLValueType();
 }
 
 void LookUpItem::print()
@@ -33,17 +33,17 @@ void LookUpItem::print()
     std::cout << "[Look Up Item print, this should be overriden]\n";
 }
 
-BaseType LookUpItem::generateBaseType()
+BaseType* LookUpItem::generateBaseType()
 {
     // error here: before, calling getTypeIndicator() resulted in an error. Try again to see if it works next time you see this.
-    if (value->typeIndicator == INTEGER) return SimpleType(new std::string("integer"));
-    else if (value->typeIndicator == CHAR) return SimpleType(new std::string("char"));
-    else if (value->typeIndicator == STRING) return SimpleType(new std::string("string"));
-    else if (value->typeIndicator == BOOLEAN) return SimpleType(new std::string("boolean"));
+    if (value->typeIndicator == INTEGER) return new SimpleType(new std::string("integer"));
+    else if (value->typeIndicator == CHAR) return new SimpleType(new std::string("char"));
+    else if (value->typeIndicator == STRING) return new SimpleType(new std::string("string"));
+    else if (value->typeIndicator == BOOLEAN) return new SimpleType(new std::string("boolean"));
     else
     {
         std::cout << "Error constructing a BaseType from a constant (since it inherits from LookUpItem, which needs a BaseType), and the expression isn't of a primitive type\n";
-        return BaseType();
+        return new BaseType();
     }
 }
 
@@ -61,13 +61,4 @@ Register LookUpItem::emit()
         std::cout << "lw " << r.getName() << " " << offset << "(" << baseRegister.getName() << ")   # load a variable\n";
         return r;
     }
-}
-
-Register LookUpItem::loadBaseRegister()
-{
-    if (lValueType == PRIMITIVE_TYPE) std::cout << "# about to load a primitive type\n";
-    else if (lValueType == ARRAY_TYPE) std::cout << "# about to load an array type\n";
-    else if (lValueType == RECORD_TYPE) std::cout << "# about to load a record type\n";
-    else throw std::runtime_error("LValueType not known\n");
-    return Register();
 }

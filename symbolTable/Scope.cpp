@@ -36,8 +36,7 @@ Scope::Scope(Prelude topLevelPrelude)
             BaseType* temp;
             if (types.count(list->type->identifier) == 1) temp = types[list->type->identifier]; // probably only necessary when the type is primitive
             else temp = list->type;
-            addItem(LookUpItem(*name, *temp , nextAddress));
-            std::cout << "# added " << *name << " at address " << nextAddress << "\n";
+            addItem(LookUpItem(*name, temp , nextAddress));
             nextAddress += temp->computeSize();
 
 //            // method two: just add the type (preferred for its simplicity; results in seg fault, but seems like it should work. Consider later. Possible downside too is that there might be many instances of a primitive types
@@ -87,5 +86,6 @@ BaseType* Scope::getBaseType(std::string key)
 
 LookUpItem Scope::getLookUpItem(std::string key)
 {
+    // BUG: I can't access the lookUpItems map when I'm adding arrays to the lookUpItem using const identifiers as bounds in the array.
     return lookUpItems[key];
 }

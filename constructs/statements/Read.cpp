@@ -26,13 +26,13 @@ void Read::emit()
     {
         std::cout << "li $v0 ";
         LookUpItem v = st.retrieveItem(lValue->getKey());
-        if (v.type.getTypeIndicator() == INTEGER) std::cout << " 5   # 5 = code to read an integer\n";
-        else if (v.type.getTypeIndicator() == CHAR) std::cout << " 12   # 12 = code to read a character\n";
+        if (v.type->getTypeIndicator() == INTEGER) std::cout << " 5   # 5 = code to read an integer\n";
+        else if (v.type->getTypeIndicator() == CHAR) std::cout << " 12   # 12 = code to read a character\n";
         else throw "attempting to read a non-integer or character lValue\n";
         std::cout << "syscall\n";
         Register r = rp.getRegister();
         std::cout << "move " << r.getName() << " $v0\n";
-        std::cout << "sw " << r.getName() << " " << v.offset << "(" << v.loadBaseRegister().getName() << ")\n\n";
+        std::cout << "sw " << r.getName() << " " << v.offset << "(" << lValue->loadBaseRegister().getName() << ")\n\n";
         rp.returnRegister(r);
     }
 }

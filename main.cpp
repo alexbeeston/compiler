@@ -20,9 +20,7 @@ int main()
 	yyparse();
 	std::cout << std::endl;
 //	program->prettyPrint();
-    st.addStuff(*program->prelude);
-
-//	st.prettyPrint();
+    st.addStuff(*program->prelude); // what if I add them one at a time?
 	program->emit();
 
 	std::cout << "\n"; // do not move; we want to see PS1 after!

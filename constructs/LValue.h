@@ -6,15 +6,17 @@
 #define COMPILERS_LVALUE_H
 
 #include <vector>
-#include <string>
 
 #include "LValueBase.h"
+#include "../Register.h"
 
 struct LValue
 {
     std::vector<LValueBase*>* sequence;
+    LValue();
     LValue(std::vector<LValueBase*>*);
     void print();
     std::string getKey();
+    Register loadBaseRegister();
 };
 #endif //COMPILERS_LVALUE_H

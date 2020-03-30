@@ -2,16 +2,9 @@ const
 hey = 10;
 
 var
-testInt : integer;
-testChar : char;
-testString : string;
+dummy : integer;
 testArray : array[1:5] of integer;
-testRecord : record x,y,z : integer; end;
 
 begin
-testInt := 10;
-testChar := 'b';
-testString := "hello\n";
-testArray := 10;
-testRecord := "hey jude\n";
+testArray[2] := 9899;
 end.

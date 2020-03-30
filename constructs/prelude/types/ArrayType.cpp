@@ -18,7 +18,7 @@ int ArrayType::computeSize()
 {
     int multiplier = type->computeSize();
     int length = high->getValue() - low->getValue();
-    return length * multiplier;
+    return multiplier * length;
 }
 void ArrayType::print()
 {
