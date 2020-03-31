@@ -26,7 +26,9 @@ Register LValue::loadBaseRegister()
         Register r1 = rp.getRegister();
         std::cout << "li " << r1.getName() << " " << array->low->getValue() << "   # lower bound of array\n";
         Register r2 = rp.getRegister();
-        std::cout << "li " << r2.getName() << " " << (*sequence)[1]->index->getValue()  << "  # index of item in array\n"; // assumes that the second item (index 1) of the LValueBase array refers to an index.
+        Register r3 = (*sequence)[1]->index->emit();
+        std::cout << "la " << r2.getName() << " (" << r3.getName()  << ")  # index of item in array\n"; // assumes that the second item (index 1) of the LValueBase array refers to an index.
+        rp.returnRegister(r3);
         std::cout << "sub " << r1.getName() << " " << r2.getName() << " " << r1.getName() << "   # number of elements offset from lower bound\n";
         std::cout << "li " << r2.getName() << " " << array->type->computeSize() << "   # loaded size of underlying type of array\n";
         std::cout << "mult " << r1.getName() << " " << r2.getName() << "\n";

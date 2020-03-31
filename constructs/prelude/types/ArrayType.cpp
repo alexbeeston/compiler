@@ -17,7 +17,7 @@ ArrayType::ArrayType(Expression* p_low, Expression* p_high, BaseType* p_type)
 int ArrayType::computeSize()
 {
     int multiplier = type->computeSize();
-    int length = high->getValue() - low->getValue();
+    int length = high->getValue() - low->getValue() + 1;
     return multiplier * length;
 }
 void ArrayType::print()
