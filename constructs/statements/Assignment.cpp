@@ -19,19 +19,19 @@ void Assignment::print()
 
 void Assignment::emit()
 {
-    // load the LookUpItem
-    LookUpItem lookUpItem = st.retrieveItem(lValue->getKey());
+    // load the Entry
+    Entry entry = st.retrieveEntry(lValue->getKey());
 
     // error checking
-    if (lookUpItem.offset == -1) throw std::runtime_error("Can not assign to a constant\n");
-    else if (lookUpItem.type->getTypeIndicator() != expression->getTypeIndicator()) throw std::runtime_error("Attempting to assign an expression of typeIndicator " + std::to_string(expression->getTypeIndicator()) + " to a LookUpItem with typeindicator " + std::to_string(lookUpItem.type->typeIndicator) + ".\n");
+    if (entry.offset == -1) throw std::runtime_error("Can not assign to a constant\n");
+    else if (entry.type->getTypeIndicator() != expression->getTypeIndicator()) throw std::runtime_error("Attempting to assign an expression of typeIndicator " + std::to_string(expression->getTypeIndicator()) + " to a entry with typeindicator " + std::to_string(entry.type->typeIndicator) + ".\n");
 
     // emit
     std::cout << "# assignment\n";
     Register valueRegister = expression->emit();
     Register baseRegister = lValue->loadBaseRegister();
 
-    std::cout << "sw " << valueRegister.getName() << " " << lookUpItem.offset << "(" << baseRegister.getName() << ")\n\n";
+    std::cout << "sw " << valueRegister.getName() << " " << entry.offset << "(" << baseRegister.getName() << ")\n\n";
     rp.returnRegister(valueRegister);
 }
 

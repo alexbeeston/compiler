@@ -18,11 +18,11 @@ std::string LValue::getKey()
 
 Register LValue::loadBaseRegister()
 {
-    LookUpItem item = st.retrieveItem(getKey());
-    if (item.lValueType == PRIMITIVE_TYPE) return rp.getGlobalPointer();
-    else if (item.lValueType == ARRAY_TYPE)
+    Entry entry= st.retrieveEntry(getKey());
+    if (entry.lValueType == PRIMITIVE_TYPE) return rp.getGlobalPointer();
+    else if (entry.lValueType == ARRAY_TYPE)
     {
-        ArrayType* array = dynamic_cast<ArrayType*>(item.type);
+        ArrayType* array = dynamic_cast<ArrayType*>(entry.type);
         Register r1 = rp.getRegister();
         std::cout << "li " << r1.getName() << " " << array->low->getValue() << "   # lower bound of array\n";
         Register r2 = rp.getRegister();
@@ -32,10 +32,10 @@ Register LValue::loadBaseRegister()
         std::cout << "mult " << r1.getName() << " " << r2.getName() << "\n";
         rp.returnRegister(r2);
         std::cout << "mflo " << r1.getName() << "\n";
-        std::cout << "add " << r1.getName() << " " << item.baseRegister.getName() << " " << r1.getName() << "\n";
+        std::cout << "add " << r1.getName() << " " << entry.baseRegister.getName() << " " << r1.getName() << "\n";
         return r1;
     }
-    else if (item.lValueType == RECORD_TYPE) std::cout << "# about to load a record type\n";
+    else if (entry.lValueType == RECORD_TYPE) std::cout << "# about to load a record type\n";
     else throw std::runtime_error("LValueType not known. Inside LValue::loadBaseRegister\n");
     return Register();
 }

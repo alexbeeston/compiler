@@ -10,7 +10,7 @@
 
 #include "../constructs/prelude/types/BaseType.h"
 #include "../constructs/prelude/Prelude.h"
-#include "../constructs/prelude/LookUpItem.h"
+#include "../constructs/prelude/Entry.h"
 
 struct Scope
 {
@@ -19,9 +19,9 @@ struct Scope
 
     // used to handle LookUpItems (variables and constants)
     int nextAddress = 0;
-    std::map<std::string, LookUpItem> lookUpItems;
-    LookUpItem getLookUpItem(std::string);
-    bool addItem(LookUpItem);
+    std::map<std::string, Entry> entries;
+    Entry getEntry(std::string);
+    bool addEntry(Entry);
 
     // used to handle types
     std::map<std::string, BaseType*> types;

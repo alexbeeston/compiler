@@ -15,10 +15,10 @@ Scope::Scope(Prelude topLevelPrelude)
     int NUM_BOOLS = 2;
     std::string booleans[] = {"false", "true"};
     bool booleanLiterals[] = {false, true};
-    for (int i = 0; i < NUM_BOOLS; ++i) lookUpItems[booleans[i]] = LookUpItem(booleans[i], new Literal(booleanLiterals[i]), true);
+    for (int i = 0; i < NUM_BOOLS; ++i) entries[booleans[i]] = Entry(booleans[i], new Literal(booleanLiterals[i]), true);
 
     // add user defined constants
-    for (Constant* i : *topLevelPrelude.constants) addItem(LookUpItem(i->ident, i->value, false));
+    for (Constant* i : *topLevelPrelude.constants) addEntry(Entry(i->ident, i->value, false));
 
     // initialize with primitive types
     std::string primitives[] = {"integer", "char", "string", "boolean"};
@@ -36,26 +36,26 @@ Scope::Scope(Prelude topLevelPrelude)
             BaseType* temp;
             if (types.count(list->type->identifier) == 1) temp = types[list->type->identifier]; // probably only necessary when the type is primitive
             else temp = list->type;
-            addItem(LookUpItem(*name, temp , nextAddress));
+            addEntry(Entry(*name, temp , nextAddress));
             nextAddress += temp->computeSize();
 
 //            // method two: just add the type (preferred for its simplicity; results in seg fault, but seems like it should work. Consider later. Possible downside too is that there might be many instances of a primitive types
 //            nextAddress += list->type->computeSize();
-//            addItem(LookUpItem(*name, *list->type, nextAddress));
+//            addEntry(Entry(*name, *list->type, nextAddress));
         }
     }
 }
 
-bool Scope::addItem(LookUpItem item)
+bool Scope::addEntry(Entry entry)
 {
-    if (lookUpItems.count(item.ident) == 0) // replace with a single || statement
+    if (entries.count(entry.ident) == 0) // replace with a single || statement
     {
-        lookUpItems[item.ident] = item;
+        entries[entry.ident] = entry;
         return true;
     }
-    else if (lookUpItems[item.ident].isRedeclarable)
+    else if (entries[entry.ident].isRedeclarable)
     {
-       lookUpItems[item.ident] = item;
+       entries[entry.ident] = entry;
        return true;
     }
     else return false;
@@ -84,8 +84,8 @@ BaseType* Scope::getBaseType(std::string key)
     return types[key];
 }
 
-LookUpItem Scope::getLookUpItem(std::string key)
+Entry Scope::getEntry(std::string key)
 {
-    // BUG: I can't access the lookUpItems map when I'm adding arrays to the lookUpItem using const identifiers as bounds in the array.
-    return lookUpItems[key];
+    // BUG: I can't access the entries map when I'm adding arrays to the entry using const identifiers as bounds in the array.
+    return entries[key];
 }

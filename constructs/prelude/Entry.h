@@ -10,7 +10,7 @@
 #include "../expressions/Expression.h"
 #include "../../Enums.h"
 
-struct LookUpItem
+struct Entry
 {
     // fields
     LValueType lValueType;
@@ -22,9 +22,9 @@ struct LookUpItem
     BaseType* type;
 
     // init
-    LookUpItem();
-    LookUpItem(std::string, Expression*, bool);
-    LookUpItem(std::string, BaseType*, int);
+    Entry();
+    Entry(std::string, Expression*, bool);
+    Entry(std::string, BaseType*, int);
     BaseType* generateBaseType();
 
     // other functions

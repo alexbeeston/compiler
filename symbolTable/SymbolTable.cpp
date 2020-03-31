@@ -21,9 +21,9 @@ void SymbolTable::prettyPrint()
     }
 }
 
-LookUpItem SymbolTable::retrieveItem(std::string key)
+Entry SymbolTable::retrieveEntry(std::string key)
 {
-    return levels[0].getLookUpItem(key); // assumes it's in the first scope
+    return levels[0].getEntry(key); // assumes it's in the first scope
 }
 
 BaseType* SymbolTable::retrieveType(std::string key)

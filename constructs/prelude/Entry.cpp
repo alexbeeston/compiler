@@ -1,13 +1,13 @@
 #include <iostream>
 
-#include "LookUpItem.h"
+#include "Entry.h"
 #include "types/SimpleType.h"
 #include "../../global.h"
 
-LookUpItem::LookUpItem() {}
+Entry::Entry() {}
 
 // Called by constants
-LookUpItem::LookUpItem(std::string p_ident, Expression* p_expression, bool p_isRedeclarable)
+Entry::Entry(std::string p_ident, Expression* p_expression, bool p_isRedeclarable)
 {
     ident = p_ident;
     value = p_expression;
@@ -18,7 +18,7 @@ LookUpItem::LookUpItem(std::string p_ident, Expression* p_expression, bool p_isR
 }
 
 // Called by variables
-LookUpItem::LookUpItem(std::string p_ident, BaseType* p_type, int p_offset)
+Entry::Entry(std::string p_ident, BaseType* p_type, int p_offset)
 {
     ident = p_ident;
     type = p_type;
@@ -28,12 +28,12 @@ LookUpItem::LookUpItem(std::string p_ident, BaseType* p_type, int p_offset)
     lValueType = p_type->getLValueType();
 }
 
-void LookUpItem::print()
+void Entry::print()
 {
     std::cout << "[Look Up Item print, this should be overriden]\n";
 }
 
-BaseType* LookUpItem::generateBaseType()
+BaseType* Entry::generateBaseType()
 {
     // error here: before, calling getTypeIndicator() resulted in an error. Try again to see if it works next time you see this.
     if (value->typeIndicator == INTEGER) return new SimpleType(new std::string("integer"));
@@ -42,12 +42,12 @@ BaseType* LookUpItem::generateBaseType()
     else if (value->typeIndicator == BOOLEAN) return new SimpleType(new std::string("boolean"));
     else
     {
-        std::cout << "Error constructing a BaseType from a constant (since it inherits from LookUpItem, which needs a BaseType), and the expression isn't of a primitive type\n";
+        std::cout << "Error constructing a BaseType from a constant (since it inherits from Entry, which needs a BaseType), and the expression isn't of a primitive type\n";
         return new BaseType();
     }
 }
 
-Register LookUpItem::emit()
+Register Entry::emit()
 {
     // emit, or load, a constant
     if (offset == -1)

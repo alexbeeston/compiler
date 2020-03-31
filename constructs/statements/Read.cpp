@@ -25,7 +25,7 @@ void Read::emit()
     for (LValue* lValue : *lValues)
     {
         std::cout << "li $v0 ";
-        LookUpItem v = st.retrieveItem(lValue->getKey());
+        Entry v = st.retrieveEntry(lValue->getKey());
         if (v.type->getTypeIndicator() == INTEGER) std::cout << " 5   # 5 = code to read an integer\n";
         else if (v.type->getTypeIndicator() == CHAR) std::cout << " 12   # 12 = code to read a character\n";
         else throw "attempting to read a non-integer or character lValue\n";

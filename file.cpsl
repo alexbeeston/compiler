@@ -2,8 +2,9 @@ const
 hey = 10;
 
 var
-testArray : array[1:5] of integer;
+a : integer;
 
 begin
-testArray[8] := 9899;
+a := 10;
+write(a);
 end.

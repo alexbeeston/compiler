@@ -55,7 +55,7 @@ set(
         constructs/prelude/constants/Constant.cpp
 		constructs/prelude/Prelude.cpp
 		constructs/prelude/TypedList.cpp
-		constructs/prelude/LookUpItem.cpp
+        constructs/prelude/Entry.cpp
 
         	constructs/routines/Routine.cpp
 		constructs/routines/Procedure.cpp

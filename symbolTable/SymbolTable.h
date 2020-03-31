@@ -17,7 +17,7 @@ struct SymbolTable
     std::vector<std::string> strings;
     int insertMessage(std::string);
 
-    LookUpItem retrieveItem(std::string);
+    Entry retrieveEntry(std::string);
     BaseType* retrieveType(std::string);
 
     // init
