@@ -30,7 +30,6 @@ void Assignment::emit()
     std::cout << "# assignment\n";
     Register valueRegister = expression->emit();
     Register baseRegister = lValue->loadBaseRegister();
-
     std::cout << "sw " << valueRegister.getName() << " " << entry.offset << "(" << baseRegister.getName() << ")\n\n";
     rp.returnRegister(valueRegister);
 }

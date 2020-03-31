@@ -7,4 +7,5 @@ b : array[1:5] of integer;
 
 begin
 b[2] := 10;
+write(b[2]);
 end.
