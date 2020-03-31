@@ -8,4 +8,7 @@ b : array[1:5] of integer;
 begin
 b[2] := 10;
 write(b[2]);
+write("\nType an integer");
+read(b[2]);
+write(b[2]);
 end.

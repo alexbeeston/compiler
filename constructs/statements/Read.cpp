@@ -32,7 +32,9 @@ void Read::emit()
         std::cout << "syscall\n";
         Register r = rp.getRegister();
         std::cout << "move " << r.getName() << " $v0\n";
-        std::cout << "sw " << r.getName() << " " << v.offset << "(" << lValue->loadBaseRegister().getName() << ")\n\n";
+        Register baseRegister = lValue->loadBaseRegister();
+        std::cout << "sw " << r.getName() << " " << v.offset << "(" << baseRegister.getName() << ")\n\n";
         rp.returnRegister(r);
+        rp.returnRegister(baseRegister);
     }
 }
