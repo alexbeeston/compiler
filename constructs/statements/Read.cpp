@@ -35,6 +35,6 @@ void Read::emit()
         Register baseRegister = lValue->loadBaseRegister();
         std::cout << "sw " << r.getName() << " " << v.offset << "(" << baseRegister.getName() << ")\n\n";
         rp.returnRegister(r);
-        rp.returnRegister(baseRegister);
+        if (baseRegister.getName().compare("$gp") != 0) rp.returnRegister(baseRegister);
     }
 }

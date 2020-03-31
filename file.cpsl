@@ -1,14 +1,14 @@
 const
-hey = 10;
+hey = 120;
 
 var
 a : integer;
 b : array[1:5] of integer;
 
 begin
-b[2] := 10;
-write(b[2]);
-write("\nType an integer");
-read(b[2]);
-write(b[2]);
+a := 10;
+write("a = ", a, "\n");
+
+b[2] := hey;
+write("b[2] = ", b[2], "\n");
 end.
