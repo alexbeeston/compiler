@@ -17,8 +17,22 @@ TypeIndicator LValueExpression::getTypeIndicator() { return st.retrieveEntry(lVa
 
 Register LValueExpression::emit()
 {
+    // emit a constant
+    Entry entry = st.retrieveEntry(lValue->getKey());
+    if (entry.offset == -1)
+    {
+        return entry.value->emit();
+    }
+    // emit a primitive variable
+    else
+    {
+        Register r = rp.getRegister();
+        std::cout << "lw " << r.getName() << " " << entry.offset << "(" << entry.baseRegister.getName() << ")   # load a variable\n";
+        return r;
+    }
+    // emit an array element
 
-    return st.retrieveEntry(lValue->getKey()).emit();
+    // emit a record element
 }
 
 

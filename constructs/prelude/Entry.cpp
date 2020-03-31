@@ -47,18 +47,3 @@ BaseType* Entry::generateBaseType()
     }
 }
 
-Register Entry::emit()
-{
-    // emit, or load, a constant
-    if (offset == -1)
-    {
-        return value->emit();
-    }
-    // emit, or load, a variable
-    else
-    {
-        Register r = rp.getRegister();
-        std::cout << "lw " << r.getName() << " " << offset << "(" << baseRegister.getName() << ")   # load a variable\n";
-        return r;
-    }
-}

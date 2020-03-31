@@ -3,8 +3,8 @@ hey = 10;
 
 var
 a : integer;
+b : array[1:5] of integer;
 
 begin
-a := 10;
-write(a);
+b[2] := 10;
 end.
