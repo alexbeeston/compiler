@@ -5,13 +5,13 @@
 #ifndef COMPILERS_REGISTERPOOL_H
 #define COMPILERS_REGISTERPOOL_H
 
-#include <vector>
+#include <stack>
 
 #include "Register.h"
 
 struct RegisterPool
 {
-    std::vector<Register> registers;
+    std::stack <Register> registers;
     Register getRegister();
     Register getGlobalPointer();
     void returnRegister(Register);
