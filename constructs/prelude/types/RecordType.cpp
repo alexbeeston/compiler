@@ -20,7 +20,6 @@ int RecordType::computeSize()
         {
             types[*identifier] = type;
             offsets[*identifier] = offset;
-            std::cout << "# added " << *identifier << " at " << offset << "\n";
             offset += type->computeSize();
         }
     }

@@ -16,10 +16,10 @@ std::string LValue::getKey()
     return (*sequence)[0]->accessor;
 }
 
-Register LValue::loadBaseRegister()
+Register LValue::getBaseRegister()
 {
-    Entry entry= st.retrieveEntry(getKey());
-    if (entry.lValueType == PRIMITIVE_TYPE) return rp.getGlobalPointer();
+    Entry entry = st.retrieveEntry(getKey());
+    if ( (entry.lValueType == PRIMITIVE_TYPE) || (entry.lValueType == RECORD_TYPE) ) return entry.baseRegister;
     else if (entry.lValueType == ARRAY_TYPE)
     {
         ArrayType* array = dynamic_cast<ArrayType*>(entry.type);
@@ -37,9 +37,22 @@ Register LValue::loadBaseRegister()
         std::cout << "add " << r1.getName() << " " << entry.baseRegister.getName() << " " << r1.getName() << "\n";
         return r1;
     }
-    else if (entry.lValueType == RECORD_TYPE) std::cout << "# about to load a record type\n";
     else throw std::runtime_error("LValueType not known. Inside LValue::loadBaseRegister\n");
-    return Register();
+}
+
+int LValue::getOffset()
+{
+    Entry entry = st.retrieveEntry(getKey());
+    if ( (entry.lValueType == PRIMITIVE_TYPE) || (entry.lValueType == ARRAY_TYPE) ) return entry.offset;
+    else if (entry.lValueType == RECORD_TYPE)
+    {
+        RecordType* record = dynamic_cast<RecordType*>(entry.type);
+        std::string accessor = (*sequence)[1]->accessor;
+        int offset = entry.offset + record->offsets[accessor];
+        return offset;
+    }
+    else throw std::runtime_error("LValueType not known. Inside LValue::loadBaseRegister\n");
+
 }
 
 void LValue::print()

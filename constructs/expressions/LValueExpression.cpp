@@ -31,7 +31,7 @@ Register LValueExpression::emit()
     else if (entry.lValueType == ARRAY_TYPE)
     {
         Register r = rp.getRegister();
-        Register baseRegister = lValue->loadBaseRegister();
+        Register baseRegister = lValue->getBaseRegister();
         std::cout << "lw " << r.getName() << " " << entry.offset << "(" << baseRegister.getName() << ")   # loaded an array element\n";
         rp.returnRegister(baseRegister);
         return r;

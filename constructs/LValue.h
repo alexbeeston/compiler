@@ -17,6 +17,7 @@ struct LValue
     LValue(std::vector<LValueBase*>*);
     void print();
     std::string getKey();
-    Register loadBaseRegister();
+    Register getBaseRegister();
+    int getOffset();
 };
 #endif //COMPILERS_LVALUE_H
