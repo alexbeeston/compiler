@@ -11,7 +11,21 @@ RecordType::RecordType(std::vector<TypedList*>* p_typedLists)
 }
 int RecordType::computeSize()
 {
-    std::cout << "inside recordType::computeSize()\n";
+    int offset  = 0;
+    BaseType* type;
+    for (TypedList* list : *typedLists)
+    {
+        type = list->type;
+        for (std::string* identifier : *list->identList)
+        {
+            types[*identifier] = type;
+            offsets[*identifier] = offset;
+            std::cout << "# added " << *identifier << " at " << offset << "\n";
+            offset += type->computeSize();
+        }
+    }
+    std::cout << "# size of record: " << offset << "\n";
+    return offset;
 }
 
 void RecordType::print()

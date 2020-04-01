@@ -1,14 +1,5 @@
-const
-hey = 120;
-
 var
-a : integer;
-b : array[1:5] of integer;
+b : record a,b,c : integer; e,f,g : char; end;
 
 begin
-a := 10;
-write("a = ", a, "\n");
-
-b[2] := hey;
-write("b[2] = ", b[2], "\n");
 end.
