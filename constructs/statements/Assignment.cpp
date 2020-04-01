@@ -29,9 +29,9 @@ void Assignment::emit()
     // emit
     std::cout << "# assignment\n";
     Register valueRegister = expression->emit();
-    int offset = lValue->getOffset();
     Register baseRegister = lValue->getBaseRegister();
-    std::cout << "sw " << valueRegister.getName() << " " << offset << "(" << baseRegister.getName() << ")\n\n";
+    std::cout << "sw " << valueRegister.getName() << " " << lValue->getOffset() << "(" << baseRegister.getName() << ")\n\n";
     rp.returnRegister(valueRegister);
+    if (baseRegister.getName().compare("$gp") != 0) rp.returnRegister(baseRegister);
 }
 

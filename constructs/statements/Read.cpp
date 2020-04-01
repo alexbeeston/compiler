@@ -33,7 +33,7 @@ void Read::emit()
         Register r = rp.getRegister();
         std::cout << "move " << r.getName() << " $v0\n";
         Register baseRegister = lValue->getBaseRegister();
-        std::cout << "sw " << r.getName() << " " << v.offset << "(" << baseRegister.getName() << ")\n\n";
+        std::cout << "sw " << r.getName() << " " << lValue->getOffset() << "(" << baseRegister.getName() << ")\n\n";
         rp.returnRegister(r);
         if (baseRegister.getName().compare("$gp") != 0) rp.returnRegister(baseRegister);
     }

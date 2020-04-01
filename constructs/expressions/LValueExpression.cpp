@@ -18,25 +18,9 @@ TypeIndicator LValueExpression::getTypeIndicator() { return st.retrieveEntry(lVa
 Register LValueExpression::emit()
 {
     Entry entry = st.retrieveEntry(lValue->getKey());
-    if (entry.lValueType == PRIMITIVE_TYPE)
-    {
-        if (entry.offset == -1) return entry.value->emit();
-        else
-        {
-            Register r = rp.getRegister();
-            std::cout << "lw " << r.getName() << " " << entry.offset << "(" << entry.baseRegister.getName() << ")   # load a variable\n";
-            return r;
-        }
-    }
-    else if (entry.lValueType == ARRAY_TYPE)
-    {
-        Register r = rp.getRegister();
-        Register baseRegister = lValue->getBaseRegister();
-        std::cout << "lw " << r.getName() << " " << entry.offset << "(" << baseRegister.getName() << ")   # loaded an array element\n";
-        rp.returnRegister(baseRegister);
-        return r;
-    }
-    else return Register();
+    Register r = rp.getRegister();
+    std::cout << "lw " << r.getName() << " " << lValue->getOffset() << "(" << lValue->getBaseRegister().getName() << ")   # loaded an LValueExpression\n";
+    return r;
 }
 
 int LValueExpression::getValue()
