@@ -39,7 +39,7 @@ TypeIndicator SimpleType::getTypeIndicator()
 
 LValueType SimpleType::getLValueType()
 {
-    if(isPrimitive()) return PRIMITIVE_TYPE;
+    if (isPrimitive()) return PRIMITIVE_TYPE;
     else return st.retrieveType(identifier)->getLValueType();
 }
 

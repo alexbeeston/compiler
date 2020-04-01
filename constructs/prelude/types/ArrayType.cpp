@@ -8,7 +8,7 @@ ArrayType::ArrayType(Expression* p_low, Expression* p_high, BaseType* p_type)
     lValueType = ARRAY_TYPE;
     low = p_low;
     high = p_high;
-    type = p_type;
+    underlyingType = p_type;
     typeIndicator = p_type->getTypeIndicator();
     isRedeclarable = false;
     identifier = std::string("[declared inline]");
@@ -16,7 +16,7 @@ ArrayType::ArrayType(Expression* p_low, Expression* p_high, BaseType* p_type)
 
 int ArrayType::computeSize()
 {
-    int multiplier = type->computeSize();
+    int multiplier = underlyingType->computeSize();
     int length = high->getValue() - low->getValue() + 1;
     return multiplier * length;
 }
@@ -27,5 +27,5 @@ void ArrayType::print()
     std::cout << ":";
     high->print();
     std::cout << "] of ";
-    type->print();
+    underlyingType->print();
 }

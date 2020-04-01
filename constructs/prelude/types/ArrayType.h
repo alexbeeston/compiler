@@ -12,7 +12,7 @@ struct ArrayType:BaseType
 {
     Expression* low;
     Expression* high;
-    BaseType* type;
+    BaseType* underlyingType;
     ArrayType(Expression*, Expression*, BaseType*);
     void print() override;
     int computeSize() override;

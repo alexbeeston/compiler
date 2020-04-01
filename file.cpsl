@@ -1,2 +1,6 @@
+var
+  a : array[1:5] of array[10:30] of integer;
 begin
+  a[2][12] := 19;
+write(a[2][12]);
 end.

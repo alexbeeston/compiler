@@ -19,7 +19,7 @@ struct LValue
     void print();
     std::string getKey();
     Register getBaseRegister();
-    void getBaseRegister_Array(ArrayType*, int, Register);
+    void getBaseRegister_Array(ArrayType*, Expression*, Register);
     int getOffset();
 };
 #endif //COMPILERS_LVALUE_H
