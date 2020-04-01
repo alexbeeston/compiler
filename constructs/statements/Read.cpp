@@ -25,15 +25,16 @@ void Read::emit()
     for (LValue* lValue : *lValues)
     {
         std::cout << "li $v0 ";
-        Entry v = st.retrieveEntry(lValue->getKey());
-        if (v.type->getTypeIndicator() == INTEGER) std::cout << " 5   # 5 = code to read an integer\n";
-        else if (v.type->getTypeIndicator() == CHAR) std::cout << " 12   # 12 = code to read a character\n";
+        BaseType* entryType = st.retrieveEntry(lValue->getKey()).type;
+        if (entryType->getTypeIndicator() == INTEGER) std::cout << " 5   # 5 = code to read an integer\n";
+        else if (entryType->getTypeIndicator() == CHAR) std::cout << " 12   # 12 = code to read a character\n";
         else throw "attempting to read a non-integer or character lValue\n";
         std::cout << "syscall\n";
         Register r = rp.getRegister();
         std::cout << "move " << r.getName() << " $v0\n";
+        int offset = lValue->getOffset();
         Register baseRegister = lValue->getBaseRegister();
-        std::cout << "sw " << r.getName() << " " << lValue->getOffset() << "(" << baseRegister.getName() << ")\n\n";
+        std::cout << "sw " << r.getName() << " " << offset << "(" << baseRegister.getName() << ")\n\n";
         rp.returnRegister(r);
         if (baseRegister.getName().compare("$gp") != 0) rp.returnRegister(baseRegister);
     }

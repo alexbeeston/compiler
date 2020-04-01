@@ -19,7 +19,10 @@ Register LValueExpression::emit()
 {
     Entry entry = st.retrieveEntry(lValue->getKey());
     Register r = rp.getRegister();
-    std::cout << "lw " << r.getName() << " " << lValue->getOffset() << "(" << lValue->getBaseRegister().getName() << ")   # loaded an LValueExpression\n";
+    int offset = lValue->getOffset();
+    Register baseRegister = lValue->getBaseRegister();
+    std::cout << "lw " << r.getName() << " " << offset << "(" << baseRegister.getName() << ")   # loaded an LValueExpression\n";
+    if (baseRegister.getName().compare("$gp") != 0) rp.returnRegister(baseRegister);
     return r;
 }
 
