@@ -1,8 +1,2 @@
-var
-b : record a,b,c : integer; end;
-
 begin
-b.a := 10;
-b.b := 20;
-b.c := 30;
 end.

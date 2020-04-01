@@ -6,6 +6,7 @@
 #define COMPILERS_REGISTERPOOL_H
 
 #include <stack>
+#include <stdexcept>
 
 #include "Register.h"
 
@@ -16,5 +17,6 @@ struct RegisterPool
     Register getGlobalPointer();
     void returnRegister(Register);
     RegisterPool();
+    void addRegisterClass(int, std::string);
 };
 #endif //COMPILERS_REGISTERPOOL_H

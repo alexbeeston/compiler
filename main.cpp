@@ -15,12 +15,9 @@ RegisterPool rp;
 
 int main()
 {
-    st = SymbolTable();
-    rp = RegisterPool();
 	yyparse();
 	std::cout << std::endl;
-//	program->prettyPrint();
-    st.addStuff(*program->prelude); // what if I add them one at a time?
+    st.addStuff(*program->prelude); // it appears that the constructors on the symbol table and register pool are automatically being called
 	program->emit();
 
 	std::cout << "\n"; // do not move; we want to see PS1 after!
