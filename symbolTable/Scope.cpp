@@ -11,11 +11,7 @@
 extern RegisterPool rp;
 
 // used during initialization
-Scope::Scope()
-{
-    // if things are still breaking, maybe give types and entries a constructor call; not sure if it would work though
-    // also could try giving the st a construcotr call in main
-}
+Scope::Scope() { }
 
 void Scope::addConstructs(Prelude topLevelPrelude)
 {
@@ -69,13 +65,7 @@ int Scope::computeSize(BaseType* type)
 
 int Scope::computeSize_Array(ArrayType* array)
 {
-//    int lower =
-//    if (array->low->typeIndicator == INTEGER || array->low->typeIndicator == CHAR) lower = array->low->value;
-//    else if (array->low->typeIndicator == ALIAS)
-//    {
-//        LValueExpression* temp = dynamic_cast<LValueExpression*>(array->low);
-//        lower = entries[temp->lValue->getKey()].value->value;
-//    }
+    std::cout << "# low: " << array->low->getValue() << ", high = " << array->high->getValue() << "\n";
     int length = array->high->getValue() - array->low->getValue() + 1;
     int size = length * computeSize(array->underlyingType);
     array->size = size;

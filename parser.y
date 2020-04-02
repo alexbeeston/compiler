@@ -322,8 +322,8 @@ Expression : NumericLiteral
     | LValue { $$ = new LValueExpression($1); };
 
     NumericLiteral : DECINT { $$ = new Literal($1); }
-    | HEXINT { $$ = new Literal(-1); }
-    | OCTINT { $$ = new Literal(-1); };
+    | HEXINT { $$ = new Literal($1); }
+    | OCTINT { $$ = new Literal($1); };
 TypeDecl : TYPE TypeListItem TypeList { $3->insert($3->begin(), $2); $$ = $3; }
     | { $$ = new std::vector<DeclaredType*>; };
 TypeList : TypeList TypeListItem { $1->push_back($2); }
