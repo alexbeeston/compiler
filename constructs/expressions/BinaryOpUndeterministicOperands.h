@@ -11,5 +11,6 @@ struct BinaryOpUndeterministicOperands:BinaryOp
 {
     BinaryOpUndeterministicOperands(Expression*, Expression*);
     std::vector<Register> checkAndEmitOperands(); // checks to make sure that both left and right operands are of the same type
+    bool operandsAreOfSameType();
 };
 #endif //COMPILERS_BINARYOPBOOLEAN_H

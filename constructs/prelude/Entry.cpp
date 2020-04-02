@@ -7,12 +7,11 @@
 Entry::Entry() {}
 
 // Called by constants
-Entry::Entry(std::string p_ident, Expression* p_expression, bool p_isRedeclarable)
+Entry::Entry(std::string p_ident, Expression* p_expression)
 {
     ident = p_ident;
     value = p_expression;
-    isRedeclarable = p_isRedeclarable;
-    offset = -1;
+    label = CONSTANT;
     type = generateBaseType();
 }
 
@@ -21,8 +20,8 @@ Entry::Entry(std::string p_ident, BaseType* p_type, int p_offset)
 {
     ident = p_ident;
     type = p_type;
-    isRedeclarable = false;
     offset = p_offset;
+    label = VARIABLE;
     baseRegister = rp.getGlobalPointer(); // assumes all variables are offset from the global pointer, for now
 }
 

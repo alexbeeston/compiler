@@ -37,3 +37,5 @@ Register Literal::emit()
     else std::cout << "Error: attempting to load an expression that is not an integer, character, bool, or string.\n";
     return r;
 }
+
+bool Literal::isCTV() { return true; }

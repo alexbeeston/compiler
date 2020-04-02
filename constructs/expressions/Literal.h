@@ -15,5 +15,6 @@ struct Literal:Expression
     Literal(bool);
     Literal(char*);
     Register emit() override;
+    bool isCTV() override;
 };
 #endif //COMPILERS_LITERAL_H

@@ -18,5 +18,6 @@ struct BinaryOp:Expression
     void print() override;
     std::vector<Register> emitOperands(int);
     void returnRegisters(std::vector<Register>);
+    bool operandsAreBothCTV();
 };
 #endif //COMPILERS_BINARYOP_H

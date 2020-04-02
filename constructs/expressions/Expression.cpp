@@ -17,4 +17,4 @@ TypeIndicator Expression::getTypeIndicator() { return typeIndicator; }
 
 int Expression::getValue() { return value; }
 
-
+bool Expression::isCTV() { return false; }

@@ -12,6 +12,7 @@
 struct Expression
 {
     int value;
+    virtual bool isCTV();
     TypeIndicator typeIndicator;
     virtual int getValue();
     virtual void print();

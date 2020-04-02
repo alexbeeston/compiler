@@ -14,15 +14,15 @@ struct Entry
 {
     // fields
     int offset; // -1 for constants (set by symbol table)
-    bool isRedeclarable; // false for everything except the true/false mutable constants
     Register baseRegister; // for variables only
     std::string ident;
     Expression* value = nullptr; // used by constants only
     BaseType* type;
+    Label label;
 
     // init
     Entry();
-    Entry(std::string, Expression*, bool);
+    Entry(std::string, Expression*);
     Entry(std::string, BaseType*, int);
     BaseType* generateBaseType();
 

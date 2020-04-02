@@ -17,10 +17,13 @@ Scope::Scope(Prelude topLevelPrelude)
     int NUM_BOOLS = 2;
     std::string booleans[] = {"false", "true"};
     bool booleanLiterals[] = {false, true};
-    for (int i = 0; i < NUM_BOOLS; ++i) entries[booleans[i]] = Entry(booleans[i], new Literal(booleanLiterals[i]), true);
+    for (int i = 0; i < NUM_BOOLS; ++i) entries[booleans[i]] = Entry(booleans[i], new Literal(booleanLiterals[i]));
 
     // add user defined constants
-    for (Constant* i : *topLevelPrelude.constants) addEntry(Entry(i->ident, i->value, false));
+    for (Constant* i : *topLevelPrelude.constants)
+    {
+        entries[i->ident] = Entry(i->ident, i->value);
+    }
 
     // initialize with primitive types
     std::string primitives[] = {"integer", "char", "string", "boolean"};
@@ -53,10 +56,8 @@ Scope::Scope(Prelude topLevelPrelude)
     {
         for (std::string* name: *list->identList)
         {
-            addEntry(Entry(*name, list->type, nextAddress));
-            int size = computeSize(list->type);
-            std::cout << "# added variable " << *name << ", and its type size is " << size << "\n";
-            nextAddress += size; // this works; if it's a simple type, then it's just a string, and we'll look it up in the st. If it's not there, it's an error, their fault.
+            entries[*name] = Entry(*name, list->type, nextAddress);
+            nextAddress += computeSize(list->type);
         }
     }
 }
@@ -106,40 +107,6 @@ int Scope::computeSize_Record(RecordType* record)
     record->size = offset;
     return offset;
 }
-
-
-bool Scope::addEntry(Entry entry)
-{
-    if (entries.count(entry.ident) == 0) // replace with a single || statement
-    {
-        entries[entry.ident] = entry;
-        return true;
-    }
-    else if (entries[entry.ident].isRedeclarable)
-    {
-       entries[entry.ident] = entry;
-       return true;
-    }
-    else return false;
-}
-
-//bool Scope::addType(BaseType* type)
-//{
-//    if (types.count(type->identifier) == 0)
-//    {
-//        types[type->identifier] = type;
-//        return true;
-//    }
-//    else if (types[type->identifier]->isRedeclarable)
-//    {
-//       types[type->identifier] = type;
-//       return true;
-//    }
-//    else
-//    {
-//        return true;
-//    }
-//}
 
 BaseType* Scope::getBaseType(std::string key)
 {

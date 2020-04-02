@@ -26,11 +26,9 @@ struct Scope
     int nextAddress = 0;
     std::map<std::string, Entry> entries;
     Entry getEntry(std::string);
-    bool addEntry(Entry);
 
     // used to handle types
     std::map<std::string, BaseType*> types;
-//    bool addType(BaseType*);
     BaseType* getBaseType(std::string);
 };
 #endif //COMPILERS_SCOPE_H

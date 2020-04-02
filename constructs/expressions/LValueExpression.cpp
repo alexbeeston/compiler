@@ -20,11 +20,20 @@ Register LValueExpression::emit()
 {
     Entry entry = st.retrieveEntry(lValue->getKey());
     Register r = rp.getRegister();
-    int offset = lValue->getOffset();
-    Register baseRegister = lValue->getBaseRegister();
-    std::cout << "lw " << r.getName() << " " << offset << "(" << baseRegister.getName() << ")   # loaded an LValueExpression\n";
-    if (baseRegister.getName().compare("$gp") != 0) rp.returnRegister(baseRegister);
-    return r;
+    if (entry.label == CONSTANT)
+    {
+        std::cout << "li " << r.getName() << " " << entry.value->getValue() << "   # loaded an LValueExpression Constant\n";
+        return r;
+    }
+    else if (entry.label == VARIABLE)
+    {
+        int offset = lValue->getOffset();
+        Register baseRegister = lValue->getBaseRegister();
+        std::cout << "lw " << r.getName() << " " << offset << "(" << baseRegister.getName() << ")   # loaded an LValueExpression Variable\n";
+        if (baseRegister.getName().compare("$gp") != 0) rp.returnRegister(baseRegister);
+        return r;
+    }
+    else throw std::runtime_error("Entry's label isn't a variable or constant");
 }
 
 int LValueExpression::getValue()

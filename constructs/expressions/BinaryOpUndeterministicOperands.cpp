@@ -10,7 +10,7 @@ BinaryOpUndeterministicOperands::BinaryOpUndeterministicOperands(Expression* p_l
 std::vector<Register> BinaryOpUndeterministicOperands::checkAndEmitOperands()
 {
    // verify that operands are the same type
-   if (left->getTypeIndicator() != right->getTypeIndicator())
+   if (!operandsAreOfSameType())
    {
        std::cout << "Error: Binary Boolean operation attempted with operands of different types. left.typeIndicator = " << left->getTypeIndicator();
        std::cout << ", right.typeIndicator = " << right->getTypeIndicator() << ". They must be the same.\n";
@@ -24,5 +24,11 @@ std::vector<Register> BinaryOpUndeterministicOperands::checkAndEmitOperands()
    }
    // emit the operands. If they are integers, the registers will hold their integer values, if they are booleans, then they will hold 0 or 1, which are also integers, suitable for comparison
    return emitOperands(left->getTypeIndicator());
+}
+
+bool BinaryOpUndeterministicOperands::operandsAreOfSameType()
+{
+    if (left->getTypeIndicator() == right->getTypeIndicator()) return true;
+    else return false;
 }
 
