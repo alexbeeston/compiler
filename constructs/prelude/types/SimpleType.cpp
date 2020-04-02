@@ -7,9 +7,7 @@
 SimpleType::SimpleType(std::string* p_name)
 {
     name = p_name;
-    typeIndicator = ALIAS; // can I get rid of this?
     lValueType = SIMPLE_TYPE;
-    size = 4; // assume it's a primitive, then if it's not, change the size to negative one,
     if (name->compare("integer") == 0) typeIndicator = INTEGER;
     else if (name->compare("INTEGER") == 0) typeIndicator = INTEGER;
     else if (name->compare("char") == 0) typeIndicator = CHAR;
@@ -18,7 +16,6 @@ SimpleType::SimpleType(std::string* p_name)
     else if (name->compare("STRING") == 0) typeIndicator = STRING;
     else if (name->compare("boolean") == 0) typeIndicator = BOOLEAN;
     else if (name->compare("BOOLEAN") == 0) typeIndicator = BOOLEAN;
-    else size = -1;
 }
 
 void SimpleType::print()
@@ -26,11 +23,9 @@ void SimpleType::print()
     std::cout << *name;
 }
 
-int SimpleType::computeSize() // should be able to get rid of this
+int SimpleType::computeSize()
 {
-//    std::cout << "# SimpleType::computeSize()\n";
-//    return 1;
-    if (isPrimitive()) return 4;
+    if (isPrimitive()) return 4; // only works on bad idea because INTEGER and CHAR are both 4
     else return st.retrieveType(*name)->computeSize();
 }
 

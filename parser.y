@@ -269,6 +269,7 @@ struct ProcedureCall* procedureCallStatementPointer;
 %token HEXINT
 %token OCTINT
 %token DECINT
+%token ZERO
 %%
 
 Program : Prelude RoutineDeclList Block DOT { program = new Program($1, $2, $3); };
@@ -323,7 +324,8 @@ Expression : NumericLiteral
 
     NumericLiteral : DECINT { $$ = new Literal($1); }
     | HEXINT { $$ = new Literal($1); }
-    | OCTINT { $$ = new Literal($1); };
+    | OCTINT { $$ = new Literal($1); }
+    | ZERO { $$ = new Literal(0); };
 TypeDecl : TYPE TypeListItem TypeList { $3->insert($3->begin(), $2); $$ = $3; }
     | { $$ = new std::vector<DeclaredType*>; };
 TypeList : TypeList TypeListItem { $1->push_back($2); }

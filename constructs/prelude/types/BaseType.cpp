@@ -14,8 +14,7 @@ void BaseType::print()
 
 int BaseType::computeSize()
 {
-    std::cout << "# BaseType::computeSize()\n";
-    return -1;
+    throw std::runtime_error("Can't call computeSize on a BaseType object");
 }
 
 TypeIndicator BaseType::getTypeIndicator() { return typeIndicator; }

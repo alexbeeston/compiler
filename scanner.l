@@ -52,6 +52,7 @@ function|FUNCTION {return FUNCTION;}
 '\\f' {yylval.character = '\f'; return CHARLIT;}
 '\\.' {yylval.character = yytext[2]; return CHARLIT;}
 '.' {yylval.character = yytext[1]; return CHARLIT;}
+0 { yylval.integer = 0; return ZERO;}
 0[0-7]* {return OCTINT;}
 0x[0-9a-fA-F]* {return HEXINT;}
 [1-9][0-9]* {yylval.integer = std::stoi(strdup(yytext)); return DECINT;}

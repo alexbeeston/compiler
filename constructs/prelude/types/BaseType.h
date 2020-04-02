@@ -10,7 +10,7 @@ struct BaseType
     TypeIndicator typeIndicator;
     BaseType();
     int size; // set by the symbol table
-    virtual int computeSize(); // delete this stupid function that "has only caused [me] grief"
+    virtual int computeSize();
     virtual void print();
     virtual TypeIndicator getTypeIndicator();
     virtual LValueType getLValueType();

@@ -7,8 +7,6 @@
 #include "symbolTable/SymbolTable.h"
 #include "RegisterPool.h"
 
-#include <map>
-
 extern int yyparse();
 extern Program* program;
 SymbolTable st;

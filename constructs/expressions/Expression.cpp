@@ -15,6 +15,8 @@ Register Expression::emit()
 
 TypeIndicator Expression::getTypeIndicator() { return typeIndicator; }
 
-int Expression::getValue() { return value; }
-
+int Expression::getValue()
+{
+    throw std::runtime_error("Calling Expression::getValue(). Should be calling on a derived type.\n");
+}
 bool Expression::isCTV() { return false; }

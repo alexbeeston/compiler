@@ -23,3 +23,5 @@ Register Add::emit()
     return r;
 }
 
+int Add::getValue() { return left->getValue() + right->getValue(); }
+
