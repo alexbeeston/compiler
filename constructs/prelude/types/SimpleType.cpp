@@ -9,8 +9,9 @@ SimpleType::SimpleType(std::string* p_name, bool p_isRedeclarable)
     name = p_name;
     identifier = *p_name; // if the simple type is the name of an array or record, it will be picked up and modified in the parser
     isRedeclarable = p_isRedeclarable;
-    typeIndicator = ALIAS;
-    lValueType = PRIMITIVE_TYPE;
+    typeIndicator = ALIAS; // can I get rid of this?
+    lValueType = SIMPLE_TYPE;
+    size = 4; // assume it's a primitive, then if it's not, change the size to negative one,
     if (name->compare("integer") == 0) typeIndicator = INTEGER;
     else if (name->compare("INTEGER") == 0) typeIndicator = INTEGER;
     else if (name->compare("char") == 0) typeIndicator = CHAR;
@@ -19,7 +20,7 @@ SimpleType::SimpleType(std::string* p_name, bool p_isRedeclarable)
     else if (name->compare("STRING") == 0) typeIndicator = STRING;
     else if (name->compare("boolean") == 0) typeIndicator = BOOLEAN;
     else if (name->compare("BOOLEAN") == 0) typeIndicator = BOOLEAN;
-    else lValueType = ALIAS_TYPE;
+    else size = -1;
 }
 
 void SimpleType::print()

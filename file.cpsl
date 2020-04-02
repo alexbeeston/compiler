@@ -6,7 +6,7 @@ type
  row = array[BASE:BASE+SIZE] of integer;
  grid = array[BASE:BASE+SIZE] of row;
 
- testing = record a,b,c:integer; end;
+ testing = record a,b,c:row; end;
 
 var
 mouse : integer;

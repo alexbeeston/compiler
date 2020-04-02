@@ -26,7 +26,6 @@ Scope::Scope(Prelude topLevelPrelude)
     for (std::string primitive : primitives)
     {
         addType(new SimpleType(&primitive, true));
-        // don't have to set the size since a the names of the primitive types is the "name" field of the simple type, the simple type's lValueType gets set to PRIMITVE_TYPE
     }
 
     // add declared types
@@ -42,19 +41,26 @@ Scope::Scope(Prelude topLevelPrelude)
         for (std::string* name: *list->identList)
         {
             addEntry(Entry(*name, list->type, nextAddress));
-            std::cout << "# added variable " << *name << " at address " << nextAddress << "\n";
-            nextAddress += computeSize(list->type);
+            int size = computeSize(list->type);
+            std::cout << "# added variable " << *name << ", and its type size is " << size << "\n";
+            nextAddress += size; // this works; if it's a simple type, then it's just a string, and we'll look it up in the st. If it's not there, it's an error, their fault.
         }
     }
 }
 
 int Scope::computeSize(BaseType* type)
 {
-    if (type->lValueType == PRIMITIVE_TYPE) return 4;
-    else if (type->lValueType == ALIAS_TYPE)
+//    if (type->lValueType == PRIMITIVE_TYPE) return 4;
+//    else if (type->lValueType == ALIAS_TYPE)
+//    {
+//        if (types.count(type->identifier) == 1) return types[type->identifier]->size;
+//        else throw std::runtime_error("Can't find an ALIAS_TYPE in the symbol table");
+//    }
+    if (type->lValueType == SIMPLE_TYPE)
     {
-        if (types.count(type->identifier) == 1) return types[type->identifier]->size;
-        else throw std::runtime_error("Can't find an ALIAS_TYPE in the symbol table");
+        SimpleType* temp = dynamic_cast<SimpleType*>(type);
+        if (types.count(*temp->name) == 1) return types[*temp->name]->size;
+        else throw std::runtime_error("Can't find an SIMPLE_TYPE in the symbol table, and we need to know its size.");
     }
     else if (type->lValueType == ARRAY_TYPE) return computeSize_Array(dynamic_cast<ArrayType*>(type));
     else if (type->lValueType == RECORD_TYPE) return computeSize_Record(dynamic_cast<RecordType*>(type));
