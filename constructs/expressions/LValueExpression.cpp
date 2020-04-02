@@ -38,6 +38,6 @@ Register LValueExpression::emit()
 int LValueExpression::getValue()
 {
     Entry entry = st.retrieveEntry(lValue->getKey());
-    if (entry.offset == -1) return entry.value->getValue();
+    if (entry.label == CONSTANT) return entry.value->getValue();
     else throw std::runtime_error("can't call LValueExpression::getValue() if the lValue points to a variable. Expression::getValue() is for constants only");
 }

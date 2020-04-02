@@ -17,7 +17,8 @@
 struct Scope
 {
     // used during initialization
-    Scope(Prelude);
+    Scope();
+    void addConstructs(Prelude);
     int computeSize(BaseType*);
     int computeSize_Array(ArrayType*);
     int computeSize_Record(RecordType*);

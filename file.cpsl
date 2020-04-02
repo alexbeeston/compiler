@@ -1,6 +1,6 @@
 const
 base = 0;
-size = 3;
+size = 9;
 
 type
  row = array[base:size] of integer;

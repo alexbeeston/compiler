@@ -7,9 +7,9 @@ SymbolTable::SymbolTable() {}
 
 void SymbolTable::addStuff(Prelude topLevelPrelude)
 {
-    levels.push_back(Scope(topLevelPrelude));
+    levels.push_back(Scope());
+    levels[0].addConstructs(topLevelPrelude);
 }
-
 
 void SymbolTable::prettyPrint()
 {
@@ -17,7 +17,6 @@ void SymbolTable::prettyPrint()
     for (Scope scope : levels)
     {
         std::cout << "Scope Level " << levelCounter << "\n";
-//        scope.prettyPrint();
     }
 }
 

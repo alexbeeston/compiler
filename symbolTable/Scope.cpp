@@ -11,7 +11,13 @@
 extern RegisterPool rp;
 
 // used during initialization
-Scope::Scope(Prelude topLevelPrelude)
+Scope::Scope()
+{
+    // if things are still breaking, maybe give types and entries a constructor call; not sure if it would work though
+    // also could try giving the st a construcotr call in main
+}
+
+void Scope::addConstructs(Prelude topLevelPrelude)
 {
     // add boolean constants, implemented as redeclarable constants; they can't be variables because we need to pull their semantic value in const_declarations, but they can't be constants because we over write their value in badidea.cpsl
     int NUM_BOOLS = 2;
