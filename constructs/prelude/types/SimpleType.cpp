@@ -10,6 +10,7 @@ SimpleType::SimpleType(std::string* p_name, bool p_isRedeclarable)
     identifier = *p_name; // if the simple type is the name of an array or record, it will be picked up and modified in the parser
     isRedeclarable = p_isRedeclarable;
     typeIndicator = UNDEFINED;
+    lValueType = PRIMITIVE_TYPE;
     if (name->compare("integer") == 0) typeIndicator = INTEGER;
     else if (name->compare("INTEGER") == 0) typeIndicator = INTEGER;
     else if (name->compare("char") == 0) typeIndicator = CHAR;
@@ -18,6 +19,7 @@ SimpleType::SimpleType(std::string* p_name, bool p_isRedeclarable)
     else if (name->compare("STRING") == 0) typeIndicator = STRING;
     else if (name->compare("boolean") == 0) typeIndicator = BOOLEAN;
     else if (name->compare("BOOLEAN") == 0) typeIndicator = BOOLEAN;
+    else lValueType = ALIAS_TYPE;
 }
 
 void SimpleType::print()
@@ -30,7 +32,7 @@ int SimpleType::computeSize()
 //    std::cout << "# SimpleType::computeSize()\n";
 //    return 1;
     if (isPrimitive()) return 4;
-    else return st.retrieveType(*name)->computeSize(); // more offending code
+    else return st.retrieveType(*name)->computeSize();
 }
 
 TypeIndicator SimpleType::getTypeIndicator()

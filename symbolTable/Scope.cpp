@@ -11,7 +11,6 @@ extern RegisterPool rp;
 // used during initialization
 Scope::Scope(Prelude topLevelPrelude)
 {
-    std::cout << "Scope init\n";
     // add boolean constants, implemented as redeclarable constants; they can't be variables because we need to pull their semantic value in const_declarations, but they can't be constants because we over write their value in badidea.cpsl
     int NUM_BOOLS = 2;
     std::string booleans[] = {"false", "true"};
@@ -23,34 +22,54 @@ Scope::Scope(Prelude topLevelPrelude)
 
     // initialize with primitive types
     std::string primitives[] = {"integer", "char", "string", "boolean"};
-    for (std::string primitive : primitives) addType(new SimpleType(&primitive, true));
+    for (std::string primitive : primitives)
+    {
+        addType(new SimpleType(&primitive, true));
+        // don't have to set the size since a the names of the primitive types is the "name" field of the simple type, the simple type's lValueType gets set to PRIMITVE_TYPE
+    }
 
-    // add user defined types
-    for (BaseType* type: *topLevelPrelude.types) addType(type);
+    // add declared types
+    for (BaseType* type : *topLevelPrelude.types)
+    {
+        type->size = computeSize(type);
+        addType(type); // can I just replace this here with types[type->identifier]? // which should get replaced with types[typeDeclItem->identifier]
+    }
 
     // add variables, which are all user defined
     for (TypedList* list: *topLevelPrelude.vars)
     {
         for (std::string* name: *list->identList)
         {
-//            // method one: if the type is in the symbol table, pull it; otherwise, just use the type declared inline. THIS MAY NOT BE NECESSARY
-//            BaseType* temp;
-//            if (types.count(list->type->identifier) == 1)
-//            {
-//                std::cout << "# found the type " << list->type->identifier << " in the st\n";
-//                temp = types[list->type->identifier]; // probably only necessary when the type is primitive
-//            }
-//            else temp = list->type;
-//            addEntry(Entry(*name, temp , nextAddress));
-//            nextAddress += temp->computeSize();
-//            std::cout << "\n";
-
-            // method two: just add the type (preferred for its simplicity; results in seg fault, but seems like it should work. Consider later. Possible downside too is that there might be many instances of a primitive types
-            nextAddress += list->type->computeSize();
             addEntry(Entry(*name, list->type, nextAddress));
+            std::cout << "# added variable " << *name << " at address " << nextAddress << "\n";
+            nextAddress += computeSize(list->type);
         }
     }
 }
+
+int Scope::computeSize(BaseType* type)
+{
+    if (type->lValueType == PRIMITIVE_TYPE) return 4;
+    else if (type->lValueType == ALIAS_TYPE)
+    {
+        if (types.count(type->identifier) == 1) return types[type->identifier]->size;
+        else throw std::runtime_error("Can't find an ALIAS_TYPE in the symbol table");
+    }
+    else if (type->lValueType == ARRAY_TYPE) return computeSize_Array(dynamic_cast<ArrayType*>(type));
+    else if (type->lValueType == RECORD_TYPE) return computeSize_Record(dynamic_cast<RecordType*>(type));
+    else throw std::runtime_error("lValueType of type unknown\n");
+}
+
+int Scope::computeSize_Array(ArrayType* array)
+{
+    return 10;
+}
+
+int Scope::computeSize_Record(RecordType* record)
+{
+    return 10;
+}
+
 
 bool Scope::addEntry(Entry entry)
 {

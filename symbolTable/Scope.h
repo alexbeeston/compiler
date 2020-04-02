@@ -9,6 +9,8 @@
 #include <string>
 
 #include "../constructs/prelude/types/BaseType.h"
+#include "../constructs/prelude/types/ArrayType.h"
+#include "../constructs/prelude/types/RecordType.h"
 #include "../constructs/prelude/Prelude.h"
 #include "../constructs/prelude/Entry.h"
 
@@ -16,6 +18,9 @@ struct Scope
 {
     // used during initialization
     Scope(Prelude);
+    int computeSize(BaseType*);
+    int computeSize_Array(ArrayType*);
+    int computeSize_Record(RecordType*);
 
     // used to handle LookUpItems (variables and constants)
     int nextAddress = 0;

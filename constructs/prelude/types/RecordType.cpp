@@ -8,6 +8,7 @@ RecordType::RecordType(std::vector<TypedList*>* p_typedLists)
     typedLists = p_typedLists;
     isRedeclarable = false;
     identifier = std::string("[declared inline]");
+    lValueType == RECORD_TYPE;
 }
 int RecordType::computeSize()
 {
