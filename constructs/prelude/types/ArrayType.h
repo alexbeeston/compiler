@@ -16,5 +16,6 @@ struct ArrayType:BaseType
     ArrayType(Expression*, Expression*, BaseType*);
     void print() override;
     int computeSize() override;
+    TypeIndicator getTypeIndicator();
 };
 #endif //COMPILERS_ARRAYTYPE_H

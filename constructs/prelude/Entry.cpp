@@ -14,7 +14,6 @@ Entry::Entry(std::string p_ident, Expression* p_expression, bool p_isRedeclarabl
     isRedeclarable = p_isRedeclarable;
     offset = -1;
     type = generateBaseType();
-    lValueType = PRIMITIVE_TYPE;
 }
 
 // Called by variables
@@ -25,7 +24,6 @@ Entry::Entry(std::string p_ident, BaseType* p_type, int p_offset)
     isRedeclarable = false;
     offset = p_offset;
     baseRegister = rp.getGlobalPointer(); // assumes all variables are offset from the global pointer, for now
-    lValueType = p_type->getLValueType();
 }
 
 void Entry::print()

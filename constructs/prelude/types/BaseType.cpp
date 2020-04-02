@@ -12,7 +12,11 @@ void BaseType::print()
     std::cout << "[base type]";
 }
 
-int BaseType::computeSize() { return -1; }
+int BaseType::computeSize()
+{
+    std::cout << "# BaseType::computeSize()\n";
+    return -1;
+}
 
 TypeIndicator BaseType::getTypeIndicator() { return typeIndicator; }
 

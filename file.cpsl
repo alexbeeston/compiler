@@ -1,6 +1,20 @@
+const
+ SIZE = 3;
+ BASE = 0;
+
+type
+ row = array[BASE:BASE+SIZE] of integer;
+ grid = array[BASE:BASE+SIZE] of row;
+
 var
-  a : array[1:5] of array[10:30] of integer;
-begin
-  a[2][12] := 19;
-write(a[2][12]);
+ g : grid;
+ r : row;
+ i,j :integer;
+
+begin;
+
+
 end.
+
+
+

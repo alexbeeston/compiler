@@ -63,8 +63,8 @@ void LValue::getBaseRegister_Array(ArrayType* array, Expression* index, Register
 int LValue::getOffset()
 {
     Entry entry = st.retrieveEntry(getKey());
-    if ( (entry.lValueType == PRIMITIVE_TYPE) || (entry.lValueType == ARRAY_TYPE) ) return entry.offset;
-    else if (entry.lValueType == RECORD_TYPE)
+    if ( (entry.type->getLValueType() == PRIMITIVE_TYPE) || (entry.type->getLValueType() == ARRAY_TYPE) ) return entry.offset;
+    else if (entry.type->getLValueType() == RECORD_TYPE)
     {
         RecordType* record = dynamic_cast<RecordType*>(entry.type);
         std::string accessor = (*sequence)[1]->accessor;

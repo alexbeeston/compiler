@@ -32,16 +32,21 @@ Scope::Scope(Prelude topLevelPrelude)
     {
         for (std::string* name: *list->identList)
         {
-            // method one: if the type is in the symbol table, pull it; otherwise, just use the type declared inline. THIS MAY NOT BE NECESSARY
-            BaseType* temp;
-            if (types.count(list->type->identifier) == 1) temp = types[list->type->identifier]; // probably only necessary when the type is primitive
-            else temp = list->type;
-            addEntry(Entry(*name, temp , nextAddress));
-            nextAddress += temp->computeSize();
+//            // method one: if the type is in the symbol table, pull it; otherwise, just use the type declared inline. THIS MAY NOT BE NECESSARY
+//            BaseType* temp;
+//            if (types.count(list->type->identifier) == 1)
+//            {
+//                std::cout << "# found the type " << list->type->identifier << " in the st\n";
+//                temp = types[list->type->identifier]; // probably only necessary when the type is primitive
+//            }
+//            else temp = list->type;
+//            addEntry(Entry(*name, temp , nextAddress));
+//            nextAddress += temp->computeSize();
+//            std::cout << "\n";
 
-//            // method two: just add the type (preferred for its simplicity; results in seg fault, but seems like it should work. Consider later. Possible downside too is that there might be many instances of a primitive types
-//            nextAddress += list->type->computeSize();
-//            addEntry(Entry(*name, *list->type, nextAddress));
+            // method two: just add the type (preferred for its simplicity; results in seg fault, but seems like it should work. Consider later. Possible downside too is that there might be many instances of a primitive types
+            nextAddress += list->type->computeSize();
+            addEntry(Entry(*name, list->type, nextAddress));
         }
     }
 }
@@ -61,8 +66,8 @@ bool Scope::addEntry(Entry entry)
     else return false;
 }
 
-bool Scope::addType(BaseType* type) // consider the case for records and arrays, which will have another type, which will need to be looked up in the symbol table or declared in-line. Save for later with UDD
-{ // assumes for now no arrays nor records
+bool Scope::addType(BaseType* type)
+{
     if (types.count(type->identifier) == 0)
     {
         types[type->identifier] = type;
@@ -81,6 +86,7 @@ bool Scope::addType(BaseType* type) // consider the case for records and arrays,
 
 BaseType* Scope::getBaseType(std::string key)
 {
+    // BUG: I (also) can't access the types map when I'm adding variables. It's not that I can't find the type in the map, it's, the map isn't accessbile
     return types[key];
 }
 

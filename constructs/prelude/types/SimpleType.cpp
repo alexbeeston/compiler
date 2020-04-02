@@ -27,8 +27,10 @@ void SimpleType::print()
 
 int SimpleType::computeSize()
 {
-    if (isPrimitive()) return 4;
-    else return st.retrieveType(*name)->computeSize();
+    std::cout << "# SimpleType::computeSize()\n";
+    return 1;
+//    if (isPrimitive()) return 4;
+//    else return st.retrieveType(*name)->computeSize(); // more offending code
 }
 
 TypeIndicator SimpleType::getTypeIndicator()
