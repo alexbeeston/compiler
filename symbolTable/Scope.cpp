@@ -4,6 +4,7 @@
 #include "Scope.h"
 #include "../constructs/prelude/types/SimpleType.h"
 #include "../constructs/expressions/Literal.h"
+#include "../constructs/expressions/LValueExpression.h"
 #include "../global.h"
 
 extern RegisterPool rp;
@@ -62,12 +63,35 @@ int Scope::computeSize(BaseType* type)
 
 int Scope::computeSize_Array(ArrayType* array)
 {
-    return 10;
+//    int lower =
+//    if (array->low->typeIndicator == INTEGER || array->low->typeIndicator == CHAR) lower = array->low->value;
+//    else if (array->low->typeIndicator == ALIAS)
+//    {
+//        LValueExpression* temp = dynamic_cast<LValueExpression*>(array->low);
+//        lower = entries[temp->lValue->getKey()].value->value;
+//    }
+    int length = 10;
+    int size = length * computeSize(array->underlyingType); // this makes it so I don't care if they simple type is primitive or alias; just get its size; black box heck, if it's record, it will compute that too!
+    array->size = size;
+    return size;
 }
 
 int Scope::computeSize_Record(RecordType* record)
 {
-    return 10;
+    int offset = 0;
+    BaseType* type;
+    for (TypedList* list : *record->typedLists)
+    {
+        type = list->type;
+        for (std::string* identifier : *list->identList)
+        {
+            record->types[*identifier] = type;
+            record->offsets[*identifier] = offset;
+            offset += computeSize(type);
+        }
+    }
+    record->size = offset;
+    return offset;
 }
 
 

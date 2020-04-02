@@ -5,6 +5,7 @@
 
 LValueExpression::LValueExpression(LValue* p_lValue)
 {
+    typeIndicator = ALIAS;
     lValue = p_lValue;
 }
 

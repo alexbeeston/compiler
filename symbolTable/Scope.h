@@ -22,7 +22,7 @@ struct Scope
     int computeSize_Array(ArrayType*);
     int computeSize_Record(RecordType*);
 
-    // used to handle LookUpItems (variables and constants)
+    // used to handle Entries (variables and constants)
     int nextAddress = 0;
     std::map<std::string, Entry> entries;
     Entry getEntry(std::string);

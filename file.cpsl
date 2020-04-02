@@ -6,10 +6,12 @@ type
  row = array[BASE:BASE+SIZE] of integer;
  grid = array[BASE:BASE+SIZE] of row;
 
+ testing = record a,b,c:integer; end;
+
 var
- g : grid;
- r : row;
- i,j :integer;
+mouse : integer;
+ dog : testing;
+ cat : integer;
 
 begin;
 

@@ -9,7 +9,7 @@ SimpleType::SimpleType(std::string* p_name, bool p_isRedeclarable)
     name = p_name;
     identifier = *p_name; // if the simple type is the name of an array or record, it will be picked up and modified in the parser
     isRedeclarable = p_isRedeclarable;
-    typeIndicator = UNDEFINED;
+    typeIndicator = ALIAS;
     lValueType = PRIMITIVE_TYPE;
     if (name->compare("integer") == 0) typeIndicator = INTEGER;
     else if (name->compare("INTEGER") == 0) typeIndicator = INTEGER;
