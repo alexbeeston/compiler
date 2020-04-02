@@ -4,6 +4,7 @@
 #include "../global.h"
 #include "../constructs/prelude/types/ArrayType.h"
 #include "../constructs/prelude/types/RecordType.h"
+#include "../constructs/prelude/types/SimpleType.h"
 
 LValue::LValue() {}
 LValue::LValue(std::vector<LValueBase*>* p_sequence)
@@ -19,23 +20,31 @@ std::string LValue::getKey()
 Register LValue::getBaseRegister()
 {
     BaseType* type = st.retrieveEntry(getKey()).type;
-    if ( (type->getLValueType() == PRIMITIVE_TYPE) || (type->getLValueType() == RECORD_TYPE) ) return rp.getGlobalPointer();
-    else if (type->getLValueType() == ARRAY_TYPE)
+
+
+
+    if (type->style == ALIAS_TYPE)
+    {
+        SimpleType* temp = dynamic_cast<SimpleType*>(type);
+        type = st.retrieveType(*temp->name);
+    }
+    if ( (type->style == PRIMITIVE_TYPE) || (type->style == RECORD_TYPE) ) return rp.getGlobalPointer();
+    else if (type->style == ARRAY_TYPE)
     {
         Register base = rp.getRegister();
         LValueBase* accessor;
         int accessorIndex = 1;
         std::cout << "add " << base.getName() << " $gp $zero\n";
-        while (type->getLValueType() != PRIMITIVE_TYPE)
+        while (type->style != PRIMITIVE_TYPE)
         {
             accessor = (*sequence)[accessorIndex];
-            if (type->getLValueType() == ARRAY_TYPE)
+            if (type->style == ARRAY_TYPE)
             {
                 ArrayType* array = dynamic_cast<ArrayType*>(type);
                 getBaseRegister_Array(array, accessor->index, base);
                 type = array->underlyingType;
             }
-            else if (type->getLValueType() == RECORD_TYPE)
+            else if (type->style == RECORD_TYPE)
             {
                 type = dynamic_cast<RecordType*>(type);
             }
@@ -43,7 +52,7 @@ Register LValue::getBaseRegister()
         }
         return base;
     }
-    else throw std::runtime_error("LValueType not known. Inside LValue::loadBaseRegister\n");
+    else throw std::runtime_error("LValueType not known. Inside LValue::getBaseRegister\n");
 }
 
 void LValue::getBaseRegister_Array(ArrayType* array, Expression* index, Register baseRegister)
@@ -63,8 +72,8 @@ void LValue::getBaseRegister_Array(ArrayType* array, Expression* index, Register
 int LValue::getOffset()
 {
     Entry entry = st.retrieveEntry(getKey());
-    if ( (entry.type->getLValueType() == PRIMITIVE_TYPE) || (entry.type->getLValueType() == ARRAY_TYPE) ) return entry.offset;
-    else if (entry.type->getLValueType() == RECORD_TYPE)
+    if ( (entry.type->style == PRIMITIVE_TYPE) || (entry.type->style == ARRAY_TYPE) ) return entry.offset;
+    else if (entry.type->style == RECORD_TYPE)
     {
         RecordType* record = dynamic_cast<RecordType*>(entry.type);
         std::string accessor = (*sequence)[1]->accessor;

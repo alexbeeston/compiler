@@ -4,9 +4,8 @@
 
 RecordType::RecordType(std::vector<TypedList*>* p_typedLists)
 {
-    lValueType = RECORD_TYPE;
     typedLists = p_typedLists;
-    lValueType == RECORD_TYPE;
+    style = RECORD_TYPE;
 }
 
 int RecordType::computeSize()

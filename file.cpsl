@@ -1,14 +1,6 @@
-const
-base = 2;
-size = 5;
-
-type
-row = array[base:base + size] of integer;
-hey = record a,b,c:integer; end;
-
+var
+  a : array[1:3] of integer;
+  x : integer;
 begin
-
+  x := 40;
 end.
-
-
-

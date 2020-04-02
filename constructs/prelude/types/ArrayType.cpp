@@ -5,11 +5,10 @@
 
 ArrayType::ArrayType(Expression* p_low, Expression* p_high, BaseType* p_type)
 {
-    lValueType = ARRAY_TYPE;
+    style = ARRAY_TYPE;
     low = p_low;
     high = p_high;
     underlyingType = p_type;
-    lValueType == ARRAY_TYPE;
 }
 
 int ArrayType::computeSize()

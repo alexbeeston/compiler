@@ -6,14 +6,13 @@
 
 struct BaseType
 {
-    LValueType lValueType;
+    Style style;
     TypeIndicator typeIndicator;
     BaseType();
     int size; // set by the symbol table
     virtual int computeSize();
     virtual void print();
     virtual TypeIndicator getTypeIndicator();
-    virtual LValueType getLValueType();
 };
 
 #endif //COMPILERS_SIMPLETYPE_H

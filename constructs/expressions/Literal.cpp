@@ -25,7 +25,6 @@ Literal::Literal(bool p_value)
 
 Literal::Literal(char* p_value)
 {
-    std::cout << "# cadlling the string literal constructor\n";
     typeIndicator = STRING;
     value = st.insertMessage(std::string(p_value));
 }
