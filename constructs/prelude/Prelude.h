@@ -7,15 +7,15 @@
 
 #include <vector>
 #include "constants/Constant.h"
-#include "types/BaseType.h"
+#include "types/DeclaredType.h"
 #include "TypedList.h"
 
 struct Prelude
 {
     std::vector<Constant*>* constants;
-    std::vector<BaseType*>* types;
+    std::vector<DeclaredType*>* declaredTypes;
     std::vector<TypedList*>* vars;
-    Prelude(std::vector<Constant*>*, std::vector<BaseType*>*, std::vector<TypedList*>*);
+    Prelude(std::vector<Constant*>*, std::vector<DeclaredType*>*, std::vector<TypedList*>*);
     void print();
 };
 #endif //COMPILERS_PRELUDE_H

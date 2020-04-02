@@ -2,10 +2,10 @@
 
 #include "Prelude.h"
 
-Prelude::Prelude(std::vector<Constant*>* p_constants, std::vector<BaseType*>* p_types, std::vector<TypedList*>* p_vars)
+Prelude::Prelude(std::vector<Constant*>* p_constants, std::vector<DeclaredType*>* p_types, std::vector<TypedList*>* p_vars)
 {
    constants = p_constants;
-   types = p_types;
+   declaredTypes = p_types;
    vars = p_vars;
 }
 
@@ -17,10 +17,10 @@ void Prelude::print()
         for (Constant* item : *constants) { item->print(); }
         std::cout << std::endl;
     }
-    if (types != nullptr)
+    if (declaredTypes != nullptr)
     {
         std::cout << "TYPE" << std::endl;
-        for (BaseType* item : *types) { item->print(); }
+        for (DeclaredType* item : *declaredTypes) { item->print(); }
         std::cout << std::endl;
     }
     if (vars != nullptr)

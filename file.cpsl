@@ -10,7 +10,7 @@ type
 
 var
 mouse : integer;
- dog : testing;
+ dog : record a,b,c:char; end;
  cat : integer;
 
 begin;

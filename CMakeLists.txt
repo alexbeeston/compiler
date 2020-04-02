@@ -52,6 +52,7 @@ set(
 		constructs/prelude/types/SimpleType.cpp
 		constructs/prelude/types/ArrayType.cpp
 		constructs/prelude/types/RecordType.cpp
+		constructs/prelude/types/DeclaredType.cpp
         constructs/prelude/constants/Constant.cpp
 		constructs/prelude/Prelude.cpp
 		constructs/prelude/TypedList.cpp

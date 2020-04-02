@@ -3,6 +3,7 @@
 
 #include "Scope.h"
 #include "../constructs/prelude/types/SimpleType.h"
+#include "../constructs/prelude/types/DeclaredType.h"
 #include "../constructs/expressions/Literal.h"
 #include "../constructs/expressions/LValueExpression.h"
 #include "../global.h"
@@ -29,10 +30,13 @@ Scope::Scope(Prelude topLevelPrelude)
     }
 
     // add declared types
-    for (BaseType* type : *topLevelPrelude.types)
+    for (DeclaredType* declaredType : *topLevelPrelude.declaredTypes)
     {
-        type->size = computeSize(type);
-        addType(type); // can I just replace this here with types[type->identifier]? // which should get replaced with types[typeDeclItem->identifier]
+        declaredType->type->size = computeSize(declaredType->type);
+        types[declaredType->identifier] = declaredType->type;
+//        type->size = computeSize(type);
+//        types[]
+//        addType(type); // can I just replace this here with types[type->identifier]? // which should get replaced with types[typeDeclItem->identifier]
     }
 
     // add variables, which are all user defined

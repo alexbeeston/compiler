@@ -19,6 +19,7 @@
 #include "constructs/prelude/types/ArrayType.h"
 #include "constructs/prelude/types/RecordType.h"
 #include "constructs/prelude/TypedList.h"
+#include "constructs/prelude/types/DeclaredType.h"
 
 #include "constructs/routines/Routine.h"
 #include "constructs/routines/Procedure.h"
@@ -94,11 +95,12 @@ std::vector<Constant*>* constantPointerVectorPointer;
 struct Prelude* preludePointer;
 struct Literal* literalPointer;
 
+struct DeclaredType* declaredTypePointer;
 struct BaseType* baseTypePointer;
 struct SimpleType* simpleTypePointer;
 struct ArrayType* arrayTypePointer;
 struct RecordType* recordTypePointer;
-std::vector<BaseType*>* baseTypePointerVectorPointer;
+std::vector<DeclaredType*>* declaredTypePointerVectorPointer;
 
 struct TypedList* typedListPointer;
 std::vector<TypedList*>* typedListPointerVectorPointer;
@@ -155,11 +157,11 @@ struct ProcedureCall* procedureCallStatementPointer;
 %type <constantPointerVectorPointer> ConstDecl
 %type <literalPointer> NumericLiteral
 
-%type <baseTypePointerVectorPointer> TypeDecl
-%type <baseTypePointerVectorPointer> TypeList
-%type <baseTypePointer> Type
-%type <baseTypePointer> TypeListItem
+%type <declaredTypePointerVectorPointer> TypeDecl
+%type <declaredTypePointerVectorPointer> TypeList
+%type <declaredTypePointer> TypeListItem
 
+%type <baseTypePointer> Type
 %type <simpleTypePointer> SimpleType
 %type <arrayTypePointer> ArrayType
 %type <recordTypePointer> RecordType
@@ -323,10 +325,10 @@ Expression : NumericLiteral
     | HEXINT { $$ = new Literal(-1); }
     | OCTINT { $$ = new Literal(-1); };
 TypeDecl : TYPE TypeListItem TypeList { $3->insert($3->begin(), $2); $$ = $3; }
-    | { $$ = new std::vector<BaseType*>; };
+    | { $$ = new std::vector<DeclaredType*>; };
 TypeList : TypeList TypeListItem { $1->push_back($2); }
-    | { $$ = new std::vector<BaseType*>; };
-TypeListItem : IDENT EQUAL Type DONE { $3->identifier = std::string($1); $$ = $3; } ;
+    | { $$ = new std::vector<DeclaredType*>; };
+TypeListItem : IDENT EQUAL Type DONE { $$ = new DeclaredType($1, $3); };
 Type : SimpleType
     | RecordType
     | ArrayType
