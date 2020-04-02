@@ -11,6 +11,7 @@ extern RegisterPool rp;
 // used during initialization
 Scope::Scope(Prelude topLevelPrelude)
 {
+    std::cout << "Scope init\n";
     // add boolean constants, implemented as redeclarable constants; they can't be variables because we need to pull their semantic value in const_declarations, but they can't be constants because we over write their value in badidea.cpsl
     int NUM_BOOLS = 2;
     std::string booleans[] = {"false", "true"};
@@ -87,11 +88,11 @@ bool Scope::addType(BaseType* type)
 BaseType* Scope::getBaseType(std::string key)
 {
     // BUG: I (also) can't access the types map when I'm adding variables. It's not that I can't find the type in the map, it's, the map isn't accessbile
-    return types[key];
+    return new BaseType();
 }
 
 Entry Scope::getEntry(std::string key)
 {
-    // BUG: I can't access the entries map when I'm adding arrays to the entry using const identifiers as bounds in the array.
+    // BUG: I can't access the entries map when I'm adding arrays to the entry using const identifiers as bounds in the array; seems to be resolved
     return entries[key];
 }
