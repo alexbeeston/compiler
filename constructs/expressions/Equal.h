@@ -11,5 +11,6 @@ struct Equal:BinaryOpUndeterministicOperands
 {
     Equal(Expression*, Expression*);
     Register emit() override;
+    int getValue() override;
 };
 #endif //COMPILERS_EQUAL_H

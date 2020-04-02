@@ -5,17 +5,14 @@
 Equal::Equal(Expression* p_l, Expression* p_r):BinaryOpUndeterministicOperands(p_l, p_r)
 {
     typeIndicator = BOOLEAN;
-    if (!operandsAreOfSameType()) throw std::runtime_error("Equal::Equal() - operands are not both of same type");
-    if (operandsAreBothCTV())
-    {
-        if (left->value == right->value) value = 1;
-        else value = 0;
-    }
-
 }
 
 Register Equal::emit()
 {
+    // validate
+    if (!operandsAreOfSameType()) throw std::runtime_error("Equal::Equal() - operands are not both of same type");
+
+    // emit
     Register r = rp.getRegister();
     if (operandsAreBothCTV()) std::cout << "li " << r.getName() << " " << value << "  # loaded a CTV\n";
     else
@@ -27,4 +24,14 @@ Register Equal::emit()
         returnRegisters(opRegs);
     }
     return r;
+}
+
+int Equal::getValue()
+{
+    if (operandsAreBothCTV())
+    {
+        if (left->value == right->value) return 1;
+        else return 0;
+    }
+    else throw std::runtime_error("Equal::getValue() - operands are not both compile time known");
 }

@@ -20,10 +20,7 @@ Scope::Scope(Prelude topLevelPrelude)
     for (int i = 0; i < NUM_BOOLS; ++i) entries[booleans[i]] = Entry(booleans[i], new Literal(booleanLiterals[i]));
 
     // add user defined constants
-    for (Constant* i : *topLevelPrelude.constants)
-    {
-        entries[i->ident] = Entry(i->ident, i->value);
-    }
+    for (Constant* i : *topLevelPrelude.constants) entries[i->ident] = Entry(i->ident, i->value);
 
     // initialize with primitive types
     std::string primitives[] = {"integer", "char", "string", "boolean"};
@@ -37,18 +34,7 @@ Scope::Scope(Prelude topLevelPrelude)
     {
         declaredType->type->size = computeSize(declaredType->type);
         types[declaredType->identifier] = declaredType->type;
-    }
-
-    // validation
-    std::cout << "# the types are now:\n";
-    std::map<std::string, BaseType*>::iterator it = types.begin();
-    while (it != types.end())
-    {
-        std::string key = it->first;
-        SimpleType* value = dynamic_cast<SimpleType*>(it->second);
-        std::cout << "# key: " << key;
-        std::cout << ", value: " << *value->name << "\n";
-        it ++;
+        std::cout << "# the size is " << declaredType->type->size << "\n";
     }
 
     // add variables, which are all user defined
@@ -84,8 +70,8 @@ int Scope::computeSize_Array(ArrayType* array)
 //        LValueExpression* temp = dynamic_cast<LValueExpression*>(array->low);
 //        lower = entries[temp->lValue->getKey()].value->value;
 //    }
-    int length = 10;
-    int size = length * computeSize(array->underlyingType); // this makes it so I don't care if they simple type is primitive or alias; just get its size; black box heck, if it's record, it will compute that too!
+    int length = array->high->getValue() - array->low->getValue() + 1;
+    int size = length * computeSize(array->underlyingType);
     array->size = size;
     return size;
 }
