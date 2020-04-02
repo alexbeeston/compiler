@@ -7,6 +7,7 @@
 #include "symbolTable/SymbolTable.h"
 #include "RegisterPool.h"
 
+#include <map>
 
 extern int yyparse();
 extern Program* program;
@@ -21,4 +22,11 @@ int main()
 	program->emit();
 
 	std::cout << "\n"; // do not move; we want to see PS1 after!
+
+//    std::map<int, std::string> test = std::map<int, std::string>();
+//    test[10] = "hello\n";
+//    std::cout << test[10];
+//    test[10] = "goodbye\n";
+//
+//    std::cout << "Size of map; " << test.size() << "\n";
 }

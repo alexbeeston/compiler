@@ -26,7 +26,7 @@ Scope::Scope(Prelude topLevelPrelude)
     std::string primitives[] = {"integer", "char", "string", "boolean"};
     for (std::string primitive : primitives)
     {
-        addType(new SimpleType(&primitive, true));
+        types[primitive] = new SimpleType(&primitive); // todo: add a key for uppercase
     }
 
     // add declared types
@@ -34,9 +34,18 @@ Scope::Scope(Prelude topLevelPrelude)
     {
         declaredType->type->size = computeSize(declaredType->type);
         types[declaredType->identifier] = declaredType->type;
-//        type->size = computeSize(type);
-//        types[]
-//        addType(type); // can I just replace this here with types[type->identifier]? // which should get replaced with types[typeDeclItem->identifier]
+    }
+
+    // validation
+    std::cout << "# the types are now:\n";
+    std::map<std::string, BaseType*>::iterator it = types.begin();
+    while (it != types.end())
+    {
+        std::string key = it->first;
+        SimpleType* value = dynamic_cast<SimpleType*>(it->second);
+        std::cout << "# key: " << key;
+        std::cout << ", value: " << *value->name << "\n";
+        it ++;
     }
 
     // add variables, which are all user defined
@@ -54,12 +63,6 @@ Scope::Scope(Prelude topLevelPrelude)
 
 int Scope::computeSize(BaseType* type)
 {
-//    if (type->lValueType == PRIMITIVE_TYPE) return 4;
-//    else if (type->lValueType == ALIAS_TYPE)
-//    {
-//        if (types.count(type->identifier) == 1) return types[type->identifier]->size;
-//        else throw std::runtime_error("Can't find an ALIAS_TYPE in the symbol table");
-//    }
     if (type->lValueType == SIMPLE_TYPE)
     {
         SimpleType* temp = dynamic_cast<SimpleType*>(type);
@@ -120,32 +123,32 @@ bool Scope::addEntry(Entry entry)
     else return false;
 }
 
-bool Scope::addType(BaseType* type)
-{
-    if (types.count(type->identifier) == 0)
-    {
-        types[type->identifier] = type;
-        return true;
-    }
-    else if (types[type->identifier]->isRedeclarable)
-    {
-       types[type->identifier] = type;
-       return true;
-    }
-    else
-    {
-        return true;
-    }
-}
+//bool Scope::addType(BaseType* type)
+//{
+//    if (types.count(type->identifier) == 0)
+//    {
+//        types[type->identifier] = type;
+//        return true;
+//    }
+//    else if (types[type->identifier]->isRedeclarable)
+//    {
+//       types[type->identifier] = type;
+//       return true;
+//    }
+//    else
+//    {
+//        return true;
+//    }
+//}
 
 BaseType* Scope::getBaseType(std::string key)
 {
-    // BUG: I (also) can't access the types map when I'm adding variables. It's not that I can't find the type in the map, it's, the map isn't accessbile
-    return new BaseType();
+    if (types.count(key) == 1) return types[key];
+    else throw std::runtime_error("Type not found in symbol table");
 }
 
 Entry Scope::getEntry(std::string key)
 {
-    // BUG: I can't access the entries map when I'm adding arrays to the entry using const identifiers as bounds in the array; seems to be resolved
-    return entries[key];
+    if (entries.count(key) == 1) return entries[key];
+    else throw std::runtime_error("Entry not found in symbol table");
 }

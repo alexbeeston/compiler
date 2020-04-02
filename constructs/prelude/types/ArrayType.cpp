@@ -9,8 +9,6 @@ ArrayType::ArrayType(Expression* p_low, Expression* p_high, BaseType* p_type)
     low = p_low;
     high = p_high;
     underlyingType = p_type;
-    isRedeclarable = false;
-    identifier = std::string("[declared inline]");
     lValueType == ARRAY_TYPE;
 }
 

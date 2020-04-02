@@ -6,8 +6,6 @@
 
 struct BaseType
 {
-    std::string identifier;
-    bool isRedeclarable;
     LValueType lValueType;
     TypeIndicator typeIndicator;
     BaseType();

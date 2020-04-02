@@ -1,22 +1,25 @@
 const
- SIZE = 3;
- BASE = 0;
+ true = 3<>3;
+ false = 3=3;
 
 type
- row = array[BASE:BASE+SIZE] of integer;
- grid = array[BASE:BASE+SIZE] of row;
-
- testing = record a,b,c:row; end;
+ i = integer;
+ c = char;
+ integer = char;
+ char = integer;
 
 var
-mouse : integer;
- dog : record a,b,c:char; end;
- cat : integer;
+ i:i;
+ c:integer;
 
-begin;
-
-
+begin
+ write(false,3<>3,'\n');
+ write(true,3=3,'\n');
+ i:=ord('A');
+ c:=chr(i);
+ write(i,' ',c,'\n');
+ write("Expected:\n");
+ write("10\n");
+ write("01\n");
+ write("65 A\n")
 end.
-
-
-

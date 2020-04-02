@@ -12,7 +12,7 @@
 struct SimpleType:BaseType
 {
     std::string* name;
-    SimpleType(std::string*, bool p_isRedeclarable = false);
+    SimpleType(std::string*);
     void print() override;
 
     // the following functions are necessary because a simple type is a string, which could be a primitive type or the name of an array or record type

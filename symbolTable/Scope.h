@@ -30,7 +30,7 @@ struct Scope
 
     // used to handle types
     std::map<std::string, BaseType*> types;
-    bool addType(BaseType*);
+//    bool addType(BaseType*);
     BaseType* getBaseType(std::string);
 };
 #endif //COMPILERS_SCOPE_H
