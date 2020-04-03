@@ -4,17 +4,17 @@
 
 LValueBase::LValueBase()
 {
-    accessor = std::string("[LValue Base keyString]");
+    ident = std::string("[LValue Base keyString]");
 }
 
 LValueBase::LValueBase(Expression* p_index)
 {
-    index = p_index;
+    indexer = p_index;
 }
 
 LValueBase::LValueBase(char* p_accessor)
 {
-    accessor = std::string(p_accessor);
+    ident = std::string(p_accessor);
 }
 
 void LValueBase::print()

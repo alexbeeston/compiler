@@ -33,5 +33,6 @@ int SimpleType::computeSize()
 
 TypeIndicator SimpleType::getTypeIndicator()
 {
-    return typeIndicator;
+    if (style == ALIAS_TYPE) return st.retrieveType(*name)->getTypeIndicator();
+    else return typeIndicator;
 }
