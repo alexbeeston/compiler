@@ -22,23 +22,25 @@ Register LValue::getBaseRegister()
     BaseType* type = st.retrieveEntry(getKey()).type;
     Register baseRegister = rp.getRegister();
     std::cout << "add " << baseRegister.getName() << " $gp $zero   # about to load an LValue\n";
-
-    for (int accessorIndex = 0; accessorIndex < sequence->size() - 1; accessorIndex++)
+    int accessorIndex = 0;
+    if (type->style == ALIAS_TYPE) type = st.retrieveType(*(dynamic_cast<SimpleType*>(type))->name);
+    while (type->style != PRIMITIVE_TYPE)
     {
-        // error checking and conversion from alias types
-        if (type == nullptr) throw std::runtime_error("LValue::getBaseRegister() - type is null. Likely, you are attempting to access more dimensions in the UDT than exist.");
+        // resolve an alias type
         if (type->style == ALIAS_TYPE) type = st.retrieveType(*(dynamic_cast<SimpleType*>(type))->name);
 
-        // handles one of the styles of types
-        if (type->style == PRIMITIVE_TYPE) type = nullptr;
-        else if (type->style == RECORD_TYPE)
+        // iterate over the type for records and arrays
+        if (type->style == RECORD_TYPE)
         {
             RecordType* record = dynamic_cast<RecordType*>(type);
+            if (accessorIndex == sequence->size() - 1) throw std::runtime_error("LValue::getBaseRegister() - too few LValue items in the LValue chain");
             type = record->types[(*sequence)[accessorIndex + 1]->ident];
+            std::cout << "# ***************************************Record\n";
         }
         else if (type->style == ARRAY_TYPE)
         {
             ArrayType* array = dynamic_cast<ArrayType*>(type);
+            if (accessorIndex == sequence->size() - 1) throw std::runtime_error("LValue::getBaseRegister() - too few LValue items in the LValue chain");
             Expression* index = (*sequence)[accessorIndex + 1]->indexer;
             Register r1 = rp.getRegister();
             Register r2 = index->emit();
@@ -52,7 +54,10 @@ Register LValue::getBaseRegister()
             rp.returnRegister(r2);
             type = array->underlyingType;
         }
+        else throw std::runtime_error("LValue::getBaseRegister() - style of type unresolved\n");
+        accessorIndex++;
     }
+    if (accessorIndex < sequence->size() - 1) throw std::runtime_error("LValue::getBaseRegister() - too many LValue items in the LValue chain");
     return baseRegister;
 }
 
