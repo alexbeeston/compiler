@@ -14,7 +14,7 @@ void LValueExpression::print()
     lValue->print();
 }
 
-TypeIndicator LValueExpression::getTypeIndicator() { return st.retrieveEntry(lValue->getKey()).type->getTypeIndicator(); }
+TypeIndicator LValueExpression::getTypeIndicator() { return lValue->getTypeIndicator(); }
 
 Register LValueExpression::emit()
 {
@@ -41,3 +41,5 @@ int LValueExpression::getValue()
     if (entry.label == CONSTANT) return entry.value->getValue();
     else throw std::runtime_error("can't call LValueExpression::getValue() if the lValue points to a variable. Expression::getValue() is for constants only");
 }
+
+Style LValueExpression::getStyle() { return lValue->getStyle(); }

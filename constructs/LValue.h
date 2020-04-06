@@ -21,5 +21,6 @@ struct LValue
     Register getBaseRegister();
     int getOffset();
     Style getStyle();
+    TypeIndicator getTypeIndicator();
 };
 #endif //COMPILERS_LVALUE_H

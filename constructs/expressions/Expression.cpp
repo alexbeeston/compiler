@@ -19,4 +19,7 @@ int Expression::getValue()
 {
     throw std::runtime_error("Calling Expression::getValue(). Should be calling on a derived type.\n");
 }
+
 bool Expression::isCTV() { return false; }
+
+Style Expression::getStyle() { return PRIMITIVE_TYPE; }

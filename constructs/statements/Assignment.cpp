@@ -21,22 +21,18 @@ void Assignment::emit()
 {
     // load the Entry
     Entry entry = st.retrieveEntry(lValue->getKey());
-
-    // error checking
     if (entry.offset == -1) throw std::runtime_error("Can not assign to a constant\n");
-//    else if (entry.type->getTypeIndicator() != expression->getTypeIndicator()) throw std::runtime_error("Attempting to assign an expression of typeIndicator " + std::to_string(expression->getTypeIndicator()) + " to a entry with typeindicator " + std::to_string(entry.type->typeIndicator) + ".\n");
-
-    // emit
+    if (lValue->getStyle() != expression->getStyle()) throw std::runtime_error("Assignment::emit() - styles of LValue and Expression in an assignment do not match.");
     std::cout << "# assignment\n";
     int offset = lValue->getOffset();
     Register baseRegister = lValue->getBaseRegister();
 
-
+    // emit for a primitive type (check type indicators later, now that we've established they're both primitive types
     Register r = expression->emit();
     std::cout << "sw " << r.getName() << " " << offset << "(" << baseRegister.getName() << ")\n\n";
     rp.returnRegister(r);
     if (baseRegister.getName().compare("$gp") != 0) rp.returnRegister(baseRegister);
 
-    // if it's not, then iterate over the values in the expression (in the case of arrays) and do lots of store words
+    // emit for an array type
 }
 

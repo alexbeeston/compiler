@@ -18,5 +18,6 @@ struct Expression
     virtual void print();
     virtual Register emit();
     virtual TypeIndicator getTypeIndicator();
+    virtual Style getStyle();
 };
 #endif //COMPILERS_EXPRESSION_H
