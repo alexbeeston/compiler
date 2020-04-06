@@ -69,7 +69,7 @@ int LValue::getOffset()
         if (type->style == RECORD_TYPE)
         {
             std::string accessor = (*sequence)[accessorIndex + 1]->ident;
-            RecordType* record = dynamic_cast<RecordType*>(entry.type);
+            RecordType* record = dynamic_cast<RecordType*>(type);
             offset += record->offsets[accessor];
             type = record->types[accessor];
         }

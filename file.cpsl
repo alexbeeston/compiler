@@ -1,28 +1,21 @@
-const
- SIZE = 3;
- BASE = 0;
-
 type
- row = array[0:4] of integer;
- grid = array[0:4] of row;
+in = record a,b,c : integer; end;
 
 var
- g : grid;
- r : row;
- a : row;
-j : integer;
-i : integer;
 
-begin;
+test : array[1:4] of in;
+temp : in;
 
-r[0] := 10;
-r[1] := 20;
-r[2] := 70;
-r[3] := 40;
-r[4] := 50;
+begin
 
-a := r;
-write(a[0], ", ", a[1], ", ", a[2], ", ", a[3], ", ", a[4]);
+temp.a := 10;
+temp.b := 20;
+temp.c := 30;
+
+test[1] := temp;
+
+write(test[1].a, ", ", test[1].b, ", ", test[1].c, "\n");
+
 end.
 
 

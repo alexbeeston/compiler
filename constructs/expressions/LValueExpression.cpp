@@ -29,7 +29,7 @@ Register LValueExpression::emit()
         int offset = lValue->getOffset();
         Register baseRegister = lValue->getBaseRegister();
         std::cout << "lw " << r.getName() << " " << offset << "(" << baseRegister.getName() << ")   # loaded an LValueExpression Variable\n";
-        if (baseRegister.getName().compare("$gp") != 0) rp.returnRegister(baseRegister);
+        rp.returnRegister(baseRegister);
     }
     else throw std::runtime_error("Entry's label isn't a variable or constant");
     return r;

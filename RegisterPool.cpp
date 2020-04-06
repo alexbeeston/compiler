@@ -33,5 +33,5 @@ Register RegisterPool::getGlobalPointer()
 
 void RegisterPool::returnRegister(Register reg)
 {
-    registers.push(reg);
+    if (reg.getName().compare("$gp") != 0) registers.push(reg);
 }
