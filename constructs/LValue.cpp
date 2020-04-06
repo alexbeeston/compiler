@@ -109,10 +109,11 @@ void LValue::print()
     for (LValueBase* item : *sequence) item->print();
 }
 
+Style LValue::getStyle() { return getInnerMostType()->style; }
 
-// COPIED CODE ALERT
+TypeIndicator LValue::getTypeIndicator() { return getInnerMostType()->getTypeIndicator(); }
 
-Style LValue::getStyle()
+BaseType* LValue::getInnerMostType()
 {
     BaseType* type = st.retrieveEntry(getKey()).type;
     for (int accessorIndex = 0; accessorIndex < sequence->size() - 1; accessorIndex++)
@@ -130,26 +131,5 @@ Style LValue::getStyle()
         else if (type->style == ARRAY_TYPE) type = (dynamic_cast<ArrayType*>(type))->underlyingType;
         else throw std::runtime_error("LValue::getBaseRegister() - style of type unresolved\n");
     }
-    return type->style;
-}
-
-TypeIndicator LValue::getTypeIndicator()
-{
-    BaseType* type = st.retrieveEntry(getKey()).type;
-    for (int accessorIndex = 0; accessorIndex < sequence->size() - 1; accessorIndex++)
-    {
-        // resolve an alias type
-        if (type->style == ALIAS_TYPE) type = st.retrieveType(*(dynamic_cast<SimpleType*>(type))->name);
-
-        // resolve standard types
-        if (type->style == RECORD_TYPE)
-        {
-            RecordType* record = dynamic_cast<RecordType*>(type);
-            std::string accessor = (*sequence)[accessorIndex + 1]->ident;
-            type = record->types[accessor];
-        }
-        else if (type->style == ARRAY_TYPE) type = (dynamic_cast<ArrayType*>(type))->underlyingType;
-        else throw std::runtime_error("LValue::getBaseRegister() - style of type unresolved\n");
-    }
-    return type->getTypeIndicator();
+    return type;
 }

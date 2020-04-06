@@ -22,5 +22,6 @@ struct LValue
     int getOffset();
     Style getStyle();
     TypeIndicator getTypeIndicator();
+    BaseType* getInnerMostType();
 };
 #endif //COMPILERS_LVALUE_H
