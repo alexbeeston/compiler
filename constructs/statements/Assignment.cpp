@@ -25,9 +25,7 @@ void Assignment::emit()
     if (entry.offset == -1) throw std::runtime_error("Can not assign to a constant\n");
     if (lValue->getStyle() != expression->getStyle()) throw std::runtime_error("Assignment::emit() - styles of LValue and Expression in an assignment do not match.");
     std::cout << "# assignment\n";
-
     int leftOffset = lValue->getOffset();
-    std::cout << "############## " << leftOffset << "\n";
     Register leftBase = lValue->getBaseRegister();
 
     if (lValue->getStyle() == PRIMITIVE_TYPE)
@@ -38,13 +36,12 @@ void Assignment::emit()
         rp.returnRegister(staging);
         if (leftBase.getName().compare("$gp") != 0) rp.returnRegister(leftBase);
     }
-    else if (lValue->getStyle() == ARRAY_TYPE)
+    else if (lValue->getStyle() == ARRAY_TYPE || lValue->getStyle() == RECORD_TYPE)
     {
         LValue* rightLValue = (dynamic_cast<LValueExpression*>(expression))->lValue;
         int leftSize = lValue->getInnerMostType()->computeSize();
         int rightSize = rightLValue->getInnerMostType()->computeSize();
         if (leftSize != rightSize) throw std::runtime_error("Assignment::emit() - sizes of left of right LValues don't match");
-        std::cout << "# leftSize = " << leftSize << ", rightSize = " << rightSize << "\n";
 
         Register rightBase = rightLValue->getBaseRegister();
         int rightOffset = rightLValue->getOffset();
@@ -55,10 +52,6 @@ void Assignment::emit()
             std::cout << "sw " << staging.getName() << " " << leftOffset + i << "(" << leftBase.getName() << ")   # store continuous memory block\n";
         }
         std::cout << "# end continuous memory block copy\n\n";
-    }
-    else if (lValue->getStyle() == RECORD_TYPE)
-    {
-
     }
     else if (lValue->getStyle() == ALIAS_TYPE) throw std::runtime_error("Assignment::emit() - lValue->getStyle() return ALIAS_TYPE; this should have been replaced with a non-Alias type in LValue::getStyle()");
     else throw std::runtime_error("Assignment::emit() - lValue->getStyle() doesn't return a recognied style");
