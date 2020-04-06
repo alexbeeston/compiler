@@ -22,7 +22,7 @@ Register LValue::getBaseRegister()
     BaseType* type = st.retrieveEntry(getKey()).type;
     Register baseRegister = rp.getRegister();
     std::cout << "add " << baseRegister.getName() << " $gp $zero   # about to load an LValue\n";
-    for (int accessorIndex = 0; accessorIndex < sequence->size() -1; accessorIndex++)
+    for (int accessorIndex = 0; accessorIndex < sequence->size() -1; accessorIndex++) // bug might be here - if the LVAlue only has 1 item, the loop won't go, but we may still need it to to assign to Left-lvalues that aren't primitives
     {
         // resolve an alias type
         if (type->style == ALIAS_TYPE) type = st.retrieveType(*(dynamic_cast<SimpleType*>(type))->name);
@@ -56,6 +56,7 @@ Register LValue::getBaseRegister()
 
 int LValue::getOffset()
 {
+    Entry entry = st.retrieveEntry(getKey());
 //    BaseType* type = st.retrieveEntry(getKey()).type;
 //    int offset = 0;
 //    int accessorIndex = 0;
@@ -101,7 +102,7 @@ int LValue::getOffset()
 //        return offset;
 //    }
 //    else throw std::runtime_error("style of type not known. Inside LValue::getOffset()\n");
-    return 0; // only handling multi-dimensional arrays today
+    return entry.offset;
 }
 
 void LValue::print()
@@ -109,7 +110,12 @@ void LValue::print()
     for (LValueBase* item : *sequence) item->print();
 }
 
-Style LValue::getStyle() { return getInnerMostType()->style; }
+Style LValue::getStyle()
+{
+    BaseType* type = getInnerMostType();
+    if (type->style == ALIAS_TYPE) return st.retrieveType(*(dynamic_cast<SimpleType*>(type))->name)->style;
+    else return type->style;
+}
 
 TypeIndicator LValue::getTypeIndicator() { return getInnerMostType()->getTypeIndicator(); }
 

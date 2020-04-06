@@ -1,20 +1,28 @@
+const
+ SIZE = 3;
+ BASE = 0;
+
 type
-a = array[1:5] of integer;
-r = record x,y,z: char; end;
+ row = array[0:4] of integer;
+ grid = array[0:4] of row;
 
 var
-test1 : a;
-test2 : r;
+ g : grid;
+ r : row;
+ a : row;
+j : integer;
+i : integer;
 
+begin;
 
-begin
+r[0] := 10;
+r[1] := 20;
+r[2] := 70;
+r[3] := 40;
+r[4] := 50;
 
-test1[3] := 40;
-write(test1[3]);
-
-test2.z := 'z';
-write(test2.z);
-
+a := r;
+write(a[0], ", ", a[1], ", ", a[2], ", ", a[3], ", ", a[4]);
 end.
 
 
