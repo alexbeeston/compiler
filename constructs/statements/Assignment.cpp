@@ -24,15 +24,19 @@ void Assignment::emit()
 
     // error checking
     if (entry.offset == -1) throw std::runtime_error("Can not assign to a constant\n");
-    else if (entry.type->getTypeIndicator() != expression->getTypeIndicator()) throw std::runtime_error("Attempting to assign an expression of typeIndicator " + std::to_string(expression->getTypeIndicator()) + " to a entry with typeindicator " + std::to_string(entry.type->typeIndicator) + ".\n");
+//    else if (entry.type->getTypeIndicator() != expression->getTypeIndicator()) throw std::runtime_error("Attempting to assign an expression of typeIndicator " + std::to_string(expression->getTypeIndicator()) + " to a entry with typeindicator " + std::to_string(entry.type->typeIndicator) + ".\n");
 
     // emit
     std::cout << "# assignment\n";
-    Register r = expression->emit();
     int offset = lValue->getOffset();
     Register baseRegister = lValue->getBaseRegister();
+
+
+    Register r = expression->emit();
     std::cout << "sw " << r.getName() << " " << offset << "(" << baseRegister.getName() << ")\n\n";
     rp.returnRegister(r);
     if (baseRegister.getName().compare("$gp") != 0) rp.returnRegister(baseRegister);
+
+    // if it's not, then iterate over the values in the expression (in the case of arrays) and do lots of store words
 }
 

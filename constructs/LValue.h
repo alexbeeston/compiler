@@ -20,5 +20,6 @@ struct LValue
     std::string getKey();
     Register getBaseRegister();
     int getOffset();
+    Style getStyle();
 };
 #endif //COMPILERS_LVALUE_H

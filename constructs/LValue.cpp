@@ -109,3 +109,7 @@ void LValue::print()
     for (LValueBase* item : *sequence) item->print();
 }
 
+Style LValue::getStyle()
+{
+    
+}
