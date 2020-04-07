@@ -15,6 +15,7 @@ struct LValueExpression:Expression
    void print() override;
    Register emit() override;
    TypeIndicator getTypeIndicator() override;
+   bool isCTV() override;
    int getValue() override;
    Style getStyle() override;
 };

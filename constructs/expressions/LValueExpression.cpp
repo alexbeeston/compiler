@@ -42,4 +42,10 @@ int LValueExpression::getValue()
     else throw std::runtime_error("can't call LValueExpression::getValue() if the lValue points to a variable. Expression::getValue() is for constants only");
 }
 
+bool LValueExpression::isCTV()
+{
+    if (st.retrieveEntry(lValue->getKey()).label == CONSTANT) return true;
+    else return false;
+}
+
 Style LValueExpression::getStyle() { return lValue->getStyle(); }

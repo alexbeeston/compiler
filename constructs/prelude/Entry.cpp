@@ -37,10 +37,6 @@ BaseType* Entry::generateBaseType()
     else if (value->typeIndicator == CHAR) return new SimpleType(new std::string("char"));
     else if (value->typeIndicator == STRING) return new SimpleType(new std::string("string"));
     else if (value->typeIndicator == BOOLEAN) return new SimpleType(new std::string("boolean"));
-    else
-    {
-        std::cout << "Error constructing a BaseType from a constant (since it inherits from Entry, which needs a BaseType), and the expression isn't of a primitive type\n";
-        return new BaseType();
-    }
+    else throw std::runtime_error("Entry::generateBaseType() - Error constructing a BaseType from a constant (since it inherits from Entry, which needs a BaseType), and the expression isn't of a primitive type\n");
 }
 

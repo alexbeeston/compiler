@@ -3,8 +3,8 @@ const
  BASE = 0;
 
 type
- row = array[BASE:BASE+SIZE] of integer;
- grid = array[BASE:BASE+SIZE] of row;
+ row = array[0:3] of integer;
+ grid = array[0:3] of row;
 
 var
  g : grid;
