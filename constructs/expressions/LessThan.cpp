@@ -23,3 +23,13 @@ Register LessThan::emit()
     returnRegisters(opRegs);
     return r;
 }
+
+int LessThan::getValue()
+{
+    if (isCTV())
+    {
+        if (left->getValue() < right->getValue()) return 1;
+        else return 0;
+    }
+    else throw std::runtime_error("LessThan::getValue() - Can't get value if both operands are not CTV");
+}

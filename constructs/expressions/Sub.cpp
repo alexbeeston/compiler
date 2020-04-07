@@ -23,3 +23,9 @@ Register Sub::emit()
     returnRegisters(opRegs);
     return r;
 }
+
+int Sub::getValue()
+{
+    if (isCTV()) return left->getValue() - right->getValue();
+    else throw std::runtime_error("Sub::getValue() - Can't get value if both operands are not CTV");
+}

@@ -6,6 +6,7 @@
 #define COMPILERS_EXPRESSION_H
 
 #include <string>
+#include <stdexcept>
 #include "../../Register.h"
 #include "../../Enums.h"
 

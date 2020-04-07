@@ -12,5 +12,6 @@ struct GreaterThan:BinaryOp
     GreaterThan(Expression*, Expression*);
     void print() override;
     Register emit() override;
+    int getValue() override;
 };
 #endif //COMPILERS_GREATTHAN_H

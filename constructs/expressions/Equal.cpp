@@ -14,7 +14,7 @@ Register Equal::emit()
 
     // emit
     Register r = rp.getRegister();
-    if (operandsAreBothCTV()) std::cout << "li " << r.getName() << " " << value << "  # loaded a CTV\n";
+    if (isCTV()) std::cout << "li " << r.getName() << " " << value << "  # loaded a CTV\n";
     else
     {
         std::vector<Register> opRegs = checkAndEmitOperands();
@@ -28,7 +28,7 @@ Register Equal::emit()
 
 int Equal::getValue()
 {
-    if (operandsAreBothCTV())
+    if (isCTV())
     {
         if (left->value == right->value) return 1;
         else return 0;

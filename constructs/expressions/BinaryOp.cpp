@@ -37,7 +37,7 @@ void BinaryOp::returnRegisters(std::vector <Register> registers)
     for (Register r : registers) rp.returnRegister(r);
 }
 
-bool BinaryOp::operandsAreBothCTV()
+bool BinaryOp::isCTV()
 {
     if ( left->isCTV() && right->isCTV()) return true;
     else return false;

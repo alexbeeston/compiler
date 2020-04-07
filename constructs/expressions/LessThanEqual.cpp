@@ -23,3 +23,13 @@ Register LessThanEqual::emit()
     returnRegisters(opRegs);
     return r;
 }
+
+int LessThanEqual::getValue()
+{
+    if (isCTV())
+    {
+        if (left->getValue() <= right->getValue()) return 1;
+        else return 0;
+    }
+    else throw std::runtime_error("LessThanEqual::getValue() - Can't get value if both operands are not CTV");
+}

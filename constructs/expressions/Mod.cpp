@@ -24,3 +24,9 @@ Register Mod::emit()
     returnRegisters(opRegs);
     return r;
 }
+
+int Mod::getValue()
+{
+    if (isCTV()) return left->getValue() % right->getValue();
+    else throw std::runtime_error("Mod::getValue() -Can't get value if both operands are not CTV ");
+}

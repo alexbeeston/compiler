@@ -13,5 +13,6 @@ struct ParenExpression:Expression
     ParenExpression(Expression*);
     void print() override;
     Register emit() override;
+    int getValue() override;
 };
 #endif //COMPILERS_PARENEXPRESSION_H

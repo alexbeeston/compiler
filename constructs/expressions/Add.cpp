@@ -23,5 +23,9 @@ Register Add::emit()
     return r;
 }
 
-int Add::getValue() { return left->getValue() + right->getValue(); }
+int Add::getValue()
+{
+   if (isCTV()) return left->getValue() + right->getValue();
+   else throw std::runtime_error("Add::getValue() - Can't add if both left and right operands are not CTV");
+}
 

@@ -24,3 +24,9 @@ Register Multiply::emit()
     returnRegisters(opRegs);
     return r;
 }
+
+int Multiply::getValue()
+{
+    if (isCTV()) return left->getValue() * right->getValue();
+    else throw std::runtime_error("Multiply::getValue() -Can't get value if both operands are not CTV");
+}

@@ -13,6 +13,7 @@ struct Negative:Expression
     Negative(Expression*);
     void print() override;
     Register emit() override;
+    int getValue() override;
 
 };
 #endif //COMPILERS_NEGATIVE_H

@@ -28,3 +28,10 @@ Register Negative::emit()
     }
     else throw std::runtime_error("Negative::emit() - can't get the negative value of a expression that's not an integer");
 }
+
+int Negative::getValue()
+{
+    if (!originalExpression->isCTV()) throw std::runtime_error("Negative::getValue() - Can't get value if operand is not CTV");
+    if (originalExpression->getTypeIndicator() != INTEGER) throw std::runtime_error("Negative::getValue() - type indicator is not INTEGER");
+    return originalExpression->getValue() * -1;
+}

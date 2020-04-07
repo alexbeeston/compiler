@@ -24,3 +24,9 @@ Register Divide::emit()
     returnRegisters(opRegs);
     return r;
 }
+
+int Divide::getValue()
+{
+    if (isCTV()) return left->getValue() / right->getValue();
+    else throw std::runtime_error("Divide::getValue() - can't get value is both left and right operands are not CTV");
+}

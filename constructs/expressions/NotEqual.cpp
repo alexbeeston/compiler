@@ -23,3 +23,13 @@ Register NotEqual::emit()
     returnRegisters(opRegs);
     return r;
 }
+
+int NotEqual::getValue()
+{
+    if (isCTV())
+    {
+        if (left->getValue() != right->getValue()) return 1;
+        else return 0;
+    }
+    else throw std::runtime_error("NotEqual::getValue() - Can't get value if both operands are not CTV");
+}

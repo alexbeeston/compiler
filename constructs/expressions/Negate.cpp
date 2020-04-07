@@ -12,3 +12,8 @@ void Negate::print()
     std::cout << " ~";
     expression->print();
 }
+
+int Negate::getValue()
+{
+    throw std::runtime_error("Haven't yet implemented Negate::getValue() ");
+}
