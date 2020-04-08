@@ -1,3 +1,5 @@
+const
+ bool = true;
+
 begin
-write(3=3);
 end.

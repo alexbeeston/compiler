@@ -24,7 +24,7 @@ void Scope::addConstructs(Prelude topLevelPrelude)
     for (Constant* i : *topLevelPrelude.constants) entries[i->ident] = Entry(i->ident, i->value);
 
     // initialize with primitive types
-    std::string primitives[] = {"integer", "char", "string", "boolean"};
+    std::string primitives[] = {"integer", "char", "string", "bool"};
     for (std::string primitive : primitives) types[primitive] = new SimpleType(&primitive); // todo: add a key for uppercase
 
     // add declared types
@@ -49,7 +49,7 @@ void Scope::addConstructs(Prelude topLevelPrelude)
 BaseType* Scope::getBaseType(std::string key)
 {
     if (types.count(key) == 1) return types[key];
-    else throw std::runtime_error("Type with identifier " + key + "not found in symbol table");
+    else throw std::runtime_error("Type with identifier \"" + key + "\" not found in symbol table");
 }
 
 Entry Scope::getEntry(std::string key)
