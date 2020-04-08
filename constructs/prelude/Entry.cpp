@@ -32,11 +32,10 @@ void Entry::print()
 
 BaseType* Entry::generateBaseType()
 {
-    // error here: before, calling getTypeIndicator() resulted in an error. Try again to see if it works next time you see this.
-    if (value->typeIndicator == INTEGER) return new SimpleType(new std::string("integer"));
-    else if (value->typeIndicator == CHAR) return new SimpleType(new std::string("char"));
-    else if (value->typeIndicator == STRING) return new SimpleType(new std::string("string"));
-    else if (value->typeIndicator == BOOLEAN) return new SimpleType(new std::string("boolean"));
+    if (value->getTypeIndicator() == INTEGER) return new SimpleType(new std::string("integer"));
+    else if (value->getTypeIndicator() == CHAR) return new SimpleType(new std::string("char"));
+    else if (value->getTypeIndicator() == STRING) return new SimpleType(new std::string("string"));
+    else if (value->getTypeIndicator() == BOOLEAN) return new SimpleType(new std::string("boolean"));
     else throw std::runtime_error("Entry::generateBaseType() - Error constructing a BaseType from a constant (since it inherits from Entry, which needs a BaseType), and the expression isn't of a primitive type\n");
 }
 

@@ -22,7 +22,9 @@ Register LValueExpression::emit()
     Register r = rp.getRegister();
     if (entry.label == CONSTANT)
     {
-        std::cout << "li " << r.getName() << " " << entry.value->getValue() << "   # loaded an LValueExpression Constant\n";
+        if (entry.value->getTypeIndicator() == STRING) std::cout << "la " << r.getName() << " message";
+        else std::cout << "li " << r.getName() << " ";
+        std::cout << entry.value->getValue() << "   # loaded an LValueExpression String Constant\n";
     }
     else if (entry.label == VARIABLE)
     {
