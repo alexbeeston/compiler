@@ -29,7 +29,11 @@ void Assignment::emit()
 
     if (lValue->getStyle() == PRIMITIVE_TYPE) // can these two ifs be combined into one where the loop runs just once? Maybe unnecessarily complex
     {
-        if (lValue->getTypeIndicator() != expression->getTypeIndicator()) throw std::runtime_error("Assignment::emit() - attempting to assign to a primitive LValue type, but the type Indicators are not the same");
+        if (lValue->getTypeIndicator() != expression->getTypeIndicator())
+        {
+            std::cout << "############## LValue Type Indicator:" << lValue->getTypeIndicator() << ", expression type indicator " << expression->getTypeIndicator() << "\n";
+            throw std::runtime_error("Assignment::emit() - attempting to assign to a primitive LValue type, but the type Indicators are not the same");
+        }
         Register staging = expression->emit();
         std::cout << "sw " << staging.getName() << " " << leftOffset << "(" << leftBase.getName() << ")\n\n";
         rp.returnRegister(staging);

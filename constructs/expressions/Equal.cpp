@@ -14,7 +14,7 @@ Register Equal::emit()
 
     // emit
     Register r = rp.getRegister();
-    if (isCTV()) std::cout << "li " << r.getName() << " " << value << "  # loaded a CTV\n";
+    if (isCTV()) std::cout << "li " << r.getName() << " " << getValue() << "  # loaded a CTV\n";
     else
     {
         std::vector<Register> opRegs = checkAndEmitOperands();

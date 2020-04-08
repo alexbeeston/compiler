@@ -31,7 +31,7 @@ void Scope::addConstructs(Prelude topLevelPrelude)
     for (DeclaredType* declaredType : *topLevelPrelude.declaredTypes)
     {
         types[declaredType->identifier] = declaredType->type;
-        std::cout << "# added declared type " << declaredType->identifier << ", which is of size " << declaredType->type->computeSize() << "\n";
+        std::cout << "# added declared type " << declaredType->identifier << ", which is of size " << declaredType->type->computeSize() << " and has type indicator << " << declaredType->type->getTypeIndicator() << "\n";
     }
 
     // add variables, which are all user defined

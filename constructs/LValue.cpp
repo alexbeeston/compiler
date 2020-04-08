@@ -97,8 +97,10 @@ TypeIndicator LValue::getTypeIndicator() { return getInnerMostType()->getTypeInd
 BaseType* LValue::getInnerMostType()
 {
     BaseType* type = st.retrieveEntry(getKey()).type;
+    if (type->style == ALIAS_TYPE || type->style == PRIMITIVE_TYPE) type = st.retrieveType(*(dynamic_cast<SimpleType*>(type))->name);
     for (int accessorIndex = 0; accessorIndex < sequence->size() - 1; accessorIndex++)
     {
+        std::cout << "# type is : " << type->getTypeIndicator() << "\n";
         // resolve an alias type
         if (type->style == ALIAS_TYPE) type = st.retrieveType(*(dynamic_cast<SimpleType*>(type))->name);
 
