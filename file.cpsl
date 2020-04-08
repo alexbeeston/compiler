@@ -2,4 +2,5 @@ const
  bool = true;
 
 begin
+write(bool);
 end.

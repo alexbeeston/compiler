@@ -58,6 +58,7 @@ Register LValue::getBaseRegister()
 int LValue::getOffset()
 {
     Entry entry = st.retrieveEntry(getKey());
+    if (entry.label == CONSTANT) throw std::runtime_error("LValue::getOffset() - trying to get the offset of a constant");
     int offset = entry.offset;
     BaseType* type = entry.type;
     for (int accessorIndex = 0; accessorIndex < sequence->size() - 1; accessorIndex++)
@@ -92,7 +93,12 @@ Style LValue::getStyle()
     else return type->style;
 }
 
-TypeIndicator LValue::getTypeIndicator() { return getInnerMostType()->getTypeIndicator(); }
+TypeIndicator LValue::getTypeIndicator()
+{
+    Entry entry = st.retrieveEntry(getKey());
+    if (entry.label == CONSTANT) return entry.value->getTypeIndicator();
+    else return getInnerMostType()->getTypeIndicator();
+}
 
 BaseType* LValue::getInnerMostType()
 {

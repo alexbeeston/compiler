@@ -24,7 +24,6 @@ struct Entry
     Entry();
     Entry(std::string, Expression*);
     Entry(std::string, BaseType*, int);
-    BaseType* generateBaseType();
 
     // other functions
     virtual void print();
