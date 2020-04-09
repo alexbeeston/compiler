@@ -25,11 +25,13 @@ void Repeat::emit()
 {
     if (expression->getTypeIndicator() != BOOLEAN) throw std::runtime_error("Repeat::emit() - expression is not boolean");
     std::string bodyLabel = st.getRepeatLabel();
-    std::cout << bodyLabel + ":\n\n";
+    std::cout << "\n# Repeat - Body\n";
+    std::cout << bodyLabel + ":\n";
     for (Statement* statement : *statements) statement->emit();
-    std::cout << "#- Repeat test expression\n";
+    std::cout << "\n# Repeat - Test\n";
     Register testResult = expression->emit();
     std::cout << "beq " << testResult.getName() << " $zero " << bodyLabel << "\n";
     rp.returnRegister(testResult);
+    std::cout << "\n# Repeat - Next\n";
 }
 

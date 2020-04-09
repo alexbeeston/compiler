@@ -13,15 +13,22 @@
 
 struct SymbolTable
 {
+    // containers
     std::vector<Scope> levels;
+
+    // data fields and methods
+    Entry retrieveEntry(std::string);
+    BaseType* retrieveType(std::string);
     std::vector<std::string> strings;
     int insertMessage(std::string);
 
-    Entry retrieveEntry(std::string);
-    BaseType* retrieveType(std::string);
-
+    // control elements
     int repeatLabelCounter;
     std::string getRepeatLabel();
+    int whileLabelCounter;
+    std::string getWhileLabel();
+    int nextLabelCounter;
+    std::string getNextLabel();
 
     // init
     SymbolTable();

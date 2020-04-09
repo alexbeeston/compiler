@@ -4,14 +4,11 @@ i : integer;
 begin
 i := 0;
 
-write("i from 0 to 5\n");
-repeat
-  write("i: ", i, " \n");
-  i := i+1;
-until i > 5;
+while ( i < 5) do
+    write(i, "\n");
+    i := i + 1;
+end;
 
-repeat
-  write("should only happen once ", i, " \n");
-  i := i+1;
-until i > 5;
+
+
 end.

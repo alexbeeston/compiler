@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "While.h"
+#include "../../global.h"
 
 While::While(Expression* p_expression, std::vector<Statement*>* p_statements)
 {
@@ -18,4 +19,20 @@ void While::print()
         statement->print();
         std::cout << "; ";
     }
+}
+
+void While::emit()
+{
+    std::string testLabel = st.getWhileLabel();
+    std::string nextLabel = st.getNextLabel();
+    std::cout << "\n#While - test\n";
+    std::cout << testLabel + ":\n";
+    Register testResult = expression->emit();
+    std::cout << "beq " << testResult.getName() << " $zero " << nextLabel << "\n";
+    std::cout << "\n#while - Body\n";
+    for (Statement* statement : *statements) statement->emit();
+    std::cout << "\n# While - update\n";
+    std::cout << "j " << testLabel << "\n";
+    std::cout << "\n# While - next\n";
+    std::cout << nextLabel + ":\n";
 }

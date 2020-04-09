@@ -6,6 +6,8 @@
 SymbolTable::SymbolTable()
 {
     repeatLabelCounter = 0;
+    whileLabelCounter = 0;
+    nextLabelCounter = 0;
 }
 
 void SymbolTable::addStuff(Prelude topLevelPrelude)
@@ -45,4 +47,28 @@ std::string SymbolTable::getRepeatLabel()
     return std::string("r" + std::to_string(repeatLabelCounter));
 }
 
+std::string SymbolTable::getWhileLabel()
+{
+    whileLabelCounter++;
+    return std::string("w" + std::to_string(whileLabelCounter));
+}
+
+std::string SymbolTable::getNextLabel()
+{
+    nextLabelCounter++;
+    return std::string("n" + std::to_string(nextLabelCounter));
+}
+
 void SymbolTable::testPrint() {std::cout << "Access to a symbol table.\n";}
+
+
+
+
+
+
+
+
+
+
+
+

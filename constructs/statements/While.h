@@ -17,5 +17,6 @@ struct While:Statement
 
     While(Expression*, std::vector<Statement*>*);
     void print() override;
+    void emit() override;
 };
 #endif //COMPILERS_WHILE_H
