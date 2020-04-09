@@ -19,7 +19,7 @@ Register LessThan::emit()
     int INT = 0;
     std::vector<Register> opRegs = emitOperands(INT);
     Register r = rp.getRegister();
-    std::cout << "sltu " << r.getName() << " " << opRegs[0].getName() << " " << opRegs[1].getName() << "\n";
+    std::cout << "slt " << r.getName() << " " << opRegs[0].getName() << " " << opRegs[1].getName() << "\n";
     returnRegisters(opRegs);
     return r;
 }

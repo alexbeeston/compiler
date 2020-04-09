@@ -19,7 +19,7 @@ Register GreaterThan::emit()
     int INT = 0;
     std::vector<Register> opRegs = emitOperands(INT);
     Register r = rp.getRegister();
-    std::cout << "sgtu " << r.getName() << " " << opRegs[0].getName() << " " << opRegs[1].getName() << "\n";
+    std::cout << "slt " << r.getName() << " " << opRegs[1].getName() << " " << opRegs[0].getName() << "\n";
     returnRegisters(opRegs);
     return r;
 }

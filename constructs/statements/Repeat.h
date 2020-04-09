@@ -15,5 +15,6 @@ struct Repeat:Statement
     std::vector<Statement*>* statements;
     Repeat(Expression*, std::vector<Statement*>*);
     void print() override;
+    void emit() override;
 };
 #endif //COMPILERS_REPEAT_H

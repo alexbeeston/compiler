@@ -19,3 +19,10 @@ void Repeat::print()
     std::cout << " until ";
     expression->print();
 }
+
+void Repeat::emit()
+{
+    if (expression->getTypeIndicator() != BOOLEAN) throw std::runtime_error("Repeat::emit() - expression is not boolean");
+
+}
+
