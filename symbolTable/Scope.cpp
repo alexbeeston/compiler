@@ -28,11 +28,7 @@ void Scope::addConstructs(Prelude topLevelPrelude)
     for (std::string primitive : primitives) types[primitive] = new SimpleType(&primitive); // todo: add a key for uppercase
 
     // add declared types
-    for (DeclaredType* declaredType : *topLevelPrelude.declaredTypes)
-    {
-        types[declaredType->identifier] = declaredType->type;
-        std::cout << "# added declared type " << declaredType->identifier << ", which is of size " << declaredType->type->computeSize() << " and has type indicator << " << declaredType->type->getTypeIndicator() << "\n";
-    }
+    for (DeclaredType* declaredType : *topLevelPrelude.declaredTypes) types[declaredType->identifier] = declaredType->type;
 
     // add variables, which are all user defined
     for (TypedList* list: *topLevelPrelude.vars)
