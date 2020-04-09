@@ -4,11 +4,7 @@ i : integer;
 begin
 i := 0;
 
-while ( i < 5) do
-    write(i, "\n");
-    i := i + 1;
-end;
-
+write(succ(i));
 
 
 end.

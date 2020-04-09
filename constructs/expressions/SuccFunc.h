@@ -12,5 +12,6 @@ struct SuccFunc:Expression
     Expression* expression;
     SuccFunc(Expression*);
     void print() override;
+    Register emit() override;
 };
 #endif //COMPILERS_SUCCFUNC_H
