@@ -3,7 +3,10 @@
 #include "SymbolTable.h"
 #include "Scope.h"
 
-SymbolTable::SymbolTable() {}
+SymbolTable::SymbolTable()
+{
+    repeatLabelCounter = 0;
+}
 
 void SymbolTable::addStuff(Prelude topLevelPrelude)
 {
@@ -34,6 +37,12 @@ int SymbolTable::insertMessage(std::string message)
 {
     strings.push_back(message);
     return strings.size() - 1;
+}
+
+std::string SymbolTable::getRepeatLabel()
+{
+    repeatLabelCounter++;
+    return std::string("r" + std::to_string(repeatLabelCounter));
 }
 
 void SymbolTable::testPrint() {std::cout << "Access to a symbol table.\n";}

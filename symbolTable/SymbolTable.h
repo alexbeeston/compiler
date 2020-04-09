@@ -20,6 +20,9 @@ struct SymbolTable
     Entry retrieveEntry(std::string);
     BaseType* retrieveType(std::string);
 
+    int repeatLabelCounter;
+    std::string getRepeatLabel();
+
     // init
     SymbolTable();
     void addStuff(Prelude);
