@@ -60,4 +60,21 @@ void For::emit()
 
     // body
     std::cout << "\n# For - body\n";
+    for (Statement* statement : *statements) statement->emit();
+
+    // update
+    std::cout << "\n# For - update\n";
+    Register iteratorValue_again = rp.getRegister();
+    std::cout << "lw " << iteratorValue_again.getName() << " " << addressOfIterator << "($gp)\n";
+    std::cout << "addi " << iteratorValue_again.getName() << " " << iteratorValue_again.getName() << " ";
+    if (location == 0) std::cout << "-1\n";
+    else std::cout << "1\n";
+    std::cout << "sw " << iteratorValue_again.getName() << " " << addressOfIterator << "($gp)\n";
+    std::cout << "j " << testLabel << "\n";
+    rp.returnRegister(iteratorValue_again);
+    rp.returnRegister(rightBound);
+
+    // next
+    std::cout << "\n# For - next\n";
+    std::cout << nextLabel << ":\n";
 }
