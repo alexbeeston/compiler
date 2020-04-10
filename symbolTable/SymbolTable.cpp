@@ -8,12 +8,13 @@ SymbolTable::SymbolTable()
     repeatLabelCounter = 0;
     whileLabelCounter = 0;
     nextLabelCounter = 0;
+    nextAvailableAddress = 0;
 }
 
 void SymbolTable::addStuff(Prelude topLevelPrelude)
 {
     levels.push_back(Scope());
-    levels[0].addConstructs(topLevelPrelude);
+    nextAvailableAddress += levels[0].addConstructs(topLevelPrelude);
 }
 
 void SymbolTable::prettyPrint()
@@ -58,6 +59,15 @@ std::string SymbolTable::getNextLabel()
     nextLabelCounter++;
     return std::string("n" + std::to_string(nextLabelCounter));
 }
+
+bool SymbolTable::containsEntry(std::string key)
+{
+   return levels[0].containsEntry(key); // assume it's in the first scope
+}
+
+int SymbolTable::getNextAvailableAddress() { return nextAvailableAddress; }
+
+void SymbolTable::incrementNextAvailableAddress(int increase) { nextAvailableAddress += increase; }
 
 void SymbolTable::testPrint() {std::cout << "Access to a symbol table.\n";}
 

@@ -21,6 +21,11 @@ struct SymbolTable
     BaseType* retrieveType(std::string);
     std::vector<std::string> strings;
     int insertMessage(std::string);
+    bool containsEntry(std::string);
+    int nextAvailableAddress;
+    int getNextAvailableAddress();
+    void incrementNextAvailableAddress(int);
+
 
     // control elements
     int repeatLabelCounter;

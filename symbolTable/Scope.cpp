@@ -12,7 +12,7 @@ extern RegisterPool rp;
 
 Scope::Scope() { }
 
-void Scope::addConstructs(Prelude topLevelPrelude)
+int Scope::addConstructs(Prelude topLevelPrelude)
 {
     // add boolean constants
     int NUM_BOOLS = 2;
@@ -40,6 +40,7 @@ void Scope::addConstructs(Prelude topLevelPrelude)
             nextAddress += list->type->computeSize();
         }
     }
+    return nextAddress;
 }
 
 BaseType* Scope::getBaseType(std::string key)
@@ -50,6 +51,12 @@ BaseType* Scope::getBaseType(std::string key)
 
 Entry Scope::getEntry(std::string key)
 {
-    if (entries.count(key) == 1) return entries[key];
+    if (containsEntry(key)) return entries[key];
     else throw std::runtime_error("Entry with identifier \"" + key + "\" not found in symbol table");
+}
+
+bool Scope::containsEntry(std::string key)
+{
+    if (entries.count(key) == 1) return true;
+    else return false;
 }

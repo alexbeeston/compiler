@@ -1,10 +1,11 @@
 var
-i : integer;
+a,b,c,d,e,i : integer;
 
 begin
-i := 0;
 
-write(succ(i));
+for i := 10 to 5 do
+    write(i, " \n");
+  end;
 
 
 end.

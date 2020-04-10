@@ -18,7 +18,7 @@ struct Scope
 {
     // used during initialization
     Scope();
-    void addConstructs(Prelude);
+    int addConstructs(Prelude);
     int computeSize(BaseType*);
     int computeSize_Array(ArrayType*);
     int computeSize_Record(RecordType*);
@@ -27,6 +27,7 @@ struct Scope
     int nextAddress = 0;
     std::map<std::string, Entry> entries;
     Entry getEntry(std::string);
+    bool containsEntry(std::string);
 
     // used to handle types
     std::map<std::string, BaseType*> types;

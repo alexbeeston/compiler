@@ -20,5 +20,6 @@ struct For:Statement
     std::vector<Statement*>* statements;
     For(char*, Expression*, int, Expression*, std::vector<Statement*>*);
     void print() override;
+    void emit() override;
 };
 #endif //COMPILERS_FOR_H
