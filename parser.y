@@ -372,7 +372,7 @@ Statement : Assignment
             | { $$ = new std::vector<ConditionalSequence*>; };
             ConditionalSequence: ELSEIF Expression THEN StatementSequence { $$ = new ConditionalSequence($2, $4); };
         Else : ELSE StatementSequence { $$ = $2; }
-            | { $$ = new std::vector<Statement*>;} ;
+            | { $$ = nullptr;} ;
     WhileStatement : WHILE Expression DO StatementSequence END { $$ = new While($2, $4); };
     RepeatStatement : REPEAT StatementSequence UNTIL Expression { $$ = new Repeat($4, $2); };
     ForStatement : FOR IDENT ASSIGN Expression Location Expression DO StatementSequence END { $$ = new For($2, $4, $5, $6, $8); };

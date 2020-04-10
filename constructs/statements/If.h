@@ -18,5 +18,6 @@ struct If:Statement
 
     If(ConditionalSequence*, std::vector<ConditionalSequence*>*, std::vector<Statement*>*);
     void print() override;
+    void emit() override;
 };
 #endif //COMPILERS_IF_H

@@ -10,6 +10,7 @@ SymbolTable::SymbolTable()
     nextLabelCounter = 0;
     nextForLabel = 0;
     nextAvailableAddress = 0;
+    nextIfLabel = 0;
 }
 
 void SymbolTable::addStuff(Prelude topLevelPrelude)
@@ -65,6 +66,12 @@ std::string SymbolTable::getNextForLabel()
 {
     nextForLabel++;
     return std::string("f" + std::to_string(nextForLabel));
+}
+
+std::string SymbolTable::getNextIfLabel()
+{
+    nextIfLabel++;
+    return std::string("i" + std::to_string(nextIfLabel));
 }
 
 bool SymbolTable::containsEntry(std::string key)

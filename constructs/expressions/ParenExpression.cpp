@@ -24,3 +24,5 @@ int ParenExpression::getValue()
     if (!expression->isCTV()) throw std::runtime_error("ParenExpression::getValue() - Operand is not CTV");
     return expression->getValue();
 }
+
+TypeIndicator ParenExpression::getTypeIndicator() { return expression->getTypeIndicator(); }

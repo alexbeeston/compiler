@@ -36,6 +36,8 @@ struct SymbolTable
     std::string getNextLabel();
     int nextForLabel;
     std::string getNextForLabel();
+    int nextIfLabel;
+    std::string getNextIfLabel();
 
     // init
     SymbolTable();
