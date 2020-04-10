@@ -8,6 +8,7 @@ SymbolTable::SymbolTable()
     repeatLabelCounter = 0;
     whileLabelCounter = 0;
     nextLabelCounter = 0;
+    nextForLabel = 0;
     nextAvailableAddress = 0;
 }
 
@@ -58,6 +59,12 @@ std::string SymbolTable::getNextLabel()
 {
     nextLabelCounter++;
     return std::string("n" + std::to_string(nextLabelCounter));
+}
+
+std::string SymbolTable::getNextForLabel()
+{
+    nextForLabel++;
+    return std::string("f" + std::to_string(nextForLabel));
 }
 
 bool SymbolTable::containsEntry(std::string key)

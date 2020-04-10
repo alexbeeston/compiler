@@ -33,7 +33,7 @@ void For::emit()
 {
     // init
     std::cout << "\n# For - init\n";
-    Register bound = left->emit();
+    Register leftBound = left->emit();
     int addressOfIterator;
     if (st.containsEntry(*ident)) addressOfIterator = st.retrieveEntry(*ident).offset;
     else
@@ -41,11 +41,23 @@ void For::emit()
         addressOfIterator = st.getNextAvailableAddress();
         st.incrementNextAvailableAddress(4);
     }
-    std::cout << "sw " << bound.getName() << " " << addressOfIterator << "($gp)\n";
-    bound = right->emit();
-    std::cout << "addi " << bound.getName() << " " << bound.getName() << " ";
+    std::cout << "sw " << leftBound.getName() << " " << addressOfIterator << "($gp)\n";
+    rp.returnRegister(leftBound);
+    Register rightBound = right->emit();
+    std::cout << "addi " << rightBound.getName() << " " << rightBound.getName() << " ";
     if (location == 0) std::cout << "-1\n";
     else std::cout << "1\n";
 
+    // test
+    std::string testLabel = st.getNextForLabel();
+    std::string nextLabel = st.getNextLabel();
+    Register iteratorValue = rp.getRegister();
+    std::cout << "\n# For - test\n";
+    std::cout << testLabel << ":\n";
+    std::cout << "lw " << iteratorValue.getName() << " " << addressOfIterator << "($gp)\n";
+    std::cout << "beq " << iteratorValue.getName() << " " << rightBound.getName() << " " << nextLabel << "\n";
+    rp.returnRegister(iteratorValue);
 
+    // body
+    std::cout << "\n# For - body\n";
 }
