@@ -1,11 +1,17 @@
-var
-a,b,c,d,e,i : integer;
+VAR 
+  i : integer;
 
-begin
+BEGIN 
 
-for i := 1 to 5 do
+  for i := 10 downto 5 do
     write(i, " \n");
   end;
+ 
+  for i := 4 downto 0 do
+    write(' ',i);
+  end;
 
+write("\nExpected:\n");
+write("10\n9\n8\n7\n6\n5\n 4 3 2 1 0\n");
 
-end.
+END.

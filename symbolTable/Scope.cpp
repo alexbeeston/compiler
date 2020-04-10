@@ -24,8 +24,11 @@ int Scope::addConstructs(Prelude topLevelPrelude)
     for (Constant* i : *topLevelPrelude.constants) entries[i->ident] = Entry(i->ident, i->value);
 
     // initialize with primitive types
-    std::string primitives[] = {"integer", "char", "string", "bool"};
-    for (std::string primitive : primitives) types[primitive] = new SimpleType(&primitive); // todo: add a key for uppercase
+    std::string primitivesLower[] = {"integer", "char", "string", "bool"};
+    for (std::string primitive : primitivesLower) types[primitive] = new SimpleType(&primitive);
+    std::string primitivesUpper[] = {"INTEGER", "CHAR", "STRING", "BOOL"};
+    int NUM_PRIMITIVES = 4;
+    for (int i = 0; i < NUM_PRIMITIVES; i++) types[primitivesUpper[i]] = new SimpleType(&primitivesLower[i]);
 
     // add declared types
     for (DeclaredType* declaredType : *topLevelPrelude.declaredTypes) types[declaredType->identifier] = declaredType->type;
