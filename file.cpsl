@@ -3,10 +3,10 @@ VAR
 
 BEGIN 
 
-if (0 < 5)then
-    write("zero is less than 5\n");
+if (6 < 5)then
+    write("if block\n");
 else
-    write("zero is less than 5\n");
+    write("else block\n");
 end;
 
 END.

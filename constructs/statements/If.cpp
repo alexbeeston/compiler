@@ -48,7 +48,14 @@ void If::emit()
     // else ifs
 
     // else
+    if (elseBlock != nullptr)
+    {
+        std::cout << "\n# If - else block\n";
+        std::cout << elseLabel << ":\n";
+        for (Statement* statement : *elseBlock) statement->emit();
+    }
 
     // next
+    std::cout << "\n# If - next\n";
     std::cout << nextLabel << ":\n";
 }
