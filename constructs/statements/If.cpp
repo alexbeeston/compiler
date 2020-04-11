@@ -32,25 +32,45 @@ void If::emit()
     std::string elseLabel = st.getNextIfLabel();
     std::string nextLabel = st.getNextLabel();
 
-    // first if
-    std::cout << "# If - first test\n";
+    // if test
+    std::cout << "# If - if block (test)\n";
     Register test = ifBlock->expression->emit();
     if (elseIfBlocks->size() != 0) std::cout << "beq " << test.getName() << " $zero " << elseIfLabels[0] << "\n";
     else if (elseBlock != nullptr) std::cout << "beq " << test.getName() << " $zero " << elseLabel << "\n";
     else std::cout << "beq " << test.getName() << " $zero " << nextLabel << "\n";
     rp.returnRegister(test);
 
-    // first if body
-    std::cout << "\n# If - first body\n";
+    // if body
+    std::cout << "\n# If - if block (body)\n";
     for (Statement* statement : *ifBlock->statements) statement->emit();
     std::cout << "j " << nextLabel << "\n";
 
     // else ifs
+    for (int i = 0; i < elseIfBlocks->size(); i ++)
+    {
+        // else if test
+       std::cout << "\n# If - elseif (test) \n";
+       std::cout << elseIfLabels[i] << ":\n";
+       test = elseIfBlocks->at(i)->expression->emit();
+       std::cout << "beq " << test.getName() << " $zero ";
+       if ( i != elseIfBlocks->size() - 1) std::cout << elseIfLabels[i + 1] << "\n";
+       else
+       {
+           if (elseBlock != nullptr) std::cout << elseLabel << "\n";
+           else std::cout << nextLabel << "\n";
+       }
+       rp.returnRegister(test);
+
+       // else if body
+       std::cout << "\n# If - elseif (body)\n";
+       for (Statement* statement : *elseIfBlocks->at(i)->statements) statement->emit();
+       std::cout << "j " << nextLabel << "\n";
+    }
 
     // else
     if (elseBlock != nullptr)
     {
-        std::cout << "\n# If - else block\n";
+        std::cout << "\n# If - else block (body)\n";
         std::cout << elseLabel << ":\n";
         for (Statement* statement : *elseBlock) statement->emit();
     }

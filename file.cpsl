@@ -1,12 +1,14 @@
 VAR 
-  i : integer;
+  i,j : integer;
 
-BEGIN 
-
-if (6 < 5)then
-    write("if block\n");
-else
-    write("else block\n");
+BEGIN
+write("Enter a value for j\n");
+read(j);
+if (j = 5) then write("five\n");
+elseif (j = 6) then write("six\n");
+elseif (j = 7) then write("seven\n");
+elseif (j = 8) then write("eight\n");
+else write("not 5, 6, 7, or 8\n");
 end;
 
 END.

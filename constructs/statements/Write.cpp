@@ -31,7 +31,7 @@ void Write::emit()
         else throw std::runtime_error("Write::emit() - The expression doesn't know if its an int, char, or string");
         Register r = expression->emit();
         std::cout << "la $a0 (" << r.getName() << ")\n";
-        std::cout << "syscall\n\n";
+        std::cout << "syscall\n";
         rp.returnRegister(r);
     }
 }
