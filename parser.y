@@ -247,7 +247,6 @@ struct ProcedureCall* procedureCallStatementPointer;
 %token READ
 %token WRITE
 
-%token TILDA
 %token GREATER_THAN_OR_EQUAL
 %token LESS_THAN_OR_EQUAL
 %token LESS_THAN
@@ -270,6 +269,12 @@ struct ProcedureCall* procedureCallStatementPointer;
 %token OCTINT
 %token DECINT
 %token ZERO
+
+%left NEGATION ADD
+%nonassoc EQUAL NOTEQUAL
+%left MULT DIV MOD
+
+
 %%
 
 Program : Prelude RoutineDeclList Block DOT { program = new Program($1, $2, $3); };

@@ -49,22 +49,23 @@ void If::emit()
     for (int i = 0; i < elseIfBlocks->size(); i ++)
     {
         // else if test
-       std::cout << "\n# If - elseif (test) \n";
-       std::cout << elseIfLabels[i] << ":\n";
-       test = elseIfBlocks->at(i)->expression->emit();
-       std::cout << "beq " << test.getName() << " $zero ";
-       if ( i != elseIfBlocks->size() - 1) std::cout << elseIfLabels[i + 1] << "\n";
-       else
-       {
-           if (elseBlock != nullptr) std::cout << elseLabel << "\n";
-           else std::cout << nextLabel << "\n";
-       }
-       rp.returnRegister(test);
+        if (elseIfBlocks->at(i)->expression->getTypeIndicator() != BOOLEAN) throw std::runtime_error("If::emit() - conditional expression for else if block not boolean");
+        std::cout << "\n# If - elseif (test) \n";
+        std::cout << elseIfLabels[i] << ":\n";
+        test = elseIfBlocks->at(i)->expression->emit();
+        std::cout << "beq " << test.getName() << " $zero ";
+        if ( i != elseIfBlocks->size() - 1) std::cout << elseIfLabels[i + 1] << "\n";
+        else
+        {
+            if (elseBlock != nullptr) std::cout << elseLabel << "\n";
+            else std::cout << nextLabel << "\n";
+        }
+        rp.returnRegister(test);
 
-       // else if body
-       std::cout << "\n# If - elseif (body)\n";
-       for (Statement* statement : *elseIfBlocks->at(i)->statements) statement->emit();
-       std::cout << "j " << nextLabel << "\n";
+        // else if body
+        std::cout << "\n# If - elseif (body)\n";
+        for (Statement* statement : *elseIfBlocks->at(i)->statements) statement->emit();
+        std::cout << "j " << nextLabel << "\n";
     }
 
     // else

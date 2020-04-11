@@ -1,14 +1,16 @@
-VAR 
-  i,j : integer;
+VAR
+a : integer;
 
 BEGIN
-write("Enter a value for j\n");
-read(j);
-if (j = 5) then write("five\n");
-elseif (j = 6) then write("six\n");
-elseif (j = 7) then write("seven\n");
-elseif (j = 8) then write("eight\n");
-else write("not 5, 6, 7, or 8\n");
-end;
+a := 0;
 
-END.
+while a < 10 do
+  if a % 2 = 0
+  then
+	  write(a);
+  end;
+	a := a + 1;
+end;
+write("\nExpected:\n02468\n")
+
+end.
