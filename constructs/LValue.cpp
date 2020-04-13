@@ -20,6 +20,7 @@ std::string LValue::getKey()
 Register LValue::getBaseRegister()
 {
     BaseType* type = st.retrieveEntry(getKey()).type;
+    if (type->style == PRIMITIVE_TYPE) return rp.getGlobalPointer();
     Register baseRegister = rp.getRegister();
     std::cout << "add " << baseRegister.getName() << " $gp $zero   # about to load an LValue\n";
     for (int accessorIndex = 0; accessorIndex < sequence->size() - 1; accessorIndex++)

@@ -18,10 +18,11 @@ Register LessThanEqual::emit()
 {
     int INT = 0;
     std::vector<Register> opRegs = emitOperands(INT);
-    Register r = rp.getRegister();
-    std::cout << "sle " << r.getName() << " " << opRegs[0].getName() << " " << opRegs[1].getName() << "\n";
-    returnRegisters(opRegs);
-    return r;
+    Register left = opRegs[0];
+    Register right = opRegs[1];
+    std::cout << "sle " << left.getName() << " " << left.getName() << " " << right.getName() << "\n";
+    rp.returnRegister(right);
+    return left;
 }
 
 int LessThanEqual::getValue()

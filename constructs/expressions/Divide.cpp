@@ -18,11 +18,12 @@ Register Divide::emit()
 {
     int INT = 0;
     std::vector<Register> opRegs = emitOperands(INT);
-    Register r = rp.getRegister();
-    std::cout << "div " << opRegs[0].getName() << " " << opRegs[1].getName() << "\n";
-    std::cout << "mflo " << r.getName() << "\n";
-    returnRegisters(opRegs);
-    return r;
+    Register left = opRegs[0];
+    Register right = opRegs[1];
+    std::cout << "div " << left.getName() << " " << right.getName() << "\n";
+    rp.returnRegister(right);
+    std::cout << "mflo " << left.getName() << "\n";
+    return left;
 }
 
 int Divide::getValue()
