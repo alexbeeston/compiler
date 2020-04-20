@@ -14,18 +14,15 @@
 struct SymbolTable
 {
     // containers
-    std::vector<Scope> levels;
-
-    // data fields and methods
+    std::vector<Scope> scopes;
+    void pushScope(Prelude);
+    void popScope();
+    int topScope;
+    int nextAddress;
     Entry retrieveEntry(std::string);
     BaseType* retrieveType(std::string);
     std::vector<std::string> strings;
     int insertMessage(std::string);
-    bool containsEntry(std::string);
-    int nextAvailableAddress;
-    int getNextAvailableAddress();
-    void incrementNextAvailableAddress(int);
-
 
     // control elements
     int repeatLabelCounter;
@@ -41,9 +38,7 @@ struct SymbolTable
 
     // init
     SymbolTable();
-    void addStuff(Prelude);
     void prettyPrint();
     void testPrint();
-
 };
 #endif //COMPILERS_SYMBOLTABLE_H

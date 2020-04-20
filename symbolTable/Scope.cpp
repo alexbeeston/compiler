@@ -12,8 +12,9 @@ extern RegisterPool rp;
 
 Scope::Scope() { }
 
-int Scope::addConstructs(Prelude topLevelPrelude)
+int Scope::addConstructs(Prelude prelude, int nextAddress)
 {
+    int initialNextAddress = nextAddress;
     // add boolean constants
     int NUM_BOOLS = 2;
     std::string booleans[] = {"false", "true"};
@@ -21,7 +22,7 @@ int Scope::addConstructs(Prelude topLevelPrelude)
     for (int i = 0; i < NUM_BOOLS; ++i) entries[booleans[i]] = Entry(booleans[i], new Literal(booleanLiterals[i]));
 
     // add user defined constants
-    for (Constant* i : *topLevelPrelude.constants) entries[i->ident] = Entry(i->ident, i->value);
+    for (Constant* i : *prelude.constants) entries[i->ident] = Entry(i->ident, i->value);
 
     // initialize with primitive types
     std::string primitivesLower[] = {"integer", "char", "string", "bool"};
@@ -31,35 +32,41 @@ int Scope::addConstructs(Prelude topLevelPrelude)
     for (int i = 0; i < NUM_PRIMITIVES; i++) types[primitivesUpper[i]] = new SimpleType(&primitivesLower[i]);
 
     // add declared types
-    for (DeclaredType* declaredType : *topLevelPrelude.declaredTypes) types[declaredType->identifier] = declaredType->type;
+    for (DeclaredType* declaredType : *prelude.declaredTypes) types[declaredType->identifier] = declaredType->type;
 
     // add variables, which are all user defined
-    for (TypedList* list: *topLevelPrelude.vars)
+    for (TypedList* list: *prelude.vars)
     {
         for (std::string* name: *list->identList)
         {
             entries[*name] = Entry(*name, list->type, nextAddress);
-            std::cout << "# added " << *name << " at " << nextAddress << "\n";
             nextAddress += list->type->computeSize();
         }
     }
+    size = nextAddress - initialNextAddress;
     return nextAddress;
 }
 
-BaseType* Scope::getBaseType(std::string key)
+int Scope::getSize() { return size; }
+
+BaseType* Scope::getType(std::string key)
 {
-    if (types.count(key) == 1) return types[key];
-    else throw std::runtime_error("Type with identifier \"" + key + "\" not found in symbol table");
+    return types[key];
 }
 
 Entry Scope::getEntry(std::string key)
 {
-    if (containsEntry(key)) return entries[key];
-    else throw std::runtime_error("Entry with identifier \"" + key + "\" not found in symbol table");
+    return entries[key];
 }
 
 bool Scope::containsEntry(std::string key)
 {
     if (entries.count(key) == 1) return true;
+    else return false;
+}
+
+bool Scope::containsType(std::string key)
+{
+    if (types.count(key) == 1) return true;
     else return false;
 }

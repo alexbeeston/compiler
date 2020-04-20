@@ -5,37 +5,49 @@
 
 SymbolTable::SymbolTable()
 {
+    nextAddress = 0;
     repeatLabelCounter = 0;
     whileLabelCounter = 0;
     nextLabelCounter = 0;
     nextForLabel = 0;
-    nextAvailableAddress = 0;
     nextIfLabel = 0;
+    topScope = -1;
 }
 
-void SymbolTable::addStuff(Prelude topLevelPrelude)
+void SymbolTable::pushScope(Prelude prelude)
 {
-    levels.push_back(Scope());
-    nextAvailableAddress += levels[0].addConstructs(topLevelPrelude);
+    Scope newScope = Scope();
+    nextAddress += newScope.addConstructs(prelude, nextAddress);
+    if (topScope == scopes.size() - 1) scopes.push_back(newScope);
+    else scopes[topScope + 1] = newScope;
+    topScope += 1;
+}
+
+void SymbolTable::popScope()
+{
+    nextAddress -= scopes[topScope].getSize();
+    topScope -= 1;
 }
 
 void SymbolTable::prettyPrint()
 {
-    int levelCounter = 0;
-    for (Scope scope : levels)
-    {
-        std::cout << "Scope Level " << levelCounter << "\n";
-    }
+    std::cout << "[implement SymbolTable::prettyPrint()]\n";
 }
 
 Entry SymbolTable::retrieveEntry(std::string key)
 {
-    return levels[0].getEntry(key); // assumes it's in the first scope
+    int i = topScope;
+    while (!scopes[i].containsEntry(key) && i != -1) i--;
+    if (scopes[i].containsEntry(key)) return scopes[i].getEntry(key);
+    else throw std::runtime_error("Entry with key \"" + key + "\" key not found in the symbol table");
 }
 
 BaseType* SymbolTable::retrieveType(std::string key)
 {
-    return levels[0].getBaseType(key); // assumes it's in the first scope
+    int i = topScope;
+    while (!scopes[i].containsType(key) && i != -1) i--;
+    if (scopes[i].containsType(key)) return scopes[i].getType(key);
+    else throw std::runtime_error("Type with key \"" + key + "\" not found in the symbol table");
 }
 
 int SymbolTable::insertMessage(std::string message)
@@ -73,26 +85,4 @@ std::string SymbolTable::getNextIfLabel()
     nextIfLabel++;
     return std::string("i" + std::to_string(nextIfLabel));
 }
-
-bool SymbolTable::containsEntry(std::string key)
-{
-   return levels[0].containsEntry(key); // assume it's in the first scope
-}
-
-int SymbolTable::getNextAvailableAddress() { return nextAvailableAddress; }
-
-void SymbolTable::incrementNextAvailableAddress(int increase) { nextAvailableAddress += increase; }
-
-void SymbolTable::testPrint() {std::cout << "Access to a symbol table.\n";}
-
-
-
-
-
-
-
-
-
-
-
 

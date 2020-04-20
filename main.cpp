@@ -16,7 +16,7 @@ int main()
 {
 	yyparse();
 	std::cout << std::endl;
-    st.addStuff(*program->prelude); // it appears that the constructors on the symbol table and register pool are automatically being called
+    st.pushScope(*program->prelude);
 	program->emit();
 	std::cout << "\n"; // do not move; we want to see PS1 after!
 }

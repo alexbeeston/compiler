@@ -34,13 +34,7 @@ void For::emit()
     // init
     std::cout << "\n# For - init\n";
     Register leftBound = left->emit();
-    int addressOfIterator;
-    if (st.containsEntry(*ident)) addressOfIterator = st.retrieveEntry(*ident).offset;
-    else
-    {
-        addressOfIterator = st.getNextAvailableAddress();
-        st.incrementNextAvailableAddress(4);
-    }
+    int addressOfIterator = st.retrieveEntry(*ident).offset;
     std::cout << "sw " << leftBound.getName() << " " << addressOfIterator << "($gp)\n";
     rp.returnRegister(leftBound);
     Register rightBound = right->emit();

@@ -18,19 +18,21 @@ struct Scope
 {
     // used during initialization
     Scope();
-    int addConstructs(Prelude);
+    int size;
+    int getSize();
+    int addConstructs(Prelude, int);
     int computeSize(BaseType*);
     int computeSize_Array(ArrayType*);
     int computeSize_Record(RecordType*);
 
     // used to handle Entries (variables and constants)
-    int nextAddress = 0;
     std::map<std::string, Entry> entries;
     Entry getEntry(std::string);
     bool containsEntry(std::string);
 
     // used to handle types
     std::map<std::string, BaseType*> types;
-    BaseType* getBaseType(std::string);
+    bool containsType(std::string);
+    BaseType* getType(std::string);
 };
 #endif //COMPILERS_SCOPE_H
