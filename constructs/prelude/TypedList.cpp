@@ -5,6 +5,12 @@
 #include "TypedList.h"
 #include "types/BaseType.h"
 
+TypedList::TypedList(std::vector<std::string*>* p_identList, BaseType* p_type)
+{
+    identList = p_identList;
+    type = p_type;
+}
+
 TypedList::TypedList(std::vector<char*>* p_identList, BaseType* p_type)
 {
     identList = new std::vector<std::string*>;

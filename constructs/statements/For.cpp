@@ -3,6 +3,8 @@
 
 #include "For.h"
 #include "../../global.h"
+#include "../prelude/Prelude.h"
+#include "../prelude/types/SimpleType.h"
 
 For::For(char* p_ident, Expression* p_left, int p_location, Expression* p_right, std::vector<Statement*>* p_statements)
 {
@@ -31,6 +33,16 @@ void For::print()
 
 void For::emit()
 {
+    // push on a new scope
+    std::string integer = "integer";
+    std::vector<std::string*>* idents = new std::vector<std::string*>();
+    idents->push_back(ident);
+    TypedList* list = new TypedList(idents, new SimpleType(&integer));
+    std::vector<TypedList*>* lists = new std::vector<TypedList*>();
+    lists->push_back(list);
+    Prelude p = Prelude(new std::vector<Constant*>, new std::vector<DeclaredType*>, lists);
+    st.pushScope(p);
+
     // init
     std::cout << "\n# For - init\n";
     Register leftBound = left->emit();
@@ -71,4 +83,7 @@ void For::emit()
     // next
     std::cout << "\n# For - next\n";
     std::cout << nextLabel << ":\n";
+
+    // pop off scope
+    st.popScope();
 }
