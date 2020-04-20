@@ -1,11 +1,11 @@
-VAR
-a,b : integer;
+VAR 
+  i : integer;
 
 BEGIN
 
-a := 8;
-b := 4;
-
-write(a/b);
-
-end.
+i := 0;
+repeat 
+  i := i+1;
+until i > 5;
+write(i);
+END.

@@ -20,7 +20,7 @@ Register GreaterThan::emit()
     std::vector<Register> opRegs = emitOperands(INT);
     Register left = opRegs[0];
     Register right = opRegs[1];
-    std::cout << "slt " << left.getName() << " " << left.getName() << " " << right.getName() << "\n";
+    std::cout << "slt " << left.getName() << " " << right.getName() << " " << left.getName() << "\n";
     rp.returnRegister(right);
     return left;
 }
