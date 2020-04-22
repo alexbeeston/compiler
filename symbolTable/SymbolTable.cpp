@@ -16,17 +16,18 @@ SymbolTable::SymbolTable()
 
 void SymbolTable::pushScope(Prelude prelude)
 {
+    int j = scopes.size();
     Scope newScope = Scope();
-    nextAddress += newScope.addConstructs(prelude, nextAddress);
-    if (topScope == scopes.size() - 1) scopes.push_back(newScope);
-    else scopes[topScope + 1] = newScope;
-    topScope += 1;
+    topScope++;
+    if (topScope > j - 1) scopes.push_back(newScope);
+    else scopes[topScope] = newScope;
+    nextAddress += scopes[topScope].addConstructs(prelude, nextAddress);
 }
 
 void SymbolTable::popScope()
 {
     nextAddress -= scopes[topScope].getSize();
-    topScope -= 1;
+    topScope--;
 }
 
 void SymbolTable::prettyPrint()
@@ -37,17 +38,23 @@ void SymbolTable::prettyPrint()
 Entry SymbolTable::retrieveEntry(std::string key)
 {
     int i = topScope;
-    while (!scopes[i].containsEntry(key) && i != -1) i--;
-    if (scopes[i].containsEntry(key)) return scopes[i].getEntry(key);
-    else throw std::runtime_error("Entry with key \"" + key + "\" key not found in the symbol table");
+    while (i != -1)
+    {
+        if (scopes[i].containsEntry(key)) return scopes[i].getEntry(key);
+        else i--;
+    }
+    throw std::runtime_error("Entry with key \"" + key + "\" key not found in the symbol table");
 }
 
 BaseType* SymbolTable::retrieveType(std::string key)
 {
     int i = topScope;
-    while (!scopes[i].containsType(key) && i != -1) i--;
-    if (scopes[i].containsType(key)) return scopes[i].getType(key);
-    else throw std::runtime_error("Type with key \"" + key + "\" not found in the symbol table");
+    while (i != -1)
+    {
+        if (scopes[i].containsType(key)) return scopes[i].getType(key);
+        else i--;
+    }
+    throw std::runtime_error("Type with key \"" + key + "\" key not found in the symbol table");
 }
 
 int SymbolTable::insertMessage(std::string message)

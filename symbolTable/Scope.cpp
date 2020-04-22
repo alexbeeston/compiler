@@ -49,14 +49,15 @@ int Scope::addConstructs(Prelude prelude, int nextAddress)
 
 int Scope::getSize() { return size; }
 
+bool Scope::containsType(std::string key)
+{
+    if (types.count(key) == 1) return true;
+    else return false;
+}
+
 BaseType* Scope::getType(std::string key)
 {
     return types[key];
-}
-
-Entry Scope::getEntry(std::string key)
-{
-    return entries[key];
 }
 
 bool Scope::containsEntry(std::string key)
@@ -65,8 +66,8 @@ bool Scope::containsEntry(std::string key)
     else return false;
 }
 
-bool Scope::containsType(std::string key)
+Entry Scope::getEntry(std::string key)
 {
-    if (types.count(key) == 1) return true;
-    else return false;
+    return entries[key];
 }
+
