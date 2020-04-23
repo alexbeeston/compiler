@@ -9,3 +9,5 @@ cpslExamples/
 bld/mars.jar
 bld/assembly.asm
 refactor
+scripts/
+bld/validate.sh
