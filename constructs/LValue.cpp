@@ -90,11 +90,7 @@ void LValue::print()
 Style LValue::getStyle()
 {
     BaseType* type = getInnerMostType();
-    if (type->style == SIMPLE_TYPE)
-    {
-        std::cout << "# "<<  (dynamic_cast<SimpleType*>(type))->name << "\n";
-        return SIMPLE_TYPE; return st.retrieveType((dynamic_cast<SimpleType*>(type))->name)->style;
-    }
+    if (type->style == SIMPLE_TYPE) return st.retrieveType((dynamic_cast<SimpleType*>(type))->name)->style;
     else return type->style;
 }
 
