@@ -21,7 +21,7 @@ void Assignment::print()
 void Assignment::emit()
 {
     Entry entry = st.retrieveEntry(lValue->getKey());
-    if (entry.offset == -1) throw std::runtime_error("Can not assign to a constant\n");
+    if (entry.label == CONSTANT) throw std::runtime_error("Can not assign to a constant\n");
     if (lValue->getStyle() != expression->getStyle()) throw std::runtime_error("Assignment::emit() - styles of LValue and Expression in an assignment do not match. LValue = " + std::to_string(lValue->getStyle()) + ", expression = " + std::to_string(expression->getStyle()));
     std::cout << "# assignment\n";
     int leftOffset = lValue->getOffset();

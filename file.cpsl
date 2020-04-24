@@ -1,19 +1,6 @@
-const
- true = 3<>3;
- false = 3=3;
-
-type
- i = integer;
-c = char;
-integer = char;
-
-var
- i:i;
-c:integer;
-
-begin
- i := ord('A');
-c := chr(i);
-write(i);
-write(c);
-end.
+VAR 
+  number : integer;
+BEGIN
+number := 2;
+write(number);
+END.

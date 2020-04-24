@@ -11,7 +11,7 @@
 
 struct SimpleType:BaseType
 {
-    std::string* name;
+    std::string name;
     SimpleType(std::string*);
     void print() override;
     bool isPrimitive() override;

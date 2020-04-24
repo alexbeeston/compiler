@@ -25,8 +25,8 @@ Register LValue::getBaseRegister()
     std::cout << "add " << baseRegister.getName() << " $gp $zero   # about to load an LValue\n";
     for (int accessorIndex = 0; accessorIndex < sequence->size() - 1; accessorIndex++)
     {
-        // resolve an alias type
-        if (type->style == SIMPLE_TYPE) type = st.retrieveType(*(dynamic_cast<SimpleType*>(type))->name);
+        // resolve a simple type
+        if (type->style == SIMPLE_TYPE) type = st.retrieveType((dynamic_cast<SimpleType*>(type))->name);
 
         // iterate over the type for records and arrays
         if (type->style == RECORD_TYPE)
@@ -64,8 +64,8 @@ int LValue::getOffset()
     BaseType* type = entry.type;
     for (int accessorIndex = 0; accessorIndex < sequence->size() - 1; accessorIndex++)
     {
-        // resolve an alias type
-        if (type->style == SIMPLE_TYPE) type = st.retrieveType(*(dynamic_cast<SimpleType*>(type))->name);
+        // resolve a simple type
+        if (type->style == SIMPLE_TYPE) type = st.retrieveType((dynamic_cast<SimpleType*>(type))->name);
 
         // iterate over the type for records and arrays
         if (type->style == RECORD_TYPE)
@@ -90,7 +90,11 @@ void LValue::print()
 Style LValue::getStyle()
 {
     BaseType* type = getInnerMostType();
-    if (type->style == SIMPLE_TYPE) return st.retrieveType(*(dynamic_cast<SimpleType*>(type))->name)->style;
+    if (type->style == SIMPLE_TYPE)
+    {
+        std::cout << "# "<<  (dynamic_cast<SimpleType*>(type))->name << "\n";
+        return SIMPLE_TYPE; return st.retrieveType((dynamic_cast<SimpleType*>(type))->name)->style;
+    }
     else return type->style;
 }
 
@@ -104,11 +108,11 @@ TypeIndicator LValue::getTypeIndicator()
 BaseType* LValue::getInnerMostType()
 {
     BaseType* type = st.retrieveEntry(getKey()).type;
-    if (type->style == SIMPLE_TYPE) type = st.retrieveType(*(dynamic_cast<SimpleType*>(type))->name);
+    if (type->style == SIMPLE_TYPE) type = st.retrieveType((dynamic_cast<SimpleType*>(type))->name);
     for (int accessorIndex = 0; accessorIndex < sequence->size() - 1; accessorIndex++)
     {
         // resolve an simple type
-        if (type->style == SIMPLE_TYPE) type = st.retrieveType(*(dynamic_cast<SimpleType*>(type))->name);
+        if (type->style == SIMPLE_TYPE) type = st.retrieveType((dynamic_cast<SimpleType*>(type))->name);
 
         // resolve standard types
         if (type->style == RECORD_TYPE)
