@@ -22,4 +22,4 @@ int Expression::getValue()
 
 bool Expression::isCTV() { return false; }
 
-Style Expression::getStyle() { return PRIMITIVE_TYPE; }
+Style Expression::getStyle() { return SIMPLE_TYPE; }

@@ -11,6 +11,7 @@ struct BaseType
     BaseType();
     int size; // set by the symbol table
     virtual bool isPrimitive();
+    virtual bool isAlias();
     virtual int computeSize();
     virtual void print();
     virtual TypeIndicator getTypeIndicator();

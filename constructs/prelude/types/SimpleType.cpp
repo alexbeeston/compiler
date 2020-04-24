@@ -7,7 +7,7 @@
 SimpleType::SimpleType(std::string* p_name)
 {
     name = p_name;
-    style = PRIMITIVE_TYPE;
+    style = SIMPLE_TYPE;
     typeIndicator = ALIAS;
     if (name->compare("integer") == 0) typeIndicator = INTEGER;
     else if (name->compare("INTEGER") == 0) typeIndicator = INTEGER;
@@ -17,7 +17,6 @@ SimpleType::SimpleType(std::string* p_name)
     else if (name->compare("STRING") == 0) typeIndicator = STRING;
     else if (name->compare("boolean") == 0) typeIndicator = BOOLEAN;
     else if (name->compare("BOOLEAN") == 0) typeIndicator = BOOLEAN;
-    else style = ALIAS_TYPE;
 }
 
 void SimpleType::print()
@@ -27,14 +26,13 @@ void SimpleType::print()
 
 int SimpleType::computeSize()
 {
-    if (style == ALIAS_TYPE) return st.retrieveType(*name)->computeSize();
-    else return 4; // only works because although, in badidea.cpsl, integer is an alias, it's type is also 4, just like char, so we're good
+    if (isPrimitive()) return 4;
+    else return st.retrieveType(*name)->computeSize();
 }
 
 TypeIndicator SimpleType::getTypeIndicator()
 {
-    if (style == ALIAS_TYPE) return st.retrieveType(*name)->getTypeIndicator();
-    else return typeIndicator;
+    return st.retrieveType(*name)->typeIndicator;
 }
 
 bool SimpleType::isPrimitive()
@@ -50,4 +48,9 @@ bool SimpleType::isPrimitive()
            name->compare("BOOLEAN") == 0
        ) return true;
     else return false;
+}
+
+bool SimpleType::isAlias()
+{
+    throw std::runtime_error("SimpleType::isAlias() - not implemented");
 }

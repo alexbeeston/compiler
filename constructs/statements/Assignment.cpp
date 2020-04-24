@@ -27,9 +27,9 @@ void Assignment::emit()
     int leftOffset = lValue->getOffset();
     Register leftBase = lValue->getBaseRegister();
 
-    if (lValue->getStyle() == PRIMITIVE_TYPE)
+    if (lValue->isPrimitive())
     {
-        if (lValue->getTypeIndicator() != expression->getTypeIndicator()) throw std::runtime_error("Assignment::emit() - attempting to assign a primitive LValue, the left operand has type " + std::to_string(lValue->getTypeIndicator()) + " and right operand has type " + std::to_string(expression->getTypeIndicator()));
+        if (lValue->getTypeIndicator() != expression->getTypeIndicator()) throw std::runtime_error("Assignment::emit() - attempting to assign a primitive LValue, the lLValue operand has type " + std::to_string(lValue->getTypeIndicator()) + " and expression operand has type " + std::to_string(expression->getTypeIndicator()));
         Register staging = expression->emit();
         std::cout << "sw " << staging.getName() << " " << leftOffset << "(" << leftBase.getName() << ")\n\n";
         rp.returnRegister(staging);

@@ -20,13 +20,13 @@ std::string LValue::getKey()
 Register LValue::getBaseRegister()
 {
     BaseType* type = st.retrieveEntry(getKey()).type;
-    if (type->style == PRIMITIVE_TYPE) return rp.getGlobalPointer(); // will probably have to change for functions, since vars in functions aren't offset from global pointer
+    if (type->isPrimitive()) return rp.getGlobalPointer(); // will probably have to change for functions, since vars in functions aren't offset from global pointer
     Register baseRegister = rp.getRegister();
     std::cout << "add " << baseRegister.getName() << " $gp $zero   # about to load an LValue\n";
     for (int accessorIndex = 0; accessorIndex < sequence->size() - 1; accessorIndex++)
     {
         // resolve an alias type
-        if (type->style == ALIAS_TYPE) type = st.retrieveType(*(dynamic_cast<SimpleType*>(type))->name);
+        if (type->style == SIMPLE_TYPE) type = st.retrieveType(*(dynamic_cast<SimpleType*>(type))->name);
 
         // iterate over the type for records and arrays
         if (type->style == RECORD_TYPE)
@@ -50,8 +50,8 @@ Register LValue::getBaseRegister()
             rp.returnRegister(r2);
             type = array->underlyingType;
         }
-        else if (type->style == PRIMITIVE_TYPE) throw std::runtime_error("LValue::getBaseRegister() - type->style in the loop is simple, which I think is an error since it shouldn't iterate over the last item in the sequence of LValueBase items");
-        else throw std::runtime_error("LValue::getBaseRegister() - style of type unresolved\n");
+        else if (type->style == SIMPLE_TYPE) throw std::runtime_error("LValue::getBaseRegister() - type->style in the loop is simple, which I think is an error since it shouldn't iterate over the last item in the sequence of LValueBase items");
+        else throw std::runtime_error("LValue::getBaseRegister() - style of type unresolved. Type is " + std::to_string(type->style));
     }
     return baseRegister;
 }
@@ -65,7 +65,7 @@ int LValue::getOffset()
     for (int accessorIndex = 0; accessorIndex < sequence->size() - 1; accessorIndex++)
     {
         // resolve an alias type
-        if (type->style == ALIAS_TYPE) type = st.retrieveType(*(dynamic_cast<SimpleType*>(type))->name);
+        if (type->style == SIMPLE_TYPE) type = st.retrieveType(*(dynamic_cast<SimpleType*>(type))->name);
 
         // iterate over the type for records and arrays
         if (type->style == RECORD_TYPE)
@@ -76,8 +76,8 @@ int LValue::getOffset()
             type = record->types[accessor];
         }
         else if (type->style == ARRAY_TYPE) type = dynamic_cast<ArrayType*>(type)->underlyingType;
-        else if (type->style == PRIMITIVE_TYPE) throw std::runtime_error("LValue::getOffSet() - type->style in the loop is simple, which I think is an error since it shouldn' iterate over the last item in the sequence");
-        else throw std::runtime_error("LValue::getBaseRegister() - style of type unresolved\n");
+        else if (type->style == SIMPLE_TYPE) throw std::runtime_error("LValue::getOffSet() - type->style in the loop is simple, which I think is an error since it shouldn' iterate over the last item in the sequence");
+        else throw std::runtime_error("LValue::getOffset() - style of type unresolved. Type is " + std::to_string(type->style));
     }
     return offset;
 }
@@ -90,7 +90,7 @@ void LValue::print()
 Style LValue::getStyle()
 {
     BaseType* type = getInnerMostType();
-    if (type->style == ALIAS_TYPE) return st.retrieveType(*(dynamic_cast<SimpleType*>(type))->name)->style;
+    if (type->style == SIMPLE_TYPE) return st.retrieveType(*(dynamic_cast<SimpleType*>(type))->name)->style;
     else return type->style;
 }
 
@@ -98,17 +98,17 @@ TypeIndicator LValue::getTypeIndicator()
 {
     Entry entry = st.retrieveEntry(getKey());
     if (entry.label == CONSTANT) return entry.value->getTypeIndicator();
-    else return getInnerMostType()->getTypeIndicator();
+    else return getInnerMostType()->typeIndicator;
 }
 
 BaseType* LValue::getInnerMostType()
 {
     BaseType* type = st.retrieveEntry(getKey()).type;
-    if (type->style == ALIAS_TYPE || type->style == PRIMITIVE_TYPE) type = st.retrieveType(*(dynamic_cast<SimpleType*>(type))->name); // should be able to delete, since the first if resolves simple types
+    if (type->style == SIMPLE_TYPE) type = st.retrieveType(*(dynamic_cast<SimpleType*>(type))->name);
     for (int accessorIndex = 0; accessorIndex < sequence->size() - 1; accessorIndex++)
     {
-        // resolve an alias type
-        if (type->style == ALIAS_TYPE) type = st.retrieveType(*(dynamic_cast<SimpleType*>(type))->name);
+        // resolve an simple type
+        if (type->style == SIMPLE_TYPE) type = st.retrieveType(*(dynamic_cast<SimpleType*>(type))->name);
 
         // resolve standard types
         if (type->style == RECORD_TYPE)
@@ -118,7 +118,12 @@ BaseType* LValue::getInnerMostType()
             type = record->types[accessor];
         }
         else if (type->style == ARRAY_TYPE) type = (dynamic_cast<ArrayType*>(type))->underlyingType;
-        else throw std::runtime_error("LValue::getBaseRegister() - style of type unresolved\n");
+        else throw std::runtime_error("LValue::getInnerMostType() - style of type unresolved. Type is " + std::to_string(type->style));
     }
     return type;
+}
+
+bool LValue::isPrimitive()
+{
+    return getInnerMostType()->isPrimitive();
 }

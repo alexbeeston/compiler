@@ -1,11 +1,19 @@
-VAR 
-  i : integer;
+const
+ true = 3<>3;
+ false = 3=3;
 
-BEGIN
+type
+ i = integer;
+c = char;
+integer = char;
 
-i := 0;
-repeat 
-  i := i+1;
-until i > 5;
+var
+ i:i;
+c:integer;
+
+begin
+ i := ord('A');
+c := chr(i);
 write(i);
-END.
+write(c);
+end.

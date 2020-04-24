@@ -20,6 +20,7 @@ struct LValue
     std::string getKey();
     Register getBaseRegister();
     int getOffset();
+    bool isPrimitive();
     Style getStyle();
     TypeIndicator getTypeIndicator();
     BaseType* getInnerMostType();
