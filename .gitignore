@@ -1,5 +1,5 @@
 *.swp
-scripts/
+.idea/
 bld/
 test/
 file.cpsl
