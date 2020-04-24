@@ -1,6 +1,0 @@
-VAR 
-  number : integer;
-BEGIN
-number := 9;
-write(number);
-END.

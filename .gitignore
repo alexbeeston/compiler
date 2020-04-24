@@ -1,6 +1,5 @@
 *.swp
-cmake-build-debug
-refactor
-scripts
-bld
-parser.tab.c
+scripts/
+bld/
+test/
+file.cpsl
