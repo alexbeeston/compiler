@@ -17,4 +17,6 @@ int BaseType::computeSize()
     throw std::runtime_error("Can't call computeSize on a BaseType object");
 }
 
+bool BaseType::isPrimitive() { throw std::runtime_error("BaseType::isPrimitive() - can't call on base Type"); }
+
 TypeIndicator BaseType::getTypeIndicator() { return typeIndicator; }

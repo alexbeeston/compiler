@@ -35,3 +35,5 @@ void RecordType::print()
     std::cout << "record ";
     for (TypedList* list : *typedLists) list->print();
 }
+
+bool RecordType::isPrimitive() { return false; }

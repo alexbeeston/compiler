@@ -10,6 +10,7 @@ struct BaseType
     TypeIndicator typeIndicator;
     BaseType();
     int size; // set by the symbol table
+    virtual bool isPrimitive();
     virtual int computeSize();
     virtual void print();
     virtual TypeIndicator getTypeIndicator();

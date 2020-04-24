@@ -14,6 +14,7 @@ struct SimpleType:BaseType
     std::string* name;
     SimpleType(std::string*);
     void print() override;
+    bool isPrimitive() override;
 
     // the following functions are necessary because a simple type is a string, which could be a primitive type or the name of an array or record type
     TypeIndicator getTypeIndicator() override;

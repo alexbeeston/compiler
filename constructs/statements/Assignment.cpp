@@ -22,18 +22,14 @@ void Assignment::emit()
 {
     Entry entry = st.retrieveEntry(lValue->getKey());
     if (entry.offset == -1) throw std::runtime_error("Can not assign to a constant\n");
-    if (lValue->getStyle() != expression->getStyle()) throw std::runtime_error("Assignment::emit() - styles of LValue and Expression in an assignment do not match.");
+    if (lValue->getStyle() != expression->getStyle()) throw std::runtime_error("Assignment::emit() - styles of LValue and Expression in an assignment do not match. LValue = " + std::to_string(lValue->getStyle()) + ", expression = " + std::to_string(expression->getStyle()));
     std::cout << "# assignment\n";
     int leftOffset = lValue->getOffset();
     Register leftBase = lValue->getBaseRegister();
 
-    if (lValue->getStyle() == PRIMITIVE_TYPE) // can these two ifs be combined into one where the loop runs just once? Maybe unnecessarily complex
+    if (lValue->getStyle() == PRIMITIVE_TYPE)
     {
-        if (lValue->getTypeIndicator() != expression->getTypeIndicator())
-        {
-            std::cout << "############## LValue Type Indicator:" << lValue->getTypeIndicator() << ", expression type indicator " << expression->getTypeIndicator() << "\n";
-            throw std::runtime_error("Assignment::emit() - attempting to assign to a primitive LValue type, but the type Indicators are not the same");
-        }
+        if (lValue->getTypeIndicator() != expression->getTypeIndicator()) throw std::runtime_error("Assignment::emit() - attempting to assign a primitive LValue, the left operand has type " + std::to_string(lValue->getTypeIndicator()) + " and right operand has type " + std::to_string(expression->getTypeIndicator()));
         Register staging = expression->emit();
         std::cout << "sw " << staging.getName() << " " << leftOffset << "(" << leftBase.getName() << ")\n\n";
         rp.returnRegister(staging);
@@ -43,10 +39,9 @@ void Assignment::emit()
         LValue* rightLValue = (dynamic_cast<LValueExpression*>(expression))->lValue;
         int leftSize = lValue->getInnerMostType()->computeSize();
         int rightSize = rightLValue->getInnerMostType()->computeSize();
-        if (leftSize != rightSize) throw std::runtime_error("Assignment::emit() - sizes of left of right LValues don't match");
-
+        if (leftSize != rightSize) throw std::runtime_error("Assignment::emit() - sizes of left of right LValues don't match. Left size is " + std::to_string(leftSize) + " and right size is " + std::to_string(rightSize) + ".");
         Register rightBase = rightLValue->getBaseRegister();
-        int rightOffset = rightLValue->getOffset();
+        int rightOffset = rightLValue->getOffset(); // will copy this into a utilities file for copying contiguous memory; will be used in function calls I think for copying to stack, or something
         Register staging = rp.getRegister();
         static int WORD_SIZE = 4;
         for (int i = 0; i < leftSize; i += WORD_SIZE)
@@ -58,8 +53,7 @@ void Assignment::emit()
         rp.returnRegister(rightBase);
         rp.returnRegister(staging);
     }
-    else if (lValue->getStyle() == ALIAS_TYPE) throw std::runtime_error("Assignment::emit() - lValue->getStyle() return ALIAS_TYPE; this should have been replaced with a non-Alias type in LValue::getStyle()");
-    else throw std::runtime_error("Assignment::emit() - lValue->getStyle() doesn't return a recognied style");
+    else throw std::runtime_error("Assignment::emit() - lValue is not primitive, nor of ARRAY_STYLE, nor of RECORD_STYLE");
     rp.returnRegister(leftBase);
 }
 

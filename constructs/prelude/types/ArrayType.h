@@ -15,6 +15,7 @@ struct ArrayType:BaseType
     BaseType* underlyingType;
     ArrayType(Expression*, Expression*, BaseType*);
     void print() override;
+    bool isPrimitive() override;
     int computeSize() override;
     TypeIndicator getTypeIndicator();
 };

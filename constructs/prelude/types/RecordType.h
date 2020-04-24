@@ -18,6 +18,7 @@ struct RecordType:BaseType
     std::map<std::string, int> offsets;
     RecordType(std::vector<TypedList*>*);
     void print() override;
+    bool isPrimitive() override;
     int computeSize() override;
     TypeIndicator getTypeIndicator();
 };

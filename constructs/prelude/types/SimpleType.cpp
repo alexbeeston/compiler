@@ -36,3 +36,18 @@ TypeIndicator SimpleType::getTypeIndicator()
     if (style == ALIAS_TYPE) return st.retrieveType(*name)->getTypeIndicator();
     else return typeIndicator;
 }
+
+bool SimpleType::isPrimitive()
+{
+    if (
+           name->compare("integer") == 0 ||
+           name->compare("INTEGER") == 0 ||
+           name->compare("char") == 0 ||
+           name->compare("CHAR") == 0 ||
+           name->compare("string") == 0 ||
+           name->compare("STRING") == 0 ||
+           name->compare("boolean") == 0 ||
+           name->compare("BOOLEAN") == 0
+       ) return true;
+    else return false;
+}

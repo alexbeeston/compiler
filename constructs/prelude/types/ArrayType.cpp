@@ -32,3 +32,5 @@ void ArrayType::print()
     std::cout << "] of ";
     underlyingType->print();
 }
+
+bool ArrayType::isPrimitive() { return false; }

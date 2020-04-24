@@ -20,7 +20,7 @@ std::string LValue::getKey()
 Register LValue::getBaseRegister()
 {
     BaseType* type = st.retrieveEntry(getKey()).type;
-    if (type->style == PRIMITIVE_TYPE) return rp.getGlobalPointer();
+    if (type->style == PRIMITIVE_TYPE) return rp.getGlobalPointer(); // will probably have to change for functions, since vars in functions aren't offset from global pointer
     Register baseRegister = rp.getRegister();
     std::cout << "add " << baseRegister.getName() << " $gp $zero   # about to load an LValue\n";
     for (int accessorIndex = 0; accessorIndex < sequence->size() - 1; accessorIndex++)
@@ -104,7 +104,7 @@ TypeIndicator LValue::getTypeIndicator()
 BaseType* LValue::getInnerMostType()
 {
     BaseType* type = st.retrieveEntry(getKey()).type;
-    if (type->style == ALIAS_TYPE || type->style == PRIMITIVE_TYPE) type = st.retrieveType(*(dynamic_cast<SimpleType*>(type))->name);
+    if (type->style == ALIAS_TYPE || type->style == PRIMITIVE_TYPE) type = st.retrieveType(*(dynamic_cast<SimpleType*>(type))->name); // should be able to delete, since the first if resolves simple types
     for (int accessorIndex = 0; accessorIndex < sequence->size() - 1; accessorIndex++)
     {
         // resolve an alias type
