@@ -2,10 +2,10 @@
 #include <string>
 
 #include "Scope.h"
-#include "../constructs/prelude/types/SimpleType.h"
-#include "../constructs/prelude/types/DeclaredType.h"
-#include "../constructs/expressions/Literal.h"
-#include "../constructs/expressions/LValueExpression.h"
+#include "../types/SimpleType.h"
+#include "../types/DeclaredType.h"
+#include "../expressions/Literal.h"
+#include "../expressions/LValueExpression.h"
 #include "../global.h"
 
 extern RegisterPool rp;

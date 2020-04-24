@@ -17,73 +17,73 @@ set(
 		calc_srcs
 		main.cpp
 
-		constructs/Program.cpp
-		constructs/LValue.cpp
-		constructs/LValueBase.cpp
+		routines/Program.cpp
+		miscellaneous/LValue.cpp
+		miscellaneous/LValueBase.cpp
 
-	        constructs/expressions/Literal.cpp
-        	constructs/expressions/Expression.cpp
-		constructs/expressions/BinaryOp.cpp
-		constructs/expressions/Or.cpp
-		constructs/expressions/And.cpp
-		constructs/expressions/NotEqual.cpp
-		constructs/expressions/LessThanEqual.cpp
-		constructs/expressions/GreaterThanEqual.cpp
-		constructs/expressions/GreaterThan.cpp
-		constructs/expressions/LessThan.cpp
-		constructs/expressions/Add.cpp
-		constructs/expressions/Sub.cpp
-		constructs/expressions/FunctionCall.cpp
-		constructs/expressions/Multiply.cpp
-		constructs/expressions/Divide.cpp
-		constructs/expressions/Mod.cpp
-		constructs/expressions/Negate.cpp
-		constructs/expressions/Negative.cpp
-		constructs/expressions/ParenExpression.cpp
-		constructs/expressions/ChrFunc.cpp
-		constructs/expressions/OrdFunc.cpp
-		constructs/expressions/PredFunc.cpp
-		constructs/expressions/SuccFunc.cpp
-		constructs/expressions/LValueExpression.cpp
-		constructs/expressions/Equal.cpp
-	        constructs/expressions/BinaryOpUndeterministicOperands.cpp
+        expressions/Literal.cpp
+        expressions/Expression.cpp
+        expressions/BinaryOp.cpp
+        expressions/Or.cpp
+        expressions/And.cpp
+        expressions/NotEqual.cpp
+        expressions/LessThanEqual.cpp
+        expressions/GreaterThanEqual.cpp
+        expressions/GreaterThan.cpp
+        expressions/LessThan.cpp
+        expressions/Add.cpp
+        expressions/Sub.cpp
+        expressions/FunctionCall.cpp
+        expressions/Multiply.cpp
+        expressions/Divide.cpp
+        expressions/Mod.cpp
+        expressions/Negate.cpp
+        expressions/Negative.cpp
+        expressions/ParenExpression.cpp
+        expressions/ChrFunc.cpp
+        expressions/OrdFunc.cpp
+        expressions/PredFunc.cpp
+        expressions/SuccFunc.cpp
+        expressions/LValueExpression.cpp
+        expressions/Equal.cpp
+        expressions/BinaryOpUndeterministicOperands.cpp
 
-		constructs/prelude/types/BaseType.cpp
-		constructs/prelude/types/SimpleType.cpp
-		constructs/prelude/types/ArrayType.cpp
-		constructs/prelude/types/RecordType.cpp
-		constructs/prelude/types/DeclaredType.cpp
-        constructs/prelude/constants/Constant.cpp
-		constructs/prelude/Prelude.cpp
-		constructs/prelude/TypedList.cpp
-        constructs/prelude/Entry.cpp
+		types/BaseType.cpp
+		types/SimpleType.cpp
+		types/ArrayType.cpp
+		types/RecordType.cpp
+		types/DeclaredType.cpp
+		miscellaneous/Constant.cpp
+		miscellaneous/Prelude.cpp
+		miscellaneous/TypedList.cpp
+		symbolTable/Entry.cpp
 
-        	constructs/routines/Routine.cpp
-		constructs/routines/Procedure.cpp
-		constructs/routines/Function.cpp
-		constructs/routines/ParameterSet.cpp
-		constructs/routines/Body.cpp
-		constructs/routines/Block.cpp
+		routines/Routine.cpp
+		routines/Procedure.cpp
+		routines/Function.cpp
+		routines/ParameterSet.cpp
+		routines/Body.cpp
+		routines/Block.cpp
 
-		constructs/statements/Statement.cpp
-		constructs/statements/Assignment.cpp
-		constructs/statements/If.cpp
-		constructs/statements/ConditionalSequence.cpp
-		constructs/statements/While.cpp
-		constructs/statements/Repeat.cpp
-		constructs/statements/For.cpp
-		constructs/statements/Stop.cpp
-		constructs/statements/Return.cpp
-		constructs/statements/Read.cpp
-		constructs/statements/Write.cpp
-		constructs/statements/ProcedureCall.cpp
-		constructs/statements/NullStatement.cpp
+		statements/Statement.cpp
+		statements/Assignment.cpp
+		statements/If.cpp
+		statements/ConditionalSequence.cpp
+		statements/While.cpp
+		statements/Repeat.cpp
+		statements/For.cpp
+		statements/Stop.cpp
+		statements/Return.cpp
+		statements/Read.cpp
+		statements/Write.cpp
+		statements/ProcedureCall.cpp
+		statements/NullStatement.cpp
 
 		symbolTable/SymbolTable.cpp
 		symbolTable/Scope.cpp
 
-		Register.cpp
-		RegisterPool.cpp
+		registerPool/Register.cpp
+		registerPool/RegisterPool.cpp
 
   		${BISON_Parser_OUTPUTS}
 		${FLEX_Scanner_OUTPUTS}

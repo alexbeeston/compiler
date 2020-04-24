@@ -9,7 +9,7 @@
 #include <string>
 
 #include "Scope.h"
-#include "../constructs/routines/Routine.h"
+#include "../routines/Routine.h"
 
 struct SymbolTable
 {

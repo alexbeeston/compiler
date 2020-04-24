@@ -1,7 +1,7 @@
 #ifndef COMPILERS_GLOBALS_H
 #define COMPILERS_GLOBALS_H
 
-#include "RegisterPool.h"
+#include "registerPool/RegisterPool.h"
 #include "symbolTable/SymbolTable.h"
 
 extern int lineNumber;

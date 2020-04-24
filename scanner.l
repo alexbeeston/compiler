@@ -4,7 +4,6 @@
 #include <vector>
 #include "parser.hpp"
 #include "global.h"
-
 int lineNumber = 0;
 %}
 

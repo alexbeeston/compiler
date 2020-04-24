@@ -1,11 +1,8 @@
 #include <iostream>
-#include <vector>
 
-#include "constructs/Program.h"
-#include "constructs/prelude/types/BaseType.h"
-#include "constructs/prelude/types/SimpleType.h"
+#include "routines/Program.h"
 #include "symbolTable/SymbolTable.h"
-#include "RegisterPool.h"
+#include "registerPool/RegisterPool.h"
 
 extern int yyparse();
 extern Program* program;

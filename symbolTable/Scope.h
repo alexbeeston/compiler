@@ -8,11 +8,11 @@
 #include <map>
 #include <string>
 
-#include "../constructs/prelude/types/BaseType.h"
-#include "../constructs/prelude/types/ArrayType.h"
-#include "../constructs/prelude/types/RecordType.h"
-#include "../constructs/prelude/Prelude.h"
-#include "../constructs/prelude/Entry.h"
+#include "../types/BaseType.h"
+#include "../types/ArrayType.h"
+#include "../types/RecordType.h"
+#include "../miscellaneous/Prelude.h"
+#include "Entry.h"
 
 struct Scope
 {
