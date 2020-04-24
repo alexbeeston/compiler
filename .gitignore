@@ -1,13 +1,6 @@
 *.swp
 cmake-build-debug
-bld/CMakeFiles
-bld/calc
-bld/parser.cpp
-bld/parser.hpp
-bld/Makefile
-cpslExamples/
-bld/mars.jar
-bld/assembly.asm
 refactor
-scripts/
-bld/validate.sh
+scripts
+bld
+parser.tab.c
