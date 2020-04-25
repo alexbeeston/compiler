@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "routines/Program.h"
+#include "miscellaneous/Program.h"
 #include "symbolTable/SymbolTable.h"
 #include "registerPool/RegisterPool.h"
 
@@ -12,8 +12,6 @@ RegisterPool rp;
 int main()
 {
 	yyparse();
-	std::cout << std::endl;
     st.pushScope(*program->prelude);
 	program->emit();
-	std::cout << "\n"; // do not move; we want to see PS1 after!
 }

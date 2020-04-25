@@ -33,15 +33,7 @@ void For::print()
 
 void For::emit()
 {
-    // push on a new scope
-    std::string integer = "integer";
-    std::vector<std::string*>* idents = new std::vector<std::string*>();
-    idents->push_back(ident);
-    TypedList* list = new TypedList(idents, new SimpleType(&integer));
-    std::vector<TypedList*>* lists = new std::vector<TypedList*>();
-    lists->push_back(list);
-    Prelude p = Prelude(new std::vector<Constant*>, new std::vector<DeclaredType*>, lists);
-    st.pushScope(p);
+    st.pushScope_iterator(*ident);
 
     // init
     std::cout << "\n# For - init\n";

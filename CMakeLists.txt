@@ -13,8 +13,8 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}")
 set(
 	compiler_srcs
 	main.cpp
-	
-	routines/Program.cpp
+
+        miscellaneous/Program.cpp
 	routines/Routine.cpp
 	routines/Procedure.cpp
 	routines/Function.cpp

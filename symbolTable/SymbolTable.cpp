@@ -1,4 +1,5 @@
 #include <iostream>
+#include <types/SimpleType.h>
 
 #include "SymbolTable.h"
 #include "Scope.h"
@@ -22,6 +23,18 @@ void SymbolTable::pushScope(Prelude prelude)
     if (topScope > j - 1) scopes.push_back(newScope);
     else scopes[topScope] = newScope;
     nextAddress += scopes[topScope].addConstructs(prelude, nextAddress);
+}
+
+void SymbolTable::pushScope_iterator(std::string ident)
+{
+    std::string intString = "integer";
+    auto* idents = new std::vector<std::string*>();
+    idents->push_back(&ident);
+    auto* typedList = new TypedList(idents, new SimpleType(&intString));
+    auto* typedLists = new std::vector<TypedList*>();
+    typedLists->push_back(typedList);
+    Prelude p = Prelude(new std::vector<Constant*>, new std::vector<DeclaredType*>, typedLists);
+    pushScope(p);
 }
 
 void SymbolTable::popScope()

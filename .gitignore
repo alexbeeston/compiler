@@ -1,4 +1,5 @@
 *.swp
+cmake-build-debug/
 .idea/
 bld/
 test/
