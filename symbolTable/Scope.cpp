@@ -1,11 +1,6 @@
-#include <iostream>
 #include <string>
 
 #include "Scope.h"
-#include "../types/SimpleType.h"
-#include "../types/DeclaredType.h"
-#include "../expressions/Literal.h"
-#include "../expressions/LValueExpression.h"
 #include "../global.h"
 
 extern RegisterPool rp;
@@ -15,26 +10,8 @@ Scope::Scope() { }
 int Scope::addConstructs(Prelude prelude, int nextAddress)
 {
     int initialNextAddress = nextAddress;
-    // add boolean constants
-    int NUM_BOOLS = 2;
-    std::string booleans[] = {"false", "true"};
-    bool booleanLiterals[] = {false, true};
-    for (int i = 0; i < NUM_BOOLS; ++i) entries[booleans[i]] = Entry(booleans[i], new Literal(booleanLiterals[i]));
-
-    // add user defined constants
     for (Constant* i : *prelude.constants) entries[i->ident] = Entry(i->ident, i->value);
-
-    // initialize with primitive types
-    std::string primitivesLower[] = {"integer", "char", "string", "bool"};
-    for (std::string primitive : primitivesLower) types[primitive] = new SimpleType(&primitive);
-    std::string primitivesUpper[] = {"INTEGER", "CHAR", "STRING", "BOOL"};
-    int NUM_PRIMITIVES = 4;
-    for (int i = 0; i < NUM_PRIMITIVES; i++) types[primitivesUpper[i]] = new SimpleType(&primitivesLower[i]);
-
-    // add declared types
     for (DeclaredType* declaredType : *prelude.declaredTypes) types[declaredType->identifier] = declaredType->type;
-
-    // add variables, which are all user defined
     for (TypedList* list: *prelude.vars)
     {
         for (std::string* name: *list->identList)
@@ -51,8 +28,7 @@ int Scope::getSize() { return size; }
 
 bool Scope::containsType(std::string key)
 {
-    if (types.count(key) == 1) return true;
-    else return false;
+    return types.count(key) == 1;
 }
 
 BaseType* Scope::getType(std::string key)
@@ -62,8 +38,7 @@ BaseType* Scope::getType(std::string key)
 
 bool Scope::containsEntry(std::string key)
 {
-    if (entries.count(key) == 1) return true;
-    else return false;
+    return entries.count(key) == 1;
 }
 
 Entry Scope::getEntry(std::string key)

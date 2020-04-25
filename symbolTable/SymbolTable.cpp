@@ -3,6 +3,7 @@
 
 #include "SymbolTable.h"
 #include "Scope.h"
+#include "../expressions/Literal.h"
 
 SymbolTable::SymbolTable()
 {
@@ -13,6 +14,30 @@ SymbolTable::SymbolTable()
     nextForLabel = 0;
     nextIfLabel = 0;
     topScope = -1;
+
+    // initialize symbol table with boolean constants constants
+    std::string boolsLower[] = {"false", "true"};
+    std::string boolsUpper[] = {"FALSE", "TRUE"};
+    bool booleanLiterals[] = {false, true};
+    auto booleanConstants = new std::vector<Constant*>();
+    int NUM_BOOLS = 2;
+    for (int i = 0; i < NUM_BOOLS; ++i)
+    {
+        booleanConstants->push_back(new Constant(boolsLower[i], new Literal(booleanLiterals[i])));
+        booleanConstants->push_back(new Constant(boolsUpper[i], new Literal(booleanLiterals[i])));
+    }
+
+    // initialize symbol table with primitive types
+    std::string primitivesLower[] = {"integer", "char", "string", "bool"};
+    std::string primitivesUpper[] = {"INTEGER", "CHAR", "STRING", "BOOL"};
+    auto primitiveTypes = new std::vector<DeclaredType*>();
+    int NUM_PRIMITIVES = 4;
+    for (int i = 0; i < NUM_PRIMITIVES; ++i)
+    {
+        primitiveTypes->push_back(new DeclaredType(primitivesLower[i], new SimpleType(&primitivesLower[i])));
+        primitiveTypes->push_back(new DeclaredType(primitivesUpper[i], new SimpleType(&primitivesUpper[i])));
+    }
+    pushScope(Prelude(booleanConstants, primitiveTypes, new std::vector<TypedList*>()));
 }
 
 void SymbolTable::pushScope(Prelude prelude)
@@ -41,11 +66,6 @@ void SymbolTable::popScope()
 {
     nextAddress -= scopes[topScope].getSize();
     topScope--;
-}
-
-void SymbolTable::prettyPrint()
-{
-    std::cout << "[implement SymbolTable::prettyPrint()]\n";
 }
 
 Entry SymbolTable::retrieveEntry(std::string key)

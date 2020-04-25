@@ -13,6 +13,7 @@ struct DeclaredType
     std::string identifier;
     BaseType* type;
     DeclaredType(char*, BaseType*);
+    DeclaredType(std::string, BaseType*);
     void print();
 };
 #endif //COMPILERS_DECLAREDTYPE_H

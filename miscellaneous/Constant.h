@@ -15,6 +15,7 @@ struct Constant
     std::string ident;
     Constant();
     Constant(char*, Expression*);
+    Constant(std::string, Expression*);
     void print();
 };
 #endif //COMPILERS_CONSTANT_H

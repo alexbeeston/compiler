@@ -13,11 +13,12 @@
 
 struct SymbolTable
 {
-    // containers
+    // Scopes
     std::vector<Scope> scopes;
     void pushScope(Prelude);
     void pushScope_iterator(std::string);
     void popScope();
+
     int topScope;
     int nextAddress;
     Entry retrieveEntry(std::string);
@@ -39,7 +40,5 @@ struct SymbolTable
 
     // init
     SymbolTable();
-    void prettyPrint();
-    void testPrint();
 };
 #endif //COMPILERS_SYMBOLTABLE_H
