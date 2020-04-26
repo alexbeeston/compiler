@@ -6,13 +6,15 @@
 #define COMPILERS_REGISTERPOOL_H
 
 #include <stack>
+#include <vector>
 #include <stdexcept>
 
 #include "Register.h"
 
 struct RegisterPool
 {
-    std::stack <Register> registers;
+    std::stack<Register> availableRegisters;
+    std::vector<Register> registersInUse;
     Register getRegister();
     Register getGlobalPointer();
     void returnRegister(Register);

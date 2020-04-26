@@ -22,7 +22,7 @@ std::vector<Register> BinaryOpUndeterministicOperands::checkAndEmitOperands()
        std::cout << "Error: Binary Boolean operation attempted with operands of the same type, but the wrong type. Their type is " << left->getTypeIndicator() << ". Expected INTEGER or BOOLEAN\n";
        return std::vector<Register>();
    }
-   // emit the operands. If they are integers, the registers will hold their integer values, if they are booleans, then they will hold 0 or 1, which are also integers, suitable for comparison
+   // emit the operands. If they are integers, the availableRegisters will hold their integer values, if they are booleans, then they will hold 0 or 1, which are also integers, suitable for comparison
    return emitOperands(left->getTypeIndicator());
 }
 

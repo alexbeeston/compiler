@@ -1,6 +1,5 @@
 #include "RegisterPool.h"
 #include "Register.h"
-#include <iostream>
 
 RegisterPool::RegisterPool()
 {
@@ -12,18 +11,19 @@ RegisterPool::RegisterPool()
 
 void RegisterPool::addRegisterClass(int quantity, std::string type)
 {
-    for (int i = quantity - 1; i >= 0; i--) registers.push(Register(std::string("$" + type + std::to_string(i))));
+    for (int i = quantity - 1; i >= 0; i--) availableRegisters.push(Register(std::string("$" + type + std::to_string(i))));
 }
 
 Register RegisterPool::getRegister()
 {
-    if (!registers.empty())
+    if (!availableRegisters.empty())
     {
-        Register temp = registers.top();
-        registers.pop();
+        Register temp = availableRegisters.top();
+        availableRegisters.pop();
+        registersInUse.push_back(temp);
         return temp;
     }
-    else throw std::runtime_error("Out of registers");
+    else throw std::runtime_error("Out of availableRegisters");
 }
 
 Register RegisterPool::getGlobalPointer()
@@ -33,5 +33,15 @@ Register RegisterPool::getGlobalPointer()
 
 void RegisterPool::returnRegister(Register reg)
 {
-    if (reg.getName().compare("$gp") != 0) registers.push(reg);
+    if (reg.getName() != "$gp" && reg.getName() != "$fp" && reg.getName() != "$sp")
+    {
+        int i = 0;
+        while (registersInUse[i].getName() != reg.getName())
+        {
+            if (i != registersInUse.size() - 1) ++i;
+            else throw std::runtime_error("RegisterPool::returnRegister - attempting to return a register but can't find it in the list of registersInUse");
+        }
+        registersInUse.erase(registersInUse.begin() + i);
+        availableRegisters.push(reg);
+    }
 }

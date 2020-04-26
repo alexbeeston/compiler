@@ -42,12 +42,9 @@ SymbolTable::SymbolTable()
 
 void SymbolTable::pushScope(Prelude prelude)
 {
-    int j = scopes.size();
     Scope newScope = Scope();
-    topScope++;
-    if (topScope > j - 1) scopes.push_back(newScope);
-    else scopes[topScope] = newScope;
-    nextAddress += scopes[topScope].addConstructs(prelude, nextAddress);
+    scopes.push_back(newScope);
+    nextAddress += scopes.back().addConstructs(prelude, nextAddress);
 }
 
 void SymbolTable::pushScope_iterator(std::string ident)
@@ -64,13 +61,14 @@ void SymbolTable::pushScope_iterator(std::string ident)
 
 void SymbolTable::popScope()
 {
-    nextAddress -= scopes[topScope].getSize();
-    topScope--;
+    nextAddress -= scopes.back().getSize();
+    scopes.pop_back();
 }
 
 Entry SymbolTable::retrieveEntry(std::string key)
 {
-    int i = topScope;
+    int i = scopes.size() - 1;
+    std::cout << "# scopes in st are: " << scopes.size()  << "\n";
     while (i != -1)
     {
         if (scopes[i].containsEntry(key)) return scopes[i].getEntry(key);
@@ -81,7 +79,7 @@ Entry SymbolTable::retrieveEntry(std::string key)
 
 BaseType* SymbolTable::retrieveType(std::string key)
 {
-    int i = topScope;
+    int i = scopes.size() - 1;
     while (i != -1)
     {
         if (scopes[i].containsType(key)) return scopes[i].getType(key);
