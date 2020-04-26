@@ -15,18 +15,20 @@ set(
 	main.cpp
 
         miscellaneous/Program.cpp
-	routines/Routine.cpp
-	routines/Procedure.cpp
-	routines/Function.cpp
-	routines/ParameterSet.cpp
-	routines/Body.cpp
-	routines/Block.cpp
-	
 	miscellaneous/LValue.cpp
 	miscellaneous/LValueBase.cpp
 	miscellaneous/Constant.cpp
 	miscellaneous/Prelude.cpp
 	miscellaneous/TypedList.cpp
+	miscellaneous/utilities.cpp
+
+	routines/Procedure.cpp
+	routines/Routine.cpp
+	routines/Function.cpp
+	routines/ParameterSet.cpp
+	routines/Body.cpp
+	routines/Block.cpp
+	
 	
 	expressions/Literal.cpp
 	expressions/Expression.cpp

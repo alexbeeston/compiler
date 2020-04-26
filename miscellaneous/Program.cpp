@@ -21,6 +21,8 @@ void Program::emit()
 {
     // emit each function declaration
     block->emit();
+    std::cout << "li $v0 10\n";
+    std::cout << "syscall\n";
 
     // emit the string declarations
     std::cout << "\n\n .data\n";

@@ -24,7 +24,7 @@ Register LValueExpression::emit()
     {
         if (entry.value->getTypeIndicator() == STRING) std::cout << "la " << r.getName() << " message";
         else std::cout << "li " << r.getName() << " ";
-        std::cout << entry.value->getValue() << "   # loaded an LValueExpression String Constant\n";
+        std::cout << entry.value->getValue() << "   # loaded an Lvalue\n"; // what should happen if the LValue's is an array or record?
     }
     else if (entry.label == VARIABLE)
     {
@@ -33,7 +33,7 @@ Register LValueExpression::emit()
         std::cout << "lw " << r.getName() << " " << offset << "(" << baseRegister.getName() << ")   # loaded an LValueExpression Variable\n";
         rp.returnRegister(baseRegister);
     }
-    else throw std::runtime_error("Entry's label isn't a variable or constant");
+    else throw std::runtime_error("LValueExpression::emit() - entry label isn't a variable or constant");
     return r;
 }
 

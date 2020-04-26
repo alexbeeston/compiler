@@ -4,3 +4,4 @@ cmake-build-debug/
 bld/
 test/
 file.cpsl
+backlog.txt
