@@ -26,8 +26,8 @@ void Read::emit()
     {
         std::cout << "li $v0 ";
         BaseType* entryType = st.retrieveEntry(lValue->getKey()).type;
-        if (entryType->getTypeIndicator() == INTEGER) std::cout << " 5   # 5 = code to read an integer\n";
-        else if (entryType->getTypeIndicator() == CHAR) std::cout << " 12   # 12 = code to read a character\n";
+        if (entryType->getPrimitiveType() == INTEGER) std::cout << " 5   # 5 = code to read an integer\n";
+        else if (entryType->getPrimitiveType() == CHAR) std::cout << " 12   # 12 = code to read a character\n";
         else throw "attempting to read a non-integer or character lValue\n";
         std::cout << "syscall\n";
         Register r = rp.getRegister();

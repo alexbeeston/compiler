@@ -5,7 +5,7 @@
 
 LValueExpression::LValueExpression(LValue* p_lValue)
 {
-    typeIndicator = ALIAS;
+    typeIndicator = NOT_PRIMITIVE;
     lValue = p_lValue;
 }
 
@@ -14,7 +14,7 @@ void LValueExpression::print()
     lValue->print();
 }
 
-TypeIndicator LValueExpression::getTypeIndicator() { return lValue->getTypeIndicator(); }
+PrimitiveType LValueExpression::getPrimitiveType() { return lValue->getPrimitiveType(); }
 
 Register LValueExpression::emit()
 {
@@ -22,7 +22,7 @@ Register LValueExpression::emit()
     Register r = rp.getRegister();
     if (entry.label == CONSTANT)
     {
-        if (entry.value->getTypeIndicator() == STRING) std::cout << "la " << r.getName() << " message";
+        if (entry.value->getPrimitiveType() == STRING) std::cout << "la " << r.getName() << " message";
         else std::cout << "li " << r.getName() << " ";
         std::cout << entry.value->getValue() << "   # loaded an Lvalue\n"; // what should happen if the LValue's is an array or record?
     }
@@ -50,4 +50,4 @@ bool LValueExpression::isCTV()
     else return false;
 }
 
-Style LValueExpression::getStyle() { return lValue->getStyle(); }
+TypeStyle LValueExpression::getStyle() { return lValue->getStyle(); }

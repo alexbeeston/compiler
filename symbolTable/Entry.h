@@ -18,7 +18,7 @@ struct Entry
     std::string ident;
     Expression* value = nullptr; // used by constants only
     BaseType* type;
-    Label label;
+    EntryStyle label;
 
     // init
     Entry();

@@ -13,7 +13,7 @@ Register Expression::emit()
     throw std::runtime_error("Constructing the base Expression struct");
 }
 
-TypeIndicator Expression::getTypeIndicator() { return typeIndicator; }
+PrimitiveType Expression::getPrimitiveType() { return typeIndicator; }
 
 int Expression::getValue()
 {
@@ -22,4 +22,4 @@ int Expression::getValue()
 
 bool Expression::isCTV() { return false; }
 
-Style Expression::getStyle() { return SIMPLE_TYPE; }
+TypeStyle Expression::getStyle() { return SIMPLE; }

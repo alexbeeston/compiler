@@ -5,7 +5,7 @@
 RecordType::RecordType(std::vector<TypedList*>* p_typedLists)
 {
     typedLists = p_typedLists;
-    style = RECORD_TYPE;
+    style = RECORD;
 }
 
 int RecordType::computeSize()
@@ -25,9 +25,9 @@ int RecordType::computeSize()
     return offset;
 }
 
-TypeIndicator RecordType::getTypeIndicator()
+PrimitiveType RecordType::getPrimitiveType()
 {
-    throw std::runtime_error("RecordType::getTypeIndicator; doesn't have a single type");
+    throw std::runtime_error("RecordType::getPrimitiveType; doesn't have a single type");
 }
 
 void RecordType::print()

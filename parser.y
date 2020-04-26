@@ -7,7 +7,7 @@
 
 #include "expressions/Expression.h"
 #include "miscellaneous/Constant.h"
-#include "routines/Program.h"
+#include "miscellaneous/Program.h"
 
 #include "miscellaneous/LValue.h"
 #include "miscellaneous/LValueBase.h"
@@ -213,11 +213,11 @@ struct ProcedureCall* procedureCallStatementPointer;
 %token CONST
 %token VAR
 %token TYPE
-%token RECORD
+%token RECORD_TOKEN
 %token END
 %token COLON
 %token COMMA
-%token ARRAY
+%token ARRAY_TOKEN
 %token LBRACKET
 %token RBRACKET
 %token OF
@@ -339,7 +339,7 @@ Type : SimpleType
     | RecordType
     | ArrayType
     SimpleType : IDENT { $$ = new SimpleType(new std::string($1)); };
-    RecordType : RECORD TypedLists END { $$ = new RecordType($2); };
+    RecordType : RECORD_TOKEN TypedLists END { $$ = new RecordType($2); };
         TypedLists : TypedLists TypedList { $1->push_back($2); }
             | { $$ = new std::vector<TypedList*>; };
             TypedList: IdentList COLON Type DONE { $$ = new TypedList($1, $3); };
@@ -347,7 +347,7 @@ Type : SimpleType
                     IdentListExtraSet : IdentListExtraSet IdentExtra { $1->push_back($2); }
                         | { $$ = new std::vector<char*>; };
                         IdentExtra : COMMA IDENT { $$ = $2; };
-    ArrayType : ARRAY LBRACKET Expression COLON Expression RBRACKET OF Type { $$ = new ArrayType($3, $5, $8); };
+    ArrayType : ARRAY_TOKEN LBRACKET Expression COLON Expression RBRACKET OF Type { $$ = new ArrayType($3, $5, $8); };
 
 VarDecl : VAR TypedList TypedLists { $3->insert($3->begin(), $2); $$ = $3; }
     | { $$ = new std::vector<TypedList*>; };

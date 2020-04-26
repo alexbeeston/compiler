@@ -16,8 +16,8 @@ const|CONST {return CONST;}
 var|VAR {return VAR;}
 type|TYPE {return TYPE;}
 end|END {return END;}
-record|RECORD {return RECORD;}
-array|ARRAY {return ARRAY;}
+record|RECORD {return RECORD_TOKEN;}
+array|ARRAY {return ARRAY_TOKEN;}
 of|OF {return OF;}
 begin|BEGIN {return BEGIN_TOKEN;}
 while|WHILE {return WHILE;}

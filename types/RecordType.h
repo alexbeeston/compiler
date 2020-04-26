@@ -20,6 +20,6 @@ struct RecordType:BaseType
     void print() override;
     bool isPrimitive() override;
     int computeSize() override;
-    TypeIndicator getTypeIndicator();
+    PrimitiveType getPrimitiveType();
 };
 #endif //COMPILERS_RECORDTYPE_H

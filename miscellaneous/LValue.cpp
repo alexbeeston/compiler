@@ -26,15 +26,15 @@ Register LValue::getBaseRegister()
     for (int accessorIndex = 0; accessorIndex < sequence->size() - 1; accessorIndex++)
     {
         // resolve a simple type
-        if (type->style == SIMPLE_TYPE) type = st.retrieveType((dynamic_cast<SimpleType*>(type))->name);
+        if (type->style == SIMPLE) type = st.retrieveType((dynamic_cast<SimpleType*>(type))->name);
 
         // iterate over the type for records and arrays
-        if (type->style == RECORD_TYPE)
+        if (type->style == RECORD)
         {
             RecordType* record = dynamic_cast<RecordType*>(type);
             type = record->types[(*sequence)[accessorIndex + 1]->ident];
         }
-        else if (type->style == ARRAY_TYPE)
+        else if (type->style == ARRAY)
         {
             ArrayType* array = dynamic_cast<ArrayType*>(type);
             Expression* index = (*sequence)[accessorIndex + 1]->indexer;
@@ -50,7 +50,7 @@ Register LValue::getBaseRegister()
             rp.returnRegister(r2);
             type = array->underlyingType;
         }
-        else if (type->style == SIMPLE_TYPE) throw std::runtime_error("LValue::getBaseRegister() - type->style in the loop is simple, which I think is an error since it shouldn't iterate over the last item in the sequence of LValueBase items");
+        else if (type->style == SIMPLE) throw std::runtime_error("LValue::getBaseRegister() - type->style in the loop is simple, which I think is an error since it shouldn't iterate over the last item in the sequence of LValueBase items");
         else throw std::runtime_error("LValue::getBaseRegister() - style of type unresolved. Type is " + std::to_string(type->style));
     }
     return baseRegister;
@@ -65,54 +65,54 @@ int LValue::getOffset()
     for (int accessorIndex = 0; accessorIndex < sequence->size() - 1; accessorIndex++)
     {
         // resolve a simple type
-        if (type->style == SIMPLE_TYPE) type = st.retrieveType((dynamic_cast<SimpleType*>(type))->name);
+        if (type->style == SIMPLE) type = st.retrieveType((dynamic_cast<SimpleType*>(type))->name);
 
         // iterate over the type for records and arrays
-        if (type->style == RECORD_TYPE)
+        if (type->style == RECORD)
         {
             std::string accessor = (*sequence)[accessorIndex + 1]->ident;
             RecordType* record = dynamic_cast<RecordType*>(type);
             offset += record->offsets[accessor];
             type = record->types[accessor];
         }
-        else if (type->style == ARRAY_TYPE) type = dynamic_cast<ArrayType*>(type)->underlyingType;
-        else if (type->style == SIMPLE_TYPE) throw std::runtime_error("LValue::getOffSet() - type->style in the loop is simple, which I think is an error since it shouldn' iterate over the last item in the sequence");
+        else if (type->style == ARRAY) type = dynamic_cast<ArrayType*>(type)->underlyingType;
+        else if (type->style == SIMPLE) throw std::runtime_error("LValue::getOffSet() - type->style in the loop is simple, which I think is an error since it shouldn' iterate over the last item in the sequence");
         else throw std::runtime_error("LValue::getOffset() - style of type unresolved. Type is " + std::to_string(type->style));
     }
     return offset;
 }
 
-Style LValue::getStyle()
+TypeStyle LValue::getStyle()
 {
     BaseType* type = getInnerMostType();
-    if (type->style == SIMPLE_TYPE) return st.retrieveType((dynamic_cast<SimpleType*>(type))->name)->style;
+    if (type->style == SIMPLE) return st.retrieveType((dynamic_cast<SimpleType*>(type))->name)->style;
     else return type->style;
 }
 
-TypeIndicator LValue::getTypeIndicator()
+PrimitiveType LValue::getPrimitiveType()
 {
     Entry entry = st.retrieveEntry(getKey());
-    if (entry.label == CONSTANT) return entry.value->getTypeIndicator();
+    if (entry.label == CONSTANT) return entry.value->getPrimitiveType();
     else return getInnerMostType()->typeIndicator;
 }
 
 BaseType* LValue::getInnerMostType()
 {
     BaseType* type = st.retrieveEntry(getKey()).type;
-    if (type->style == SIMPLE_TYPE) type = st.retrieveType((dynamic_cast<SimpleType*>(type))->name);
+    if (type->style == SIMPLE) type = st.retrieveType((dynamic_cast<SimpleType*>(type))->name);
     for (int accessorIndex = 0; accessorIndex < sequence->size() - 1; accessorIndex++)
     {
         // resolve an simple type
-        if (type->style == SIMPLE_TYPE) type = st.retrieveType((dynamic_cast<SimpleType*>(type))->name);
+        if (type->style == SIMPLE) type = st.retrieveType((dynamic_cast<SimpleType*>(type))->name);
 
         // resolve standard types
-        if (type->style == RECORD_TYPE)
+        if (type->style == RECORD)
         {
             RecordType* record = dynamic_cast<RecordType*>(type);
             std::string accessor = (*sequence)[accessorIndex + 1]->ident;
             type = record->types[accessor];
         }
-        else if (type->style == ARRAY_TYPE) type = (dynamic_cast<ArrayType*>(type))->underlyingType;
+        else if (type->style == ARRAY) type = (dynamic_cast<ArrayType*>(type))->underlyingType;
         else throw std::runtime_error("LValue::getInnerMostType() - style of type unresolved. Type is " + std::to_string(type->style));
     }
     return type;

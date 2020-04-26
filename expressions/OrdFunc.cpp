@@ -17,7 +17,7 @@ void OrdFunc::print()
 
 Register OrdFunc::emit()
 {
-    if (expression->getTypeIndicator() == CHAR)
+    if (expression->getPrimitiveType() == CHAR)
     {
         expression->typeIndicator = INTEGER;
         return expression->emit();
@@ -25,4 +25,4 @@ Register OrdFunc::emit()
     else throw std::runtime_error("Error: Ord() attempted on a non-character.");
 }
 
-TypeIndicator OrdFunc::getTypeIndicator() { return INTEGER; }
+PrimitiveType OrdFunc::getPrimitiveType() { return INTEGER; }

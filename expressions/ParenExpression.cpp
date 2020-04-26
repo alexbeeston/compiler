@@ -25,4 +25,4 @@ int ParenExpression::getValue()
     return expression->getValue();
 }
 
-TypeIndicator ParenExpression::getTypeIndicator() { return expression->getTypeIndicator(); }
+PrimitiveType ParenExpression::getPrimitiveType() { return expression->getPrimitiveType(); }

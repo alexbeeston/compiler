@@ -14,10 +14,10 @@ void BinaryOp::print()
 
 std::vector<Register> BinaryOp::emitOperands(int requiredType)
 {
-    if (!(left->getTypeIndicator() == requiredType && right->getTypeIndicator() == requiredType))
+    if (!(left->getPrimitiveType() == requiredType && right->getPrimitiveType() == requiredType))
     {
-        std::cout << "# ERROR: binary operation attempted on left operand of typeIndicator " << left->getTypeIndicator();
-        std::cout << " and right operand typeIndicator " << right->getTypeIndicator();
+        std::cout << "# ERROR: binary operation attempted on left operand of typeIndicator " << left->getPrimitiveType();
+        std::cout << " and right operand typeIndicator " << right->getPrimitiveType();
         std::cout << ". They should both be " << requiredType << ".\n";
         return std::vector<Register>();
     }

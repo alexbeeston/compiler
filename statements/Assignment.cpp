@@ -30,12 +30,14 @@ void Assignment::emit()
 
     if (lValue->isPrimitive())
     {
-        if (lValue->getTypeIndicator() != expression->getTypeIndicator()) throw std::runtime_error("Assignment::emit() - attempting to assign a primitive LValue, the lLValue operand has type " + std::to_string(lValue->getTypeIndicator()) + " and expression operand has type " + std::to_string(expression->getTypeIndicator()));
+        if (lValue->getPrimitiveType() != expression->getPrimitiveType()) throw std::runtime_error("Assignment::emit() - attempting to assign a primitive LValue, the lLValue operand has type " + std::to_string(
+                    lValue->getPrimitiveType()) + " and expression operand has type " + std::to_string(
+                    expression->getPrimitiveType()));
         Register staging = expression->emit();
         std::cout << "sw " << staging.getName() << " " << leftAddress << "(" << leftBase.getName() << ")\n\n";
         rp.returnRegister(staging);
     }
-    else if (lValue->getStyle() == ARRAY_TYPE || lValue->getStyle() == RECORD_TYPE)
+    else if (lValue->getStyle() == ARRAY || lValue->getStyle() == RECORD)
     {
         LValue* rightLValue = (dynamic_cast<LValueExpression*>(expression))->lValue;
         int leftSize = lValue->getInnerMostType()->computeSize();

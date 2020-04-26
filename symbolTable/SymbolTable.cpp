@@ -68,7 +68,6 @@ void SymbolTable::popScope()
 Entry SymbolTable::retrieveEntry(std::string key)
 {
     int i = scopes.size() - 1;
-    std::cout << "# scopes in st are: " << scopes.size()  << "\n";
     while (i != -1)
     {
         if (scopes[i].containsEntry(key)) return scopes[i].getEntry(key);

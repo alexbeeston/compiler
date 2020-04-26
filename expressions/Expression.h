@@ -14,11 +14,11 @@ struct Expression
 {
     int value;
     virtual bool isCTV();
-    TypeIndicator typeIndicator;
+    PrimitiveType typeIndicator;
     virtual int getValue();
     virtual void print();
     virtual Register emit();
-    virtual TypeIndicator getTypeIndicator();
-    virtual Style getStyle();
+    virtual PrimitiveType getPrimitiveType();
+    virtual TypeStyle getStyle();
 };
 #endif //COMPILERS_EXPRESSION_H

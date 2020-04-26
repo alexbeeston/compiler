@@ -5,7 +5,7 @@
 
 ArrayType::ArrayType(Expression* p_low, Expression* p_high, BaseType* p_type)
 {
-    style = ARRAY_TYPE;
+    style = ARRAY;
     low = p_low;
     high = p_high;
     underlyingType = p_type;
@@ -18,9 +18,9 @@ int ArrayType::computeSize()
     return multiplier * length;
 }
 
-TypeIndicator ArrayType::getTypeIndicator()
+PrimitiveType ArrayType::getPrimitiveType()
 {
-    return underlyingType->getTypeIndicator();
+    return underlyingType->getPrimitiveType();
 }
 
 void ArrayType::print()

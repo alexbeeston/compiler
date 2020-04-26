@@ -17,7 +17,7 @@ struct SimpleType:BaseType
     bool isPrimitive() override;
 
     // the following functions are necessary because a simple type is a string, which could be a primitive type or the name of an array or record type
-    TypeIndicator getTypeIndicator() override;
+    PrimitiveType getPrimitiveType() override;
     int computeSize() override;
     bool isAlias() override;
 };

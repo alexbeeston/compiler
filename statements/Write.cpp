@@ -25,13 +25,14 @@ void Write::emit()
     std::cout << "# write\n";
     for (Expression* expression : *expressions)
     {
-        if (expression->getTypeIndicator() == INTEGER || expression->getTypeIndicator() == BOOLEAN) std::cout << "li $v0 1   # 1 = system call to print an integer; used for ints and bools\n";
-        else if (expression->getTypeIndicator() == CHAR) std::cout << "li $v0 11   # 11 = system call to print an char\n";
-        else if (expression->getTypeIndicator() == STRING) std::cout << "li $v0 4   # 4 = system call to print a label to a string\n";
+        if (expression->getPrimitiveType() == INTEGER || expression->getPrimitiveType() == BOOLEAN) std::cout << "li $v0 1   # 1 = system call to print an integer; used for ints and bools\n";
+        else if (expression->getPrimitiveType() == CHAR) std::cout << "li $v0 11   # 11 = system call to print an char\n";
+        else if (expression->getPrimitiveType() == STRING) std::cout << "li $v0 4   # 4 = system call to print a label to a string\n";
         else throw std::runtime_error("Write::emit() - The expression doesn't know if its an int, char, or string");
+        std::cout << std::endl;
         Register r = expression->emit();
         std::cout << "la $a0 (" << r.getName() << ")\n";
-        std::cout << "syscall\n";
+        std::cout << "syscall\n\n";
         rp.returnRegister(r);
     }
 }

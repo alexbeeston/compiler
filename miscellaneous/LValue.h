@@ -21,8 +21,8 @@ struct LValue
     Register getBaseRegister();
     int getOffset();
     bool isPrimitive();
-    Style getStyle();
-    TypeIndicator getTypeIndicator();
+    TypeStyle getStyle();
+    PrimitiveType getPrimitiveType();
     BaseType* getInnerMostType();
 };
 #endif //COMPILERS_LVALUE_H

@@ -26,7 +26,8 @@ void If::print()
 void If::emit()
 {
     // validation and label preparation
-    if (ifBlock->expression->getTypeIndicator() != BOOLEAN) throw std::runtime_error("If::emit() - if block has expression of type " + ifBlock->expression->getTypeIndicator());
+    if (ifBlock->expression->getPrimitiveType() != BOOLEAN) throw std::runtime_error("If::emit() - if block has expression of type " +
+                                                                                     ifBlock->expression->getPrimitiveType());
     std::vector<std::string> elseIfLabels = std::vector<std::string>();
     for (ConditionalSequence* sequence : *elseIfBlocks) elseIfLabels.push_back(st.getNextIfLabel());
     std::string elseLabel = st.getNextIfLabel();
@@ -49,7 +50,7 @@ void If::emit()
     for (int i = 0; i < elseIfBlocks->size(); i ++)
     {
         // else if test
-        if (elseIfBlocks->at(i)->expression->getTypeIndicator() != BOOLEAN) throw std::runtime_error("If::emit() - conditional expression for else if block not boolean");
+        if (elseIfBlocks->at(i)->expression->getPrimitiveType() != BOOLEAN) throw std::runtime_error("If::emit() - conditional expression for else if block not boolean");
         std::cout << "\n# If - elseif (test) \n";
         std::cout << elseIfLabels[i] << ":\n";
         test = elseIfBlocks->at(i)->expression->emit();
