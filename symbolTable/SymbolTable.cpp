@@ -14,6 +14,7 @@ SymbolTable::SymbolTable()
     nextForLabel = 0;
     nextIfLabel = 0;
     topScope = -1;
+    addingGlobals = true;
 
     // initialize symbol table with boolean constants constants
     std::string boolsLower[] = {"false", "true"};

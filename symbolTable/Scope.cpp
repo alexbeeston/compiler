@@ -10,13 +10,13 @@ Scope::Scope() { }
 int Scope::addConstructs(Prelude prelude, int nextAddress)
 {
     int initialNextAddress = nextAddress;
-    for (Constant* i : *prelude.constants) entries[i->ident] = Entry(i->ident, i->value);
+    for (Constant* i : *prelude.constants) entries[i->ident] = Entry(i->ident, i->value, st.addingGlobals);
     for (DeclaredType* declaredType : *prelude.declaredTypes) types[declaredType->identifier] = declaredType->type;
     for (TypedList* list: *prelude.vars)
     {
         for (std::string* name: *list->identList)
         {
-            entries[*name] = Entry(*name, list->type, nextAddress);
+            entries[*name] = Entry(*name, list->type, nextAddress, st.addingGlobals);
             nextAddress += list->type->computeSize();
         }
     }

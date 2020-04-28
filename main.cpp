@@ -10,6 +10,5 @@ RegisterPool rp;
 int main()
 {
 	yyparse();
-    st.pushScope(*program->prelude);
 	program->emit();
 }

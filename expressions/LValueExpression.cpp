@@ -30,16 +30,17 @@ Register LValueExpression::emit()
     else if (entry.label == VARIABLE)
     {
         Register baseRegister = lValue->getBaseRegister();
+        int offset = lValue->getOffset();
         if (lValue->isPrimitive())
         {
             r.containsAddress = false;
-            std::cout << "lw " << r.getName() << " " << lValue->getOffset() << "(" << baseRegister.getName() << ") # loaded primitive LValue\n";
+            std::cout << "lw " << r.getName() << " " << offset << "(" << baseRegister.getName() << ") # loaded primitive LValue\n";
         }
         else
         {
             r.containsAddress = true;
             r.space = lValue->getInnerMostType()->computeSize();
-            std::cout << "la " << r.getName() << " (" << baseRegister.getName() << ")  # loaded address of non-primitive lValue\n";
+            std::cout << "la " << r.getName() << " " << offset << "(" << baseRegister.getName() << ")  # loaded address of non-primitive lValue\n";
         }
         rp.returnRegister(baseRegister);
     }

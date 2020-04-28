@@ -14,16 +14,16 @@ struct Entry
 {
     // fields
     int offset; // -1 for constants (set by symbol table)
-    Register baseRegister; // for variables only
     std::string ident;
     Expression* value = nullptr; // used by constants only
     BaseType* type;
     EntryStyle label;
+    bool isGlobal;
 
     // init
     Entry();
-    Entry(std::string, Expression*);
-    Entry(std::string, BaseType*, int);
+    Entry(std::string, Expression*, bool);
+    Entry(std::string, BaseType*, int, bool);
 
     // other functions
     virtual void print();

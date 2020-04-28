@@ -19,7 +19,12 @@ void Program::prettyPrint()
 
 void Program::emit()
 {
+    st.pushScope(*prelude);
+    st.addingGlobals = false;
+
     // emit each function declaration
+
+    std::cout << "main:\n";
     block->emit();
     std::cout << "li $v0 10\n";
     std::cout << "syscall\n";

@@ -18,7 +18,7 @@ struct SymbolTable
     void pushScope(Prelude);
     void pushScope_iterator(std::string);
     void popScope();
-
+    bool addingGlobals;
     int topScope;
     int nextAddress;
     Entry retrieveEntry(std::string);
