@@ -26,6 +26,7 @@ Register SuccFunc::emit()
     {
         Register result = expression->emit();
         std::cout << "addi " << result.getName() << " " << result.getName() << " 1\n";
+        result.containsAddress = false;
         return result;
     }
     else throw std::runtime_error("SuccFunc::emit() - expression is not string, boolean, or integer");

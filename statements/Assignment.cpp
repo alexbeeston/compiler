@@ -21,33 +21,37 @@ void Assignment::print()
 
 void Assignment::emit()
 {
+    // validation
     Entry entry = st.retrieveEntry(lValue->getKey());
     if (entry.label == CONSTANT) throw std::runtime_error("Can not assign to a constant\n");
     if (lValue->getStyle() != expression->getStyle()) throw std::runtime_error("Assignment::emit() - styles of LValue and Expression in an assignment do not match. LValue = " + std::to_string(lValue->getStyle()) + ", expression = " + std::to_string(expression->getStyle()));
-    std::cout << "# assignment\n";
-    int leftAddress = lValue->getOffset();
-    Register leftBase = lValue->getBaseRegister();
 
+    // assign to memory
+    int leftOffsetStart = lValue->getOffset();
+    Register leftBase = lValue->getBaseRegister();
+    Register expressionRegister = expression->emit();
+    std::cout << "# assignment\n";
     if (lValue->isPrimitive())
     {
-        if (lValue->getPrimitiveType() != expression->getPrimitiveType()) throw std::runtime_error("Assignment::emit() - attempting to assign a primitive LValue, the lLValue operand has type " + std::to_string(
-                    lValue->getPrimitiveType()) + " and expression operand has type " + std::to_string(
-                    expression->getPrimitiveType()));
-        Register staging = expression->emit();
-        std::cout << "sw " << staging.getName() << " " << leftAddress << "(" << leftBase.getName() << ")\n\n";
-        rp.returnRegister(staging);
+        // validation
+        if (lValue->getPrimitiveType() != expression->getPrimitiveType()) throw std::runtime_error("Assignment::emit() - attempting to assign a primitive LValue, the lLValue operand has type " + std::to_string(lValue->getPrimitiveType()) + " and expression operand has type " + std::to_string(expression->getPrimitiveType()));
+        if (expressionRegister.containsAddress) throw std::runtime_error("Assignment::emit() - attempting to assign to a primitive LValue, but the register returned by the expression contains an address");
+
+        // copy memory
+        std::cout << "sw " << expressionRegister.getName() << " " << leftOffsetStart << "(" << leftBase.getName() << ") # assigned to a primitive LValue\n";
+        rp.returnRegister(expressionRegister);
     }
-    else if (lValue->getStyle() == ARRAY || lValue->getStyle() == RECORD)
+    else
     {
-        LValue* rightLValue = (dynamic_cast<LValueExpression*>(expression))->lValue;
+        // validation
+        if (!expressionRegister.containsAddress) throw std::runtime_error("Assignment::emit() - attempting to assign to a non-primitive LValue, but the register returned by the expression does not contain an address");
         int leftSize = lValue->getInnerMostType()->computeSize();
-        int rightSize = rightLValue->getInnerMostType()->computeSize();
-        if (leftSize != rightSize) throw std::runtime_error("Assignment::emit() - sizes of left of right LValues don't match. Left size is " + std::to_string(leftSize) + " and right size is " + std::to_string(rightSize) + ".");
-        Register rightBase = rightLValue->getBaseRegister();
-        int rightAddress = rightLValue->getOffset();
-        copyContinuousMemory(leftAddress, rightAddress, leftSize, leftBase, rightBase);
-        rp.returnRegister(rightBase);
+        if (leftSize != expressionRegister.space) throw std::runtime_error("Assignment::emit() - assigning a non-primitive expression to an lvalue, but sizes don't match. Left size is " + std::to_string(leftSize) + " and right size is " + std::to_string(expressionRegister.space));
+
+        // copy memory block
+        static int RIGHT_OFFSET = 0;
+        copyContinuousMemory(leftOffsetStart, RIGHT_OFFSET, expressionRegister.space, leftBase, expressionRegister);
     }
-    else throw std::runtime_error("Assignment::emit() - lValue is not primitive, nor of ARRAY_STYLE, nor of RECORD_STYLE");
+    std::cout << std::endl;
     rp.returnRegister(leftBase);
 }

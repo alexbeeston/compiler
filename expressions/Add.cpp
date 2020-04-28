@@ -22,6 +22,7 @@ Register Add::emit()
     Register right = opRegs[1];
     std::cout << "add " << left.getName() << " " << left.getName() << " " << right.getName() << "\n";
     rp.returnRegister(right);
+    left.containsAddress = false;
     return left;
 }
 

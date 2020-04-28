@@ -35,6 +35,7 @@ Register Literal::emit()
     if (typeIndicator == INTEGER || typeIndicator == CHAR || typeIndicator == BOOLEAN) std::cout << "li " << r.getName() << " " << value << "\n";
     else if (typeIndicator == STRING) std::cout << "la " << r.getName() << " message" << value << "\n";
     else std::cout << "Error: attempting to load an expression that is not an integer, character, bool, or string.\n";
+    r.containsAddress = false;
     return r;
 }
 

@@ -24,6 +24,7 @@ Register Negative::emit()
         std::cout << "mult " << originalValue.getName() << " " << negativeOne.getName() << "\n";
         rp.returnRegister(negativeOne);
         std::cout << "mflo " << originalValue.getName() << "\n";
+        originalValue.containsAddress = false;
         return originalValue;
     }
     else throw std::runtime_error("Negative::emit() - can't get the negative value of a expression that's not an integer");

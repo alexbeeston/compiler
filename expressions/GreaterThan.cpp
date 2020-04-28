@@ -22,6 +22,7 @@ Register GreaterThan::emit()
     Register right = opRegs[1];
     std::cout << "slt " << left.getName() << " " << right.getName() << " " << left.getName() << "\n";
     rp.returnRegister(right);
+    left.containsAddress = false;
     return left;
 }
 

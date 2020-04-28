@@ -23,6 +23,7 @@ Register Multiply::emit()
     std::cout << "mult " << left.getName() << " " << right.getName() << "\n";
     rp.returnRegister(right);
     std::cout << "mflo " << left.getName() << "\n";
+    left.containsAddress = false;
     return left;
 }
 

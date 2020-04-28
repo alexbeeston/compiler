@@ -24,13 +24,23 @@ Register LValueExpression::emit()
     {
         if (entry.value->getPrimitiveType() == STRING) std::cout << "la " << r.getName() << " message";
         else std::cout << "li " << r.getName() << " ";
-        std::cout << entry.value->getValue() << "   # loaded an Lvalue\n"; // what should happen if the LValue's is an array or record?
+        std::cout << entry.value->getValue() << "   # loaded an Lvalue\n";
+        r.containsAddress = false;
     }
     else if (entry.label == VARIABLE)
     {
-        int offset = lValue->getOffset();
         Register baseRegister = lValue->getBaseRegister();
-        std::cout << "lw " << r.getName() << " " << offset << "(" << baseRegister.getName() << ")   # loaded an LValueExpression Variable\n";
+        if (lValue->isPrimitive())
+        {
+            r.containsAddress = false;
+            std::cout << "lw " << r.getName() << " " << lValue->getOffset() << "(" << baseRegister.getName() << ") # loaded primitive LValue\n";
+        }
+        else
+        {
+            r.containsAddress = true;
+            r.space = lValue->getInnerMostType()->computeSize();
+            std::cout << "la " << r.getName() << " (" << baseRegister.getName() << ")  # loaded address of non-primitive lValue\n";
+        }
         rp.returnRegister(baseRegister);
     }
     else throw std::runtime_error("LValueExpression::emit() - entry label isn't a variable or constant");

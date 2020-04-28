@@ -47,7 +47,9 @@ Register FunctionCall::emit()
     spilledRegisters[fp_registerName] = spillRegOffset;
 
     std::cout << std::endl;
-    return rp.getRegister();
+    Register r = rp.getRegister();
+    r.containsAddress = true;
+    return r;
 }
 
 PrimitiveType FunctionCall::getPrimitiveType()

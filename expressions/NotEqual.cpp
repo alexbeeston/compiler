@@ -21,6 +21,7 @@ Register NotEqual::emit()
     std::cout << "subu " << r.getName() << " " << opRegs[0].getName() << " " << opRegs[1].getName() << "\n";
     std::cout << "sltu " << r.getName() << " $zero " << r.getName() << "\n";
     returnRegisters(opRegs);
+    r.containsAddress = false;
     return r;
 }
 

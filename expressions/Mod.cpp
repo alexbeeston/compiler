@@ -23,6 +23,7 @@ Register Mod::emit()
     std::cout << "div " << left.getName() << " " << right.getName() << "\n";
     rp.returnRegister(right);
     std::cout << "mfhi " << left.getName() << "\n";
+    left.containsAddress = false;
     return left;
 }
 

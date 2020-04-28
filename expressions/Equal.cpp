@@ -23,6 +23,7 @@ Register Equal::emit()
         std::cout << "xori " << r.getName() << " " << r.getName() << " 1\n";
         returnRegisters(opRegs);
     }
+    r.containsAddress = false;
     return r;
 }
 

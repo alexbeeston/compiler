@@ -22,6 +22,7 @@ Register LessThanEqual::emit()
     Register right = opRegs[1];
     std::cout << "sle " << left.getName() << " " << left.getName() << " " << right.getName() << "\n";
     rp.returnRegister(right);
+    left.containsAddress = false;
     return left;
 }
 

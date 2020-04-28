@@ -13,5 +13,7 @@ struct Register
     Register(std::string);
     Register();
     std::string getName();
+    bool containsAddress;
+    int space;
 };
 #endif //COMPILERS_REGISTER_H
