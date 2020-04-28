@@ -27,10 +27,10 @@ void Assignment::emit()
     if (lValue->getStyle() != expression->getStyle()) throw std::runtime_error("Assignment::emit() - styles of LValue and Expression in an assignment do not match. LValue = " + std::to_string(lValue->getStyle()) + ", expression = " + std::to_string(expression->getStyle()));
 
     // assign to memory
+    std::cout << "# assignment\n";
     int leftOffsetStart = lValue->getOffset();
     Register leftBase = lValue->getBaseRegister();
     Register expressionRegister = expression->emit();
-    std::cout << "# assignment\n";
     if (lValue->isPrimitive())
     {
         // validation

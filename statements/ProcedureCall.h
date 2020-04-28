@@ -17,5 +17,6 @@ struct ProcedureCall:Statement
     std::vector<Expression*>* expressions;
     ProcedureCall(char*, std::vector<Expression*>*);
     void print() override;
+    void emit() override;
 };
 #endif //COMPILERS_PROCEDURECALL_H

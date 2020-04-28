@@ -7,5 +7,6 @@
 extern int lineNumber;
 extern RegisterPool rp;
 extern SymbolTable st;
+static int WORD_SIZE = 4;
 
 #endif // COMPILERS_GLOBALS_H

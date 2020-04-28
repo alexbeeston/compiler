@@ -23,33 +23,7 @@ void FunctionCall::print()
 
 Register FunctionCall::emit()
 {
-    // spill registers
-    static int WORD_SIZE = 4;
-    static int NUM_RESERVED_REGISTERS = 2;
-    int spillRegSize = WORD_SIZE * (rp.registersInUse.size() + NUM_RESERVED_REGISTERS);
-    auto spilledRegisters = std::map<std::string, int>();
-    int spillRegOffset = 0;
-    std::cout << "# spill registers\n";
-    std::cout << "addi $sp $sp -" << spillRegSize << "\n";
-    for (Register reg : rp.registersInUse)
-    {
-        std::cout << "sw " << reg.getName() << " " << spillRegOffset << "($sp)\n";
-        spilledRegisters[reg.getName()] = spillRegOffset;
-        spillRegOffset += WORD_SIZE;
-    }
-    std::string ra_registerName = "$ra";
-    std::cout << "sw " << ra_registerName << " " << spillRegOffset << "($sp)\n";
-    spilledRegisters[ra_registerName] = spillRegOffset;
-    spillRegOffset += WORD_SIZE;
 
-    std::string fp_registerName = "$fp";
-    std::cout << "sw " << fp_registerName << " " << spillRegOffset << "($sp)\n";
-    spilledRegisters[fp_registerName] = spillRegOffset;
-
-    std::cout << std::endl;
-    Register r = rp.getRegister();
-    r.containsAddress = true;
-    return r;
 }
 
 PrimitiveType FunctionCall::getPrimitiveType()
