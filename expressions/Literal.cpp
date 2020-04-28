@@ -32,8 +32,8 @@ Literal::Literal(char* p_value)
 Register Literal::emit()
 {
     Register r = rp.getRegister();
-    if (typeIndicator == INTEGER || typeIndicator == CHAR || typeIndicator == BOOLEAN) std::cout << "li " << r.getName() << " " << value << "   # loaded an integer (used for a integer, char, or bool)\n";
-    else if (typeIndicator == STRING) std::cout << "la " << r.getName() << " message" << value << "   # loaded a string literal\n";
+    if (typeIndicator == INTEGER || typeIndicator == CHAR || typeIndicator == BOOLEAN) std::cout << "li " << r.getName() << " " << value << "\n";
+    else if (typeIndicator == STRING) std::cout << "la " << r.getName() << " message" << value << "\n";
     else std::cout << "Error: attempting to load an expression that is not an integer, character, bool, or string.\n";
     return r;
 }
