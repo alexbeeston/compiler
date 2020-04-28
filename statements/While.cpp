@@ -24,7 +24,7 @@ void While::print()
 void While::emit()
 {
     std::string testLabel = st.getWhileLabel();
-    std::string nextLabel = st.getNextLabel();
+    std::string nextLabel = st.getNextNextLabel();
     std::cout << "\n#While - test\n";
     std::cout << testLabel + ":\n";
     Register testResult = expression->emit();

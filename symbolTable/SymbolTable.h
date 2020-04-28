@@ -19,12 +19,15 @@ struct SymbolTable
     void pushScope_iterator(std::string);
     void popScope();
     bool addingGlobals;
-    int topScope;
     int nextAddress;
     Entry retrieveEntry(std::string);
     BaseType* retrieveType(std::string);
     std::vector<std::string> strings;
     int insertMessage(std::string);
+
+    // routines
+    std::map<std::string, Routine*> routines;
+    void addRoutines(std::vector<Routine*>*);
 
     // control elements
     int repeatLabelCounter;
@@ -32,7 +35,7 @@ struct SymbolTable
     int whileLabelCounter;
     std::string getWhileLabel();
     int nextLabelCounter;
-    std::string getNextLabel();
+    std::string getNextNextLabel();
     int nextForLabel;
     std::string getNextForLabel();
     int nextIfLabel;

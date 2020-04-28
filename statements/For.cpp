@@ -48,7 +48,7 @@ void For::emit()
 
     // test
     std::string testLabel = st.getNextForLabel();
-    std::string nextLabel = st.getNextLabel();
+    std::string nextLabel = st.getNextNextLabel();
     Register iteratorValue = rp.getRegister();
     std::cout << "\n# For - test\n";
     std::cout << testLabel << ":\n";

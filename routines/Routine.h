@@ -12,7 +12,7 @@
 
 struct Routine
 {
-    char* ident;
+    std::string ident;
     std::vector<ParameterSet*>* formalParameters;
     Body* body;
     virtual void print();

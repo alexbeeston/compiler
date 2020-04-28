@@ -13,7 +13,6 @@ SymbolTable::SymbolTable()
     nextLabelCounter = 0;
     nextForLabel = 0;
     nextIfLabel = 0;
-    topScope = -1;
     addingGlobals = true;
 
     // initialize symbol table with boolean constants constants
@@ -66,6 +65,14 @@ void SymbolTable::popScope()
     scopes.pop_back();
 }
 
+void SymbolTable::addRoutines(std::vector<Routine*>* p_routines)
+{
+    for (Routine* routine : *p_routines)
+    {
+        routines[routine->ident] = routine;
+    }
+}
+
 Entry SymbolTable::retrieveEntry(std::string key)
 {
     int i = scopes.size() - 1;
@@ -106,7 +113,7 @@ std::string SymbolTable::getWhileLabel()
     return std::string("w" + std::to_string(whileLabelCounter));
 }
 
-std::string SymbolTable::getNextLabel()
+std::string SymbolTable::getNextNextLabel()
 {
     nextLabelCounter++;
     return std::string("n" + std::to_string(nextLabelCounter));

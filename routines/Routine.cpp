@@ -7,7 +7,7 @@
 
 Routine::Routine(char* p_ident, std::vector<ParameterSet*>* p_formalParameters, Body* p_body)
 {
-    ident = p_ident;
+    ident = std::string(p_ident);
     formalParameters = p_formalParameters;
     body = p_body;
 }

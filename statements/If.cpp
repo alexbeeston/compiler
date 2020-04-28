@@ -31,7 +31,7 @@ void If::emit()
     std::vector<std::string> elseIfLabels = std::vector<std::string>();
     for (ConditionalSequence* sequence : *elseIfBlocks) elseIfLabels.push_back(st.getNextIfLabel());
     std::string elseLabel = st.getNextIfLabel();
-    std::string nextLabel = st.getNextLabel();
+    std::string nextLabel = st.getNextNextLabel();
 
     // if test
     std::cout << "# If - if block (test)\n";

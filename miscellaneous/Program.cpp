@@ -19,21 +19,24 @@ void Program::prettyPrint()
 
 void Program::emit()
 {
+    // global constants, types, and variables
     st.pushScope(*prelude);
     st.addingGlobals = false;
 
-    // emit each function declaration
+    // routines
+    st.addRoutines(routines);
 
+    // main block
     std::cout << "main:\n";
     block->emit();
     std::cout << "li $v0 10\n";
     std::cout << "syscall\n";
 
-    // emit the string declarations
+    // strings
     std::cout << "\n\n .data\n";
     std::cout << ".asciiz\n";
     int counter = 0;
-    for (std::string message : st.strings)
+    for (const std::string& message : st.strings)
     {
         std::cout << "message" << std::to_string(counter) << ":  " << message << "\n";
         ++counter;
