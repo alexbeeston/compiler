@@ -69,8 +69,15 @@ void SymbolTable::addRoutines(std::vector<Routine*>* p_routines)
 {
     for (Routine* routine : *p_routines)
     {
+        routine->computeOffsets();
         routines[routine->ident] = routine;
     }
+}
+
+Routine* SymbolTable::retrieveRoutine(std::string name)
+{
+    if (routines.count(name) == 1) return routines[name];
+    else throw std::runtime_error("SymbolTable::retrieveRoutine() - routine with name \"" + name + "\" not found in symbol table");
 }
 
 Entry SymbolTable::retrieveEntry(std::string key)

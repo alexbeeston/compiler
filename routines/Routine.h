@@ -18,5 +18,10 @@ struct Routine
     virtual void print();
     void printParameters();
     Routine(char*, std::vector<ParameterSet*>*, Body*);
+    void emit();
+    std::vector<int> offsets;
+    void computeOffsets_internal(int);
+    virtual void computeOffsets();
+    int stackSize;
 };
 #endif //COMPILERS_ROUTINE_H

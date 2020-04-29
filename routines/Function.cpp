@@ -17,3 +17,5 @@ void Function::print()
     if (body != nullptr) { body->print(); }
     std::cout << std::endl;
 }
+
+void Function::computeOffsets() { computeOffsets_internal(type->computeSize()); }

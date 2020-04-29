@@ -24,7 +24,7 @@ std::map<std::string, int> spillRegisters()
     int spillRegSize = WORD_SIZE * (rp.registersInUse.size() + NUM_RESERVED_REGISTERS);
     auto spilledRegisters = std::map<std::string, int>();
     int spillRegOffset = 0;
-    std::cout << "# spill registers\n";
+    std::cout << "# Spill Registers\n";
     std::cout << "addi $sp $sp -" << spillRegSize << "\n";
     for (Register reg : rp.registersInUse)
     {
@@ -39,16 +39,38 @@ std::map<std::string, int> spillRegisters()
     std::string fp_registerName = "$fp";
     std::cout << "sw " << fp_registerName << " " << spillRegOffset << "($sp)\n";
     spilledRegisters[fp_registerName] = spillRegOffset;
+    std::cout << std::endl;
     return spilledRegisters;
 }
 
 void restoreRegisters(std::map<std::string, int> registers)
 {
-    std::cout << "# restore spilled registers\n";
+    std::cout << "# Restore Spilled Registers\n";
     for (auto & iterator : registers)
     {
         std::cout << "lw " << iterator.first << " " << iterator.second << "($sp)\n";
     }
     std::cout << "addi $sp $sp " << registers.size() * WORD_SIZE << "\n";
+    std::cout << std::endl;
 }
 
+int addParametersToStack(std::string routineName, std::vector<Expression*> expressions)
+{
+    std::cout << "# Add Parameters To Stack\n";
+    auto routine = st.retrieveRoutine(routineName);
+    std::cout << "addi $sp $sp -" << routine->stackSize << "\n";
+    auto staging = rp.getRegister();
+    for (auto offset : routine->offsets)
+    {
+        std::cout << "sw " << staging.getName() << " " << offset << "($sp)\n";
+    }
+    std::cout << std::endl;
+    return routine->stackSize;
+}
+
+void deallocateParameters(int size)
+{
+    std::cout << "# Deallocate Parameters\n";
+    std::cout << "addi $sp $sp " << size << "\n";
+    std::cout << std::endl;
+}

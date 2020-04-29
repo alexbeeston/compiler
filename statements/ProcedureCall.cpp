@@ -23,5 +23,7 @@ void ProcedureCall::print()
 void ProcedureCall::emit()
 {
     auto spilledRegisters = spillRegisters();
+    int sizeOfParameters = addParametersToStack(*ident, *expressions);
+    deallocateParameters(sizeOfParameters);
     restoreRegisters(spilledRegisters);
 }

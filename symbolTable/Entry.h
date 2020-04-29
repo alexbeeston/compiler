@@ -18,7 +18,8 @@ struct Entry
     Expression* value = nullptr; // used by constants only
     BaseType* type;
     EntryStyle label;
-    bool isGlobal;
+    Register baseRegister;
+    void setRegister(bool);
 
     // init
     Entry();

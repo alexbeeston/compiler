@@ -12,6 +12,6 @@ void Procedure::print()
     std::cout << "PROCEDURE " << ident << "(";
     printParameters();
     std::cout << ")\n";
-    if (body != NULL) { body->print(); };
+    if (body != nullptr) { body->print(); };
     std::cout << std::endl;
 }

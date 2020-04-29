@@ -7,7 +7,7 @@ temp : integer;
 begin
  temp := x;
  x := succ(x);
- return temp;
+ return computeOffsets;
 end;
 
 begin

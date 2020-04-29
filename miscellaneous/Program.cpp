@@ -32,6 +32,8 @@ void Program::emit()
     std::cout << "li $v0 10\n";
     std::cout << "syscall\n";
 
+    // emit functions (here is where the local scopes come into play (?)
+
     // strings
     std::cout << "\n\n .data\n";
     std::cout << ".asciiz\n";

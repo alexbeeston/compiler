@@ -28,6 +28,7 @@ struct SymbolTable
     // routines
     std::map<std::string, Routine*> routines;
     void addRoutines(std::vector<Routine*>*);
+    Routine* retrieveRoutine(std::string);
 
     // control elements
     int repeatLabelCounter;

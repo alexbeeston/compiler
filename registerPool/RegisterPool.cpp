@@ -31,6 +31,8 @@ Register RegisterPool::getGlobalPointer()
     return Register(std::string("$gp"));
 }
 
+Register RegisterPool::getFramePointer() { return Register(std::string("$fp")); }
+
 void RegisterPool::returnRegister(Register reg)
 {
     if (reg.getName() != "$gp" && reg.getName() != "$fp" && reg.getName() != "$sp")
