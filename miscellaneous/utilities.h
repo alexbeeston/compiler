@@ -12,7 +12,7 @@
 
 void copyContinuousMemory(int, int, int, Register, Register);
 std::map<std::string, int> spillRegisters();
-void restoreRegisters(std::map<std::string, int>);
+void restoreSpilledRegisters(std::map<std::string, int> registers);
 int addParametersToStack(std::string, std::vector<Expression*>);
 void deallocateParameters(int);
 

@@ -24,6 +24,8 @@ void ProcedureCall::emit()
 {
     auto spilledRegisters = spillRegisters();
     int sizeOfParameters = addParametersToStack(*ident, *expressions);
+    std::cout << "# Call the Procedure\n";
+    std::cout << "jal " << *ident << "\n\n";
     deallocateParameters(sizeOfParameters);
-    restoreRegisters(spilledRegisters);
+    restoreSpilledRegisters(spilledRegisters);
 }

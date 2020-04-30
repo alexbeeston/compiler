@@ -10,7 +10,12 @@ Routine::Routine(char* p_ident, std::vector<ParameterSet*>* p_formalParameters, 
 {
     ident = std::string(p_ident);
     formalParameters = p_formalParameters;
-    body = p_body;
+    if (p_body == nullptr) forwardDeclared = true;
+    else
+    {
+        forwardDeclared = false;
+        body = p_body;
+    }
 }
 
 void Routine::computeOffsets_internal(int nextOffset)

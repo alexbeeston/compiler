@@ -23,16 +23,16 @@ void Program::emit()
     st.pushScope(*prelude);
     st.addingGlobals = false;
 
-    // routines
+    // add function signatures, at least. If they aren't forward declarations, great.
     st.addRoutines(routines);
+    std::cout << "j main\n\n";
+
 
     // main block
     std::cout << "main:\n";
     block->emit();
     std::cout << "li $v0 10\n";
     std::cout << "syscall\n";
-
-    // emit functions (here is where the local scopes come into play (?)
 
     // strings
     std::cout << "\n\n .data\n";

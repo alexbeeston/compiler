@@ -23,5 +23,6 @@ struct Routine
     void computeOffsets_internal(int);
     virtual void computeOffsets();
     int stackSize;
+    bool forwardDeclared;
 };
 #endif //COMPILERS_ROUTINE_H

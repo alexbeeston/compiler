@@ -43,7 +43,7 @@ std::map<std::string, int> spillRegisters()
     return spilledRegisters;
 }
 
-void restoreRegisters(std::map<std::string, int> registers)
+void restoreSpilledRegisters(std::map<std::string, int> registers)
 {
     std::cout << "# Restore Spilled Registers\n";
     for (auto & iterator : registers)
@@ -56,13 +56,21 @@ void restoreRegisters(std::map<std::string, int> registers)
 
 int addParametersToStack(std::string routineName, std::vector<Expression*> expressions)
 {
-    std::cout << "# Add Parameters To Stack\n";
+    // validate
     auto routine = st.retrieveRoutine(routineName);
+    if (routine->offsets.size() != expressions.size()) throw std::runtime_error("addParametersToStack() - expected " + std::to_string(routine->offsets.size()) + " parameters, received " + std::to_string(expressions.size()) + " parameters");
+    int numParameters = expressions.size();
+
+    // continue
+    std::cout << "# Add Parameters To Stack\n";
     std::cout << "addi $sp $sp -" << routine->stackSize << "\n";
-    auto staging = rp.getRegister();
-    for (auto offset : routine->offsets)
-    {
-        std::cout << "sw " << staging.getName() << " " << offset << "($sp)\n";
+    for (int i = 0; i < numParameters; ++i)
+    { // assume that everything is passed by value for now
+        // if pass by reference, (validate something)
+        // la staging.getName() offset(base)
+        Register staging = expressions[i]->emit();
+        std::cout << "sw " << staging.getName() << " " << routine->offsets[i] << "($sp)\n";
+        rp.returnRegister(staging);
     }
     std::cout << std::endl;
     return routine->stackSize;

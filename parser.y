@@ -282,7 +282,7 @@ Prelude : ConstDecl TypeDecl VarDecl { $$ = new Prelude($1, $2, $3); };
 RoutineDeclList : RoutineDeclList RoutineDeclListItem { $1->push_back($2); }
     | { $$ = new std::vector<Routine*>; };
     RoutineDeclListItem : ProcedureDecl | FunctionDecl ;
-ProcedureDecl : PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE FORWARD DONE { $$ = new Procedure($2, $4, NULL); }
+ProcedureDecl : PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE FORWARD DONE { $$ = new Procedure($2, $4, nullptr); }
     | PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE Body DONE { $$ = new Procedure($2, $4, $7); };
     FormalParameters : ParameterSet ParameterSetList { $2->push_back($1); $$ = $2; } | { std::cout << "no formal paramters\n"; $$ = new std::vector<ParameterSet*>; } ;
             ParameterSet : VarOrRef IdentList COLON Type { $$ = new ParameterSet($1, $2, $4); };

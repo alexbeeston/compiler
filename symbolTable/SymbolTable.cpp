@@ -69,8 +69,21 @@ void SymbolTable::addRoutines(std::vector<Routine*>* p_routines)
 {
     for (Routine* routine : *p_routines)
     {
-        routine->computeOffsets();
-        routines[routine->ident] = routine;
+        if (routines.count(routine->ident) == 1)
+        {
+            Routine* st_routine = routines[routine->ident];
+            if (st_routine->forwardDeclared)
+            {
+                st_routine->body = routine->body;
+                st_routine->forwardDeclared = false;
+            }
+            else throw std::runtime_error("SymbolTable::addRoutines() - routine with name \"" + routine->ident + "\" already in symbol table and is not forward declared");
+        }
+        else
+        {
+            routine->computeOffsets();
+            routines[routine->ident] = routine;
+        }
     }
 }
 
