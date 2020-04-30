@@ -37,17 +37,14 @@ PrimitiveType SimpleType::getPrimitiveType()
 
 bool SimpleType::isPrimitive()
 {
-    if (
-           name.compare("integer") == 0 ||
+    return name == "integer" ||
            name.compare("INTEGER") == 0 ||
            name.compare("char") == 0 ||
            name.compare("CHAR") == 0 ||
            name.compare("string") == 0 ||
            name.compare("STRING") == 0 ||
            name.compare("boolean") == 0 ||
-           name.compare("BOOLEAN") == 0
-       ) return true;
-    else return false;
+           name.compare("BOOLEAN") == 0;
 }
 
 bool SimpleType::isAlias()

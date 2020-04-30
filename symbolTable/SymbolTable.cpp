@@ -7,10 +7,9 @@
 
 SymbolTable::SymbolTable()
 {
-    nextAddress = 0;
     repeatLabelCounter = 0;
     whileLabelCounter = 0;
-    nextLabelCounter = 0;
+    nextNextLabelCounter = 0;
     nextForLabel = 0;
     nextIfLabel = 0;
     addingGlobals = true;
@@ -37,14 +36,17 @@ SymbolTable::SymbolTable()
         primitiveTypes->push_back(new DeclaredType(primitivesLower[i], new SimpleType(&primitivesLower[i])));
         primitiveTypes->push_back(new DeclaredType(primitivesUpper[i], new SimpleType(&primitivesUpper[i])));
     }
-    pushScope(Prelude(booleanConstants, primitiveTypes, new std::vector<TypedList*>()));
+    auto prelude = Prelude(booleanConstants, primitiveTypes, new std::vector<TypedList*>());
+    pushScope(nullptr, std::vector<ParameterSet*>(), prelude);
 }
 
-void SymbolTable::pushScope(Prelude prelude)
+void SymbolTable::pushScope(BaseType* returnType, std::vector<ParameterSet*> parameters, Prelude prelude)
 {
     Scope newScope = Scope();
     scopes.push_back(newScope);
-    nextAddress += scopes.back().addConstructs(prelude, nextAddress);
+    if (returnType != nullptr) scopes.back().accommodateReturnType(returnType);
+    scopes.back().addParameters(parameters);
+    scopes.back().addLocalPrelude(prelude);
 }
 
 void SymbolTable::pushScope_iterator(std::string ident)
@@ -56,12 +58,13 @@ void SymbolTable::pushScope_iterator(std::string ident)
     auto* typedLists = new std::vector<TypedList*>();
     typedLists->push_back(typedList);
     Prelude p = Prelude(new std::vector<Constant*>, new std::vector<DeclaredType*>, typedLists);
-    pushScope(p);
+    pushScope(nullptr, std::vector<ParameterSet*>(), p);
+    throw std::runtime_error("SymbolTable::pushScope_iterator() - this function is legacy; needs to be updated. Can we add an iterator to a global scope without touching the frame pointer? Or should be touch the frame pointer?");
 }
 
 void SymbolTable::popScope()
 {
-    nextAddress -= scopes.back().getSize();
+    scopes.back().getSize();
     scopes.pop_back();
 }
 
@@ -135,8 +138,8 @@ std::string SymbolTable::getWhileLabel()
 
 std::string SymbolTable::getNextNextLabel()
 {
-    nextLabelCounter++;
-    return std::string("n" + std::to_string(nextLabelCounter));
+    nextNextLabelCounter++;
+    return std::string("n" + std::to_string(nextNextLabelCounter));
 }
 
 std::string SymbolTable::getNextForLabel()

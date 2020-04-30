@@ -2,29 +2,52 @@
 
 #include "Scope.h"
 #include "../global.h"
+#include <cmath>
 
 extern RegisterPool rp;
 
-Scope::Scope() { }
+Scope::Scope() { nextAddress = 0; }
 
-int Scope::addConstructs(Prelude prelude, int nextAddress)
+void Scope::accommodateReturnType(BaseType* type)
 {
-    int initialNextAddress = nextAddress;
+    updateNextAddress(type->computeSize());
+}
+
+void Scope::addParameters(std::vector<ParameterSet*> parameterSets)
+{
+    for (auto set : parameterSets)
+    {
+        int size = set->type->computeSize();
+        for (std::string identifier : set->identList)
+        {
+            Entry var = Entry(identifier, set->type, nextAddress, st.addingGlobals);
+            updateNextAddress(size);
+        }
+    }
+}
+
+void Scope::addLocalPrelude(Prelude prelude)
+{
     for (Constant* i : *prelude.constants) entries[i->ident] = Entry(i->ident, i->value, st.addingGlobals);
     for (DeclaredType* declaredType : *prelude.declaredTypes) types[declaredType->identifier] = declaredType->type;
     for (TypedList* list: *prelude.vars)
     {
+        int size = list->type->computeSize();
         for (std::string* name: *list->identList)
         {
             entries[*name] = Entry(*name, list->type, nextAddress, st.addingGlobals);
-            nextAddress += list->type->computeSize();
+            updateNextAddress(size);
         }
     }
-    size = nextAddress - initialNextAddress;
-    return nextAddress;
 }
 
-int Scope::getSize() { return size; }
+void Scope::updateNextAddress(int amount)
+{
+    if (st.addingGlobals) nextAddress += amount;
+    else nextAddress -= amount;
+}
+
+int Scope::getSize() { return std::abs(nextAddress); }
 
 bool Scope::containsType(std::string key)
 {

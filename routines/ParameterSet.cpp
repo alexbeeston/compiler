@@ -2,10 +2,10 @@
 
 #include "ParameterSet.h"
 
-ParameterSet::ParameterSet(int p_passBy, std::vector<char *>* p_identList, BaseType* p_type)
+ParameterSet::ParameterSet(int p_passBy, std::vector<char*>* p_identList, BaseType* p_type)
 {
     passBy = p_passBy;
-    identList = p_identList;
+    for (auto ident : *p_identList) identList.push_back(std::string(ident));
     type = p_type;
 }
 

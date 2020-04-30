@@ -11,7 +11,7 @@
 struct ParameterSet
 {
     int passBy;
-    std::vector<char*>* identList;
+    std::vector<std::string> identList;
     BaseType* type;
     ParameterSet(int, std::vector<char*>*, BaseType*);
     void print();

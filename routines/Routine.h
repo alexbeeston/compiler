@@ -9,6 +9,7 @@
 
 #include "ParameterSet.h"
 #include "Body.h"
+#include "../types/BaseType.h"
 
 struct Routine
 {
@@ -24,5 +25,6 @@ struct Routine
     virtual void computeOffsets();
     int stackSize;
     bool forwardDeclared;
+    BaseType* typeInRoutine;
 };
 #endif //COMPILERS_ROUTINE_H

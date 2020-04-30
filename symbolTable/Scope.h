@@ -7,23 +7,27 @@
 
 #include <map>
 #include <string>
-
+#include <vector>
 #include "../types/BaseType.h"
 #include "../types/ArrayType.h"
 #include "../types/RecordType.h"
 #include "../miscellaneous/Prelude.h"
 #include "Entry.h"
+#include "../routines/ParameterSet.h"
 
 struct Scope
 {
-    // used during initialization
+    // inserting into the scope
+    void addLocalPrelude(Prelude);
+    void addParameters(std::vector<ParameterSet*> parameterSets);
+    void accommodateReturnType(BaseType*);
+    void updateNextAddress(int);
+
+
+    // general stuff
     Scope();
-    int size;
+    int nextAddress;
     int getSize();
-    int addConstructs(Prelude, int);
-    int computeSize(BaseType*);
-    int computeSize_Array(ArrayType*);
-    int computeSize_Record(RecordType*);
 
     // used to handle Entries (variables and constants)
     std::map<std::string, Entry> entries;

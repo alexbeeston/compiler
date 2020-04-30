@@ -19,14 +19,14 @@ void Program::prettyPrint()
 
 void Program::emit()
 {
-    // global constants, types, and variables
-    st.pushScope(*prelude);
+    // add global prelude
+    st.pushScope(nullptr, std::vector<ParameterSet*>(), *prelude);
     st.addingGlobals = false;
 
-    // add function signatures, at least. If they aren't forward declarations, great.
+    // handle routines
     st.addRoutines(routines);
     std::cout << "j main\n\n";
-
+    for (auto iterator : st.routines) iterator.second->emit();
 
     // main block
     std::cout << "main:\n";

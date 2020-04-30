@@ -13,9 +13,9 @@
 struct Entry
 {
     // fields
-    int offset; // -1 for constants (set by symbol table)
+    int offset;
     std::string ident;
-    Expression* value = nullptr; // used by constants only
+    Expression* value;
     BaseType* type;
     EntryStyle label;
     Register baseRegister;
@@ -23,8 +23,8 @@ struct Entry
 
     // init
     Entry();
-    Entry(std::string, Expression*, bool);
-    Entry(std::string, BaseType*, int, bool);
+    Entry(std::string, Expression*, bool); // called by constants
+    Entry(std::string, BaseType*, int, bool); // called by variables
 
     // other functions
     virtual void print();

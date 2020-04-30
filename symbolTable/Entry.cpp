@@ -22,6 +22,7 @@ Entry::Entry(std::string p_ident, BaseType* p_type, int p_offset, bool isGlobal)
     type = p_type;
     offset = p_offset;
     label = VARIABLE;
+    value = nullptr;
     setRegister(isGlobal);
 }
 

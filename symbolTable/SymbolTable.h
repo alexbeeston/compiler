@@ -15,34 +15,35 @@ struct SymbolTable
 {
     // Scopes
     std::vector<Scope> scopes;
-    void pushScope(Prelude);
-    void pushScope_iterator(std::string);
+    void pushScope(BaseType*, std::vector<ParameterSet*>, Prelude);
     void popScope();
-    bool addingGlobals;
-    int nextAddress;
-    Entry retrieveEntry(std::string);
-    BaseType* retrieveType(std::string);
-    std::vector<std::string> strings;
-    int insertMessage(std::string);
 
     // routines
     std::map<std::string, Routine*> routines;
     void addRoutines(std::vector<Routine*>*);
-    Routine* retrieveRoutine(std::string);
 
     // control elements
     int repeatLabelCounter;
     std::string getRepeatLabel();
     int whileLabelCounter;
     std::string getWhileLabel();
-    int nextLabelCounter;
+    int nextNextLabelCounter;
     std::string getNextNextLabel();
     int nextForLabel;
     std::string getNextForLabel();
     int nextIfLabel;
     std::string getNextIfLabel();
 
-    // init
+    // general
     SymbolTable();
+    bool addingGlobals;
+    Entry retrieveEntry(std::string);
+    BaseType* retrieveType(std::string);
+    std::vector<std::string> strings;
+    int insertMessage(std::string);
+    Routine* retrieveRoutine(std::string);
+
+     // legacy; will throw errors; needs updating
+     void pushScope_iterator(std::string);
 };
 #endif //COMPILERS_SYMBOLTABLE_H
