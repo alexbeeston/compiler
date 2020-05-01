@@ -31,8 +31,17 @@ Register FunctionCall::emit()
     int sizeOfParameters = addParametersToStack(*ident, *params, sizeOfReturnType);
     std::cout << "# Call the function\n";
     std::cout << "jal " << *ident << "\n\n";
+
+    // hang onto the return value
+    Register returnValue = rp.getRegister();
+    returnValue.containsAddress = false;
+    returnValue.space = WORD_SIZE;
+    std::cout << "lw " << returnValue.getName() << " 0(" << rp.getStackPointer().getName() << ")\n";
+
+    // continue with function calling
     deallocateParameters(sizeOfParameters);
     restoreSpilledRegisters(spilledRegisters);
+    return returnValue;
 }
 
 PrimitiveType FunctionCall::getPrimitiveType()

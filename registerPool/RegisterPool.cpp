@@ -26,10 +26,9 @@ Register RegisterPool::getRegister()
     else throw std::runtime_error("Out of availableRegisters");
 }
 
-Register RegisterPool::getGlobalPointer()
-{
-    return Register(std::string("$gp"));
-}
+Register RegisterPool::getGlobalPointer() { return Register(std::string("$gp")); }
+
+Register RegisterPool::getStackPointer() { return Register(std::string("$sp")); }
 
 Register RegisterPool::getFramePointer() { return Register(std::string("$fp")); }
 

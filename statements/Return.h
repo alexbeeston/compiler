@@ -14,5 +14,6 @@ struct Return:Statement
     Return();
     Return(Expression*);
     void print() override;
+    void emit() override;
 };
 #endif //COMPILERS_RETURN_H
