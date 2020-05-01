@@ -2,6 +2,7 @@
 
 #include "While.h"
 #include "../global.h"
+#include "../miscellaneous/utilities.h"
 
 While::While(Expression* p_expression, std::vector<Statement*>* p_statements)
 {
@@ -28,6 +29,7 @@ void While::emit()
     std::cout << "\n#While - test\n";
     std::cout << testLabel + ":\n";
     Register testResult = expression->emit();
+    dereferencePointer(testResult);
     std::cout << "beq " << testResult.getName() << " $zero " << nextLabel << "\n";
     std::cout << "\n#while - Body\n";
     for (Statement* statement : *statements) statement->emit();

@@ -9,10 +9,12 @@ Return::Return(Expression* p_expression) { expression = p_expression; }
 
 void Return::emit()
 {
-    Register value = expression->emit();
+    Register expressionRegister = expression->emit();
     Register framePointer = rp.getFramePointer();
-    if (value.containsAddress) copyContinuousMemory(0, 0, value.space, value, framePointer);
-    else std::cout << "sw " << value.getName() << " 0(" << framePointer.getName() << ")\n";
+    if (expressionRegister.containsAddress) copyContinuousMemory(0, 0, expressionRegister.space, expressionRegister, framePointer);
+    else std::cout << "sw " << expressionRegister.getName() << " 0(" << framePointer.getName() << ")\n";
+    rp.returnRegister(expressionRegister);
+    rp.returnRegister(framePointer);
 }
 
 void Return::print()

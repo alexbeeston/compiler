@@ -58,3 +58,8 @@ PrimitiveType FunctionCall::getPrimitiveType()
     }
     else return NOT_PRIMITIVE;
 }
+
+TypeStyle FunctionCall::getTypeStyle()
+{
+    return st.retrieveRoutine(*ident)->type_temp->style;
+}

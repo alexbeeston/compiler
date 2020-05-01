@@ -19,6 +19,6 @@ struct Expression
     virtual void print();
     virtual Register emit();
     virtual PrimitiveType getPrimitiveType();
-    virtual TypeStyle getStyle();
+    virtual TypeStyle getTypeStyle();
 };
 #endif //COMPILERS_EXPRESSION_H

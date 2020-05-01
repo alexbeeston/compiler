@@ -3,8 +3,7 @@
 
 #include "For.h"
 #include "../global.h"
-#include "../miscellaneous/Prelude.h"
-#include "../types/SimpleType.h"
+#include "../miscellaneous/utilities.h"
 
 For::For(char* p_ident, Expression* p_left, int p_location, Expression* p_right, std::vector<Statement*>* p_statements)
 {
@@ -33,15 +32,17 @@ void For::print()
 
 void For::emit()
 {
-    st.pushScope_iterator(*ident);
+//    st.pushScope_iterator(*ident);
 
     // init
     std::cout << "\n# For - init\n";
     Register leftBound = left->emit();
+    dereferencePointer(leftBound);
     int addressOfIterator = st.retrieveEntry(*ident).offset;
     std::cout << "sw " << leftBound.getName() << " " << addressOfIterator << "($gp)\n";
     rp.returnRegister(leftBound);
     Register rightBound = right->emit();
+    dereferencePointer(rightBound);
     std::cout << "addi " << rightBound.getName() << " " << rightBound.getName() << " ";
     if (location == 0) std::cout << "-1\n";
     else std::cout << "1\n";
@@ -75,7 +76,5 @@ void For::emit()
     // next
     std::cout << "\n# For - next\n";
     std::cout << nextLabel << ":\n";
-
-    // pop off scope
-    st.popScope();
+//    st.popScope();
 }

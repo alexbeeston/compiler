@@ -17,6 +17,6 @@ struct LValueExpression:Expression
    PrimitiveType getPrimitiveType() override;
    bool isCTV() override;
    int getValue() override;
-   TypeStyle getStyle() override;
+   TypeStyle getTypeStyle() override;
 };
 #endif //COMPILERS_LVALUEEXPRESSION_H

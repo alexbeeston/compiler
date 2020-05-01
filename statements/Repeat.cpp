@@ -2,6 +2,7 @@
 
 #include "Repeat.h"
 #include "../global.h"
+#include "../miscellaneous/utilities.h"
 
 Repeat::Repeat(Expression* p_expression, std::vector<Statement*>* p_statements)
 {
@@ -30,6 +31,7 @@ void Repeat::emit()
     for (Statement* statement : *statements) statement->emit();
     std::cout << "\n# Repeat - Test\n";
     Register testResult = expression->emit();
+    dereferencePointer(testResult);
     std::cout << "beq " << testResult.getName() << " $zero " << bodyLabel << "\n";
     rp.returnRegister(testResult);
     std::cout << "\n# Repeat - Next\n";

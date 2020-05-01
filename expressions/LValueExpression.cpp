@@ -57,7 +57,7 @@ int LValueExpression::getValue()
 
 bool LValueExpression::isCTV()
 {
-    return st.retrieveEntry(lValue->getKey()).label == CONSTANT
+    return st.retrieveEntry(lValue->getKey()).label == CONSTANT;
 }
 
-TypeStyle LValueExpression::getStyle() { return lValue->getStyle(); }
+TypeStyle LValueExpression::getTypeStyle() { return lValue->getStyle(); }

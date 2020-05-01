@@ -5,6 +5,14 @@
 #include "utilities.h"
 #include "../global.h"
 
+void dereferencePointer(Register reg)
+{
+    if (reg.containsAddress)
+    {
+        std::cout << "lw " << reg.getName() << " 0(" << reg.getName() << ")\n";
+        reg.containsAddress = false;
+    }
+}
 void copyContinuousMemory(int targetOffsetStart, int sourceOffsetStart, int size, Register targetBase, Register sourceBase)
 {
     Register staging = rp.getRegister();

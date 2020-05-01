@@ -18,6 +18,6 @@ struct FunctionCall:Expression
     void print() override;
     Register emit() override;
     PrimitiveType getPrimitiveType() override;
-
+    TypeStyle getTypeStyle() override;
 };
 #endif //COMPILERS_FUNCTIONCALL_H

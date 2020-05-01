@@ -2,6 +2,7 @@
 
 #include "If.h"
 #include "../global.h"
+#include "../miscellaneous/utilities.h"
 
 If::If(ConditionalSequence* p_ifBlock, std::vector<ConditionalSequence*>* p_elseIfBlocks, std::vector<Statement*>* p_elseBlock)
 {
@@ -25,9 +26,10 @@ void If::print()
 
 void If::emit()
 {
-    // validation and label preparation
-    if (ifBlock->expression->getPrimitiveType() != BOOLEAN) throw std::runtime_error("If::emit() - if block has expression of type " +
-                                                                                     ifBlock->expression->getPrimitiveType());
+    // validate
+    if (ifBlock->expression->getPrimitiveType() != BOOLEAN) throw std::runtime_error("If::emit() - if block has expression of type " + std::to_string(ifBlock->expression->getPrimitiveType()));
+
+    // continue
     std::vector<std::string> elseIfLabels = std::vector<std::string>();
     for (ConditionalSequence* sequence : *elseIfBlocks) elseIfLabels.push_back(st.getNextIfLabel());
     std::string elseLabel = st.getNextIfLabel();
@@ -36,6 +38,7 @@ void If::emit()
     // if test
     std::cout << "# If - if block (test)\n";
     Register test = ifBlock->expression->emit();
+    dereferencePointer(test);
     if (elseIfBlocks->size() != 0) std::cout << "beq " << test.getName() << " $zero " << elseIfLabels[0] << "\n";
     else if (elseBlock != nullptr) std::cout << "beq " << test.getName() << " $zero " << elseLabel << "\n";
     else std::cout << "beq " << test.getName() << " $zero " << nextLabel << "\n";
@@ -54,6 +57,7 @@ void If::emit()
         std::cout << "\n# If - elseif (test) \n";
         std::cout << elseIfLabels[i] << ":\n";
         test = elseIfBlocks->at(i)->expression->emit();
+        dereferencePointer(test);
         std::cout << "beq " << test.getName() << " $zero ";
         if ( i != elseIfBlocks->size() - 1) std::cout << elseIfLabels[i + 1] << "\n";
         else
