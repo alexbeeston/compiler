@@ -1,6 +1,7 @@
 #include <iostream>
 #include "../global.h"
 #include "Write.h"
+#include "../miscellaneous/utilities.h"
 
 Write::Write(Expression* p_expression1, std::vector<Expression*>* p_expressions)
 {
@@ -30,9 +31,10 @@ void Write::emit()
         else if (expression->getPrimitiveType() == STRING) std::cout << "li $v0 4   # 4 = system call to print a label to a string\n";
         else throw std::runtime_error("Write::emit() - The expression doesn't know if its an int, char, or string");
         std::cout << std::endl;
-        Register r = expression->emit();
-        std::cout << "la $a0 (" << r.getName() << ")\n";
+        Register reg = expression->emit();
+        dereferencePointer(reg);
+        std::cout << "la $a0 (" << reg.getName() << ")\n";
         std::cout << "syscall\n\n";
-        rp.returnRegister(r);
+        rp.returnRegister(reg);
     }
 }
