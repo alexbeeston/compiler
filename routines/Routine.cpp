@@ -7,17 +7,17 @@
 #include "../global.h"
 #include "../types/SimpleType.h"
 
-Routine::Routine(char* p_ident, std::vector<ParameterSet*>* p_formalParameters, Body* p_body)
+Routine::Routine(char* p_ident, std::vector<ParameterSet*>* p_formalParameters, BaseType* p_returnType, Body* p_body)
 {
     ident = std::string(p_ident);
     formalParameters = p_formalParameters;
-    if (p_body == nullptr) forwardDeclared = true;
+    if (p_body == nullptr) isForwardDeclared = true;
     else
     {
-        forwardDeclared = false;
+        isForwardDeclared = false;
         body = p_body;
     }
-    typeInRoutine = new SimpleType(new std::string("integer"));
+    type_temp = p_returnType;
 }
 
 void Routine::computeOffsets_internal(int nextOffset)
@@ -31,7 +31,7 @@ void Routine::computeOffsets_internal(int nextOffset)
             nextOffset += size;
         }
     }
-    stackSize = nextOffset;
+    sizeOfParametersAndReturnType = nextOffset + type_temp->computeSize();
 }
 
 void Routine::computeOffsets()
@@ -61,22 +61,24 @@ void Routine::printParameters()
 
 void Routine::emit()
 {
-    // scope inserts the return type, then parameters, then local variables
-    // st.pushScope(*body->prelude);
+    // validate
+    if (isForwardDeclared)
+    {
+        if (body == nullptr) throw std::runtime_error("Routine::computeSizeOnStack() - can not emit a forward declared function");
+        else throw std::runtime_error("Routine::computeSizeOnStack(0 - there are two errors: 1) can not emit a forward declared function. 2) The function is forward declared, yet the body is not null. Bodies should not be null if and only if the function is not forward declared.");
+    }
+    if (body == nullptr) throw std::runtime_error("Routine::computeSizeOnStack() - the body is null, yet the function is not forward declared. Bodies should be null if and only if the function is forward declared");
 
-    // scope.addParams();
-
-    // something to add the parameters to the scope too
-    // std::cout << "ori $fp $sp 0\n";
-    // MOVE THE STACK POINTER DOWN!
-    // for (Statement* statement : *body->block->statementSequence) statement->emit();
-    // std::cout << "jr $ra\n";
-    // st.popScope();
-
+    // continue
+    int sizeOfLocalVars = body->prelude->computeSize();
+    st.pushScope(type_temp, *formalParameters, *body->prelude);
     std::cout << ident << ":\n";
     std::cout << "ori $fp $sp 0\n";
-    std::cout << "# now move the stack pointer down\n";
-    std::cout << "# now emit each statement\n";
-    std::cout << "# now restore the stack pointer\n";
+    std::cout << "addi $sp $sp -" << sizeOfLocalVars << "\n";
+    for (auto statement : *body->block->statementSequence) statement->emit();
+    std::cout << "addi $sp $sp " << sizeOfLocalVars << "\n";
+    std::cout << "jr $ra\n";
     std::cout << std::endl;
+
+    st.popScope();
 }

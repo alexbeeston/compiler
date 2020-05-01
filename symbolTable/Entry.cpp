@@ -7,22 +7,24 @@
 Entry::Entry() {}
 
 // Called by constants
-Entry::Entry(std::string p_ident, Expression* p_expression, bool isGlobal)
+Entry::Entry(std::string p_ident, Expression* p_expression, bool isGlobal, bool p_isDeclaredEntry)
 {
     ident = p_ident;
     value = p_expression;
     label = CONSTANT;
+    isDeclaredEntry = p_isDeclaredEntry;
     setRegister(isGlobal);
 }
 
 // Called by variables
-Entry::Entry(std::string p_ident, BaseType* p_type, int p_offset, bool isGlobal)
+Entry::Entry(std::string p_ident, BaseType* p_type, int p_offset, bool isGlobal, bool p_isDeclaredEntry)
 {
     ident = p_ident;
     type = p_type;
     offset = p_offset;
     label = VARIABLE;
     value = nullptr;
+    isDeclaredEntry = p_isDeclaredEntry;
     setRegister(isGlobal);
 }
 

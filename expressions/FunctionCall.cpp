@@ -3,6 +3,7 @@
 #include <map>
 #include "FunctionCall.h"
 #include "../global.h"
+#include "../miscellaneous/utilities.h"
 
 FunctionCall::FunctionCall(char* p_ident, std::vector<Expression*>* p_params)
 {
@@ -23,7 +24,15 @@ void FunctionCall::print()
 
 Register FunctionCall::emit()
 {
-
+    auto spilledRegisters = spillRegisters();
+    BaseType* type = st.retrieveRoutine(*ident)->type_temp;
+    int sizeOfReturnType = 0;
+    if (type != nullptr) sizeOfReturnType = type->computeSize();
+    int sizeOfParameters = addParametersToStack(*ident, *params, sizeOfReturnType);
+    std::cout << "# Call the function\n";
+    std::cout << "jal " << *ident << "\n\n";
+    deallocateParameters(sizeOfParameters);
+    restoreSpilledRegisters(spilledRegisters);
 }
 
 PrimitiveType FunctionCall::getPrimitiveType()

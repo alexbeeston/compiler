@@ -18,16 +18,15 @@
 struct Scope
 {
     // inserting into the scope
-    void addLocalPrelude(Prelude);
+    void addPrelude(Prelude);
     void addParameters(std::vector<ParameterSet*> parameterSets);
     void accommodateReturnType(BaseType*);
-    void updateNextAddress(int);
-
 
     // general stuff
     Scope();
-    int nextAddress;
-    int getSize();
+    int nextDeclaredVariableAddress;
+    int nextSignatureVariableAddress;
+    int getSizeOfDeclaredVars();
 
     // used to handle Entries (variables and constants)
     std::map<std::string, Entry> entries;

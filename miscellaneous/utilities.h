@@ -13,7 +13,7 @@
 void copyContinuousMemory(int, int, int, Register, Register);
 std::map<std::string, int> spillRegisters();
 void restoreSpilledRegisters(std::map<std::string, int> registers);
-int addParametersToStack(std::string, std::vector<Expression*>);
+int addParametersToStack(std::string, std::vector<Expression*>, int);
 void deallocateParameters(int);
 
 #endif //COMPILER_UTILITIES_H

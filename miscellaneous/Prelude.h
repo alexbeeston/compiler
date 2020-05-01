@@ -17,5 +17,6 @@ struct Prelude
     std::vector<TypedList*>* vars;
     Prelude(std::vector<Constant*>*, std::vector<DeclaredType*>*, std::vector<TypedList*>*);
     void print();
+    int computeSize();
 };
 #endif //COMPILERS_PRELUDE_H

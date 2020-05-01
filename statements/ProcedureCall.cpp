@@ -2,6 +2,8 @@
 
 #include "ProcedureCall.h"
 #include "../miscellaneous/utilities.h"
+#include "../types/BaseType.h"
+#include "../global.h"
 
 ProcedureCall::ProcedureCall(char* p_ident, std::vector<Expression*>* p_expressions)
 {
@@ -23,8 +25,11 @@ void ProcedureCall::print()
 void ProcedureCall::emit()
 {
     auto spilledRegisters = spillRegisters();
-    int sizeOfParameters = addParametersToStack(*ident, *expressions);
-    std::cout << "# Call the Procedure\n";
+    BaseType* type = st.retrieveRoutine(*ident)->type_temp;
+    int sizeOfReturnType = 0;
+    if (type != nullptr) sizeOfReturnType = type->computeSize();
+    int sizeOfParameters = addParametersToStack(*ident, *expressions, sizeOfReturnType);
+    std::cout << "# Call the function\n";
     std::cout << "jal " << *ident << "\n\n";
     deallocateParameters(sizeOfParameters);
     restoreSpilledRegisters(spilledRegisters);

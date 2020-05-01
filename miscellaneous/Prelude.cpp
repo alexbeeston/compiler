@@ -9,6 +9,17 @@ Prelude::Prelude(std::vector<Constant*>* p_constants, std::vector<DeclaredType*>
    vars = p_vars;
 }
 
+int Prelude::computeSize()
+{
+    int cumulativeSize = 0;
+    for (auto typedList : *vars)
+    {
+        int sizeOfEachListItem = typedList->type->computeSize();
+        cumulativeSize += sizeOfEachListItem * typedList->identList->size();
+    }
+    return cumulativeSize;
+}
+
 void Prelude::print()
 {
     if (constants != nullptr)

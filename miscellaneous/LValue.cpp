@@ -19,10 +19,19 @@ std::string LValue::getKey()
 
 Register LValue::getBaseRegister()
 {
-    BaseType* type = st.retrieveEntry(getKey()).type;
-    if (type->isPrimitive()) return rp.getGlobalPointer(); // will probably have to change for functions, since vars in functions aren't offset from global pointer
+    // validation
+    Entry entry = st.retrieveEntry(getKey());
+    if (entry.baseRegister.getName() == "$gp" && !entry.isDeclaredEntry) throw std::runtime_error("LValue::getBaseRegister() - entry's base register is the global pointer, but the entry is not a declared entry. Entries at global scope shouldn't be non-declared since we can't pass parameters to the global scope");
+
+    // continue
+    if (entry.type->isPrimitive()) return entry.baseRegister;
+
+    bool positiveOffsets = true;
+    if (entry.baseRegister.getName() == "$fp" && entry.isDeclaredEntry) positiveOffsets = false;
+
+    BaseType* type = entry.type;
     Register baseRegister = rp.getRegister();
-    std::cout << "add " << baseRegister.getName() << " $gp $zero   # about to load an LValue\n";
+    std::cout << "add " << baseRegister.getName() << " " << entry.baseRegister.getName() << " $zero   # about to load an LValue\n";
     for (int accessorIndex = 0; accessorIndex < sequence->size() - 1; accessorIndex++)
     {
         // resolve a simple type
@@ -31,12 +40,12 @@ Register LValue::getBaseRegister()
         // iterate over the type for records and arrays
         if (type->style == RECORD)
         {
-            RecordType* record = dynamic_cast<RecordType*>(type);
+            auto* record = dynamic_cast<RecordType*>(type);
             type = record->types[(*sequence)[accessorIndex + 1]->ident];
         }
         else if (type->style == ARRAY)
         {
-            ArrayType* array = dynamic_cast<ArrayType*>(type);
+            auto* array = dynamic_cast<ArrayType*>(type);
             Expression* index = (*sequence)[accessorIndex + 1]->indexer;
             Register r1 = rp.getRegister();
             Register r2 = index->emit();
@@ -45,7 +54,8 @@ Register LValue::getBaseRegister()
             std::cout << "li " << r2.getName() << " " << array->underlyingType->computeSize() << "   # loaded size of underlying type of array\n";
             std::cout << "mult " << r1.getName() << " " << r2.getName() << "\n";
             std::cout << "mflo " << r1.getName() << "\n";
-            std::cout << "add " << baseRegister.getName() << " " << baseRegister.getName() << " " << r1.getName() << "\n";
+            if (positiveOffsets) std::cout << "add " << baseRegister.getName() << " " << baseRegister.getName() << " " << r1.getName() << "\n";
+            else std::cout << "sub " << baseRegister.getName() << " " << baseRegister.getName() << " " << r1.getName() << "\n";
             rp.returnRegister(r1);
             rp.returnRegister(r2);
             type = array->underlyingType;

@@ -2,7 +2,7 @@
 
 #include "Function.h"
 
-Function::Function(char* p_ident, std::vector<ParameterSet*>* p_parameters, Body* p_body, BaseType* p_type):Routine(p_ident, p_parameters, p_body)
+Function::Function(char* p_ident, std::vector<ParameterSet*>* p_parameters, Body* p_body, BaseType* p_type):Routine(p_ident, p_parameters, p_type, p_body)
 {
     type = p_type;
 }

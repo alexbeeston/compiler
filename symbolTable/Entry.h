@@ -19,16 +19,16 @@ struct Entry
     BaseType* type;
     EntryStyle label;
     Register baseRegister;
-    void setRegister(bool);
+    bool isDeclaredEntry;
 
     // init
     Entry();
-    Entry(std::string, Expression*, bool); // called by constants
-    Entry(std::string, BaseType*, int, bool); // called by variables
+    Entry(std::string, Expression*, bool, bool); // called by constants
+    Entry(std::string, BaseType*, int, bool, bool); // called by variables
 
     // other functions
     virtual void print();
-    Register emit();
+    private: void setRegister(bool);
 };
 
 #endif //COMPILERS_LOOKUPITEM_H

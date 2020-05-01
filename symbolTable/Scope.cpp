@@ -6,48 +6,49 @@
 
 extern RegisterPool rp;
 
-Scope::Scope() { nextAddress = 0; }
+Scope::Scope()
+{
+    nextDeclaredVariableAddress = 0;
+    nextSignatureVariableAddress = 0;
+}
 
 void Scope::accommodateReturnType(BaseType* type)
 {
-    updateNextAddress(type->computeSize());
+    nextSignatureVariableAddress += type->computeSize();
 }
 
 void Scope::addParameters(std::vector<ParameterSet*> parameterSets)
 {
+    static bool IS_DECLARED = false;
     for (auto set : parameterSets)
     {
         int size = set->type->computeSize();
         for (std::string identifier : set->identList)
         {
-            Entry var = Entry(identifier, set->type, nextAddress, st.addingGlobals);
-            updateNextAddress(size);
+            entries[identifier] = Entry(identifier, set->type, nextSignatureVariableAddress, st.addingGlobals, IS_DECLARED);
+            nextSignatureVariableAddress += size;
         }
     }
 }
 
-void Scope::addLocalPrelude(Prelude prelude)
+void Scope::addPrelude(Prelude prelude)
 {
-    for (Constant* i : *prelude.constants) entries[i->ident] = Entry(i->ident, i->value, st.addingGlobals);
+    static bool IS_DECLARED = true;
+    for (Constant* i : *prelude.constants) entries[i->ident] = Entry(i->ident, i->value, st.addingGlobals, IS_DECLARED);
     for (DeclaredType* declaredType : *prelude.declaredTypes) types[declaredType->identifier] = declaredType->type;
     for (TypedList* list: *prelude.vars)
     {
         int size = list->type->computeSize();
         for (std::string* name: *list->identList)
         {
-            entries[*name] = Entry(*name, list->type, nextAddress, st.addingGlobals);
-            updateNextAddress(size);
+            if (st.addingGlobals) nextDeclaredVariableAddress += size;
+            else nextDeclaredVariableAddress -= size;
+            entries[*name] = Entry(*name, list->type, nextDeclaredVariableAddress, st.addingGlobals, IS_DECLARED);
         }
     }
 }
 
-void Scope::updateNextAddress(int amount)
-{
-    if (st.addingGlobals) nextAddress += amount;
-    else nextAddress -= amount;
-}
-
-int Scope::getSize() { return std::abs(nextAddress); }
+int Scope::getSizeOfDeclaredVars() { return std::abs(nextDeclaredVariableAddress); }
 
 bool Scope::containsType(std::string key)
 {

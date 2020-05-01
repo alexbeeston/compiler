@@ -18,13 +18,13 @@ struct Routine
     Body* body;
     virtual void print();
     void printParameters();
-    Routine(char*, std::vector<ParameterSet*>*, Body*);
+    Routine(char*, std::vector<ParameterSet*>*, BaseType*, Body*);
     void emit();
     std::vector<int> offsets;
     void computeOffsets_internal(int);
     virtual void computeOffsets();
-    int stackSize;
-    bool forwardDeclared;
-    BaseType* typeInRoutine;
+    int sizeOfParametersAndReturnType;
+    bool isForwardDeclared;
+    BaseType* type_temp;
 };
 #endif //COMPILERS_ROUTINE_H

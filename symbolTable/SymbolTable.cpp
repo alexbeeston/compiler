@@ -46,7 +46,7 @@ void SymbolTable::pushScope(BaseType* returnType, std::vector<ParameterSet*> par
     scopes.push_back(newScope);
     if (returnType != nullptr) scopes.back().accommodateReturnType(returnType);
     scopes.back().addParameters(parameters);
-    scopes.back().addLocalPrelude(prelude);
+    scopes.back().addPrelude(prelude);
 }
 
 void SymbolTable::pushScope_iterator(std::string ident)
@@ -64,7 +64,7 @@ void SymbolTable::pushScope_iterator(std::string ident)
 
 void SymbolTable::popScope()
 {
-    scopes.back().getSize();
+    scopes.back().getSizeOfDeclaredVars();
     scopes.pop_back();
 }
 
@@ -75,10 +75,10 @@ void SymbolTable::addRoutines(std::vector<Routine*>* p_routines)
         if (routines.count(routine->ident) == 1)
         {
             Routine* st_routine = routines[routine->ident];
-            if (st_routine->forwardDeclared)
+            if (st_routine->isForwardDeclared)
             {
                 st_routine->body = routine->body;
-                st_routine->forwardDeclared = false;
+                st_routine->isForwardDeclared= false;
             }
             else throw std::runtime_error("SymbolTable::addRoutines() - routine with name \"" + routine->ident + "\" already in symbol table and is not forward declared");
         }
