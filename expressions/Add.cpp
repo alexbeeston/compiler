@@ -20,6 +20,7 @@ Register Add::emit()
     std::vector<Register> opRegs = emitOperands(INT);
     Register left = opRegs[0];
     Register right = opRegs[1];
+    if (right.containsAddress) std::cout << "lw " << right.getName() << " 0(" << right.getName() << ")\n";
     std::cout << "add " << left.getName() << " " << left.getName() << " " << right.getName() << "\n";
     rp.returnRegister(right);
     left.containsAddress = false;

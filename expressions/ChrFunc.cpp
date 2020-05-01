@@ -19,7 +19,9 @@ Register ChrFunc::emit()
     if (expression->getPrimitiveType() == INTEGER)
     {
         expression->typeIndicator = CHAR;
-        return expression->emit();
+        Register reg = expression->emit();
+        reg.containsAddress = false;
+        return reg;
     }
     else throw std::runtime_error("Error: chr() was called on something other than an integer. Sorry, can't print what it was without a lot of annoying if statements, at least as far as I know.");
 }

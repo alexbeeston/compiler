@@ -5,14 +5,14 @@
 #include "utilities.h"
 #include "../global.h"
 
-void copyContinuousMemory(int leftOffsetStart, int rightOffsetStart, int size, Register leftBase, Register rightBase)
+void copyContinuousMemory(int targetOffsetStart, int sourceOffsetStart, int size, Register targetBase, Register sourceBase)
 {
     Register staging = rp.getRegister();
     std::cout << "# begin continuous memory block copy\n";
     for (int i = 0; i < size; i += WORD_SIZE)
     {
-        std::cout << "lw " << staging.getName() << " " << rightOffsetStart + i << "(" << rightBase.getName() << ")\n";
-        std::cout << "sw " << staging.getName() << " " << leftOffsetStart + i << "(" << leftBase.getName() << ")\n";
+        std::cout << "lw " << staging.getName() << " " << sourceOffsetStart + i << "(" << sourceBase.getName() << ")\n";
+        std::cout << "sw " << staging.getName() << " " << targetOffsetStart + i << "(" << targetBase.getName() << ")\n";
     }
     rp.returnRegister(staging);
     std::cout << "# end continuous memory block copy\n";
@@ -54,7 +54,7 @@ void restoreSpilledRegisters(std::map<std::string, int> registers)
     std::cout << std::endl;
 }
 
-int addParametersToStack(std::string routineName, std::vector<Expression*> expressions, int startingOffset)
+void addParametersToStack(std::string routineName, std::vector<Expression*> expressions, int returnTypeSize)
 {
     // validate
     auto routine = st.retrieveRoutine(routineName);
@@ -65,15 +65,15 @@ int addParametersToStack(std::string routineName, std::vector<Expression*> expre
     std::cout << "# Add Parameters To Stack\n";
     std::cout << "addi $sp $sp -" << routine->sizeOfParametersAndReturnType << "\n";
     for (int i = 0; i < numParameters; ++i)
-    { // assume that everything is passed by value for now
+    {
+        // assume that everything is passed by value for now
         // if pass by reference, (validate something)
         // la staging.getName() offset(base)
         Register staging = expressions[i]->emit();
-        std::cout << "sw " << staging.getName() << " " << startingOffset + routine->offsets[i] << "($sp)\n";
+        std::cout << "sw " << staging.getName() << " " << returnTypeSize + routine->offsets[i] << "($sp)\n";
         rp.returnRegister(staging);
     }
     std::cout << std::endl;
-    return routine->sizeOfParametersAndReturnType;
 }
 
 void deallocateParameters(int size)

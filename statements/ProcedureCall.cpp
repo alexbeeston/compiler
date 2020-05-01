@@ -24,13 +24,16 @@ void ProcedureCall::print()
 
 void ProcedureCall::emit()
 {
+    // validate
+    auto routine = st.retrieveRoutine(*ident);
+    if (routine->type_temp != nullptr) throw std::runtime_error("ProcedureCall::emit() - the procedure has a non-nullptr return type");
+
+    // continue
     auto spilledRegisters = spillRegisters();
-    BaseType* type = st.retrieveRoutine(*ident)->type_temp;
-    int sizeOfReturnType = 0;
-    if (type != nullptr) sizeOfReturnType = type->computeSize();
-    int sizeOfParameters = addParametersToStack(*ident, *expressions, sizeOfReturnType);
-    std::cout << "# Call the function\n";
+    static int RETURN_TYPE_SIZE = 0;
+    addParametersToStack(*ident, *expressions, RETURN_TYPE_SIZE);
+    std::cout << "# Call the procedure\n";
     std::cout << "jal " << *ident << "\n\n";
-    deallocateParameters(sizeOfParameters);
+    deallocateParameters(routine->sizeOfParametersAndReturnType);
     restoreSpilledRegisters(spilledRegisters);
 }
