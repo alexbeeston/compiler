@@ -16,14 +16,12 @@ void Multiply::print()
 
 Register Multiply::emit()
 {
-    int INT = 0;
-    std::vector<Register> opRegs = emitOperands(INT);
+    std::vector<Register> opRegs = emitOperands(INTEGER);
     Register left = opRegs[0];
     Register right = opRegs[1];
     std::cout << "mult " << left.getName() << " " << right.getName() << "\n";
     rp.returnRegister(right);
     std::cout << "mflo " << left.getName() << "\n";
-    left.containsAddress = false;
     return left;
 }
 

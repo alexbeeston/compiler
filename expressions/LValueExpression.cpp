@@ -19,13 +19,13 @@ PrimitiveType LValueExpression::getPrimitiveType() { return lValue->getPrimitive
 Register LValueExpression::emit()
 {
     Entry entry = st.retrieveEntry(lValue->getKey());
-    Register r = rp.getRegister();
+    Register reg = rp.getRegister();
     if (entry.label == CONSTANT)
     {
-        if (entry.value->getPrimitiveType() == STRING) std::cout << "la " << r.getName() << " message";
-        else std::cout << "li " << r.getName() << " ";
+        if (entry.value->getPrimitiveType() == STRING) std::cout << "la " << reg.getName() << " message";
+        else std::cout << "li " << reg.getName() << " ";
         std::cout << entry.value->getValue() << "   # loaded an Lvalue\n";
-        r.containsAddress = false;
+        reg.containsAddress = false;
     }
     else if (entry.label == VARIABLE)
     {
@@ -33,19 +33,19 @@ Register LValueExpression::emit()
         int offset = lValue->getOffset();
         if (lValue->isPrimitive())
         {
-            r.containsAddress = false;
-            std::cout << "lw " << r.getName() << " " << offset << "(" << baseRegister.getName() << ") # loaded primitive LValue\n";
+            reg.containsAddress = false;
+            std::cout << "lw " << reg.getName() << " " << offset << "(" << baseRegister.getName() << ") # loaded primitive LValue\n";
         }
         else
         {
-            r.containsAddress = true;
-            r.space = lValue->getInnerMostType()->computeSize();
-            std::cout << "la " << r.getName() << " " << offset << "(" << baseRegister.getName() << ")  # loaded address of non-primitive lValue\n";
+            reg.containsAddress = true;
+            reg.space = lValue->getInnerMostType()->computeSize();
+            std::cout << "la " << reg.getName() << " " << offset << "(" << baseRegister.getName() << ")  # loaded address of non-primitive lValue\n";
         }
         rp.returnRegister(baseRegister);
     }
     else throw std::runtime_error("LValueExpression::emit() - entry label isn't a variable or constant");
-    return r;
+    return reg;
 }
 
 int LValueExpression::getValue()
@@ -57,8 +57,7 @@ int LValueExpression::getValue()
 
 bool LValueExpression::isCTV()
 {
-    if (st.retrieveEntry(lValue->getKey()).label == CONSTANT) return true;
-    else return false;
+    return st.retrieveEntry(lValue->getKey()).label == CONSTANT
 }
 
 TypeStyle LValueExpression::getStyle() { return lValue->getStyle(); }

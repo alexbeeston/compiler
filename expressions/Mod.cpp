@@ -16,14 +16,12 @@ void Mod::print()
 
 Register Mod::emit()
 {
-    int INT = 0;
-    std::vector<Register> opRegs = emitOperands(INT);
+    std::vector<Register> opRegs = emitOperands(INTEGER);
     Register left = opRegs[0];
     Register right = opRegs[1];
     std::cout << "div " << left.getName() << " " << right.getName() << "\n";
     rp.returnRegister(right);
     std::cout << "mfhi " << left.getName() << "\n";
-    left.containsAddress = false;
     return left;
 }
 

@@ -16,18 +16,15 @@ void Negative::print()
 
 Register Negative::emit()
 {
-    if (originalExpression->getPrimitiveType() == INTEGER)
-    {
-        Register originalValue = originalExpression->emit();
-        Register negativeOne = rp.getRegister();
-        std::cout << "li " << negativeOne.getName() << " -1\n";
-        std::cout << "mult " << originalValue.getName() << " " << negativeOne.getName() << "\n";
-        rp.returnRegister(negativeOne);
-        std::cout << "mflo " << originalValue.getName() << "\n";
-        originalValue.containsAddress = false;
-        return originalValue;
-    }
-    else throw std::runtime_error("Negative::emit() - can't get the negative value of a expression that's not an integer");
+    if (originalExpression->getPrimitiveType() != INTEGER) throw std::runtime_error("Negative::emit() - can't get the negative value of a expression that's not an integer");
+    Register originalValue = originalExpression->emit();
+    Register negativeOne = rp.getRegister();
+    std::cout << "li " << negativeOne.getName() << " -1\n";
+    std::cout << "mult " << originalValue.getName() << " " << negativeOne.getName() << "\n";
+    rp.returnRegister(negativeOne);
+    std::cout << "mflo " << originalValue.getName() << "\n";
+    originalValue.containsAddress = false;
+    return originalValue;
 }
 
 int Negative::getValue()

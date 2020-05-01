@@ -31,12 +31,12 @@ Literal::Literal(char* p_value)
 
 Register Literal::emit()
 {
-    Register r = rp.getRegister();
-    if (typeIndicator == INTEGER || typeIndicator == CHAR || typeIndicator == BOOLEAN) std::cout << "li " << r.getName() << " " << value << "\n";
-    else if (typeIndicator == STRING) std::cout << "la " << r.getName() << " message" << value << "\n";
+    Register reg = rp.getRegister();
+    if (typeIndicator == INTEGER || typeIndicator == CHAR || typeIndicator == BOOLEAN) std::cout << "li " << reg.getName() << " " << value << "\n";
+    else if (typeIndicator == STRING) std::cout << "la " << reg.getName() << " message" << value << "\n";
     else std::cout << "Error: attempting to load an expression that is not an integer, character, bool, or string.\n";
-    r.containsAddress = false;
-    return r;
+    reg.containsAddress = false;
+    return reg;
 }
 
 bool Literal::isCTV() { return true; }

@@ -17,14 +17,11 @@ void OrdFunc::print()
 
 Register OrdFunc::emit()
 {
-    if (expression->getPrimitiveType() == CHAR)
-    {
-        expression->typeIndicator = INTEGER;
-        Register reg = expression->emit();
-        reg.containsAddress = false;
-        return reg;
-    }
-    else throw std::runtime_error("Error: Ord() attempted on a non-character.");
+    if (expression->getPrimitiveType() != CHAR) throw std::runtime_error("Error: Ord() attempted on a non-character.");
+    expression->typeIndicator = INTEGER;
+    Register reg = expression->emit();
+    reg.containsAddress = false;
+    return reg;
 }
 
 PrimitiveType OrdFunc::getPrimitiveType() { return INTEGER; }

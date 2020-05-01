@@ -9,22 +9,25 @@ Equal::Equal(Expression* p_l, Expression* p_r): LogicalBinaryOp(p_l, p_r)
 
 Register Equal::emit()
 {
-    // validate
-    if (!operandsAreSamePrimitiveType()) throw std::runtime_error("Equal::Equal() - operands are not both of same type");
-
-    // emit
-    Register r = rp.getRegister();
-    if (isCTV()) std::cout << "li " << r.getName() << " " << getValue() << "  # loaded a CTV\n";
+    if (isCTV())
+    {
+        Register r = rp.getRegister();
+        std::cout << "li " << r.getName() << " " << getValue() << "  # loaded a CTV\n";
+        r.containsAddress = false;
+        return r;
+    }
     else
     {
-        std::vector<Register> opRegs = checkAndEmitOperands();
-        std::cout << "subu " << r.getName() << " " << opRegs[0].getName() << " " << opRegs[1].getName() << "\n";
-        std::cout << "sltu " << r.getName() << " $zero " << r.getName() << "\n";
-        std::cout << "xori " << r.getName() << " " << r.getName() << " 1\n";
-        returnRegisters(opRegs);
+        auto registers = checkAndEmitOperands();
+        auto leftReg = registers[0];
+        auto rightReg = registers[1];
+        std::cout << "subu " << leftReg.getName() << " " << leftReg.getName() << " " << rightReg.getName() << "\n";
+        std::cout << "sltu " << leftReg.getName() << " $zero " << leftReg.getName() << "\n";
+        std::cout << "xori " << leftReg.getName() << " " << leftReg.getName() << " 1\n";
+        rp.returnRegister(rightReg);
+        leftReg.containsAddress = false;
+        return leftReg;
     }
-    r.containsAddress = false;
-    return r;
 }
 
 int Equal::getValue()

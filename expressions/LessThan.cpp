@@ -16,13 +16,11 @@ void LessThan::print()
 
 Register LessThan::emit()
 {
-    int INT = 0;
-    std::vector<Register> opRegs = emitOperands(INT);
+    std::vector<Register> opRegs = emitOperands(INTEGER);
     Register left = opRegs[0];
     Register right = opRegs[1];
     std::cout << "slt " << left.getName() << " " << left.getName() << " " << right.getName() << "\n";
     rp.returnRegister(right);
-    left.containsAddress = false;
     return left;
 }
 

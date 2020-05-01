@@ -16,13 +16,14 @@ void NotEqual::print()
 
 Register NotEqual::emit()
 {
-    std::vector<Register> opRegs = checkAndEmitOperands();
-    Register r = rp.getRegister();
-    std::cout << "subu " << r.getName() << " " << opRegs[0].getName() << " " << opRegs[1].getName() << "\n";
-    std::cout << "sltu " << r.getName() << " $zero " << r.getName() << "\n";
-    returnRegisters(opRegs);
-    r.containsAddress = false;
-    return r;
+    auto registers = checkAndEmitOperands();
+    auto leftReg = registers[0];
+    auto rightReg = registers[1];
+    std::cout << "subu " << leftReg.getName() << " " << leftReg.getName() << " " << rightReg.getName() << "\n";
+    std::cout << "sltu " << leftReg.getName() << " $zero " << leftReg.getName() << "\n";
+    rp.returnRegister(rightReg);
+    leftReg.containsAddress = false;
+    return leftReg;
 }
 
 int NotEqual::getValue()
