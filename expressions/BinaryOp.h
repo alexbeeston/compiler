@@ -16,7 +16,8 @@ struct BinaryOp:Expression
     Expression* right;
     BinaryOp(Expression*, Expression*);
     void print() override;
-    std::vector<Register> emitOperands(int);
+    std::vector<Register> emitOperands(PrimitiveType requiredPrimitiveType);
+    Register processExpression(Expression*, std::string);
     void returnRegisters(std::vector<Register>);
     bool isCTV() override;
 };

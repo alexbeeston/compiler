@@ -16,14 +16,11 @@ void Add::print()
 
 Register Add::emit()
 {
-    int INT = 0;
-    std::vector<Register> opRegs = emitOperands(INT);
+    std::vector<Register> opRegs = emitOperands(INTEGER);
     Register left = opRegs[0];
     Register right = opRegs[1];
-    if (right.containsAddress) std::cout << "lw " << right.getName() << " 0(" << right.getName() << ")\n";
     std::cout << "add " << left.getName() << " " << left.getName() << " " << right.getName() << "\n";
     rp.returnRegister(right);
-    left.containsAddress = false;
     return left;
 }
 

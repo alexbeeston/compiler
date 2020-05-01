@@ -55,7 +55,7 @@ set(
 	expressions/SuccFunc.cpp
 	expressions/LValueExpression.cpp
 	expressions/Equal.cpp
-	expressions/BinaryOpUndeterministicOperands.cpp
+        expressions/LogicalBinaryOp.cpp
 	
 	types/BaseType.cpp
 	types/SimpleType.cpp

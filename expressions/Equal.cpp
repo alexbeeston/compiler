@@ -2,7 +2,7 @@
 
 #include "Equal.h"
 
-Equal::Equal(Expression* p_l, Expression* p_r):BinaryOpUndeterministicOperands(p_l, p_r)
+Equal::Equal(Expression* p_l, Expression* p_r): LogicalBinaryOp(p_l, p_r)
 {
     typeIndicator = BOOLEAN;
 }
@@ -10,7 +10,7 @@ Equal::Equal(Expression* p_l, Expression* p_r):BinaryOpUndeterministicOperands(p
 Register Equal::emit()
 {
     // validate
-    if (!operandsAreOfSameType()) throw std::runtime_error("Equal::Equal() - operands are not both of same type");
+    if (!operandsAreSamePrimitiveType()) throw std::runtime_error("Equal::Equal() - operands are not both of same type");
 
     // emit
     Register r = rp.getRegister();

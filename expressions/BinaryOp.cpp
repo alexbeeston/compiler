@@ -12,26 +12,29 @@ void BinaryOp::print()
     std::cout << "[binary Op]";
 }
 
-std::vector<Register> BinaryOp::emitOperands(int requiredType)
+std::vector<Register> BinaryOp::emitOperands(PrimitiveType requiredPrimitiveType)
 {
-    if (!(left->getPrimitiveType() == requiredType && right->getPrimitiveType() == requiredType))
-    {
-        std::cout << "# ERROR: binary operation attempted on left operand of typeIndicator " << left->getPrimitiveType();
-        std::cout << " and right operand typeIndicator " << right->getPrimitiveType();
-        std::cout << ". They should both be " << requiredType << ".\n";
-        return std::vector<Register>();
-    }
-    else
-    {
-        Register r1 = left->emit();
-        Register r2 = right->emit();
-        std::vector<Register> temp = std::vector<Register>();
-        temp.push_back(r1);
-        temp.push_back(r2);
-        return temp;
-    }
+    // validate
+    if (!(left->getPrimitiveType() == requiredPrimitiveType && right->getPrimitiveType() == requiredPrimitiveType)) throw std::runtime_error("BinaryOp::emitOperands() - required primitiveType of both operands is " + std::to_string(requiredPrimitiveType) + " but left is " + std::to_string(left->getPrimitiveType()) + " and right is " + std::to_string(right->getPrimitiveType()) + ".");
+
+    // continue
+    auto registers = std::vector<Register>();
+    registers.push_back(processExpression(left, "left"));
+    registers.push_back(processExpression(right, "right"));
+    return registers;
 }
 
+Register BinaryOp::processExpression(Expression* expression, std::string operand)
+{
+   // validate
+   Register reg = expression->emit();
+   if (reg.containsAddress) if (reg.space > WORD_SIZE) throw std::runtime_error("BinaryOp::processExpression() - register for " + operand + " operand contains address, but word size is " + std::to_string(reg.space) + ". Expected 4 (the word size)");
+
+   // continue
+   if (reg.containsAddress) std::cout << "lw " << reg.getName() << " 0(" << reg.getName() << ")\n";
+   reg.containsAddress = false;
+   return reg;
+}
 void BinaryOp::returnRegisters(std::vector <Register> registers)
 {
     for (Register r : registers) rp.returnRegister(r);
@@ -39,6 +42,5 @@ void BinaryOp::returnRegisters(std::vector <Register> registers)
 
 bool BinaryOp::isCTV()
 {
-    if ( left->isCTV() && right->isCTV()) return true;
-    else return false;
+    return left->isCTV() && right->isCTV();
 }

@@ -19,6 +19,7 @@ struct RegisterPool
     Register getGlobalPointer();
     Register getFramePointer();
     Register getStackPointer();
+    void returnRegisters(std::vector<Register>);
     void returnRegister(Register);
     RegisterPool();
     void addRegisterClass(int, std::string);

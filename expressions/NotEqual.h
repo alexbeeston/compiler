@@ -5,9 +5,9 @@
 #ifndef COMPILERS_NOTEQUAL_H
 #define COMPILERS_NOTEQUAL_H
 
-#include "BinaryOpUndeterministicOperands.h"
+#include "LogicalBinaryOp.h"
 
-struct NotEqual:BinaryOpUndeterministicOperands
+struct NotEqual: LogicalBinaryOp
 {
     NotEqual(Expression*, Expression*);
     void print() override;

@@ -5,9 +5,9 @@
 #ifndef COMPILERS_EQUAL_H
 #define COMPILERS_EQUAL_H
 
-#include "BinaryOpUndeterministicOperands.h"
+#include "LogicalBinaryOp.h"
 
-struct Equal:BinaryOpUndeterministicOperands
+struct Equal:LogicalBinaryOp
 {
     Equal(Expression*, Expression*);
     Register emit() override;

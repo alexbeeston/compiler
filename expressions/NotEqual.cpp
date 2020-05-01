@@ -2,7 +2,7 @@
 
 #include "NotEqual.h"
 
-NotEqual::NotEqual(Expression* p_left, Expression* p_right):BinaryOpUndeterministicOperands(p_left, p_right)
+NotEqual::NotEqual(Expression* p_left, Expression* p_right): LogicalBinaryOp(p_left, p_right)
 {
     typeIndicator = BOOLEAN;
 }
