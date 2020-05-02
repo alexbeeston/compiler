@@ -2,10 +2,10 @@
 #include "Program.h"
 #include "global.h"
 
-Program::Program(Prelude* p_prelude, std::vector<Routine*>* p_routines, Block* p_block)
+Program::Program(Prelude* p_prelude, std::vector<Method*>* p_routines, Block* p_block)
 {
     prelude = p_prelude;
-    routines = p_routines;
+    methods = p_routines;
     block = p_block;
 }
 
@@ -13,7 +13,7 @@ void Program::prettyPrint()
 {
     prelude->print();
     std::cout << std::endl;
-    for (Routine* routine : *routines) routine->print();
+    for (Method* methods : *methods) methods->print();
     block->print();
 }
 
@@ -23,8 +23,8 @@ void Program::emit()
     st.pushScope(nullptr, std::vector<ParameterSet*>(), *prelude);
     st.addingGlobals = false;
 
-    // handle routines
-    st.addRoutines(routines);
+    // handle methods
+    st.addRoutines(methods);
     std::cout << "j main\n\n";
     for (auto iterator : st.routines) iterator.second->emit();
 

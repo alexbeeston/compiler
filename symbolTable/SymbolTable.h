@@ -9,7 +9,7 @@
 #include <string>
 
 #include "Scope.h"
-#include "../routines/Routine.h"
+#include "routines/Method.h"
 
 struct SymbolTable
 {
@@ -18,9 +18,9 @@ struct SymbolTable
     void pushScope(BaseType*, std::vector<ParameterSet*>, Prelude);
     void popScope();
 
-    // routines
-    std::map<std::string, Routine*> routines;
-    void addRoutines(std::vector<Routine*>*);
+    // methods
+    std::map<std::string, Method*> routines;
+    void addRoutines(std::vector<Method*>*);
 
     // control elements
     int repeatLabelCounter;
@@ -41,7 +41,7 @@ struct SymbolTable
     BaseType* retrieveType(std::string);
     std::vector<std::string> strings;
     int insertMessage(std::string);
-    Routine* retrieveRoutine(std::string);
+    Method* retrieveRoutine(std::string);
     int sizeOfLocalVars;
 
      // legacy; will throw errors; needs updating

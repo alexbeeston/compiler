@@ -68,13 +68,13 @@ void SymbolTable::popScope()
     scopes.pop_back();
 }
 
-void SymbolTable::addRoutines(std::vector<Routine*>* p_routines)
+void SymbolTable::addRoutines(std::vector<Method*>* p_routines)
 {
-    for (Routine* routine : *p_routines)
+    for (Method* routine : *p_routines)
     {
         if (routines.count(routine->ident) == 1)
         {
-            Routine* st_routine = routines[routine->ident];
+            Method* st_routine = routines[routine->ident];
             if (st_routine->isForwardDeclared)
             {
                 st_routine->body = routine->body;
@@ -90,7 +90,7 @@ void SymbolTable::addRoutines(std::vector<Routine*>* p_routines)
     }
 }
 
-Routine* SymbolTable::retrieveRoutine(std::string name)
+Method* SymbolTable::retrieveRoutine(std::string name)
 {
     if (routines.count(name) == 1) return routines[name];
     else throw std::runtime_error("SymbolTable::retrieveRoutine() - routine with name \"" + name + "\" not found in symbol table");

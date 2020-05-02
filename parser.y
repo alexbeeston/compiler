@@ -20,12 +20,10 @@
 #include "types/RecordType.h"
 #include "types/DeclaredType.h"
 
-#include "routines/Routine.h"
-#include "routines/Procedure.h"
-#include "routines/Function.h"
-#include "routines/ParameterSet.h"
-#include "routines/Body.h"
-#include "routines/Block.h"
+#include "methods/Method.h"
+#include "methods/ParameterSet.h"
+#include "methods/Body.h"
+#include "methods/Block.h"
 
 #include "statements/Statement.h"
 #include "statements/Assignment.h"
@@ -104,10 +102,8 @@ std::vector<DeclaredType*>* declaredTypePointerVectorPointer;
 struct TypedList* typedListPointer;
 std::vector<TypedList*>* typedListPointerVectorPointer;
 
-struct Routine* routinePointer;
-std::vector<Routine*>* routinePointerVectorPointer;
-struct Procedure* procedurePointer;
-struct Function* functionPointer;
+struct Method* methodPointer;
+std::vector<Method*>* methodPointerVectorPointer;
 struct ParameterSet* parameterSetPointer;
 std::vector<ParameterSet*>* parameterSetPointerVectorPointer;
 struct Body* bodyPointer;
@@ -169,10 +165,10 @@ struct ProcedureCall* procedureCallStatementPointer;
 %type <typedListPointerVectorPointer> TypedLists
 %type <typedListPointerVectorPointer> VarDecl
 
-%type <routinePointer> RoutineDeclListItem
-%type <routinePointerVectorPointer> RoutineDeclList
-%type <routinePointer> ProcedureDecl
-%type <routinePointer> FunctionDecl
+%type <methodPointer> MethodDeclListItem
+%type <methodPointerVectorPointer> MethodDeclList
+%type <methodPointer> ProcedureDecl
+%type <methodPointer> FunctionDecl
 %type <parameterSetPointer> ParameterSet
 %type <parameterSetPointer> ParameterSetListItem
 %type <parameterSetPointerVectorPointer> FormalParameters
@@ -276,14 +272,14 @@ struct ProcedureCall* procedureCallStatementPointer;
 
 %%
 
-Program : Prelude RoutineDeclList Block DOT { program = new Program($1, $2, $3); };
+Program : Prelude MethodDeclList Block DOT { program = new Program($1, $2, $3); };
 Prelude : ConstDecl TypeDecl VarDecl { $$ = new Prelude($1, $2, $3); };
 
-RoutineDeclList : RoutineDeclList RoutineDeclListItem { $1->push_back($2); }
-    | { $$ = new std::vector<Routine*>; };
-    RoutineDeclListItem : ProcedureDecl | FunctionDecl ;
-ProcedureDecl : PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE FORWARD DONE { $$ = new Routine($2, $4, nullptr, nullptr); }
-    | PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE Body DONE { $$ = new Routine($2, $4, nullptr, $7); };
+MethodDeclList : MethodDeclList MethodDeclListItem { $1->push_back($2); }
+    | { $$ = new std::vector<Method*>; };
+    MethodDeclListItem : ProcedureDecl | FunctionDecl ;
+ProcedureDecl : PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE FORWARD DONE { $$ = new Method($2, $4, nullptr, nullptr); }
+    | PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE Body DONE { $$ = new Method($2, $4, nullptr, $7); };
     FormalParameters : ParameterSet ParameterSetList { $2->push_back($1); $$ = $2; } | { $$ = new std::vector<ParameterSet*>; } ;
             ParameterSet : VarOrRef IdentList COLON Type { $$ = new ParameterSet($1, $2, $4); };
                 VarOrRef : VAR { $$ = 0; } |  REF { $$ = 1; } | { $$ = 0; } ;
@@ -291,8 +287,8 @@ ProcedureDecl : PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE FORWARD DONE
                 | { $$ = new std::vector<ParameterSet*>; } ;
                 ParameterSetListItem : DONE ParameterSet { $$ = $2; };
     Body : Prelude Block { $$ = new Body($1, $2); };
-FunctionDecl : FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE FORWARD DONE { $$ = new Routine($2, $4, $7, nullptr); }
-    | FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE Body DONE { $$ = new Routine($2, $4, $7, $9); };
+FunctionDecl : FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE FORWARD DONE { $$ = new Method($2, $4, $7, nullptr); }
+    | FUNCTION IDENT LPAREN FormalParameters RPAREN COLON Type DONE Body DONE { $$ = new Method($2, $4, $7, $9); };
 
 ConstDecl : CONST Constant ConstantList { $3->insert($3->begin(), $2);  $$ = $3;}
     | { $$ = new std::vector<Constant*>; };

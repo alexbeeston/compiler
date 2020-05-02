@@ -2,23 +2,22 @@
 // Created by abeeston on 2/24/20.
 //
 
-#ifndef COMPILERS_ROUTINE_H
-#define COMPILERS_ROUTINE_H
-
+#ifndef COMPILERS_METHOD_H_
+#define COMPILERS_METHOD_H_
 #include <vector>
 
 #include "ParameterSet.h"
 #include "Body.h"
 #include "../types/BaseType.h"
 
-struct Routine
+struct Method
 {
     std::string ident;
     std::vector<ParameterSet*>* formalParameters;
     Body* body;
     virtual void print();
     void printParameters();
-    Routine(char*, std::vector<ParameterSet*>*, BaseType*, Body*);
+    Method(char*, std::vector<ParameterSet*>*, BaseType*, Body*);
     void emit();
     std::vector<int> offsets;
     virtual void computeOffsets();
@@ -26,4 +25,4 @@ struct Routine
     bool isForwardDeclared;
     BaseType* type_temp;
 };
-#endif //COMPILERS_ROUTINE_H
+#endif //COMPILERS_METHOD_H_
