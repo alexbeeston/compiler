@@ -42,6 +42,7 @@ struct SymbolTable
     std::vector<std::string> strings;
     int insertMessage(std::string);
     Routine* retrieveRoutine(std::string);
+    int sizeOfLocalVars;
 
      // legacy; will throw errors; needs updating
      void pushScope_iterator(std::string);

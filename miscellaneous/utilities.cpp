@@ -33,7 +33,7 @@ std::map<std::string, int> spillRegisters()
     auto spilledRegisters = std::map<std::string, int>();
     int spillRegOffset = 0;
     std::cout << "# Spill Registers\n";
-    std::cout << "addi $sp $sp -" << spillRegSize << "\n";
+    moveStackPointerDown(spillRegSize);
     for (Register reg : rp.registersInUse)
     {
         std::cout << "sw " << reg.getName() << " " << spillRegOffset << "($sp)\n";
@@ -58,7 +58,7 @@ void restoreSpilledRegisters(std::map<std::string, int> registers)
     {
         std::cout << "lw " << iterator.first << " " << iterator.second << "($sp)\n";
     }
-    std::cout << "addi $sp $sp " << registers.size() * WORD_SIZE << "\n";
+    moveStackPointerUp(registers.size() * WORD_SIZE);
     std::cout << std::endl;
 }
 
@@ -71,7 +71,7 @@ void addParametersToStack(std::string routineName, std::vector<Expression*> expr
 
     // continue
     std::cout << "# Add Parameters To Stack\n";
-    std::cout << "addi $sp $sp -" << routine->sizeOfParametersAndReturnType << "\n";
+    moveStackPointerDown(routine->sizeOfParametersAndReturnType);
     for (int i = 0; i < numParameters; ++i)
     {
         // assume that everything is passed by value for now
@@ -84,9 +84,12 @@ void addParametersToStack(std::string routineName, std::vector<Expression*> expr
     std::cout << std::endl;
 }
 
-void deallocateParameters(int size)
+void moveStackPointerUp(int size)
 {
-    std::cout << "# Deallocate Parameters\n";
     std::cout << "addi $sp $sp " << size << "\n";
-    std::cout << std::endl;
+}
+
+void moveStackPointerDown(int size)
+{
+    std::cout << "addi $sp $sp -" << size << "\n";
 }

@@ -6,6 +6,7 @@
 #include "Body.h"
 #include "../global.h"
 #include "../types/SimpleType.h"
+#include "../miscellaneous/utilities.h"
 
 Routine::Routine(char* p_ident, std::vector<ParameterSet*>* p_formalParameters, BaseType* p_returnType, Body* p_body)
 {
@@ -70,15 +71,14 @@ void Routine::emit()
     if (body == nullptr) throw std::runtime_error("Routine::computeSizeOnStack() - the body is null, yet the function is not forward declared. Bodies should be null if and only if the function is forward declared");
 
     // continue
-    int sizeOfLocalVars = body->prelude->computeSize();
     st.pushScope(type_temp, *formalParameters, *body->prelude);
+    st.sizeOfLocalVars = body->prelude->computeSize();
     std::cout << ident << ":\n";
     std::cout << "ori $fp $sp 0\n";
-    std::cout << "addi $sp $sp -" << sizeOfLocalVars << "\n";
+    if (st.sizeOfLocalVars != 0) moveStackPointerDown(st.sizeOfLocalVars);
     for (auto statement : *body->block->statementSequence) statement->emit();
-    std::cout << "addi $sp $sp " << sizeOfLocalVars << "\n";
-    std::cout << "jr $ra\n";
+    if (st.sizeOfLocalVars != 0) moveStackPointerUp(st.sizeOfLocalVars);
+    st.sizeOfLocalVars = 0;
     std::cout << std::endl;
-
     st.popScope();
 }

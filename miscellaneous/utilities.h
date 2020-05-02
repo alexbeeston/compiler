@@ -15,6 +15,7 @@ void dereferencePointer(Register);
 std::map<std::string, int> spillRegisters();
 void restoreSpilledRegisters(std::map<std::string, int> registers);
 void addParametersToStack(std::string, std::vector<Expression*>, int);
-void deallocateParameters(int);
+void moveStackPointerUp(int);
+void moveStackPointerDown(int);
 
 #endif //COMPILER_UTILITIES_H

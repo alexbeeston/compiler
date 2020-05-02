@@ -13,6 +13,8 @@ void Return::emit()
     Register framePointer = rp.getFramePointer();
     if (expressionRegister.containsAddress) copyContinuousMemory(0, 0, expressionRegister.space, framePointer, expressionRegister);
     else std::cout << "sw " << expressionRegister.getName() << " 0(" << framePointer.getName() << ")\n";
+    if (st.sizeOfLocalVars != 0) moveStackPointerUp(st.sizeOfLocalVars);
+    std::cout << "jr $ra\n";
     rp.returnRegister(expressionRegister);
     rp.returnRegister(framePointer);
 }

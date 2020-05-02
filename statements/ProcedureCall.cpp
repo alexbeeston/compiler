@@ -34,6 +34,7 @@ void ProcedureCall::emit()
     addParametersToStack(*ident, *expressions, RETURN_TYPE_SIZE);
     std::cout << "# Call the procedure\n";
     std::cout << "jal " << *ident << "\n\n";
-    deallocateParameters(routine->sizeOfParametersAndReturnType);
+    std::cout << "# Deallocate Parameters\n";
+    moveStackPointerUp(routine->sizeOfParametersAndReturnType);
     restoreSpilledRegisters(spilledRegisters);
 }

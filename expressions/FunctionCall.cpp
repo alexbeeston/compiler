@@ -43,7 +43,8 @@ Register FunctionCall::emit()
     std::cout << "la " << valueRegister.getName() << " 0(" << rp.getStackPointer().getName() << ")\n";
 
     // continue with function calling
-    deallocateParameters(routine->sizeOfParametersAndReturnType);
+    std::cout << "# Deallocate Parameters\n";
+    moveStackPointerUp(routine->sizeOfParametersAndReturnType);
     restoreSpilledRegisters(spilledRegisters);
     return valueRegister;
 }

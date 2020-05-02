@@ -1,0 +1,13 @@
+const
+	MAX_POSSIBLE_VALUE_BEFORE_OVERFLOW = 12;
+
+function factorial(num:integer) : integer;
+begin
+	if num = 0 then return 1; end;
+	return num * factorial(num - 1);
+end;
+
+begin
+	write(factorial(MAX_POSSIBLE_VALUE_BEFORE_OVERFLOW));
+end.
+

@@ -1,6 +1,6 @@
 const
-	LOW = 2;
-	HIGH = 8;
+	LOW = 1;
+	HIGH = 5;
 	FACTOR = 10;
 type
 	listType = array[LOW:HIGH] of integer;
