@@ -25,4 +25,4 @@ int ParenExpression::getValue()
     return expression->getValue();
 }
 
-PrimitiveType ParenExpression::getPrimitiveType() { return expression->getPrimitiveType(); }
+PrimitiveType ParenExpression::resolvePrimitiveType() { return expression->resolvePrimitiveType(); }

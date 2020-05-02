@@ -4,7 +4,7 @@
 
 And::And(Expression* p_left, Expression* p_right):BinaryOp(p_left, p_right)
 {
-    typeIndicator = BOOLEAN;
+    primitiveType = BOOLEAN;
 }
 
 void And::print()

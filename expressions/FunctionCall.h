@@ -17,7 +17,7 @@ struct FunctionCall:Expression
     FunctionCall(char*, std::vector<Expression*>*);
     void print() override;
     Register emit() override;
-    PrimitiveType getPrimitiveType() override;
+    PrimitiveType resolvePrimitiveType() override;
     TypeStyle getTypeStyle() override;
 };
 #endif //COMPILERS_FUNCTIONCALL_H

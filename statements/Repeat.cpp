@@ -24,7 +24,7 @@ void Repeat::print()
 
 void Repeat::emit()
 {
-    if (expression->getPrimitiveType() != BOOLEAN) throw std::runtime_error("Repeat::emit() - expression is not boolean");
+    if (expression->resolvePrimitiveType() != BOOLEAN) throw std::runtime_error("Repeat::emit() - expression is not boolean");
     std::string bodyLabel = st.getRepeatLabel();
     std::cout << "\n# Repeat - Body\n";
     std::cout << bodyLabel + ":\n";

@@ -5,6 +5,7 @@
 Negate::Negate(Expression* p_expression)
 {
     expression = p_expression;
+    primitiveType = INTEGER;
 }
 
 void Negate::print()

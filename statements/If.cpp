@@ -27,7 +27,8 @@ void If::print()
 void If::emit()
 {
     // validate
-    if (ifBlock->expression->getPrimitiveType() != BOOLEAN) throw std::runtime_error("If::emit() - if block has expression of type " + std::to_string(ifBlock->expression->getPrimitiveType()));
+    if (ifBlock->expression->resolvePrimitiveType() != BOOLEAN) throw std::runtime_error("If::emit() - if block has expression of type " + std::to_string(
+                ifBlock->expression->resolvePrimitiveType()));
 
     // continue
     std::vector<std::string> elseIfLabels = std::vector<std::string>();
@@ -53,7 +54,7 @@ void If::emit()
     for (int i = 0; i < elseIfBlocks->size(); i ++)
     {
         // else if test
-        if (elseIfBlocks->at(i)->expression->getPrimitiveType() != BOOLEAN) throw std::runtime_error("If::emit() - conditional expression for else if block not boolean");
+        if (elseIfBlocks->at(i)->expression->resolvePrimitiveType() != BOOLEAN) throw std::runtime_error("If::emit() - conditional expression for else if block not boolean");
         std::cout << "\n# If - elseif (test) \n";
         std::cout << elseIfLabels[i] << ":\n";
         test = elseIfBlocks->at(i)->expression->emit();

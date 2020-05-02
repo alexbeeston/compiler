@@ -4,7 +4,7 @@
 
 Mod::Mod(Expression* p_left, Expression* p_right):BinaryOp(p_left, p_right)
 {
-    typeIndicator = INTEGER;
+    primitiveType = INTEGER;
 }
 
 void Mod::print()

@@ -26,9 +26,9 @@ void Write::emit()
     std::cout << "# write\n";
     for (Expression* expression : *expressions)
     {
-        if (expression->getPrimitiveType() == INTEGER || expression->getPrimitiveType() == BOOLEAN) std::cout << "li $v0 1   # 1 = system call to print an integer; used for ints and bools\n";
-        else if (expression->getPrimitiveType() == CHAR) std::cout << "li $v0 11   # 11 = system call to print an char\n";
-        else if (expression->getPrimitiveType() == STRING) std::cout << "li $v0 4   # 4 = system call to print a label to a string\n";
+        if (expression->resolvePrimitiveType() == INTEGER || expression->resolvePrimitiveType() == BOOLEAN) std::cout << "li $v0 1   # 1 = system call to print an integer; used for ints and bools\n";
+        else if (expression->resolvePrimitiveType() == CHAR) std::cout << "li $v0 11   # 11 = system call to print an char\n";
+        else if (expression->resolvePrimitiveType() == STRING) std::cout << "li $v0 4   # 4 = system call to print a label to a string\n";
         else throw std::runtime_error("Write::emit() - The expression doesn't know if its an int, char, or string");
         std::cout << std::endl;
         Register reg = expression->emit();

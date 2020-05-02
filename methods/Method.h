@@ -20,9 +20,10 @@ struct Method
     Method(char*, std::vector<ParameterSet*>*, BaseType*, Body*);
     void emit();
     std::vector<int> offsets;
-    virtual void computeOffsets();
+    virtual void computeOffsetsAndPassBys();
     int sizeOfParametersAndReturnType;
     bool isForwardDeclared;
     BaseType* type_temp;
+    std::vector<PassBy> passbys;
 };
 #endif //COMPILERS_METHOD_H_

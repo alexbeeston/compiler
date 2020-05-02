@@ -43,7 +43,8 @@ void Assignment::emit()
     {
         // validate
         if (!lValue->isPrimitive()) throw std::runtime_error("Assignment::emit() - the register containing the evaluation of the expression contains a value, but the LValue is not primitive");
-        if (lValue->getPrimitiveType() != expression->getPrimitiveType()) throw std::runtime_error("Assignment::emit() - attempting to assign a primitive LValue, the lLValue operand has type " + std::to_string(lValue->getPrimitiveType()) + " and expression operand has type " + std::to_string(expression->getPrimitiveType()));
+        if (lValue->getPrimitiveType() != expression->resolvePrimitiveType()) throw std::runtime_error("Assignment::emit() - attempting to assign a primitive LValue, the lLValue operand has type " + std::to_string(lValue->getPrimitiveType()) + " and expression operand has type " + std::to_string(
+                    expression->resolvePrimitiveType()));
 
         // continue
         std::cout << "sw " << sourceRegister.getName() << " " << targetOffset << "(" << targetBaseRegister.getName() << ")  # assigned a primitive expression to a primitive LValue\n";

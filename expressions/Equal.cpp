@@ -4,7 +4,7 @@
 
 Equal::Equal(Expression* p_l, Expression* p_r): LogicalBinaryOp(p_l, p_r)
 {
-    typeIndicator = BOOLEAN;
+    primitiveType = BOOLEAN;
 }
 
 Register Equal::emit()

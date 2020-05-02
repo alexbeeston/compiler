@@ -4,7 +4,7 @@
 
 NotEqual::NotEqual(Expression* p_left, Expression* p_right): LogicalBinaryOp(p_left, p_right)
 {
-    typeIndicator = BOOLEAN;
+    primitiveType = BOOLEAN;
 }
 
 void NotEqual::print()

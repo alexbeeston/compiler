@@ -6,6 +6,7 @@
 OrdFunc::OrdFunc(Expression* p_expression)
 {
     expression = p_expression;
+    primitiveType = INTEGER;
 }
 
 void OrdFunc::print()
@@ -17,11 +18,11 @@ void OrdFunc::print()
 
 Register OrdFunc::emit()
 {
-    if (expression->getPrimitiveType() != CHAR) throw std::runtime_error("Error: Ord() attempted on a non-character.");
-    expression->typeIndicator = INTEGER;
+    if (expression->resolvePrimitiveType() != CHAR) throw std::runtime_error("Error: Ord() attempted on a non-character.");
+    expression->primitiveType = INTEGER;
     Register reg = expression->emit();
     reg.containsAddress = false;
     return reg;
 }
 
-PrimitiveType OrdFunc::getPrimitiveType() { return INTEGER; }
+PrimitiveType OrdFunc::resolvePrimitiveType() { return INTEGER; }

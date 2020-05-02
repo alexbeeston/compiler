@@ -5,7 +5,7 @@
 
 LValueExpression::LValueExpression(LValue* p_lValue)
 {
-    typeIndicator = NOT_PRIMITIVE;
+    primitiveType = NOT_PRIMITIVE;
     lValue = p_lValue;
 }
 
@@ -14,7 +14,7 @@ void LValueExpression::print()
     lValue->print();
 }
 
-PrimitiveType LValueExpression::getPrimitiveType() { return lValue->getPrimitiveType(); }
+PrimitiveType LValueExpression::resolvePrimitiveType() { return lValue->getPrimitiveType(); }
 
 Register LValueExpression::emit()
 {
@@ -22,7 +22,7 @@ Register LValueExpression::emit()
     Register reg = rp.getRegister();
     if (entry.label == CONSTANT)
     {
-        if (entry.value->getPrimitiveType() == STRING) std::cout << "la " << reg.getName() << " message";
+        if (entry.value->resolvePrimitiveType() == STRING) std::cout << "la " << reg.getName() << " message";
         else std::cout << "li " << reg.getName() << " ";
         std::cout << entry.value->getValue() << "   # loaded an Lvalue\n";
         reg.containsAddress = false;

@@ -1,7 +1,7 @@
 #include <vector>
 #include "Prelude.h"
-#include "routines/Method.h"
-#include "routines/Block.h"
+#include "methods/Method.h"
+#include "methods/Block.h"
 
 struct Program
 {

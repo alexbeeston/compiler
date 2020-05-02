@@ -49,7 +49,7 @@ Register FunctionCall::emit()
     return valueRegister;
 }
 
-PrimitiveType FunctionCall::getPrimitiveType()
+PrimitiveType FunctionCall::resolvePrimitiveType()
 {
     BaseType* returnType = st.retrieveRoutine(*ident)->type_temp;
     if (returnType->style == SIMPLE)

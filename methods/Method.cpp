@@ -7,6 +7,7 @@
 #include "../global.h"
 #include "../types/SimpleType.h"
 #include "../miscellaneous/utilities.h"
+#include "../Enums.h"
 
 Method::Method(char* p_ident, std::vector<ParameterSet*>* p_formalParameters, BaseType* p_returnType, Body* p_body)
 {
@@ -21,18 +22,21 @@ Method::Method(char* p_ident, std::vector<ParameterSet*>* p_formalParameters, Ba
     type_temp = p_returnType;
 }
 
-void Method::computeOffsets()
+void Method::computeOffsetsAndPassBys()
 {
     int nextOffset;
     if (type_temp != nullptr) nextOffset = type_temp->computeSize();
     else nextOffset = 0;
     for (auto set : *formalParameters)
     {
-        int size = set->type->computeSize();
+        int size;
+        if (set->passBy == VALUE ) size = set->type->computeSize();
+        else size = WORD_SIZE;
         for (auto parameter : set->identList)
         {
             offsets.push_back(nextOffset);
             nextOffset += size;
+            passbys.push_back(set->passBy);
         }
     }
     sizeOfParametersAndReturnType = nextOffset;

@@ -27,7 +27,7 @@ int RecordType::computeSize()
 
 PrimitiveType RecordType::getPrimitiveType()
 {
-    throw std::runtime_error("RecordType::getPrimitiveType; doesn't have a single type");
+    throw std::runtime_error("RecordType::resolvePrimitiveType; doesn't have a single type");
 }
 
 void RecordType::print()

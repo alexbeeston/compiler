@@ -16,7 +16,7 @@ void Negative::print()
 
 Register Negative::emit()
 {
-    if (originalExpression->getPrimitiveType() != INTEGER) throw std::runtime_error("Negative::emit() - can't get the negative value of a expression that's not an integer");
+    if (originalExpression->resolvePrimitiveType() != INTEGER) throw std::runtime_error("Negative::emit() - can't get the negative value of a expression that's not an integer");
     Register originalValue = originalExpression->emit();
     Register negativeOne = rp.getRegister();
     std::cout << "li " << negativeOne.getName() << " -1\n";
@@ -30,6 +30,6 @@ Register Negative::emit()
 int Negative::getValue()
 {
     if (!originalExpression->isCTV()) throw std::runtime_error("Negative::getValue() - Can't get value if operand is not CTV");
-    if (originalExpression->getPrimitiveType() != INTEGER) throw std::runtime_error("Negative::getValue() - type indicator is not INTEGER");
+    if (originalExpression->resolvePrimitiveType() != INTEGER) throw std::runtime_error("Negative::getValue() - type indicator is not INTEGER");
     return originalExpression->getValue() * -1;
 }

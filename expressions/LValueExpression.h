@@ -14,7 +14,7 @@ struct LValueExpression:Expression
    LValueExpression(LValue*);
    void print() override;
    Register emit() override;
-   PrimitiveType getPrimitiveType() override;
+   PrimitiveType resolvePrimitiveType() override;
    bool isCTV() override;
    int getValue() override;
    TypeStyle getTypeStyle() override;

@@ -14,7 +14,7 @@ struct ParenExpression:Expression
     void print() override;
     Register emit() override;
     int getValue() override;
-    PrimitiveType  getPrimitiveType() override;
+    PrimitiveType  resolvePrimitiveType() override;
 
 };
 #endif //COMPILERS_PARENEXPRESSION_H

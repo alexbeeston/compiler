@@ -18,18 +18,18 @@ void SuccFunc::print()
 Register SuccFunc::emit()
 {
     // validate
-    if (expression->getPrimitiveType() == STRING) throw std::runtime_error("SuccFunc::emit() - not defined for strings");
-    else if (expression->getPrimitiveType() == NOT_PRIMITIVE) throw std::runtime_error("SuccFunc::emit() - not defined for non-primitive types");
+    if (expression->resolvePrimitiveType() == STRING) throw std::runtime_error("SuccFunc::emit() - not defined for strings");
+    else if (expression->resolvePrimitiveType() == NOT_PRIMITIVE) throw std::runtime_error("SuccFunc::emit() - not defined for non-primitive types");
 
     // continue
-    if (expression->getPrimitiveType() == INTEGER || expression->getPrimitiveType() == CHAR)
+    if (expression->resolvePrimitiveType() == INTEGER || expression->resolvePrimitiveType() == CHAR)
     {
         Register result = expression->emit();
         std::cout << "addi " << result.getName() << " " << result.getName() << " 1\n";
         result.containsAddress = false;
         return result;
     }
-    else if (expression->getPrimitiveType() == BOOLEAN)
+    else if (expression->resolvePrimitiveType() == BOOLEAN)
     {
         throw std::runtime_error("SuccFun::emit() - not yet implemented for booleans");
     }

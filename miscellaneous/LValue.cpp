@@ -97,7 +97,7 @@ TypeStyle LValue::getStyle()
 PrimitiveType LValue::getPrimitiveType()
 {
     Entry entry = st.retrieveEntry(getKey());
-    if (entry.label == CONSTANT) return entry.value->getPrimitiveType();
+    if (entry.label == CONSTANT) return entry.value->resolvePrimitiveType();
     else return getInnerMostType()->typeIndicator;
 }
 

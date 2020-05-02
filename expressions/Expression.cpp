@@ -13,7 +13,7 @@ Register Expression::emit()
     throw std::runtime_error("Constructing the base Expression struct");
 }
 
-PrimitiveType Expression::getPrimitiveType() { return typeIndicator; }
+PrimitiveType Expression::resolvePrimitiveType() { return primitiveType; }
 
 int Expression::getValue() { throw std::runtime_error("Calling Expression::getValue(). Should be called on a derived class.\n"); }
 

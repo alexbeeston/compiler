@@ -22,10 +22,10 @@ set(
 	miscellaneous/TypedList.cpp
 	miscellaneous/utilities.cpp
 
-	routines/Method.cpp
-        routines/ParameterSet.cpp
-	routines/Body.cpp
-	routines/Block.cpp
+	methods/Method.cpp
+	methods/ParameterSet.cpp
+	methods/Body.cpp
+	methods/Block.cpp
 	
 	expressions/Literal.cpp
 	expressions/Expression.cpp

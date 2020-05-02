@@ -9,7 +9,7 @@
 #include <string>
 
 #include "Scope.h"
-#include "routines/Method.h"
+#include "methods/Method.h"
 
 struct SymbolTable
 {

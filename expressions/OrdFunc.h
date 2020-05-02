@@ -13,6 +13,6 @@ struct OrdFunc:Expression
     OrdFunc(Expression*);
     void print() override;
     Register emit() override;
-    PrimitiveType getPrimitiveType() override;
+    PrimitiveType resolvePrimitiveType() override;
 };
 #endif //COMPILERS_ORDFUNC_H

@@ -8,5 +8,6 @@
 enum PrimitiveType {INTEGER, CHAR, STRING, BOOLEAN, NOT_PRIMITIVE};
 enum TypeStyle {SIMPLE, ARRAY, RECORD};
 enum EntryStyle {CONSTANT, VARIABLE};
+enum PassBy {VALUE, REFERENCE};
 
 #endif //COMPILERS_TYPEINDICATOR_H

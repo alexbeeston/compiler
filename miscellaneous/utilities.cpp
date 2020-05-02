@@ -72,12 +72,21 @@ void addParametersToStack(std::string routineName, std::vector<Expression*> expr
     // continue
     std::cout << "# Add Parameters To Stack\n";
     moveStackPointerDown(routine->sizeOfParametersAndReturnType);
+    Register staging;
     for (int i = 0; i < numParameters; ++i)
     {
-        // assumes pass by value
-        Register staging = expressions[i]->emit();
-        if (staging.containsAddress) copyContinuousMemory(routine->offsets[i], 0, staging.space, rp.getStackPointer(), staging);
-        else std::cout << "sw " << staging.getName() << " " << routine->offsets[i] << "($sp)\n";
+        // assumes pass by value - if pass by reference and it's a literal, then we're in trouble
+        staging = expressions[i]->emit();
+        if (routine->passbys[i] == VALUE)
+        {
+            if (staging.containsAddress) copyContinuousMemory(routine->offsets[i], 0, staging.space, rp.getStackPointer(), staging);
+            else std::cout << "sw " << staging.getName() << " " << routine->offsets[i] << "($sp)\n";
+        }
+        else
+        {
+            // validate
+            if (expressions[i]->primitiveType != NOT_PRIMITIVE) throw std::runtime_error("addParametersToStack() - attempting to add a parameter that is declared as \"pass by reference\", but a literal expression was given");
+        }
         rp.returnRegister(staging);
     }
     std::cout << std::endl;

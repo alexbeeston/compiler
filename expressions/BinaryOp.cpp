@@ -15,7 +15,9 @@ void BinaryOp::print()
 std::vector<Register> BinaryOp::emitOperands(PrimitiveType requiredPrimitiveType)
 {
     // validate
-    if (!(left->getPrimitiveType() == requiredPrimitiveType && right->getPrimitiveType() == requiredPrimitiveType)) throw std::runtime_error("BinaryOp::emitOperands() - required primitiveType of both operands is " + std::to_string(requiredPrimitiveType) + " but left is " + std::to_string(left->getPrimitiveType()) + " and right is " + std::to_string(right->getPrimitiveType()) + ".");
+    if (!(left->resolvePrimitiveType() == requiredPrimitiveType && right->resolvePrimitiveType() == requiredPrimitiveType)) throw std::runtime_error("BinaryOp::emitOperands() - required primitiveType of both operands is " + std::to_string(requiredPrimitiveType) + " but left is " + std::to_string(
+                left->resolvePrimitiveType()) + " and right is " + std::to_string(
+                right->resolvePrimitiveType()) + ".");
 
     // continue
     auto registers = std::vector<Register>();

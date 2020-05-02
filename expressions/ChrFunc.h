@@ -13,6 +13,5 @@ struct ChrFunc:Expression
     ChrFunc(Expression*);
     void print() override;
     Register emit() override;
-    PrimitiveType getPrimitiveType() override;
 };
 #endif //COMPILERS_CHRFUNC_H

@@ -70,22 +70,22 @@ void SymbolTable::popScope()
 
 void SymbolTable::addRoutines(std::vector<Method*>* p_routines)
 {
-    for (Method* routine : *p_routines)
+    for (Method* methods : *p_routines)
     {
-        if (routines.count(routine->ident) == 1)
+        if (routines.count(methods->ident) == 1)
         {
-            Method* st_routine = routines[routine->ident];
+            Method* st_routine = routines[methods->ident];
             if (st_routine->isForwardDeclared)
             {
-                st_routine->body = routine->body;
+                st_routine->body = methods->body;
                 st_routine->isForwardDeclared= false;
             }
-            else throw std::runtime_error("SymbolTable::addRoutines() - routine with name \"" + routine->ident + "\" already in symbol table and is not forward declared");
+            else throw std::runtime_error("SymbolTable::addRoutines() - methods with name \"" + methods->ident + "\" already in symbol table and is not forward declared");
         }
         else
         {
-            routine->computeOffsets();
-            routines[routine->ident] = routine;
+            methods->computeOffsetsAndPassBys();
+            routines[methods->ident] = methods;
         }
     }
 }
