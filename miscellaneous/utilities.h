@@ -10,7 +10,7 @@
 #include "../registerPool/Register.h"
 #include "../expressions/Expression.h"
 
-void copyContinuousMemory(int, int, int, Register, Register);
+void copyContinuousMemory(int, Register, int, Register, int);
 void dereferencePointer(Register);
 std::map<std::string, int> spillRegisters();
 void restoreSpilledRegisters(std::map<std::string, int> registers);

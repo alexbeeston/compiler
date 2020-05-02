@@ -13,7 +13,7 @@ void dereferencePointer(Register reg)
         reg.containsAddress = false;
     }
 }
-void copyContinuousMemory(int targetOffsetStart, int sourceOffsetStart, int size, Register targetBase, Register sourceBase)
+void copyContinuousMemory(int sourceOffsetStart, Register sourceBase, int targetOffsetStart, Register targetBase, int size)
 {
     Register staging = rp.getRegister();
     std::cout << "# begin continuous memory block copy\n";
@@ -75,11 +75,10 @@ void addParametersToStack(std::string routineName, std::vector<Expression*> expr
     Register staging;
     for (int i = 0; i < numParameters; ++i)
     {
-        // assumes pass by value - if pass by reference and it's a literal, then we're in trouble
         staging = expressions[i]->emit();
         if (routine->passbys[i] == VALUE)
         {
-            if (staging.containsAddress) copyContinuousMemory(routine->offsets[i], 0, staging.space, rp.getStackPointer(), staging);
+            if (staging.containsAddress) copyContinuousMemory(0, staging, routine->offsets[i], rp.getStackPointer(), staging.space);
             else std::cout << "sw " << staging.getName() << " " << routine->offsets[i] << "($sp)\n";
         }
         else

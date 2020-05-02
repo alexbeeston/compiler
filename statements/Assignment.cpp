@@ -36,15 +36,13 @@ void Assignment::emit()
         if (lValue->getInnerMostType()->computeSize() != sourceRegister.space) throw std::runtime_error("Assignment::emit() - assigning a non-primitive expression to an lvalue, but sizes don't match. Left size is " + std::to_string(lValue->getInnerMostType()->computeSize()) + " and right size is " + std::to_string(sourceRegister.space));
 
         // continue
-        static int SOURCE_OFFSET = 0;
-        copyContinuousMemory(targetOffset, SOURCE_OFFSET, sourceRegister.space, targetBaseRegister, sourceRegister);
+        copyContinuousMemory(0, sourceRegister, targetOffset, targetBaseRegister, sourceRegister.space);
     }
     else
     {
         // validate
         if (!lValue->isPrimitive()) throw std::runtime_error("Assignment::emit() - the register containing the evaluation of the expression contains a value, but the LValue is not primitive");
-        if (lValue->getPrimitiveType() != expression->resolvePrimitiveType()) throw std::runtime_error("Assignment::emit() - attempting to assign a primitive LValue, the lLValue operand has type " + std::to_string(lValue->getPrimitiveType()) + " and expression operand has type " + std::to_string(
-                    expression->resolvePrimitiveType()));
+        if (lValue->getPrimitiveType() != expression->resolvePrimitiveType()) throw std::runtime_error("Assignment::emit() - attempting to assign a primitive LValue, the lLValue operand has type " + std::to_string(lValue->getPrimitiveType()) + " and expression operand has type " + std::to_string(expression->resolvePrimitiveType()));
 
         // continue
         std::cout << "sw " << sourceRegister.getName() << " " << targetOffset << "(" << targetBaseRegister.getName() << ")  # assigned a primitive expression to a primitive LValue\n";
