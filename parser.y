@@ -20,10 +20,10 @@
 #include "types/RecordType.h"
 #include "types/DeclaredType.h"
 
-#include "methods/Method.h"
-#include "methods/ParameterSet.h"
-#include "methods/Body.h"
-#include "methods/Block.h"
+#include "routines/Method.h"
+#include "routines/ParameterSet.h"
+#include "routines/Body.h"
+#include "routines/Block.h"
 
 #include "statements/Statement.h"
 #include "statements/Assignment.h"

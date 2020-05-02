@@ -74,11 +74,10 @@ void addParametersToStack(std::string routineName, std::vector<Expression*> expr
     moveStackPointerDown(routine->sizeOfParametersAndReturnType);
     for (int i = 0; i < numParameters; ++i)
     {
-        // assume that everything is passed by value for now
-        // if pass by reference, (validate something)
-        // la staging.getName() offset(base)
+        // assumes pass by value
         Register staging = expressions[i]->emit();
-        std::cout << "sw " << staging.getName() << " " << routine->offsets[i] << "($sp)\n";
+        if (staging.containsAddress) copyContinuousMemory(routine->offsets[i], 0, staging.space, rp.getStackPointer(), staging);
+        else std::cout << "sw " << staging.getName() << " " << routine->offsets[i] << "($sp)\n";
         rp.returnRegister(staging);
     }
     std::cout << std::endl;
