@@ -1,11 +1,8 @@
 #include <iostream>
 #include <string>
-#include <utility>
 
 #include "Constant.h"
 #include "../expressions/Expression.h"
-#include "../types/SimpleType.h"
-#include "../types/BaseType.h"
 
 Constant::Constant() {}
 

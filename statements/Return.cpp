@@ -11,7 +11,7 @@ void Return::emit()
 {
     Register expressionRegister = expression->emit();
     Register framePointer = rp.getFramePointer();
-    if (expressionRegister.containsAddress) copyContinuousMemory(0, 0, expressionRegister.space, expressionRegister, framePointer);
+    if (expressionRegister.containsAddress) copyContinuousMemory(0, 0, expressionRegister.space, framePointer, expressionRegister);
     else std::cout << "sw " << expressionRegister.getName() << " 0(" << framePointer.getName() << ")\n";
     rp.returnRegister(expressionRegister);
     rp.returnRegister(framePointer);

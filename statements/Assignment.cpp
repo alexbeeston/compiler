@@ -26,10 +26,10 @@ void Assignment::emit()
     if (lValue->getStyle() != expression->getTypeStyle()) throw std::runtime_error("Assignment::emit() - styles of LValue and Expression in an assignment do not match. LValue = " + std::to_string(lValue->getStyle()) + ", expression = " + std::to_string(expression->getTypeStyle()));
 
     // assign to memory
+    std::cout << "# assignment\n";
     Register sourceRegister = expression->emit();
     Register targetBaseRegister = lValue->getBaseRegister();
     int targetOffset = lValue->getOffset();
-    std::cout << "# assignment\n";
     if (sourceRegister.containsAddress)
     {
         // validate

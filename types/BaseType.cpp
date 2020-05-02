@@ -20,5 +20,3 @@ int BaseType::computeSize()
 bool BaseType::isPrimitive() { throw std::runtime_error("BaseType::isPrimitive() - can't call on base Type"); }
 
 PrimitiveType BaseType::getPrimitiveType() { return typeIndicator; }
-
-bool BaseType::isAlias() { return false; }

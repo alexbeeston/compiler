@@ -41,9 +41,18 @@ void Scope::addPrelude(Prelude prelude)
         int size = list->type->computeSize();
         for (std::string* name: *list->identList)
         {
-            if (st.addingGlobals) nextDeclaredVariableAddress += size;
-            else nextDeclaredVariableAddress -= size;
-            entries[*name] = Entry(*name, list->type, nextDeclaredVariableAddress, st.addingGlobals, IS_DECLARED);
+            if (st.addingGlobals)
+            {
+                entries[*name] = Entry(*name, list->type, nextDeclaredVariableAddress, st.addingGlobals, IS_DECLARED);
+                std::cout << "# added " << *name << " at " << nextDeclaredVariableAddress << "\n";
+                nextDeclaredVariableAddress += size;
+            }
+            else
+            {
+                nextDeclaredVariableAddress -= size;
+                entries[*name] = Entry(*name, list->type, nextDeclaredVariableAddress, st.addingGlobals, IS_DECLARED);
+                std::cout << "# added " << *name << " at " << nextDeclaredVariableAddress << "\n";
+            }
         }
     }
 }

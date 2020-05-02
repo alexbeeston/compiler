@@ -38,8 +38,8 @@ void For::emit()
     std::cout << "\n# For - init\n";
     Register leftBound = left->emit();
     dereferencePointer(leftBound);
-    int addressOfIterator = st.retrieveEntry(*ident).offset;
-    std::cout << "sw " << leftBound.getName() << " " << addressOfIterator << "($gp)\n";
+    Entry iterator = st.retrieveEntry(*ident);
+    std::cout << "sw " << leftBound.getName() << " " << iterator.offset << "(" << iterator.baseRegister.getName() << ")\n";
     rp.returnRegister(leftBound);
     Register rightBound = right->emit();
     dereferencePointer(rightBound);
@@ -53,7 +53,7 @@ void For::emit()
     Register iteratorValue = rp.getRegister();
     std::cout << "\n# For - test\n";
     std::cout << testLabel << ":\n";
-    std::cout << "lw " << iteratorValue.getName() << " " << addressOfIterator << "($gp)\n";
+    std::cout << "lw " << iteratorValue.getName() << " " << iterator.offset << "(" << iterator.baseRegister.getName() << ")\n";
     std::cout << "beq " << iteratorValue.getName() << " " << rightBound.getName() << " " << nextLabel << "\n";
     rp.returnRegister(iteratorValue);
 
@@ -64,11 +64,11 @@ void For::emit()
     // update
     std::cout << "\n# For - update\n";
     Register iteratorValue_again = rp.getRegister();
-    std::cout << "lw " << iteratorValue_again.getName() << " " << addressOfIterator << "($gp)\n";
+    std::cout << "lw " << iteratorValue_again.getName() << " " << iterator.offset << "(" << iterator.baseRegister.getName() << ")\n";
     std::cout << "addi " << iteratorValue_again.getName() << " " << iteratorValue_again.getName() << " ";
     if (location == 0) std::cout << "-1\n";
     else std::cout << "1\n";
-    std::cout << "sw " << iteratorValue_again.getName() << " " << addressOfIterator << "($gp)\n";
+    std::cout << "sw " << iteratorValue_again.getName() << " " << iterator.offset << "(" << iterator.baseRegister.getName() << ")\n";
     std::cout << "j " << testLabel << "\n";
     rp.returnRegister(iteratorValue_again);
     rp.returnRegister(rightBound);

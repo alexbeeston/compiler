@@ -61,5 +61,7 @@ PrimitiveType FunctionCall::getPrimitiveType()
 
 TypeStyle FunctionCall::getTypeStyle()
 {
-    return st.retrieveRoutine(*ident)->type_temp->style;
+    BaseType* rawReturnType = st.retrieveRoutine(*ident)->type_temp;
+    if (rawReturnType->style == SIMPLE) return st.retrieveType(dynamic_cast<SimpleType*>(rawReturnType)->name)->style;
+    else return rawReturnType->style;
 }

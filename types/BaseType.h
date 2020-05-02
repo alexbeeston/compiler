@@ -9,9 +9,8 @@ struct BaseType
     TypeStyle style;
     PrimitiveType typeIndicator;
     BaseType();
-    int size; // set by the symbol table
+    int size; // might be able to delete
     virtual bool isPrimitive();
-    virtual bool isAlias();
     virtual int computeSize();
     virtual void print();
     virtual PrimitiveType getPrimitiveType();

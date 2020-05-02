@@ -10,5 +10,6 @@ RegisterPool rp;
 int main()
 {
 	yyparse();
+	std::cout << std::endl;
 	program->emit();
 }

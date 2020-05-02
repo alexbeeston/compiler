@@ -25,10 +25,6 @@ Register LValue::getBaseRegister()
 
     // continue
     if (entry.type->isPrimitive()) return entry.baseRegister;
-
-    bool positiveOffsets = true;
-    if (entry.baseRegister.getName() == "$fp" && entry.isDeclaredEntry) positiveOffsets = false;
-
     BaseType* type = entry.type;
     Register baseRegister = rp.getRegister();
     std::cout << "add " << baseRegister.getName() << " " << entry.baseRegister.getName() << " $zero   # about to load an LValue\n";
@@ -54,8 +50,7 @@ Register LValue::getBaseRegister()
             std::cout << "li " << r2.getName() << " " << array->underlyingType->computeSize() << "   # loaded size of underlying type of array\n";
             std::cout << "mult " << r1.getName() << " " << r2.getName() << "\n";
             std::cout << "mflo " << r1.getName() << "\n";
-            if (positiveOffsets) std::cout << "add " << baseRegister.getName() << " " << baseRegister.getName() << " " << r1.getName() << "\n";
-            else std::cout << "sub " << baseRegister.getName() << " " << baseRegister.getName() << " " << r1.getName() << "\n";
+            std::cout << "add " << baseRegister.getName() << " " << baseRegister.getName() << " " << r1.getName() << "\n";
             rp.returnRegister(r1);
             rp.returnRegister(r2);
             type = array->underlyingType;

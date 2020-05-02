@@ -1,0 +1,30 @@
+const
+	LOW = 2;
+	HIGH = 8;
+	FACTOR = 10;
+type
+	listType = array[LOW:HIGH] of integer;
+
+var
+	globalList : listType;
+	globalIterator : integer;
+
+function createArray(multiplier:integer) : listType;
+var
+	localList : listType;
+	localIterator : integer;
+begin
+	for localIterator := LOW to HIGH do
+		localList[localIterator] := multiplier * localIterator;
+	end;
+	return localList;
+	
+end;
+
+begin
+	globalList := createArray(FACTOR);
+	for globalIterator := LOW to HIGH do
+		write(globalList[globalIterator], '\n');
+	end;
+end.
+

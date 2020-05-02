@@ -46,8 +46,3 @@ bool SimpleType::isPrimitive()
            name.compare("boolean") == 0 ||
            name.compare("BOOLEAN") == 0;
 }
-
-bool SimpleType::isAlias()
-{
-    throw std::runtime_error("SimpleType::isAlias() - not implemented");
-}
