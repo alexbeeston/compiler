@@ -8,6 +8,6 @@ begin
 end;
 
 begin
-	write(factorial(MAX_POSSIBLE_VALUE_BEFORE_OVERFLOW));
+	write(MAX_POSSIBLE_VALUE_BEFORE_OVERFLOW, " factorial is ", factorial(MAX_POSSIBLE_VALUE_BEFORE_OVERFLOW), ".\n");
 end.
 

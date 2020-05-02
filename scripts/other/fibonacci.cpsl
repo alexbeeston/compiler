@@ -1,0 +1,13 @@
+const
+	arg = 12;
+
+function fib(num:integer) : integer;
+begin
+	if num = 0 then return 0;
+	elseif num = 1 then return 1;
+	else return fib(num - 1) + fib(num - 2); end;
+end;
+
+begin
+	write("The Fibonacci of ", arg, " is ", fib(arg), ".\n");
+end.
