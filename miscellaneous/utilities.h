@@ -14,7 +14,7 @@ void copyContinuousMemory(int, int, int, Register, Register);
 void dereferencePointer(Register);
 std::map<std::string, int> spillRegisters();
 void restoreSpilledRegisters(std::map<std::string, int> registers);
-void addParametersToStack(std::string, std::vector<Expression*>, int);
+void addParametersToStack(std::string, std::vector<Expression*>);
 void moveStackPointerUp(int);
 void moveStackPointerDown(int);
 

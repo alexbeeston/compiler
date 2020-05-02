@@ -27,12 +27,12 @@ Register FunctionCall::emit()
 {
     // validate
     auto routine = st.retrieveRoutine(*ident);
-    if (routine->type_temp == nullptr) throw std::runtime_error("FunctionCall::emit() - the function has nullptr for a return type");
+    if (routine->type_temp == nullptr) throw std::runtime_error("FunctionCall::emit() - the function \"" + *ident + "\" has nullptr for a return type");
 
     // continue
     auto spilledRegisters = spillRegisters();
     BaseType* returnType = routine->type_temp;
-    addParametersToStack(*ident, *params, returnType->computeSize());
+    addParametersToStack(*ident, *params);
     std::cout << "# Call the function\n";
     std::cout << "jal " << *ident << "\n\n";
 

@@ -21,7 +21,6 @@ struct Routine
     Routine(char*, std::vector<ParameterSet*>*, BaseType*, Body*);
     void emit();
     std::vector<int> offsets;
-    void computeOffsets_internal(int);
     virtual void computeOffsets();
     int sizeOfParametersAndReturnType;
     bool isForwardDeclared;

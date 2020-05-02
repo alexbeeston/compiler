@@ -171,7 +171,7 @@ struct ProcedureCall* procedureCallStatementPointer;
 
 %type <routinePointer> RoutineDeclListItem
 %type <routinePointerVectorPointer> RoutineDeclList
-%type <procedurePointer> ProcedureDecl
+%type <routinePointer> ProcedureDecl
 %type <routinePointer> FunctionDecl
 %type <parameterSetPointer> ParameterSet
 %type <parameterSetPointer> ParameterSetListItem
@@ -282,8 +282,8 @@ Prelude : ConstDecl TypeDecl VarDecl { $$ = new Prelude($1, $2, $3); };
 RoutineDeclList : RoutineDeclList RoutineDeclListItem { $1->push_back($2); }
     | { $$ = new std::vector<Routine*>; };
     RoutineDeclListItem : ProcedureDecl | FunctionDecl ;
-ProcedureDecl : PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE FORWARD DONE { $$ = new Procedure($2, $4, nullptr); }
-    | PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE Body DONE { $$ = new Procedure($2, $4, $7); };
+ProcedureDecl : PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE FORWARD DONE { $$ = new Routine($2, $4, nullptr, nullptr); }
+    | PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE Body DONE { $$ = new Routine($2, $4, nullptr, $7); };
     FormalParameters : ParameterSet ParameterSetList { $2->push_back($1); $$ = $2; } | { $$ = new std::vector<ParameterSet*>; } ;
             ParameterSet : VarOrRef IdentList COLON Type { $$ = new ParameterSet($1, $2, $4); };
                 VarOrRef : VAR { $$ = 0; } |  REF { $$ = 1; } | { $$ = 0; } ;

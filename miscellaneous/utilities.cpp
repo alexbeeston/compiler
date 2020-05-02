@@ -62,7 +62,7 @@ void restoreSpilledRegisters(std::map<std::string, int> registers)
     std::cout << std::endl;
 }
 
-void addParametersToStack(std::string routineName, std::vector<Expression*> expressions, int returnTypeSize)
+void addParametersToStack(std::string routineName, std::vector<Expression*> expressions)
 {
     // validate
     auto routine = st.retrieveRoutine(routineName);
@@ -78,7 +78,7 @@ void addParametersToStack(std::string routineName, std::vector<Expression*> expr
         // if pass by reference, (validate something)
         // la staging.getName() offset(base)
         Register staging = expressions[i]->emit();
-        std::cout << "sw " << staging.getName() << " " << returnTypeSize + routine->offsets[i] << "($sp)\n";
+        std::cout << "sw " << staging.getName() << " " << routine->offsets[i] << "($sp)\n";
         rp.returnRegister(staging);
     }
     std::cout << std::endl;

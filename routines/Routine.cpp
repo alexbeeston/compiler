@@ -21,8 +21,11 @@ Routine::Routine(char* p_ident, std::vector<ParameterSet*>* p_formalParameters, 
     type_temp = p_returnType;
 }
 
-void Routine::computeOffsets_internal(int nextOffset)
+void Routine::computeOffsets()
 {
+    int nextOffset;
+    if (type_temp != nullptr) nextOffset = type_temp->computeSize();
+    else nextOffset = 0;
     for (auto set : *formalParameters)
     {
         int size = set->type->computeSize();
@@ -32,13 +35,7 @@ void Routine::computeOffsets_internal(int nextOffset)
             nextOffset += size;
         }
     }
-    sizeOfParametersAndReturnType = nextOffset + type_temp->computeSize();
-}
-
-void Routine::computeOffsets()
-{
-    static int RETURN_TYPE_SIZE = 0;
-    computeOffsets_internal(RETURN_TYPE_SIZE);
+    sizeOfParametersAndReturnType = nextOffset;
 }
 
 void Routine::print()

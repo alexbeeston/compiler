@@ -14,6 +14,5 @@ struct Function:Routine
     BaseType* type;
     Function(char*, std::vector<ParameterSet*>*, Body*, BaseType*);
     void print();
-    void computeOffsets() override;
 };
 #endif //COMPILERS_FUNCTION_H

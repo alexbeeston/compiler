@@ -30,8 +30,7 @@ void ProcedureCall::emit()
 
     // continue
     auto spilledRegisters = spillRegisters();
-    static int RETURN_TYPE_SIZE = 0;
-    addParametersToStack(*ident, *expressions, RETURN_TYPE_SIZE);
+    addParametersToStack(*ident, *expressions);
     std::cout << "# Call the procedure\n";
     std::cout << "jal " << *ident << "\n\n";
     std::cout << "# Deallocate Parameters\n";
