@@ -7,6 +7,7 @@ LValueExpression::LValueExpression(LValue* p_lValue)
 {
     primitiveType = NOT_PRIMITIVE;
     lValue = p_lValue;
+    isLValueExpression = true;
 }
 
 void LValueExpression::print()

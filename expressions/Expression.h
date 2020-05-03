@@ -14,6 +14,7 @@ struct Expression
 {
     int value;
     virtual bool isCTV();
+    bool isLValueExpression = false;
     PrimitiveType primitiveType;
     virtual int getValue();
     virtual void print();

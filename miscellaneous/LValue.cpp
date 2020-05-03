@@ -2,8 +2,6 @@
 
 #include "LValue.h"
 #include "../global.h"
-#include "../types/ArrayType.h"
-#include "../types/RecordType.h"
 #include "../types/SimpleType.h"
 
 LValue::LValue() {}

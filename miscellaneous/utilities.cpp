@@ -2,6 +2,7 @@
 // Created by abeeston on 4/25/20.
 //
 
+#include <expressions/LValueExpression.h>
 #include "utilities.h"
 #include "../global.h"
 
@@ -75,16 +76,22 @@ void addParametersToStack(std::string routineName, std::vector<Expression*> expr
     Register staging;
     for (int i = 0; i < numParameters; ++i)
     {
-        staging = expressions[i]->emit();
         if (routine->passbys[i] == VALUE)
         {
+            staging = expressions[i]->emit();
             if (staging.containsAddress) copyContinuousMemory(0, staging, routine->offsets[i], rp.getStackPointer(), staging.space);
             else std::cout << "sw " << staging.getName() << " " << routine->offsets[i] << "($sp)\n";
         }
         else
         {
             // validate
-            if (expressions[i]->primitiveType != NOT_PRIMITIVE) throw std::runtime_error("addParametersToStack() - attempting to add a parameter that is declared as \"pass by reference\", but a literal expression was given");
+            if (!expressions[i]->isLValueExpression) throw std::runtime_error("addParameterstoStack() - expression at index " + std::to_string(i) + " in the parameter list (0-based) is not an LValue");
+
+            // continue
+            staging = rp.getRegister();
+            auto lValue= dynamic_cast<LValueExpression*>(expressions[i])->lValue;
+            std::cout << "la " << staging.getName() << " " << lValue->getOffset() << "(" << lValue->getBaseRegister().getName() << ")\n";
+            std::cout << "sw " << staging.getName() << " " << routine->offsets[i] << "($sp)\n";
         }
         rp.returnRegister(staging);
     }
