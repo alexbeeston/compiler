@@ -280,7 +280,7 @@ MethodDeclList : MethodDeclList MethodDeclListItem { $1->push_back($2); }
     MethodDeclListItem : ProcedureDecl | FunctionDecl ;
 ProcedureDecl : PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE FORWARD DONE { $$ = new Method($2, $4, nullptr, nullptr); }
     | PROCEDURE IDENT LPAREN FormalParameters RPAREN DONE Body DONE { $$ = new Method($2, $4, nullptr, $7); };
-    FormalParameters : ParameterSet ParameterSetList { $2->push_back($1); $$ = $2; } | { $$ = new std::vector<ParameterSet*>; } ;
+    FormalParameters : ParameterSet ParameterSetList { $2->insert($2->begin(), $1); $$ = $2; } | { $$ = new std::vector<ParameterSet*>; } ;
             ParameterSet : VarOrRef IdentList COLON Type { $$ = new ParameterSet($1, $2, $4); };
                 VarOrRef : VAR { $$ = 0; } |  REF { $$ = 1; } | { $$ = 0; } ;
             ParameterSetList : ParameterSetList ParameterSetListItem { $1->push_back($2); }

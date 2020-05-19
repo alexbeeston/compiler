@@ -20,11 +20,12 @@ struct Entry
     EntryStyle label;
     Register baseRegister;
     bool isDeclaredEntry;
+    bool passByReference;
 
     // init
     Entry();
     Entry(std::string, Expression*, bool, bool); // called by constants
-    Entry(std::string, BaseType*, int, bool, bool); // called by variables
+    Entry(std::string, BaseType*, int, bool, bool, bool); // called by variables
 
     // other functions
     virtual void print();

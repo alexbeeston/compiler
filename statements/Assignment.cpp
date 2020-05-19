@@ -22,7 +22,8 @@ void Assignment::print()
 void Assignment::emit()
 {
     // validation
-    if (st.retrieveEntry(lValue->getKey()).label == CONSTANT) throw std::runtime_error("Assignment::emit() - can not assign to a constant\n");
+    Entry entry = st.retrieveEntry(lValue->getKey());
+    if (entry.label == CONSTANT) throw std::runtime_error("Assignment::emit() - can not assign to a constant\n");
     if (lValue->getStyle() != expression->getTypeStyle()) throw std::runtime_error("Assignment::emit() - styles of LValue and Expression in an assignment do not match. LValue = " + std::to_string(lValue->getStyle()) + ", expression = " + std::to_string(expression->getTypeStyle()));
 
     // assign to memory
@@ -45,7 +46,14 @@ void Assignment::emit()
         if (lValue->getPrimitiveType() != expression->resolvePrimitiveType()) throw std::runtime_error("Assignment::emit() - attempting to assign a primitive LValue, the lLValue operand has type " + std::to_string(lValue->getPrimitiveType()) + " and expression operand has type " + std::to_string(expression->resolvePrimitiveType()));
 
         // continue
-        std::cout << "sw " << sourceRegister.getName() << " " << targetOffset << "(" << targetBaseRegister.getName() << ")  # assigned a primitive expression to a primitive LValue\n";
+        if (entry.passByReference)
+        {
+            Register destination = rp.getRegister();
+            std::cout << "lw " << destination.getName() << " " << targetOffset << "(" << targetBaseRegister.getName() << ")\n";
+            std::cout << "sw " << sourceRegister.getName() << " 0(" << destination.getName() << ")\n";
+            rp.returnRegister(destination);
+        }
+        else std::cout << "sw " << sourceRegister.getName() << " " << targetOffset << "(" << targetBaseRegister.getName() << ")  # assigned a primitive expression to a primitive LValue\n";
     }
     rp.returnRegister(sourceRegister);
     rp.returnRegister(targetBaseRegister);

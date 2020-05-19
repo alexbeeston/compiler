@@ -45,8 +45,8 @@ void SymbolTable::pushScope(BaseType* returnType, std::vector<ParameterSet*> par
     Scope newScope = Scope();
     scopes.push_back(newScope);
     if (returnType != nullptr) scopes.back().accommodateReturnType(returnType);
-    scopes.back().addParameters(parameters);
-    scopes.back().addPrelude(prelude);
+    scopes.back().addEntriesFromParameters(parameters);
+    scopes.back().addEntriesFromPrelude(prelude);
 }
 
 void SymbolTable::pushScope_iterator(std::string ident)

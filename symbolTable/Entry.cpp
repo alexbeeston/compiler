@@ -17,7 +17,7 @@ Entry::Entry(std::string p_ident, Expression* p_expression, bool isGlobal, bool 
 }
 
 // Called by variables
-Entry::Entry(std::string p_ident, BaseType* p_type, int p_offset, bool isGlobal, bool p_isDeclaredEntry)
+Entry::Entry(std::string p_ident, BaseType* p_type, int p_offset, bool isGlobal, bool p_isDeclaredEntry, bool p_passByReference)
 {
     ident = p_ident;
     type = p_type;
@@ -25,6 +25,7 @@ Entry::Entry(std::string p_ident, BaseType* p_type, int p_offset, bool isGlobal,
     label = VARIABLE;
     value = nullptr;
     isDeclaredEntry = p_isDeclaredEntry;
+    passByReference = p_passByReference;
     setRegister(isGlobal);
 }
 

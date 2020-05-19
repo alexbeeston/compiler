@@ -1,0 +1,20 @@
+var w,x,y,z : integer;
+
+procedure p(ref a:integer; b,c:integer);
+begin
+	a := 80;	
+	b := 90;
+	write("Expect 80: ", a, '\n');
+	write("expect 90: ", b, '\n');
+end;
+
+begin
+	x := 10;
+	y := 20;
+	z := 30;
+	p(x, y, z);
+	write("Expect 80: ", x, '\n');
+	write("Expect 20: ", y, '\n');
+	write("expect 30: ", z, '\n');
+end.
+

@@ -18,8 +18,8 @@
 struct Scope
 {
     // inserting into the scope
-    void addPrelude(Prelude);
-    void addParameters(std::vector<ParameterSet*> parameterSets);
+    void addEntriesFromPrelude(Prelude prelude);
+    void addEntriesFromParameters(std::vector<ParameterSet*> parameterSets);
     void accommodateReturnType(BaseType*);
 
     // general stuff

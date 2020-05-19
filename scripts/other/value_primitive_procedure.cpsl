@@ -1,0 +1,18 @@
+var x,y,z,q,r,s : integer;
+
+procedure p(a,b:integer);
+begin
+	write("In procedure, expect '11,10': ", a, ",", b, "\n");
+	a := 98;
+	b := 97;
+	write("In procedure, expect '98,97': ", a, ",", b, "\n");
+end;
+
+begin
+	r := 11;
+	s := 10;
+	write("In global, expect '11,10': ",r,",",s,"\n");
+	p(r,s);
+	write("In global, expect '11,10': ",r,",",s,"\n");
+end.
+

@@ -34,14 +34,31 @@ Register LValueExpression::emit()
         int offset = lValue->getOffset();
         if (lValue->isPrimitive())
         {
-            reg.containsAddress = false;
-            std::cout << "lw " << reg.getName() << " " << offset << "(" << baseRegister.getName() << ") # loaded primitive LValue\n";
+            if (entry.passByReference)
+            {
+                Register location = rp.getRegister();
+                std::cout << "lw " << location.getName() << " " << offset << "(" << baseRegister.getName() << ")\n";
+                std::cout << "lw " << reg.getName() << " 0(" << location.getName() << ")\n";
+                rp.returnRegister(location);
+            }
+            else
+            {
+                reg.containsAddress = false;
+                std::cout << "lw " << reg.getName() << " " << offset << "(" << baseRegister.getName() << ") # loaded primitive LValue\n";
+            }
         }
         else
         {
-            reg.containsAddress = true;
-            reg.space = lValue->getInnerMostType()->computeSize();
-            std::cout << "la " << reg.getName() << " " << offset << "(" << baseRegister.getName() << ")  # loaded address of non-primitive lValue\n";
+            if (entry.passByReference)
+            {
+                throw std::runtime_error("LValueExpression::emit() - function not implemented");
+            }
+            else
+            {
+                reg.containsAddress = true;
+                reg.space = lValue->getInnerMostType()->computeSize();
+                std::cout << "la " << reg.getName() << " " << offset << "(" << baseRegister.getName() << ")  # loaded address of non-primitive lValue\n";
+            }
         }
         rp.returnRegister(baseRegister);
     }
