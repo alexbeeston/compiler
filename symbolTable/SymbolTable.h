@@ -43,8 +43,9 @@ struct SymbolTable
     int insertMessage(std::string);
     Method* retrieveRoutine(std::string);
     int sizeOfLocalVars;
-
-     // legacy; will throw errors; needs updating
-     void pushScope_iterator(std::string);
+    int nextGlobalAddress;
+    void addIterator(std::string);
+    void removeIterator(std::string);
+    bool containsEntry(std::string);
 };
 #endif //COMPILERS_SYMBOLTABLE_H

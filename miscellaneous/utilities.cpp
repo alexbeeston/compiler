@@ -90,7 +90,9 @@ void addParametersToStack(std::string routineName, std::vector<Expression*> expr
             // continue
             staging = rp.getRegister();
             auto lValue= dynamic_cast<LValueExpression*>(expressions[i])->lValue;
-            std::cout << "la " << staging.getName() << " " << lValue->getOffset() << "(" << lValue->getBaseRegister().getName() << ")\n";
+            int offset = lValue->getOffset();
+            Register baseRegister = lValue->getBaseRegister();
+            std::cout << "la " << staging.getName() << " " << offset << "(" << baseRegister.getName() << ")\n";
             std::cout << "sw " << staging.getName() << " " << routine->offsets[i] << "($sp)\n";
         }
         rp.returnRegister(staging);

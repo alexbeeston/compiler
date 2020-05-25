@@ -1,9 +1,10 @@
 #include <iostream>
-#include <types/SimpleType.h>
 
 #include "SymbolTable.h"
 #include "Scope.h"
 #include "../expressions/Literal.h"
+#include "../types/SimpleType.h"
+#include "../global.h"
 
 SymbolTable::SymbolTable()
 {
@@ -49,19 +50,6 @@ void SymbolTable::pushScope(BaseType* returnType, std::vector<ParameterSet*> par
     scopes.back().addEntriesFromPrelude(prelude);
 }
 
-void SymbolTable::pushScope_iterator(std::string ident)
-{
-    std::string intString = "integer";
-    auto* idents = new std::vector<std::string*>();
-    idents->push_back(&ident);
-    auto* typedList = new TypedList(idents, new SimpleType(&intString));
-    auto* typedLists = new std::vector<TypedList*>();
-    typedLists->push_back(typedList);
-    Prelude p = Prelude(new std::vector<Constant*>, new std::vector<DeclaredType*>, typedLists);
-    pushScope(nullptr, std::vector<ParameterSet*>(), p);
-    throw std::runtime_error("SymbolTable::pushScope_iterator() - this function is legacy; needs to be updated. Can we add an iterator to a global scope without touching the frame pointer? Or should be touch the frame pointer?");
-}
-
 void SymbolTable::popScope()
 {
     scopes.back().getSizeOfDeclaredVars();
@@ -96,6 +84,17 @@ Method* SymbolTable::retrieveRoutine(std::string name)
     else throw std::runtime_error("SymbolTable::retrieveRoutine() - routine with name \"" + name + "\" not found in symbol table");
 }
 
+bool SymbolTable::containsEntry(std::string key)
+{
+    int i = scopes.size() - 1;
+    while (i != -1)
+    {
+        if (scopes[i].containsEntry(key)) return true;
+        else i--;
+    }
+    return false;
+}
+
 Entry SymbolTable::retrieveEntry(std::string key)
 {
     int i = scopes.size() - 1;
@@ -116,6 +115,19 @@ BaseType* SymbolTable::retrieveType(std::string key)
         else i--;
     }
     throw std::runtime_error("Type with key \"" + key + "\" key not found in the symbol table");
+}
+
+void SymbolTable::addIterator(std::string identifier)
+{
+    Entry iterator = Entry(identifier, new SimpleType(new std::string("integer")), nextGlobalAddress, true, true, false);
+    nextGlobalAddress += WORD_SIZE;
+    scopes.back().entries[identifier] = iterator;
+}
+
+void SymbolTable::removeIterator(std::string identifier)
+{
+    nextGlobalAddress -= WORD_SIZE;
+    scopes.back().entries.erase(identifier);
 }
 
 int SymbolTable::insertMessage(std::string message)

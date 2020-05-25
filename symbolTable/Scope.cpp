@@ -59,6 +59,7 @@ void Scope::addEntriesFromPrelude(Prelude prelude)
             }
         }
     }
+    if (st.addingGlobals) st.nextGlobalAddress = nextDeclaredVariableAddress;
 }
 
 int Scope::getSizeOfDeclaredVars() { return std::abs(nextDeclaredVariableAddress); }

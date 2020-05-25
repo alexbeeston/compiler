@@ -34,6 +34,7 @@ Register LValueExpression::emit()
         int offset = lValue->getOffset();
         if (lValue->isPrimitive())
         {
+            reg.containsAddress = false;
             if (entry.passByReference)
             {
                 Register location = rp.getRegister();
@@ -43,19 +44,18 @@ Register LValueExpression::emit()
             }
             else
             {
-                reg.containsAddress = false;
                 std::cout << "lw " << reg.getName() << " " << offset << "(" << baseRegister.getName() << ") # loaded primitive LValue\n";
             }
         }
         else
         {
+            reg.containsAddress = true;
             if (entry.passByReference)
             {
                 throw std::runtime_error("LValueExpression::emit() - function not implemented");
             }
             else
             {
-                reg.containsAddress = true;
                 reg.space = lValue->getInnerMostType()->computeSize();
                 std::cout << "la " << reg.getName() << " " << offset << "(" << baseRegister.getName() << ")  # loaded address of non-primitive lValue\n";
             }

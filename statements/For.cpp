@@ -32,7 +32,13 @@ void For::print()
 
 void For::emit()
 {
-//    st.pushScope_iterator(*ident);
+    // handle iterator
+    bool iteratorDeclaredInLine = false;
+    if (!st.containsEntry(*ident))
+    {
+        st.addIterator(*ident);
+        iteratorDeclaredInLine = true;
+    }
 
     // init
     std::cout << "\n# For - init\n";
@@ -76,5 +82,7 @@ void For::emit()
     // next
     std::cout << "\n# For - next\n";
     std::cout << nextLabel << ":\n";
-//    st.popScope();
+
+    // handle iterator
+    if (iteratorDeclaredInLine) st.removeIterator(*ident);
 }
