@@ -1,0 +1,23 @@
+const
+ LIST_MAX = 100;
+type
+  list = array[0:LIST_MAX] of integer;
+
+var
+  l : list;
+
+procedure print(ref a:list);
+begin
+ for i :=0 to LIST_MAX - 1 do
+  write(a[i],' ');
+ end;
+ write(a[LIST_MAX], '\n');
+end;
+
+begin
+for i := 0 to LIST_MAX do
+	l[i] := i;
+end;
+
+print(l);
+end.
