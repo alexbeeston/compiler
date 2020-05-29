@@ -33,7 +33,7 @@ void Assignment::emit()
     int targetOffset = lValue->getOffset();
 
     // do all four combinations here maybe: targetBase and source base contains address or not.
-    if (targetBaseRegister.containsAddress && !sourceRegister.containsAddress) std::cout << "sw " << sourceRegister.getName() << " 0(" << targetBaseRegister.getName() << ")\n";
+    if (targetBaseRegister.containsAddress && !sourceRegister.containsAddress) std::cout << "sw " << sourceRegister.getName() << " " << targetOffset << "(" << targetBaseRegister.getName() << ") # GOT CALLED 1\n";
     else if (sourceRegister.containsAddress)
     {
         // validate
@@ -41,6 +41,7 @@ void Assignment::emit()
 
         // continue
         copyContinuousMemory(0, sourceRegister, targetOffset, targetBaseRegister, sourceRegister.space);
+        std::cout << "# GOT CALLED 2\n";
     }
     else
     {
@@ -53,10 +54,10 @@ void Assignment::emit()
         {
             Register destination = rp.getRegister();
             std::cout << "lw " << destination.getName() << " " << targetOffset << "(" << targetBaseRegister.getName() << ")\n";
-            std::cout << "sw " << sourceRegister.getName() << " 0(" << destination.getName() << ")\n";
+            std::cout << "sw " << sourceRegister.getName() << " 0(" << destination.getName() << ") # GOT CALLED 3\n";
             rp.returnRegister(destination);
         }
-        else std::cout << "sw " << sourceRegister.getName() << " " << targetOffset << "(" << targetBaseRegister.getName() << ")  # assigned a primitive expression to a primitive LValue\n";
+        else std::cout << "sw " << sourceRegister.getName() << " " << targetOffset << "(" << targetBaseRegister.getName() << ")  # GOT CALLED 4 assigned a primitive expression to a primitive LValue\n";
     }
     rp.returnRegister(sourceRegister);
     rp.returnRegister(targetBaseRegister);

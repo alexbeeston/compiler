@@ -35,7 +35,11 @@ Register LValueExpression::emit()
         if (lValue->isPrimitive())
         {
             reg.containsAddress = false;
-            if (entry.passByReference)
+            if (baseRegister.containsAddress) // I think this is repeated code; when would baseRegister.containAddress be false but entry.passByReference be true?
+            {
+                std::cout << "lw " << reg.getName() << " " << offset << "(" << baseRegister.getName() << ")\n";
+            }
+            else if (entry.passByReference)
             {
                 Register location = rp.getRegister();
                 std::cout << "lw " << location.getName() << " " << offset << "(" << baseRegister.getName() << ")\n";
