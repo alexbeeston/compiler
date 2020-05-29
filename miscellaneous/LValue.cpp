@@ -25,7 +25,16 @@ Register LValue::getBaseRegister()
     if (entry.type->isPrimitive()) return entry.baseRegister;
     BaseType* type = entry.type;
     Register baseRegister = rp.getRegister();
-    std::cout << "add " << baseRegister.getName() << " " << entry.baseRegister.getName() << " $zero   # about to load an LValue\n";
+    if (entry.passByReference)
+    {
+        std::cout << "lw " << baseRegister.getName() << " " << entry.offset << "(" << entry.baseRegister.getName() << ")\n";
+        baseRegister.containsAddress = true;
+    }
+    else
+    {
+        std::cout << "add " << baseRegister.getName() << " " << entry.baseRegister.getName() << " $zero   # about to load an LValue\n";
+        baseRegister.containsAddress = false;
+    }
     for (int accessorIndex = 0; accessorIndex < sequence->size() - 1; accessorIndex++)
     {
         // resolve a simple type

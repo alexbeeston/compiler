@@ -31,7 +31,10 @@ void Assignment::emit()
     Register sourceRegister = expression->emit();
     Register targetBaseRegister = lValue->getBaseRegister();
     int targetOffset = lValue->getOffset();
-    if (sourceRegister.containsAddress)
+
+    // do all four combinations here maybe: targetBase and source base contains address or not.
+    if (targetBaseRegister.containsAddress && !sourceRegister.containsAddress) std::cout << "sw " << sourceRegister.getName() << " 0(" << targetBaseRegister.getName() << ")\n";
+    else if (sourceRegister.containsAddress)
     {
         // validate
         if (lValue->getInnerMostType()->computeSize() != sourceRegister.space) throw std::runtime_error("Assignment::emit() - assigning a non-primitive expression to an lvalue, but sizes don't match. Left size is " + std::to_string(lValue->getInnerMostType()->computeSize()) + " and right size is " + std::to_string(sourceRegister.space));

@@ -1,0 +1,38 @@
+const
+	SIZE = 5;
+
+type
+	list = array[0:SIZE] of integer;
+
+var
+	 global : list;
+
+procedure test(ref x:list);
+begin
+	for i := 0 to SIZE do
+		x[i] := i * 10;
+	end;
+end;
+
+
+
+begin
+
+for i := 0 to SIZE do
+	global[i] := i;
+end;
+
+write("Before procedure call:\n");
+for i := 0 to SIZE do
+	write(global[i], '\n');
+end;
+
+test(global);
+
+write("After procedure call:\n");
+for i := 0 to SIZE do
+	write(global[i], '\n');
+end;
+
+
+end.
