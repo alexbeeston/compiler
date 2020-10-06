@@ -5,3 +5,5 @@ bld/
 test/
 file.cpsl
 backlog.txt
+build
+fileCount.txt
